@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <meta charset='utf-8'>
+    <title>Unpoly</title>
+    <meta content='A framework for easily creating beautiful presentations using HTML' name='description'>
+    <meta content='Hakim El Hattab' name='author'>
+    <meta content='yes' name='apple-mobile-web-app-capable'>
+    <meta content='black-translucent' name='apple-mobile-web-app-status-bar-style'>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui' name='viewport'>
+    <link href='css/reveal.css' rel='stylesheet'>
+    <link href='css/theme/blood.css' id='theme' rel='stylesheet'>
+    <link href='css/custom.css' rel='stylesheet'>
+    <!-- Code syntax highlighting -->
+    <link href='lib/css/zenburn.css' rel='stylesheet'>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+      <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class='reveal'>
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class='slides'>
+        <section>
+          <h2>Unpoly</h2>
+        </section>
+        <section>
+          <h3>Javascript at makandra</h3>
+          <p>
+            <div class='line'>
+              Random.js
+            </div>
+            <div class='subtle'>
+              2008-2016
+            </div>
+          </p>
+          <p>
+            <div class='line'>
+              AngularJS
+            </div>
+            <div class='subtle'>
+              2008-2016
+            </div>
+          </p>
+          <p>
+            <div class='line'>
+              Half-assed AngularJS
+            </div>
+            <div class='subtle'>
+              2013-2016
+            </div>
+          </p>
+        </section>
+        <section>
+          <h3>AngularJS</h3>
+          <ul>
+            <li>Guter Fit für: Template Builder, extrem komplexe Formulare, Kalender, Holly, PH-Planer</li>
+            <li>Mittelmäßiger Fit für: Alles andere</li>
+            <li>Viele Konzepte (Scopes, Transclusion, Dependency Injection, Digest Cycle...) machen Ausbildung schwierig</li>
+            <li>Wenige Best Practices</li>
+            <li>Angular 1 geht EOL und es gibt keinen klaren Nachfolger</li>
+            <li>Aufwändig</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Random.js</h3>
+          <ul>
+            <li>Überwiegend copy & paste von Code-Schnippseln</li>
+            <li>Ungetestet</li>
+            <li>Fehlerhaft</li>
+            <li>Nicht komponierbar</li>
+            <li>UI in Random.js-Projekten Läuft unter "Zusatzaufwand"</li>
+            <li>Wir verbiegen uns, um weniger JS zu schreiben</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Entscheidung für unsere Kunden</h3>
+          <blockquote>
+            Willst du's (geil und sauteuer) oder (mittelmäßig und billig)?
+          </blockquote>
+          <p>
+            Niemand möchte diese Entscheidung treffen.
+          </p>
+          <p>
+            Die durchschnittliche GUI von uns ist weder zeitgemäß
+            noch wettbewerbsfähig gegenüber anderen Agenturen.
+          </p>
+        </section>
+        <section>
+          <h2>What is Unpoly?</h2>
+          <ul>
+            <li>Framework for progressive enhancement / Unobtrusive Javascript</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Project state</h2>
+          <ul>
+            <li>In development since Oct 2014</li>
+            <li>Powers Nanomize, railslts.com, H&Z Smart Brain</li>
+            <li>423 specs</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+    <script src='lib/js/head.min.js'></script>
+    <script src='js/reveal.js'></script>
+    <script>
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+      
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+      
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,134 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %title Unpoly
+    %meta{:content => "A framework for easily creating beautiful presentations using HTML", :name => "description"}/
+    %meta{:content => "Hakim El Hattab", :name => "author"}/
+    %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}/
+    %meta{:content => "black-translucent", :name => "apple-mobile-web-app-status-bar-style"}/
+    %meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui", :name => "viewport"}/
+    %link{:href => "css/reveal.css", :rel => "stylesheet"}/
+    %link#theme{:href => "css/theme/blood.css", :rel => "stylesheet"}/
+    %link{:href => "css/custom.css", :rel => "stylesheet"}/
+    / Code syntax highlighting
+    %link{:href => "lib/css/zenburn.css", :rel => "stylesheet"}/
+    / Printing and PDF exports
+    :javascript
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    /[if lt IE 9]
+      <script src="lib/js/html5shiv.js"></script>
+  %body
+    .reveal
+      / Any section element inside of this container is displayed as a slide
+      .slides
+
+        %section
+          -#%p(style='text-align: right')
+          -#  %img.plain(src='pictures/makandra/makandra-inverted.png' width='22%')
+          %h2 Unpoly
+
+          -#%p
+          -#  %a(href='mailto:henning.koch@makandra.de') henning.koch@makandra.de
+          -#  %br
+          -#  %a(href='https://twitter.com/triskweline') @triskweline
+          -#%p
+          -#  &nbsp;
+
+        %section
+          %h3 Javascript at makandra
+
+          %p
+            .line
+              Random.js
+            .subtle
+              2008-2016
+
+          %p
+            .line
+              AngularJS
+            .subtle
+              2008-2016
+
+          %p
+            .line
+              Half-assed AngularJS
+            .subtle
+              2013-2016
+
+        %section
+          %h3 AngularJS
+
+          %ul
+            %li Guter Fit für: Template Builder, extrem komplexe Formulare, Kalender, Holly, PH-Planer
+            %li Mittelmäßiger Fit für: Alles andere
+            %li Viele Konzepte (Scopes, Transclusion, Dependency Injection, Digest Cycle...) machen Ausbildung schwierig
+            %li Wenige Best Practices
+            %li Angular 1 geht EOL und es gibt keinen klaren Nachfolger
+            %li Aufwändig
+
+        %section
+          %h3 Random.js
+
+          %ul
+            %li Überwiegend copy & paste von Code-Schnippseln
+            %li Ungetestet
+            %li Fehlerhaft
+            %li Nicht komponierbar
+            %li UI in Random.js-Projekten Läuft unter "Zusatzaufwand"
+            %li Wir verbiegen uns, um weniger JS zu schreiben
+
+        %section
+          %h3 Entscheidung für unsere Kunden
+
+          %blockquote
+            Willst du's (geil und sauteuer) oder (mittelmäßig und billig)?
+
+          %p
+            Niemand möchte diese Entscheidung treffen.
+
+          %p
+            Die durchschnittliche GUI von uns ist weder zeitgemäß
+            noch wettbewerbsfähig gegenüber anderen Agenturen.
+
+        %section
+          %h2 What is Unpoly?
+          %ul
+            %li Framework for progressive enhancement / Unobtrusive Javascript
+
+        %section
+          %h2 Project state
+          %ul
+            %li In development since Oct 2014
+            %li Powers Nanomize, railslts.com, H&Z Smart Brain
+            %li 423 specs
+
+
+    %script{:src => "lib/js/head.min.js"}
+    %script{:src => "js/reveal.js"}
+    :javascript
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true }
+        ]
+      });
