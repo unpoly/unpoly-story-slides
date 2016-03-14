@@ -63,11 +63,11 @@
         <section>
           <h3>AngularJS</h3>
           <ul>
-            <li>Guter Fit für: Template Builder, extrem komplexe Formulare, Kalender, Holly, PH-Planer</li>
-            <li>Mittelmäßiger Fit für: Alles andere</li>
-            <li>Viele Konzepte (Scopes, Transclusion, Dependency Injection, Digest Cycle...) machen Ausbildung schwierig</li>
-            <li>Wenige Best Practices</li>
-            <li>Angular 1 geht EOL und es gibt keinen klaren Nachfolger</li>
+            <li class='green'>Guter Fit für:<br>Template Builder, extrem komplexe Formulare, Kalender, Holly, PH-Planer</li>
+            <li class='red'>Mittelmäßiger Fit für:<br>Alles andere</li>
+            <li class='red'>Viele Konzepte (Scopes, Transclusion, Dependency Injection, Digest Cycle...) machen Ausbildung schwierig</li>
+            <li class='red'>Wenige Patterns und Best Practices</li>
+            <li class='red'>Angular 1 geht EOL und es gibt keinen klaren Nachfolger</li>
           </ul>
         </section>
         <section>
@@ -108,9 +108,9 @@
           <h3>What server-side apps don't do well</h3>
           <ol>
             <li>Slow interaction feedback</li>
-            <li>Partial page updates require AJAX spaghetti</li>
+            <li>Partial page updates require additional code on client & server</li>
             <li>Can't do animated transitions</li>
-            <li>Requests destroy transient state (scroll positions, unsaved form values)</li>
+            <li>Page loads destroy transient state (scroll positions, unsaved form values)</li>
             <li>Layered interactions (modals, drop-downs, drawers) are hard</li>
           </ol>
         </section>
@@ -119,7 +119,7 @@
           <ul>
             <li>Schnelle und moderne UI für serverseitige Apps</li>
             <li>AJAX ist Default</li>
-            <li>Keine¹ serverseitige Änderungen nötig</li>
+            <li>Keine* serverseitige Änderungen nötig</li>
             <li>Alles hat eine URL</li>
             <li>Compiler-Registry wie <code>$.unobtrusive</code> oder Angular-Direktiven</li>
             <li>Geschwindigkeit</li>
@@ -145,8 +145,8 @@
           <pre class='xs'><code class='html' data-noescape>&lt;div class="story"&gt;&#x000A;&#x000A;  &lt;p&gt;Story summary&lt;/p&gt;&#x000A;&#x000A;  &lt;a href="full.html" <mark>up-target=".story"</mark>&gt;&#x000A;    Read full story&#x000A;  &lt;/a&gt;&#x000A;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
           <ul>
             <li class='fragment'>Unpoly requests <code>full.html</code> via AJAX</li>
-            <li class='fragment'>Server returns a <u>full HTML page</u> (nothing changes on the server)</li>
-            <li class='fragment'>Unpoly extracts the fragment that matches <code>.story</code> from the response</li>
+            <li class='fragment'>Server returns a <u>full HTML page</u> as usual</li>
+            <li class='fragment'>Unpoly extracts the fragment that matches <code>.story</code></li>
             <li class='fragment'>Unpoly swaps the old and new fragment</li>
             <li class='fragment'>Unpoly changes the browser URL to <code>http://host/full.html</code></li>
           </ul>
@@ -155,8 +155,8 @@
           <pre class='xs'><code class='html' data-noescape>&lt;div class="story"&gt;&#x000A;&#x000A;  &lt;p&gt;Story summary&lt;/p&gt;&#x000A;&#x000A;  &lt;a href="full.html" <mark>up-modal=".story"</mark>&gt;&#x000A;    Read full story&#x000A;  &lt;/a&gt;&#x000A;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
           <ul class='fragment'>
             <li>Unpoly requests <code>full.html</code> via AJAX</li>
-            <li>Server returns a <u>full HTML page</u> (nothing changes on the server)</li>
-            <li>Unpoly extracts the fragment that matches <code>.story</code> from the response</li>
+            <li>Server returns a <u>full HTML page</u> as usual</li>
+            <li>Unpoly extracts the fragment that matches <code>.story</code></li>
             <li><mark>Unpoly displays the new fragment in a <code>&lt;div class="up-modal"&gt;</code></mark></li>
             <li>Unpoly changes the browser URL to <code>http://host/full.html</code></li>
           </ul>
@@ -186,14 +186,17 @@
           <img src='pictures/gmail.png'>
         </section>
         <section>
+          <img src='pictures/gmail_layers.png'>
+        </section>
+        <section>
+          <h3>Appending instead of replacing</h3>
+          <pre><code class='html' data-noescape>&lt;div class="tasks"&gt;&#x000A;  &lt;li&gt;Wash car&lt;/li&gt;&#x000A;  &lt;li&gt;Purchase supplies&lt;/li&gt;&#x000A;  &lt;li&gt;Fix tent&lt;/li&gt;&#x000A;&lt;/ul&gt;&#x000A;&#x000A;&lt;a class="next-page" href="/tasks?page=2"&#x000A;  up-target=".next-page, .tasks:after"&gt;Next page&lt;/a&gt;&#x000A;</code></pre>
+        </section>
+        <section>
           <h3>Navigation</h3>
           <ul>
             <li>
               All fragment updates change the browser URL by default.
-            </li>
-            <li>
-              Links to the current URL get an <a href="http://unpoly.com/up-current"><code>up-current</code></a>
-              class automatically.
             </li>
             <li>
               Back/Forward buttons work as expected.<br />
@@ -202,6 +205,10 @@
             <li>
               Linking to a fragment will scroll the viewport to reveal the fragment.<br />
               Unpoly is aware of fixed navigation bars when revealing.
+            </li>
+            <li>
+              Links to the current URL get an <a href="http://unpoly.com/up-current"><code>up-current</code></a>
+              class automatically.
             </li>
             <li>
               Modals and popups have their own URL.<br />
@@ -376,6 +383,7 @@
         <section>
           <h3>Getting started</h3>
           <ul>
+            <li>Read through unpoly.com</li>
             <li>unpoly-rails</li>
             <li>Replace half your Javascript with `up-target`</li>
             <li>Convert remaining Javascripts into up.compiler</li>
@@ -412,6 +420,14 @@
             <li>In development since Oct 2014</li>
             <li>Powers Nanomize, railslts.com, H&Z Smart Brain</li>
             <li>423 specs</li>
+            <li>
+              Release policy
+              <ul>
+                <li>Stable vs. Experimental</li>
+                <li>Breaking changes</li>
+                <li>Compatible changes</li>
+              </ul>
+            </li>
           </ul>
         </section>
       </div>

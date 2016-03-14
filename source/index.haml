@@ -65,11 +65,11 @@
           %h3 AngularJS
 
           %ul
-            %li Guter Fit für: Template Builder, extrem komplexe Formulare, Kalender, Holly, PH-Planer
-            %li Mittelmäßiger Fit für: Alles andere
-            %li Viele Konzepte (Scopes, Transclusion, Dependency Injection, Digest Cycle...) machen Ausbildung schwierig
-            %li Wenige Best Practices
-            %li Angular 1 geht EOL und es gibt keinen klaren Nachfolger
+            %li.green Guter Fit für:<br>Template Builder, extrem komplexe Formulare, Kalender, Holly, PH-Planer
+            %li.red Mittelmäßiger Fit für:<br>Alles andere
+            %li.red Viele Konzepte (Scopes, Transclusion, Dependency Injection, Digest Cycle...) machen Ausbildung schwierig
+            %li.red Wenige Patterns und Best Practices
+            %li.red Angular 1 geht EOL und es gibt keinen klaren Nachfolger
 
         %section
           %h3 Random.js
@@ -110,9 +110,9 @@
 
           %ol
             %li Slow interaction feedback
-            %li Partial page updates require AJAX spaghetti
+            %li Partial page updates require additional code on client & server
             %li Can't do animated transitions
-            %li Requests destroy transient state (scroll positions, unsaved form values)
+            %li Page loads destroy transient state (scroll positions, unsaved form values)
             %li Layered interactions (modals, drop-downs, drawers) are hard
 
 
@@ -121,7 +121,7 @@
           %ul
             %li Schnelle und moderne UI für serverseitige Apps
             %li AJAX ist Default
-            %li Keine¹ serverseitige Änderungen nötig
+            %li Keine* serverseitige Änderungen nötig
             %li Alles hat eine URL
             %li Compiler-Registry wie <code>$.unobtrusive</code> oder Angular-Direktiven
             %li Geschwindigkeit
@@ -157,8 +157,8 @@
 
           %ul
             %li.fragment Unpoly requests <code>full.html</code> via AJAX
-            %li.fragment Server returns a <u>full HTML page</u> (nothing changes on the server)
-            %li.fragment Unpoly extracts the fragment that matches <code>.story</code> from the response
+            %li.fragment Server returns a <u>full HTML page</u> as usual
+            %li.fragment Unpoly extracts the fragment that matches <code>.story</code>
             %li.fragment Unpoly swaps the old and new fragment
             %li.fragment Unpoly changes the browser URL to <code>http://host/full.html</code>
 
@@ -179,8 +179,8 @@
 
           %ul.fragment
             %li Unpoly requests <code>full.html</code> via AJAX
-            %li Server returns a <u>full HTML page</u> (nothing changes on the server)
-            %li Unpoly extracts the fragment that matches <code>.story</code> from the response
+            %li Server returns a <u>full HTML page</u> as usual
+            %li Unpoly extracts the fragment that matches <code>.story</code>
             %li <mark>Unpoly displays the new fragment in a <code>&lt;div class="up-modal"&gt;</code></mark>
             %li Unpoly changes the browser URL to <code>http://host/full.html</code>
 
@@ -206,20 +206,39 @@
           %img(src='pictures/gmail.png')
 
         %section
+          %img(src='pictures/gmail_layers.png')
+
+        %section
+          %h3 Appending instead of replacing
+
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="tasks"&gt;
+                  &lt;li&gt;Wash car&lt;/li&gt;
+                  &lt;li&gt;Purchase supplies&lt;/li&gt;
+                  &lt;li&gt;Fix tent&lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;a class="next-page" href="/tasks?page=2"
+                  up-target=".next-page, .tasks:after"&gt;Next page&lt;/a&gt;
+
+        %section
           %h3 Navigation
 
           %ul
             %li
               All fragment updates change the browser URL by default.
             %li
-              Links to the current URL get an <a href="http://unpoly.com/up-current"><code>up-current</code></a>
-              class automatically.
-            %li
               Back/Forward buttons work as expected.<br />
               Even scroll positions are restored.
             %li
               Linking to a fragment will scroll the viewport to reveal the fragment.<br />
               Unpoly is aware of fixed navigation bars when revealing.
+            %li
+              Links to the current URL get an <a href="http://unpoly.com/up-current"><code>up-current</code></a>
+              class automatically.
             %li
               Modals and popups have their own URL.<br />
               When a modal closes, the background URL is restored.
