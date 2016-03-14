@@ -53,7 +53,7 @@
             .line
               AngularJS
             .subtle
-              2008-2016
+              2013-2016
 
           %p
             .line
@@ -70,15 +70,13 @@
             %li Viele Konzepte (Scopes, Transclusion, Dependency Injection, Digest Cycle...) machen Ausbildung schwierig
             %li Wenige Best Practices
             %li Angular 1 geht EOL und es gibt keinen klaren Nachfolger
-            %li Aufwändig
 
         %section
           %h3 Random.js
 
           %ul
-            %li Überwiegend copy & paste von Code-Schnippseln
-            %li Ungetestet
-            %li Fehlerhaft
+            %li Serverseitig getriebene Apps
+            %li Javascript ist hauptsächlich Copy & Paste von ungetesteten und fehlerhaften Code-Schnippseln
             %li Nicht komponierbar
             %li UI in Random.js-Projekten Läuft unter "Zusatzaufwand"
             %li Wir verbiegen uns, um weniger JS zu schreiben
@@ -96,10 +94,426 @@
             Die durchschnittliche GUI von uns ist weder zeitgemäß
             noch wettbewerbsfähig gegenüber anderen Agenturen.
 
+        %section(data-background-color='#2c3e50')
+          %h3 What server-side apps do well
+
+          %ol
+            %li Wide choice of great and mature languages
+            %li Synchronous data access
+            %li Time to first render
+            %li Everything has a URL
+            %li Low complexity stack
+            %li Works on low-end devices
+
+        %section(data-background-color='#921')
+          %h3 What server-side apps don't do well
+
+          %ol
+            %li Slow interaction feedback
+            %li Partial page updates require AJAX spaghetti
+            %li Can't do animated transitions
+            %li Requests destroy transient state (scroll positions, unsaved form values)
+            %li Layered interactions (modals, drop-downs, drawers) are hard
+
+
         %section
-          %h2 What is Unpoly?
+          %h2 Unpoly
           %ul
-            %li Framework for progressive enhancement / Unobtrusive Javascript
+            %li Schnelle und moderne UI für serverseitige Apps
+            %li AJAX ist Default
+            %li Keine¹ serverseitige Änderungen nötig
+            %li Alles hat eine URL
+            %li Compiler-Registry wie <code>$.unobtrusive</code> oder Angular-Direktiven
+            %li Geschwindigkeit
+            %li Unterstützt allgegenwärtige UI-Patterns<br>(Navigationsleisten, Modals, Popups, Tooltips)
+            %li Animation & Transition
+
+        %section
+          %h2 Unpoly
+
+          %p
+            Gleicher serverseitiger Code:
+
+          %ul
+            %li
+              %a(href='http://demo.upjs.io/sessions/CSARbQ/cards/6463?up_enabled=false') ohne Unpoly
+            %li
+              %a(href='http://demo.upjs.io/sessions/CSARbQ/cards/6463?up_enabled=true') mit Unpoly
+
+        %section
+
+          %pre.xs
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="story"&gt;
+
+                  &lt;p&gt;Story summary&lt;/p&gt;
+
+                  &lt;a href="full.html" <mark>up-target=".story"</mark>&gt;
+                    Read full story
+                  &lt;/a&gt;
+
+                &lt;/div&gt;
+
+          %ul
+            %li.fragment Unpoly requests <code>full.html</code> via AJAX
+            %li.fragment Server returns a <u>full HTML page</u> (nothing changes on the server)
+            %li.fragment Unpoly extracts the fragment that matches <code>.story</code> from the response
+            %li.fragment Unpoly swaps the old and new fragment
+            %li.fragment Unpoly changes the browser URL to <code>http://host/full.html</code>
+
+        %section
+
+          %pre.xs
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="story"&gt;
+
+                  &lt;p&gt;Story summary&lt;/p&gt;
+
+                  &lt;a href="full.html" <mark>up-modal=".story"</mark>&gt;
+                    Read full story
+                  &lt;/a&gt;
+
+                &lt;/div&gt;
+
+          %ul.fragment
+            %li Unpoly requests <code>full.html</code> via AJAX
+            %li Server returns a <u>full HTML page</u> (nothing changes on the server)
+            %li Unpoly extracts the fragment that matches <code>.story</code> from the response
+            %li <mark>Unpoly displays the new fragment in a <code>&lt;div class="up-modal"&gt;</code></mark>
+            %li Unpoly changes the browser URL to <code>http://host/full.html</code>
+
+        %section
+          %h3 Layers
+
+          .layers
+            .layers--layer.is-document
+              Document
+            .layers--layer.is-modal
+              Modal
+            .layers--layer.is-popup
+              Popup
+
+          %ul
+            %li Changing a modal doesn't change the document<br />
+            %li Changing a popup doesn't change the modal
+            %li Links in an overlay prefer to update fragments within the overlay
+            %li Changing a fragment behind the overlay will close the overlay
+            %li Use this for layered interactions
+
+        %section
+          %img(src='pictures/gmail.png')
+
+        %section
+          %h3 Navigation
+
+          %ul
+            %li
+              All fragment updates change the browser URL by default.
+            %li
+              Links to the current URL get an <a href="http://unpoly.com/up-current"><code>up-current</code></a>
+              class automatically.
+            %li
+              Back/Forward buttons work as expected.<br />
+              Even scroll positions are restored.
+            %li
+              Linking to a fragment will scroll the viewport to reveal the fragment.<br />
+              Unpoly is aware of fixed navigation bars when revealing.
+            %li
+              Modals and popups have their own URL.<br />
+              When a modal closes, the background URL is restored.
+            %li
+              Use <a href="http://unpoly.com/up-back"><code>[up-back]</code></a> to link to a previous state.
+
+        %section
+          %h3 Enhancing elements
+
+          %ul
+            %li Keiner checkt $.unobtrusive
+            %li Vgl. Angular
+            %li up.compiler
+            %li up.on
+            %li up-data
+            %li Legacy-Bibliotheken einbinden
+
+        %section
+          %h3 Prevent memory leaks
+
+        %section
+          %h3 Speed
+
+          %ul
+            %li up-active
+            %li up-instant
+            %li up-preload
+            %li up-dash
+            %li Caching
+            %li Spinners
+
+        %section
+          %h3 Animation
+          %ul
+            %li Why it's hard
+            %li Ghosting ...
+
+        %section
+          %h3
+            Composability
+
+          %ul
+            %li
+              Unpoly's default UJS behavior is a thin wrapper around a Javascript API
+            %li
+              If the default UJS behavior doesn't fit your use case, you can use
+              that Javascript API to compose your own behavior
+
+
+        %section
+          %h3
+            .subtle Composability
+            .line Dual interfaces
+
+          %h4 Unobtrusive
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="story"&gt;
+
+                  &lt;p&gt;Story summary&lt;/p&gt;
+
+                  &lt;a href="full.html" up-target=".story"&gt;
+                    Read full story
+                  &lt;/a&gt;
+
+                &lt;/div&gt;
+
+          %h4 Programmatic
+
+          %pre
+            %code.javascript
+              :preserve
+                up.replace('.story', 'full.html');
+
+        %section
+          %h3
+            .subtle Composability
+            .line Events
+
+          %pre
+            %code.javascript
+              :preserve
+                $(document).on('up:modal:open', function(event) {
+                  if (dontLikeModals()) {
+                    event.preventDefault();
+                  }
+                });
+
+        %section
+          %h3
+            .subtle Composability
+            .line All Async actions return promises
+
+          %pre
+            %code.javascript
+              :preserve
+                up.replace('.story', 'full.html').then(function() {
+                  // Fragments were loaded and swapped
+                });
+
+          %pre
+            %code.javascript
+              :preserve
+                up.morph('.old', '.new', 'move-left').then(function() {
+                  // Animation completed!
+                });
+
+        %section
+          %h3 Bootstrap integration
+
+          %ul
+            %li
+              Include <a href="https://raw.githubusercontent.com/unpoly/unpoly/master/dist/unpoly-bootstrap3.js">unpoly-bootstrap3.js</a> and
+              <a href="https://raw.githubusercontent.com/unpoly/unpoly/master/dist/unpoly-bootstrap3.css">unpoly-bootstrap3.css</a>
+            %li
+              Configures Unpoly to use Bootstrap styles for dialogs,<br />
+              marking current navigation taps, etc.
+            %li
+              Makes Unpoly aware of fixed Bootstrap layout components when scrolling the viewport.
+
+        %section
+          %h3 Legacy browsers
+
+          %p
+            Unpoly gracefully degrades with old versions of Internet Explorer:
+
+          %table
+            %tr
+              %th Edge
+              %td Full support
+            %tr
+              %th IE 10
+              %td Full support
+            %tr
+              %th IE 9
+              %td
+                Page updates that change browser history fall back to a classic page load.<br />
+                Animations and transitions are skipped.
+            %tr
+              %th IE8
+              %td Unpoly prevents itself from booting itself, leaving you with a classic server-side application
+
+        %section
+          %h3 Rails integration
+
+          %p
+            In your <code>Gemfile</code>:
+
+          %pre
+            %code.ruby
+              :preserve
+                gem 'unpoly-rails'
+
+          %p
+            In your controllers, views and helpers:
+
+          %pre
+            %code.ruby
+              :preserve
+                up?
+                up.target # '.story'
+                up.title = 'Title from server'
+                up.validate?
+
+          %p
+            The gem also provides the JS and CSS assets for the latest Unpoly.
+
+        %section
+          %h2 Forms
+
+          %p
+            Hard things with forms:
+
+          %ul
+            %li Submitting a form via AJAX
+            %li Submitting a form within a modal and stay within the modal
+            %li Server-side validations without a page load
+
+        %section
+          %h3 Ajax forms
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;form method="post" action="/users" up-target=".main"&gt;
+                  ...
+                &lt;/form&gt;
+
+          %ul
+            %li A successful submission (status 200) will update <code>.main</code>
+            %li A failed submission will (non-200 status) update the form itself
+
+        %section
+
+          %h3 Return non-200 status<br />when validations fail
+
+          %pre
+            %code.ruby(data-noescape)
+              :preserve
+                class UsersController < ApplicationController
+
+                  def create
+                    user_params = params[:user].permit(:email, :password)
+                    @user = User.new(user_params)
+                    if @user.save?
+                      sign_in @user
+                    else
+                      render 'form', <mark>status: :bad_request</mark>
+                    end
+                  end
+
+                end
+
+        %section
+          %h3 Forms within a modal
+
+          %p.fragment
+            Target a selector within the modal. Done.
+
+        %section
+          %h3 Keep elements
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="story"&gt;
+
+                  &lt;audio <mark>up-keep</mark> src="song.mp3"&gt;&lt;/audio&gt;
+
+                  &lt;p&gt;Story summary&lt;/p&gt;
+
+                  &lt;a href="full.html" up-target=".story"&gt;
+                    Read full story
+                  &lt;/a&gt;
+
+                &lt;/div&gt;
+
+        %section
+          %h3 Getting started
+
+          %ul
+            %li unpoly-rails
+            %li Replace half your Javascript with `up-target`
+            %li Convert remaining Javascripts into up.compiler
+
+        %section
+          %h3 Unit testing
+
+          %p
+            I recommend jasmine, jasmine-jquery and jasmine-ajax:
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                describe('.current-year', function() {
+                  it("displays today's year", function() {
+                    $element = affix('.today');
+                    up.hello($element);
+                    year = new Date().getFullYear();
+                    expect($element).toHaveText(year.toString());
+                  });
+                });
+
+        %section
+          %h3 Easier integration testing
+
+          %p
+            Disable animation:
+
+          %pre
+            %code.ruby(data-noescape)
+              :preserve
+                up.motion.config.enabled = false
+
+          %p
+            Disable concurrent requests:
+
+          %pre
+            %code.ruby(data-noescape)
+              :preserve
+                up.proxy.config.maxRequests = 1
+
+          %p
+            Wait before you do things:
+
+          %pre.xs
+            %code.ruby(data-noescape)
+              :preserve
+                AfterStep do
+                  sleep 0.05 while page.evaluate_script('up && up.proxy.isBusy()')
+                end
+          %p
+            (Or just use <a href="https://github.com/makandra/spreewald#waiting-for-page-load"><code>patiently</code></a>).
 
         %section
           %h2 Project state
