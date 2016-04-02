@@ -67,8 +67,7 @@
           %ul
             %li.green Guter Fit für:<br>Template Builder, extrem komplexe Formulare, Kalender, Holly, PH-Planer
             %li.red Mittelmäßiger Fit für:<br>Alles andere
-            %li.red Viele Konzepte (Scopes, Transclusion, Dependency Injection, Digest Cycle...) machen Ausbildung schwierig
-            %li.red Wenige Patterns und Best Practices
+            %li.red Viele Konzepte (Scopes, Transclusion, Dependency Injection, Digest Cycle...) erschweren Ausbildung
             %li.red Angular 1 geht EOL und es gibt keinen klaren Nachfolger
 
         %section
@@ -102,6 +101,7 @@
             %li Synchronous data access
             %li Time to first render
             %li Everything has a URL
+            %li Accessible for Google and <code>curl</code>
             %li Low complexity stack
             %li Works on low-end devices
 
@@ -115,6 +115,47 @@
             %li Page loads destroy transient state (scroll positions, unsaved form values)
             %li Layered interactions (modals, drop-downs, drawers) are hard
 
+        %section
+          %h2 Unpoly
+          %ul
+            %li In development for 18 months
+            %li
+              Largest open-source project we have
+              .subtle
+                #{540 + 130} commits (Spreewald: 259, Geordi: 282, ActiveType: 154)
+            %li
+              Currently powers:
+              %br
+              Nanomize, railslts.com, H&Z Smart Brain, new makandra.de
+
+        %section
+          %h2
+            .subtle
+              Design goals
+            .line
+              Close the UX gap between server-side and client-side apps
+
+          %ul
+            %li Layered interactions
+            %li Perceived speed
+            %li Keep Javascript VM
+
+        %section
+          %h1 Design goals
+          %ul
+            %li server-side and client-side apps
+            %li Batteries included
+            %li Enable things that are hard (even in Angular)
+            %li Works with existing code
+
+        %section
+          %h2 Enable things that are hard (even in Angular!)
+
+          %ul
+            %li Page transitions
+            %li Scroll positions
+            %li Everything has an URL
+            %li Crawlable
 
         %section
           %h2 Unpoly
@@ -139,6 +180,9 @@
               %a(href='http://demo.upjs.io/sessions/CSARbQ/cards/6463?up_enabled=false') ohne Unpoly
             %li
               %a(href='http://demo.upjs.io/sessions/CSARbQ/cards/6463?up_enabled=true') mit Unpoly
+
+        %section
+          %img(src='pictures/fragment_flow.svg' width='100%')
 
         %section
 
@@ -198,9 +242,9 @@
           %ul
             %li Changing a modal doesn't change the document<br />
             %li Changing a popup doesn't change the modal
-            %li Links in an overlay prefer to update fragments within the overlay
-            %li Changing a fragment behind the overlay will close the overlay
-            %li Use this for layered interactions
+            %li Links in an layer prefer to update fragments within the layer
+            %li Changing a fragment behind the layer will close the layer
+            %li Use this to <b>keep context</b> during interactions
 
         %section
           %img(src='pictures/gmail.png')
@@ -210,7 +254,6 @@
 
         %section
           %h3 Appending instead of replacing
-
 
           %pre
             %code.html(data-noescape)
@@ -225,6 +268,21 @@
                   up-target=".next-page, .tasks:after"&gt;Next page&lt;/a&gt;
 
         %section
+          %h3 Appending instead of replacing
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="tasks"&gt;
+                  &lt;li&gt;Wash car&lt;/li&gt;
+                  &lt;li&gt;Purchase supplies&lt;/li&gt;
+                  &lt;li&gt;Fix tent&lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;a class="next-page" href="/tasks?page=2"
+                  up-target=".next-page, <mark>.tasks:after</mark>"&gt;Next page&lt;/a&gt;
+
+        %section
           %h3 Navigation
 
           %ul
@@ -234,7 +292,7 @@
               Back/Forward buttons work as expected.<br />
               Even scroll positions are restored.
             %li
-              Linking to a fragment will scroll the viewport to reveal the fragment.<br />
+              Linking to a fragment will <b>scroll the viewport</b> to reveal the fragment.<br />
               Unpoly is aware of fixed navigation bars when revealing.
             %li
               Links to the current URL get an <a href="http://unpoly.com/up-current"><code>up-current</code></a>
@@ -258,6 +316,123 @@
 
         %section
           %h3 Prevent memory leaks
+
+          %h4 HTML
+
+          %pre.xs
+            %code.html(data-noescape)
+              :preserve
+                &lt;clock&gt;&lt;/clock&gt;
+
+          %h4 Javascript
+
+          %pre.xs
+            %code.javascript(data-noescape)
+              :preserve
+                $.unobtrusive(function() {
+                  $(this).find('clock', function() {
+
+                    var $clock = $(this);
+
+                    function updateClock() {
+                      var now = new Date();
+                      $clock.html(now.toString());
+                    }
+
+                    setInterval(updateClock, 1000);
+
+                  });
+                });
+
+        %section
+          %h3 Prevent memory leaks
+
+          %h4 HTML
+
+          %pre.xs
+            %code.html(data-noescape)
+              :preserve
+                &lt;clock&gt;&lt;/clock&gt;
+
+          %h4 Javascript
+
+          %pre.xs
+            %code.javascript(data-noescape)
+              :preserve
+                $.unobtrusive(function() {
+                  $(this).find('clock', function() {
+
+                    var $clock = $(this);
+
+                    function updateClock() {
+                      var now = new Date();
+                      $clock.html(now.toString());
+                    }
+
+                    <mark>setInterval(updateClock, 1000);</mark>
+
+                  });
+                });
+
+        %section
+          %h3 Prevent memory leaks
+
+          %h4 HTML
+
+          %pre.xs
+            %code.html(data-noescape)
+              :preserve
+                &lt;clock&gt;&lt;/clock&gt;
+
+          %h4 Javascript
+
+          %pre.xs
+            %code.javascript(data-noescape)
+              :preserve
+                up.compiler('clock', function($clock) {
+
+                  function updateClock() {
+                    var now = new Date();
+                    $clock.html(now.toString());
+                  }
+
+                  setInterval(updateClock, 1000);
+                });
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+
+        %section
+          %h3 Prevent memory leaks
+
+          %h4 HTML
+
+          %pre.xs
+            %code.html(data-noescape)
+              :preserve
+                &lt;clock&gt;&lt;/clock&gt;
+
+          %h4 Javascript
+
+          %pre.xs
+            %code.javascript(data-noescape)
+              :preserve
+                up.compiler('clock', function($clock) {
+
+                  function updateClock() {
+                    var now = new Date();
+                    $clock.html(now.toString());
+                  }
+
+                  var interval = setInterval(updateClock, 1000);
+
+                  <mark>return function() { clearInterval(interval) };</mark>
+                });
+                &nbsp;
+                &nbsp;
+                &nbsp;
 
         %section
           %h3 Speed

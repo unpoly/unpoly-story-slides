@@ -65,8 +65,7 @@
           <ul>
             <li class='green'>Guter Fit für:<br>Template Builder, extrem komplexe Formulare, Kalender, Holly, PH-Planer</li>
             <li class='red'>Mittelmäßiger Fit für:<br>Alles andere</li>
-            <li class='red'>Viele Konzepte (Scopes, Transclusion, Dependency Injection, Digest Cycle...) machen Ausbildung schwierig</li>
-            <li class='red'>Wenige Patterns und Best Practices</li>
+            <li class='red'>Viele Konzepte (Scopes, Transclusion, Dependency Injection, Digest Cycle...) erschweren Ausbildung</li>
             <li class='red'>Angular 1 geht EOL und es gibt keinen klaren Nachfolger</li>
           </ul>
         </section>
@@ -100,6 +99,7 @@
             <li>Synchronous data access</li>
             <li>Time to first render</li>
             <li>Everything has a URL</li>
+            <li>Accessible for Google and <code>curl</code></li>
             <li>Low complexity stack</li>
             <li>Works on low-end devices</li>
           </ol>
@@ -113,6 +113,56 @@
             <li>Page loads destroy transient state (scroll positions, unsaved form values)</li>
             <li>Layered interactions (modals, drop-downs, drawers) are hard</li>
           </ol>
+        </section>
+        <section>
+          <h2>Unpoly</h2>
+          <ul>
+            <li>In development for 18 months</li>
+            <li>
+              Largest open-source project we have
+              <div class='subtle'>
+                670 commits (Spreewald: 259, Geordi: 282, ActiveType: 154)
+              </div>
+            </li>
+            <li>
+              Currently powers:
+              <br>
+              Nanomize, railslts.com, H&Z Smart Brain, new makandra.de
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>
+            <div class='subtle'>
+              Design goals
+            </div>
+            <div class='line'>
+              Close the UX gap between server-side and client-side apps
+            </div>
+          </h2>
+          <ul>
+            <li>Layered interactions</li>
+            <li>Perceived speed</li>
+            <li>Keep Javascript VM</li>
+          </ul>
+        </section>
+        <section>
+          <h1>Design goals</h1>
+          <ul>
+            <li>server-side and client-side apps</li>
+            <li>Batteries included</li>
+            <li>Enable things that are hard (even in Angular)</li>
+            <li>Works with existing code</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Enable things that are hard (even in Angular!)</h2>
+          <ul>
+            <li>Page transitions</li>
+            <li>Scroll positions</li>
+            <li>Everything has an URL</li>
+            <li>Crawlable</li>
+          </ul>
         </section>
         <section>
           <h2>Unpoly</h2>
@@ -140,6 +190,9 @@
               <a href='http://demo.upjs.io/sessions/CSARbQ/cards/6463?up_enabled=true'>mit Unpoly</a>
             </li>
           </ul>
+        </section>
+        <section>
+          <img src='pictures/fragment_flow.svg' width='100%'>
         </section>
         <section>
           <pre class='xs'><code class='html' data-noescape>&lt;div class="story"&gt;&#x000A;&#x000A;  &lt;p&gt;Story summary&lt;/p&gt;&#x000A;&#x000A;  &lt;a href="full.html" <mark>up-target=".story"</mark>&gt;&#x000A;    Read full story&#x000A;  &lt;/a&gt;&#x000A;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
@@ -177,9 +230,9 @@
           <ul>
             <li>Changing a modal doesn't change the document<br /></li>
             <li>Changing a popup doesn't change the modal</li>
-            <li>Links in an overlay prefer to update fragments within the overlay</li>
-            <li>Changing a fragment behind the overlay will close the overlay</li>
-            <li>Use this for layered interactions</li>
+            <li>Links in an layer prefer to update fragments within the layer</li>
+            <li>Changing a fragment behind the layer will close the layer</li>
+            <li>Use this to <b>keep context</b> during interactions</li>
           </ul>
         </section>
         <section>
@@ -193,6 +246,10 @@
           <pre><code class='html' data-noescape>&lt;div class="tasks"&gt;&#x000A;  &lt;li&gt;Wash car&lt;/li&gt;&#x000A;  &lt;li&gt;Purchase supplies&lt;/li&gt;&#x000A;  &lt;li&gt;Fix tent&lt;/li&gt;&#x000A;&lt;/ul&gt;&#x000A;&#x000A;&lt;a class="next-page" href="/tasks?page=2"&#x000A;  up-target=".next-page, .tasks:after"&gt;Next page&lt;/a&gt;&#x000A;</code></pre>
         </section>
         <section>
+          <h3>Appending instead of replacing</h3>
+          <pre><code class='html' data-noescape>&lt;div class="tasks"&gt;&#x000A;  &lt;li&gt;Wash car&lt;/li&gt;&#x000A;  &lt;li&gt;Purchase supplies&lt;/li&gt;&#x000A;  &lt;li&gt;Fix tent&lt;/li&gt;&#x000A;&lt;/ul&gt;&#x000A;&#x000A;&lt;a class="next-page" href="/tasks?page=2"&#x000A;  up-target=".next-page, <mark>.tasks:after</mark>"&gt;Next page&lt;/a&gt;&#x000A;</code></pre>
+        </section>
+        <section>
           <h3>Navigation</h3>
           <ul>
             <li>
@@ -203,7 +260,7 @@
               Even scroll positions are restored.
             </li>
             <li>
-              Linking to a fragment will scroll the viewport to reveal the fragment.<br />
+              Linking to a fragment will <b>scroll the viewport</b> to reveal the fragment.<br />
               Unpoly is aware of fixed navigation bars when revealing.
             </li>
             <li>
@@ -232,6 +289,31 @@
         </section>
         <section>
           <h3>Prevent memory leaks</h3>
+          <h4>HTML</h4>
+          <pre class='xs'><code class='html' data-noescape>&lt;clock&gt;&lt;/clock&gt;&#x000A;</code></pre>
+          <h4>Javascript</h4>
+          <pre class='xs'><code class='javascript' data-noescape>$.unobtrusive(function() {&#x000A;  $(this).find('clock', function() {&#x000A;&#x000A;    var $clock = $(this);&#x000A;&#x000A;    function updateClock() {&#x000A;      var now = new Date();&#x000A;      $clock.html(now.toString());&#x000A;    }&#x000A;&#x000A;    setInterval(updateClock, 1000);&#x000A;&#x000A;  });&#x000A;});&#x000A;</code></pre>
+        </section>
+        <section>
+          <h3>Prevent memory leaks</h3>
+          <h4>HTML</h4>
+          <pre class='xs'><code class='html' data-noescape>&lt;clock&gt;&lt;/clock&gt;&#x000A;</code></pre>
+          <h4>Javascript</h4>
+          <pre class='xs'><code class='javascript' data-noescape>$.unobtrusive(function() {&#x000A;  $(this).find('clock', function() {&#x000A;&#x000A;    var $clock = $(this);&#x000A;&#x000A;    function updateClock() {&#x000A;      var now = new Date();&#x000A;      $clock.html(now.toString());&#x000A;    }&#x000A;&#x000A;    <mark>setInterval(updateClock, 1000);</mark>&#x000A;&#x000A;  });&#x000A;});&#x000A;</code></pre>
+        </section>
+        <section>
+          <h3>Prevent memory leaks</h3>
+          <h4>HTML</h4>
+          <pre class='xs'><code class='html' data-noescape>&lt;clock&gt;&lt;/clock&gt;&#x000A;</code></pre>
+          <h4>Javascript</h4>
+          <pre class='xs'><code class='javascript' data-noescape>up.compiler('clock', function($clock) {&#x000A;&#x000A;  function updateClock() {&#x000A;    var now = new Date();&#x000A;    $clock.html(now.toString());&#x000A;  }&#x000A;&#x000A;  setInterval(updateClock, 1000);&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
+        </section>
+        <section>
+          <h3>Prevent memory leaks</h3>
+          <h4>HTML</h4>
+          <pre class='xs'><code class='html' data-noescape>&lt;clock&gt;&lt;/clock&gt;&#x000A;</code></pre>
+          <h4>Javascript</h4>
+          <pre class='xs'><code class='javascript' data-noescape>up.compiler('clock', function($clock) {&#x000A;&#x000A;  function updateClock() {&#x000A;    var now = new Date();&#x000A;    $clock.html(now.toString());&#x000A;  }&#x000A;&#x000A;  var interval = setInterval(updateClock, 1000);&#x000A;&#x000A;  <mark>return function() { clearInterval(interval) };</mark>&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
         </section>
         <section>
           <h3>Speed</h3>
