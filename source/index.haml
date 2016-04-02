@@ -65,18 +65,23 @@
           %h3 AngularJS
 
           %ul
-            %li.green Guter Fit für:<br>Template Builder, extrem komplexe Formulare, Kalender, Holly, PH-Planer
-            %li.red Mittelmäßiger Fit für:<br>Alles andere
-            %li.red Viele Konzepte (Scopes, Transclusion, Dependency Injection, Digest Cycle...) erschweren Ausbildung
-            %li.red Angular 1 geht EOL und es gibt keinen klaren Nachfolger
+            %li AMC, Blogger Ranking, KITT
+            %li.green Good fit for:<br>Template builder, complex forms, calendar, Holly, PH-planner
+            %li.red Mediocre fit for:<br>Everything else
+            %li.red
+              Many concepts make training difficult
+              .subtle
+                (scopes, dependency injection, digest cycle...)
+            %li.red Angular 1 is EOL, leaving us in an awkward situation.
+            %li.red We don't know how we will build SPAs in 2016+.
 
         %section
           %h3 Random.js
 
           %ul
+            %li All other projects
             %li Serverseitig getriebene Apps
             %li Javascript ist hauptsächlich Copy & Paste von ungetesteten und fehlerhaften Code-Schnippseln
-            %li Nicht komponierbar
             %li UI in Random.js-Projekten Läuft unter "Zusatzaufwand"
             %li Wir verbiegen uns, um weniger JS zu schreiben
 
@@ -519,7 +524,7 @@
           %pre
             %code.javascript
               :preserve
-                up.morph('.old', '.new', 'move-left').then(function() {
+                up.morph('.old', '.new', 'cross-fade').then(function() {
                   // Animation completed!
                 });
 
@@ -656,10 +661,10 @@
           %h3 Getting started
 
           %ul
-            %li Read through unpoly.com
-            %li unpoly-rails
-            %li Replace half your Javascript with `up-target`
-            %li Convert remaining Javascripts into up.compiler
+            %li Read through <a href="http://unpoly.com">unpoly.com</a>
+            %li <code>gem 'unpoly-rails'</code>
+            %li Replace half your Javascript with <code>up-target</code>
+            %li Convert remaining Javascripts into <code>up.compiler</code>
 
         %section
           %h3 Unit testing

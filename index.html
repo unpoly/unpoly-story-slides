@@ -63,18 +63,25 @@
         <section>
           <h3>AngularJS</h3>
           <ul>
-            <li class='green'>Guter Fit für:<br>Template Builder, extrem komplexe Formulare, Kalender, Holly, PH-Planer</li>
-            <li class='red'>Mittelmäßiger Fit für:<br>Alles andere</li>
-            <li class='red'>Viele Konzepte (Scopes, Transclusion, Dependency Injection, Digest Cycle...) erschweren Ausbildung</li>
-            <li class='red'>Angular 1 geht EOL und es gibt keinen klaren Nachfolger</li>
+            <li>AMC, Blogger Ranking, KITT</li>
+            <li class='green'>Good fit for:<br>Template builder, complex forms, calendar, Holly, PH-planner</li>
+            <li class='red'>Mediocre fit for:<br>Everything else</li>
+            <li class='red'>
+              Many concepts make training difficult
+              <div class='subtle'>
+                (scopes, dependency injection, digest cycle...)
+              </div>
+            </li>
+            <li class='red'>Angular 1 is EOL, leaving us in an awkward situation.</li>
+            <li class='red'>We don't know how we will build SPAs in 2016+.</li>
           </ul>
         </section>
         <section>
           <h3>Random.js</h3>
           <ul>
+            <li>All other projects</li>
             <li>Serverseitig getriebene Apps</li>
             <li>Javascript ist hauptsächlich Copy & Paste von ungetesteten und fehlerhaften Code-Schnippseln</li>
-            <li>Nicht komponierbar</li>
             <li>UI in Random.js-Projekten Läuft unter "Zusatzaufwand"</li>
             <li>Wir verbiegen uns, um weniger JS zu schreiben</li>
           </ul>
@@ -370,7 +377,7 @@
             <div class='line'>All Async actions return promises</div>
           </h3>
           <pre><code class='javascript'>up.replace('.story', 'full.html').then(function() {&#x000A;  // Fragments were loaded and swapped&#x000A;});&#x000A;</code></pre>
-          <pre><code class='javascript'>up.morph('.old', '.new', 'move-left').then(function() {&#x000A;  // Animation completed!&#x000A;});&#x000A;</code></pre>
+          <pre><code class='javascript'>up.morph('.old', '.new', 'cross-fade').then(function() {&#x000A;  // Animation completed!&#x000A;});&#x000A;</code></pre>
         </section>
         <section>
           <h3>Bootstrap integration</h3>
@@ -465,10 +472,10 @@
         <section>
           <h3>Getting started</h3>
           <ul>
-            <li>Read through unpoly.com</li>
-            <li>unpoly-rails</li>
-            <li>Replace half your Javascript with `up-target`</li>
-            <li>Convert remaining Javascripts into up.compiler</li>
+            <li>Read through <a href="http://unpoly.com">unpoly.com</a></li>
+            <li><code>gem 'unpoly-rails'</code></li>
+            <li>Replace half your Javascript with <code>up-target</code></li>
+            <li>Convert remaining Javascripts into <code>up.compiler</code></li>
           </ul>
         </section>
         <section>
