@@ -13,7 +13,7 @@
     <link href='css/theme/blood.css' id='theme' rel='stylesheet'>
     <link href='css/custom.css' rel='stylesheet'>
     <!-- Code syntax highlighting -->
-    <link href='lib/css/zenburn.css' rel='stylesheet'>
+    <link href='lib/css/highlightjs/paraiso-dark.css' rel='stylesheet'>
     <!-- Printing and PDF exports -->
     <script>
       var link = document.createElement( 'link' );
@@ -31,85 +31,159 @@
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class='slides'>
         <section>
-          <h2>Unpoly</h2>
+          <h2>Unpoly Logo</h2>
         </section>
         <section>
           <h3>Javascript at makandra</h3>
-          <p>
-            <div class='line'>
-              Random.js
-            </div>
-            <div class='subtle'>
-              2008-2016
-            </div>
-          </p>
-          <p>
-            <div class='line'>
-              AngularJS
-            </div>
-            <div class='subtle'>
-              2013-2016
-            </div>
-          </p>
-          <p>
-            <div class='line'>
-              Half-assed AngularJS
-            </div>
-            <div class='subtle'>
-              2013-2016
-            </div>
-          </p>
+          <div class='fragment'>
+            <p>
+              <div class='line'>
+                Random.js
+              </div>
+              <div class='subtle'>
+                2008-2016
+              </div>
+            </p>
+          </div>
+          <div class='fragment'>
+            <p>
+              <div class='line'>
+                AngularJS
+              </div>
+              <div class='subtle'>
+                2013-2016
+              </div>
+            </p>
+          </div>
+          <div class='fragment'>
+            <p>
+              <div class='line'>
+                Half-assed AngularJS
+              </div>
+              <div class='subtle'>
+                2013-2016
+              </div>
+            </p>
+          </div>
         </section>
         <section>
           <h3>AngularJS</h3>
           <ul>
-            <li>AMC, Blogger Ranking, KITT</li>
+            <li>AMC backend, Blogger Ranking, KITT</li>
             <li class='green'>Good fit for:<br>Template builder, complex forms, calendar, Holly, PH-planner</li>
             <li class='red'>Mediocre fit for:<br>Everything else</li>
             <li class='red'>
               Many concepts make training difficult
               <div class='subtle'>
-                (scopes, dependency injection, digest cycle...)
+                (scope inheritance, isolation, dependency injection, digest cycle...)
               </div>
             </li>
             <li class='red'>Angular 1 is EOL, leaving us in an awkward situation.</li>
-            <li class='red'>We don't know how we will build SPAs in 2016+.</li>
+            <li class='red'>We don't know how we're going to build SPAs in 2016+.</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Half-assed AngularJS</h3>
+          <ul>
+            <li>AMC frontend, REALCUBE</li>
+            <li>
+              Uses Angular directives to run JS on matching HTML elements
+              <div class='subtle'>
+                (like an <code>$.unobtrusive</code> replacement):
+              </div>
+              <pre class='xs'><code class='javascript' data-noescape>app.directive('foo', function() {&#x000A;  return {&#x000A;    link: function(scope, $element) {&#x000A;      // do something with an $element that has class "foo"&#x000A;    };&#x000A;  }&#x000A;});&#x000A;</code></pre>
+            </li>
+            <li>
+              Use local scopes to toggle UI states:
+              <pre class='xs'><code class='html' data-noescape>&lt;div ng-init="more = false"&gt;&#x000A;  &lt;span ng-click="more = true"&gt;Show more&lt;/a&gt;&#x000A;  &lt;div ng-if="more"&gt;More information&lt;/div&gt;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>
+            <div class='subtle'>
+              Half-assed AngularJS
+            </div>
+            <div class='line'>
+              Issues
+            </div>
+          </h3>
+          <ul>
+            <li>No routing, so no real URLs for changed state</li>
+            <li>Crawlable content must always be rendered on the server,<br />so we can't really use this for important state changes</li>
+            <li>Compile time is an issue on large pages</li>
+            <li>All things considered, we're not very happy with this</li>
           </ul>
         </section>
         <section>
           <h3>Random.js</h3>
-          <ul>
+          <ul class='s'>
             <li>All other projects</li>
             <li>Server-side applications</li>
             <li>
-              Javascript is mainly
+              Javascript is mainly:
               <ul>
                 <li>copy &amp; paste of untested (and flawed!) code snippets</li>
-                <li>endless spaghetti of jQuery</li>
+                <li>endless spaghetti of jQuery mixing data and DOM manipulation</li>
+                <li>initialized randomly (on load, <code>$.unobtrusive</code>, <code>&lt;script&gt;</code> tags...)</li>
               </ul>
             </li>
             <li>
-              UX in Random.js projects usually quite mediocre: Endless series
-              of CRUD screens
+              UX in Random.js projects usually quite mediocre:
+              <Ul>
+                <li>Endless CRUD tunnels</li>
+                <li>Tedious navigation</li>
+                <li>List context is lost on every click</li>
+                <li>giant nested forms</li>
+              </Ul>
             </li>
             <li>
-              We go to great lengths to avoid writing JS
-              (giant nested forms)
+              We go to great lengths to avoid writing JS in Random.js projects
             </li>
           </ul>
         </section>
         <section>
-          <h3>Entscheidung für unsere Kunden</h3>
-          <blockquote>
-            Willst du's (geil und sauteuer) oder (mittelmäßig und billig)?
-          </blockquote>
-          <p>
-            Niemand möchte diese Entscheidung treffen.
-          </p>
-          <p>
-            Die durchschnittliche GUI von uns ist weder zeitgemäß
-            noch wettbewerbsfähig gegenüber anderen Agenturen.
-          </p>
+          <h3>A shitty decision for our clients</h3>
+          <table>
+            <tr>
+              <th></th>
+              <th>Random.js</th>
+              <th>Single-page app</th>
+            </tr>
+            <tr>
+              <th>
+                Code
+              </th>
+              <td>
+                Simple
+              </td>
+              <td>
+                Complex
+              </td>
+            </tr>
+            <tr>
+              <th>
+                UX
+              </th>
+              <td>
+                Painful
+              </td>
+              <td>
+                Fancy
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Cost
+              </th>
+              <td>
+                Cheap
+              </td>
+              <td>
+                Expensive
+              </td>
+            </tr>
+          </table>
         </section>
         <section data-background-color='#2c3e50'>
           <h3>What server-side apps do well</h3>
@@ -129,9 +203,72 @@
             <li>Slow interaction feedback</li>
             <li>Partial page updates require additional code on client & server</li>
             <li>Can't do animated transitions</li>
-            <li>Page loads destroy transient state (scroll positions, unsaved form values)</li>
-            <li>Layered interactions (modals, drop-downs, drawers) are hard</li>
+            <li>
+              Page loads destroy transient state
+              <div class='subtle'>(scroll positions, unsaved form values)</div>
+            </li>
+            <li>
+              Layered interactions are hard
+              <div class='subtle'>(modals, drop-downs, drawers)</div>
+            </li>
           </ol>
+        </section>
+        <section>
+          <h2>Unpoly Logo</h2>
+        </section>
+        <section>
+          <table>
+            <tr>
+              <th></th>
+              <th>Random.js</th>
+              <th class='green'>
+                Unpoly app
+              </th>
+              <th>Single-page app</th>
+            </tr>
+            <tr>
+              <th>
+                Code
+              </th>
+              <td>
+                Simple
+              </td>
+              <td class='green'>
+                Simple
+              </td>
+              <td>
+                Complex
+              </td>
+            </tr>
+            <tr>
+              <th>
+                UX
+              </th>
+              <td>
+                Painful
+              </td>
+              <td class='green'>
+                Friendly
+              </td>
+              <td>
+                Fancy
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Cost
+              </th>
+              <td>
+                Cheap
+              </td>
+              <td class='green'>
+                Cheap
+              </td>
+              <td>
+                Expensive
+              </td>
+            </tr>
+          </table>
         </section>
         <section>
           <h2>Unpoly</h2>
@@ -146,54 +283,72 @@
             <li>
               Currently powers:
               <br>
-              Nanomize, railslts.com, H&Z Smart Brain, new makandra.de
+              Nanomize, railslts.com, H&Z Smart Brain,<br />
+              new makandra.de, new makandra cards version
             </li>
           </ul>
         </section>
         <section>
-          <h2>
-            <div class='subtle'>
-              Design goals
-            </div>
-            <div class='line'>
-              Close the UX gap between server-side and client-side apps
-            </div>
-          </h2>
+          <h2>Design goals</h2>
           <ul>
-            <li>Layered interactions</li>
-            <li>Perceived speed</li>
-            <li>Keep Javascript VM</li>
-          </ul>
-        </section>
-        <section>
-          <h1>Design goals</h1>
-          <ul>
-            <li>server-side and client-side apps</li>
+            <li>Close UX-gap between server-side apps and SPAs</li>
             <li>Batteries included</li>
             <li>Enable things that are hard (even in Angular)</li>
+            <li>Not for ambitious UI</li>
             <li>Works with existing code</li>
+            <li>
+              Backend-agnostic
+              <div class='subtle'>
+                (although we have some really nice Rails bindings)
+              </div>
+            </li>
           </ul>
         </section>
         <section>
-          <h2>Enable things that are hard (even in Angular!)</h2>
+          <h3>
+            Close the UX gap
+            <div class='subtle'>
+              Between server-side apps and SPAs
+            </div>
+          </h3>
+          <ul>
+            <li>Perceived speed</li>
+            <li>Keep DOM and Javascript VM between requests</li>
+            <li>Layered interactions</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Batteries included</h3>
+          <p>
+            Unpoly ships with a basic implementation for established UI patterns:
+          </p>
+          <ul>
+            <li>navigation bars</li>
+            <li>infinite scrolling</li>
+            <li>drop-down menus</li>
+            <li>modals dialogs</li>
+            <li>...</li>
+          </ul>
+        </section>
+        <section>
+          <h3>URLs are important</h3>
+          <ul>
+            <li>Everything has an URL</li>
+            <li>Support Google, <code>curl</code> and legacy browsers</li>
+          </ul>
+        </section>
+        <section>
+          <h3>
+            Enable things that are hard
+            <div class='subtle'>
+              (even in Angular!)
+            </div>
+          </h3>
           <ul>
             <li>Page transitions</li>
             <li>Scroll positions</li>
-            <li>Everything has an URL</li>
-            <li>Crawlable</li>
-          </ul>
-        </section>
-        <section>
-          <h2>Unpoly</h2>
-          <ul>
-            <li>Schnelle und moderne UI für serverseitige Apps</li>
-            <li>AJAX ist Default</li>
-            <li>Keine* serverseitige Änderungen nötig</li>
-            <li>Alles hat eine URL</li>
-            <li>Compiler-Registry wie <code>$.unobtrusive</code> oder Angular-Direktiven</li>
-            <li>Geschwindigkeit</li>
-            <li>Unterstützt allgegenwärtige UI-Patterns<br>(Navigationsleisten, Modals, Popups, Tooltips)</li>
-            <li>Animation & Transition</li>
+            <li>Keep persistent elements</li>
+            <li>Testing async code</li>
           </ul>
         </section>
         <section>
@@ -214,6 +369,15 @@
           <img src='pictures/fragment_flow.svg' width='100%'>
         </section>
         <section>
+          <h3>
+            Update a page fragment
+            <div class='subtle'>
+              without Javascript
+            </div>
+          </h3>
+          <p>
+            <a href='http://unpoly.com/examples/update-fragment/'>Run example on unpoly.com</a>
+          </p>
           <pre class='xs'><code class='html' data-noescape>&lt;div class="story"&gt;&#x000A;&#x000A;  &lt;p&gt;Story summary&lt;/p&gt;&#x000A;&#x000A;  &lt;a href="full.html" <mark>up-target=".story"</mark>&gt;&#x000A;    Read full story&#x000A;  &lt;/a&gt;&#x000A;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
           <ul>
             <li class='fragment'>Unpoly requests <code>full.html</code> via AJAX</li>
@@ -224,8 +388,17 @@
           </ul>
         </section>
         <section>
+          <h3>
+            Open a fragment in a modal dialog
+            <div class='subtle'>
+              without Javascript
+            </div>
+          </h3>
+          <p>
+            <a href='http://unpoly.com/examples/modal/'>Run example on unpoly.com</a>
+          </p>
           <pre class='xs'><code class='html' data-noescape>&lt;div class="story"&gt;&#x000A;&#x000A;  &lt;p&gt;Story summary&lt;/p&gt;&#x000A;&#x000A;  &lt;a href="full.html" <mark>up-modal=".story"</mark>&gt;&#x000A;    Read full story&#x000A;  &lt;/a&gt;&#x000A;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
-          <ul class='fragment'>
+          <ul>
             <li>Unpoly requests <code>full.html</code> via AJAX</li>
             <li>Server returns a <u>full HTML page</u> as usual</li>
             <li>Unpoly extracts the fragment that matches <code>.story</code></li>
@@ -280,7 +453,7 @@
             </li>
             <li>
               Linking to a fragment will <b>scroll the viewport</b> to reveal the fragment.<br />
-              Unpoly is aware of fixed navigation bars when revealing.
+              Unpoly is aware of fixed navigation bars and will scroll further/less.
             </li>
             <li>
               Links to the current URL get an <a href="http://unpoly.com/up-current"><code>up-current</code></a>
@@ -304,6 +477,26 @@
             <li>up.on</li>
             <li>up-data</li>
             <li>Legacy-Bibliotheken einbinden</li>
+            <li>Adding structured data</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Memory leaks</h3>
+          <ul>
+            <li>
+              Our Random.js is full of memory leaks.
+            </li>
+            <li>
+              We just don't notice because the Javascript VM is reset between page loads.
+            </li>
+            <li>
+              We can't have memory leaks in persistent Javascript VMs
+              like Unpoly or Angular.js.
+            </li>
+            <li>
+              Background: <a href="https://makandracards.com/makandra/31325-how-to-create-memory-leaks-in-jquery">one</a>,
+              <a href="https://makandracards.com/makandra/31289-how-to-create-giant-memory-leaks-in-angularjs">two</a>.
+            </li>
           </ul>
         </section>
         <section>
@@ -336,20 +529,36 @@
         </section>
         <section>
           <h3>Speed</h3>
-          <ul>
-            <li>up-active</li>
-            <li>up-instant</li>
-            <li>up-preload</li>
-            <li>up-dash</li>
-            <li>Caching</li>
-            <li>Spinners</li>
-          </ul>
+          <div class='s'>
+            <ul>
+              <li>Clicked links/forms get an <a href="http://unpoly.com/up-active"><code>up-active</code></a> class while loading</li>
+              <li>
+                Links with an <a href="http://unpoly.com/up-instant"><code>up-instant</code></a> attribute load on <code>mousedown</code> instead of <code>click</code>
+                <div class='subtle'>
+                  (your Linux/Windows apps do that, too!)
+                </div>
+              </li>
+              <li>Links with <a href="http://unpoly.com/up-preload"><code>up-preload</code></a> attribute preload their destination<br />when hovering over the link.</li>
+              <li><a href="http://unpoly.com"><code>up-dash</code></a> is a <a href="http://unpoly.com/up.macro">macro</a> for <code>up-target</code>, <code>up-instant</code> and <code>up-preload</code>.</li>
+              <li><code>GET</code> requests are cached for 5 minutes</li>
+            </ul>
+            <p>
+              Feel speed by opening a card on
+              <a href="http://makandracards-up.makandra.de/makandra">makandracards-up.makandra.de</a>.
+            </p>
+          </div>
+        </section>
+        <section>
+          <h3>Spinners</h3>
+          <pre class='xs'><code class='html' data-noescape>&lt;div class="spinner"&gt;Please wait!&lt;/div&gt;&#x000A;</code></pre>
+          <pre class='xs'><code class='javascript' data-noescape>up.compiler('.spinner', function($element) {&#x000A;&#x000A;  up.on('up:proxy:slow', show);&#x000A;  up.on('up:proxy:recover', hide);&#x000A;&#x000A;  hide();&#x000A;&#x000A;  return function() {&#x000A;    up.off('up:proxy:slow', show);&#x000A;    up.off('up:proxy:recover', hide);&#x000A;  };&#x000A;&#x000A;});&#x000A;</code></pre>
         </section>
         <section>
           <h3>Animation</h3>
           <ul>
             <li>Why it's hard</li>
             <li>Ghosting ...</li>
+            <li>View example on new makandra.de</li>
           </ul>
         </section>
         <section>
@@ -392,6 +601,12 @@
           <pre><code class='javascript'>up.morph('.old', '.new', 'cross-fade').then(function() {&#x000A;  // Animation completed!&#x000A;});&#x000A;</code></pre>
         </section>
         <section>
+          <p>
+            View full documentation of JS functions,<br> events and CSS selectors on
+            <a href="http://unpoly.com/">unpoly.com</a>.
+          </p>
+        </section>
+        <section>
           <h3>Bootstrap integration</h3>
           <ul>
             <li>
@@ -424,13 +639,13 @@
             <tr>
               <th>IE 9</th>
               <td>
-                Page updates that change browser history fall back to a classic page load.<br />
+                Page updates that change browser history<br>fall back to a classic page load.<br />
                 Animations and transitions are skipped.
               </td>
             </tr>
             <tr>
               <th>IE8</th>
-              <td>Unpoly prevents itself from booting itself, leaving you with a classic server-side application</td>
+              <td>Unpoly prevents itself from booting,<br>leaving you with a classic server-side application</td>
             </tr>
           </table>
         </section>
@@ -478,8 +693,36 @@
           </p>
         </section>
         <section>
+          <h3>Validations without a page load</h3>
+          <pre class='xs'><code class='html' data-noescape>&lt;form action="/users"&gt;&#x000A;&#x000A;  &lt;fieldset&gt;&#x000A;    &lt;label&gt;E-mail&lt;/label&gt;&#x000A;    &lt;input type="text" name="email" <mark>up-validate</mark> /&gt;&#x000A;  &lt;/label&gt;&#x000A;&#x000A;  &lt;fieldset&gt;&#x000A;    &lt;label&gt;Password&lt;/label&gt;&#x000A;    &lt;input type="password" name="password" <mark>up-validate</mark> /&gt;&#x000A;  &lt;/fieldset&gt;&#x000A;&#x000A;  &lt;button type="submit"&gt;Register&lt;/button&gt;&#x000A;&#x000A;&lt;/form&gt;&#x000A;</code></pre>
+        </section>
+        <section>
+          <h3>Validations without a page load</h3>
+          <pre><code class='ruby' data-noescape>class UsersController &lt; ApplicationController&#x000A;&#x000A;  def create&#x000A;    @user = User.new(user_params)&#x000A;    if up.validate?&#x000A;      @user.valid?  # run validations, but don't save to DB&#x000A;      render 'form' # render form with error messages&#x000A;    elsif @user.save?&#x000A;      sign_in @user&#x000A;    else&#x000A;      render 'form', status: :bad_request&#x000A;    end&#x000A;  end&#x000A;&#x000A;end&#x000A;</code></pre>
+        </section>
+        <section>
+          <h3>Validations without a page load</h3>
+          <pre class='xs'><code class='html' data-noescape>&lt;form action="/users"&gt;&#x000A;&#x000A;  <mark>&lt;fieldset&gt;                                      </mark>&#x000A;  <mark>  &lt;label&gt;E-mail&lt;/label&gt;                         </mark>&#x000A;  <mark>  &lt;input type="text" name="email" up-validate /&gt;</mark>&#x000A;  <mark>&lt;/label&gt;                                        </mark>&#x000A;&#x000A;  &lt;fieldset&gt;&#x000A;    &lt;label&gt;Password&lt;/label&gt;&#x000A;    &lt;input type="password" name="password" up-validate /&gt;&#x000A;  &lt;/fieldset&gt;&#x000A;&#x000A;  &lt;button type="submit"&gt;Register&lt;/button&gt;&#x000A;&#x000A;&lt;/form&gt;&#x000A;</code></pre>
+        </section>
+        <section>
+          <h3>Validations without a page load</h3>
+          <pre class='xs'><code class='html' data-noescape>&lt;form action="/users"&gt;&#x000A;&#x000A;  <mark>&lt;fieldset class="has-error"&gt;                                       </mark>&#x000A;  <mark>  &lt;label&gt;E-mail has already been taken!&lt;/label&gt;                    </mark>&#x000A;  <mark>  &lt;input type="text" name="email" up-validate value="foo@bar.com"/&gt;</mark>&#x000A;  <mark>&lt;/label&gt;                                                           </mark>&#x000A;&#x000A;  &lt;fieldset&gt;&#x000A;    &lt;label&gt;Password&lt;/label&gt;&#x000A;    &lt;input type="password" name="password" up-validate /&gt;&#x000A;  &lt;/fieldset&gt;&#x000A;&#x000A;  &lt;button type="submit"&gt;Register&lt;/button&gt;&#x000A;&#x000A;&lt;/form&gt;&#x000A;</code></pre>
+        </section>
+        <section>
+          <h3>Updating dependent fields</h3>
+          <pre class='xs'><code class='html' data-noescape>&lt;form action="/contracts"&gt;&#x000A;  &lt;select name="department" up-validate="[name=employee]"&gt;...&lt;/select&gt;&#x000A;  &lt;select name="employee"&gt;...&lt;/select&gt;&#x000A;&lt;/form&gt;&#x000A;</code></pre>
+        </section>
+        <section>
           <h3>Keep elements</h3>
-          <pre><code class='html' data-noescape>&lt;div class="story"&gt;&#x000A;&#x000A;  &lt;audio <mark>up-keep</mark> src="song.mp3"&gt;&lt;/audio&gt;&#x000A;&#x000A;  &lt;p&gt;Story summary&lt;/p&gt;&#x000A;&#x000A;  &lt;a href="full.html" up-target=".story"&gt;&#x000A;    Read full story&#x000A;  &lt;/a&gt;&#x000A;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
+          <pre><code class='html' data-noescape>&lt;div class="story"&gt;&#x000A;&#x000A;  &lt;video <mark>up-keep</mark> src="movie.mp4"&gt;&lt;/video&gt;&#x000A;&#x000A;  &lt;p&gt;Story summary&lt;/p&gt;&#x000A;&#x000A;  &lt;a href="full.html" up-target=".story"&gt;&#x000A;    Read full story&#x000A;  &lt;/a&gt;&#x000A;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
+        </section>
+        <section>
+          <h3>Two-way bindings</h3>
+          <p>
+            Use <a href="http://rivetsjs.com/">Rivets.js</a> (6 KB):
+          </p>
+          <pre><code class='html' data-noescape>&lt;div class='template' up-data='{ "name": "Arne" }'&gt;&#x000A;  &lt;input rv-value='name'>&#x000A;  Hello, { name }!&#x000A;&lt;/div&gt;&#x000A;</code></pre>
+          <pre><code class='javascript' data-noescape>up.compiler('.template', function($element, data) {&#x000A;  var view = rivets.bind($element, data);&#x000A;  return view.unbind;&#x000A;});&#x000A;</code></pre>
         </section>
         <section>
           <h3>Getting started</h3>
@@ -493,26 +736,36 @@
         <section>
           <h3>Unit testing</h3>
           <p>
-            I recommend jasmine, jasmine-jquery and jasmine-ajax:
+            Use <a href="http://jasmine.github.io/">Jasmine</a> to describe examples.<br />
+            Use <a href="https://github.com/velesin/jasmine-jquery">jasmine-jquery</a> to create sample elements.<br />
+            Use <a href="http://unpoly.com/up.hello"><code>up.hello</code></a> to compile sample elements.
           </p>
-          <pre><code class='javascript' data-noescape>describe('.current-year', function() {&#x000A;  it("displays today's year", function() {&#x000A;    $element = affix('.today');&#x000A;    up.hello($element);&#x000A;    year = new Date().getFullYear();&#x000A;    expect($element).toHaveText(year.toString());&#x000A;  });&#x000A;});&#x000A;</code></pre>
+          <pre class='xs'><code class='javascript' data-noescape>up.compiler('.current-year', function($element) {&#x000A;  var year = new Date().getFullYear();&#x000A;  $element.text(year);&#x000A;});&#x000A;</code></pre>
+          <pre class='xs'><code class='javascript' data-noescape>describe('.current-year', function() {&#x000A;  it("displays today's year", function() {&#x000A;    $element = affix('.current-today');&#x000A;    up.hello($element);&#x000A;    year = new Date().getFullYear();&#x000A;    expect($element).toHaveText(year.toString());&#x000A;  });&#x000A;});&#x000A;</code></pre>
+        </section>
+        <section>
+          <p>
+            Use <a href="https://github.com/jasmine/jasmine-ajax">jasmine-ajax</a> to mock the network:
+          </p>
+          <pre class='xxs'><code class='javascript' data-noescape>up.compiler('.server-time', function($element) {&#x000A;  $element.text('Loading ...');&#x000A;  up.ajax('/time').then(function(time) { $element.text(time) };&#x000A;});&#x000A;</code></pre>
+          <pre class='xxs'><code class='javascript' data-noescape>describe('.current-year', function() {&#x000A;  it('fetches and displays the current time from the server', function() {&#x000A;    jasmine.Ajax.install();&#x000A;    var $element = affix('.server-time');&#x000A;    up.hello($element);&#x000A;    expect($element).toHaveText('Loading...');&#x000A;    jasmine.Ajax.requests.mostRecent().respondWith({&#x000A;      status: 200,&#x000A;      contentType: 'text/plain',&#x000A;      responseText: '13:37:00'&#x000A;    });&#x000A;    expect($element).toHaveText('13:37:00');&#x000A;  });&#x000A;});&#x000A;</code></pre>
         </section>
         <section>
           <h3>Easier integration testing</h3>
           <p>
             Disable animation:
           </p>
-          <pre><code class='ruby' data-noescape>up.motion.config.enabled = false&#x000A;</code></pre>
+          <pre><code class='ruby' data-noescape>up.motion.config.enabled = false;&#x000A;</code></pre>
           <p>
             Disable concurrent requests:
           </p>
-          <pre><code class='ruby' data-noescape>up.proxy.config.maxRequests = 1&#x000A;</code></pre>
+          <pre><code class='ruby' data-noescape>up.proxy.config.maxRequests = 1;&#x000A;</code></pre>
           <p>
             Wait before you do things:
           </p>
           <pre class='xs'><code class='ruby' data-noescape>AfterStep do&#x000A;  sleep 0.05 while page.evaluate_script('up && up.proxy.isBusy()')&#x000A;end</code></pre>
           <p>
-            (Or just use <a href="https://github.com/makandra/spreewald#waiting-for-page-load"><code>patiently</code></a>).
+            (Or use <a href="https://github.com/makandra/spreewald#waiting-for-page-load"><code>patiently</code></a>).
           </p>
         </section>
         <section>

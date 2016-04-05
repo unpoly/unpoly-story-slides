@@ -1,5 +1,5 @@
 body {
-  background-color: #1a121a;
+  background-color: #1f1222;
 }
 
 .reveal a {
@@ -98,12 +98,21 @@ body {
   line-height: 1.2;
 }
 
+.reveal table {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .reveal table td {
   color: #bbb;
 }
 
 .reveal table th {
   text-transform: uppercase;
+}
+
+.reveal table tr:last-child th {
+  border: 0;
 }
 
 .reveal .columns:after {
@@ -220,7 +229,7 @@ body {
 }
 
 .reveal code mark {
-  background-color: rgba(0, 125, 195, 0.9);
+  background-color: #0473b3;
   padding-left: 0;
   padding-right: 0;
 }
