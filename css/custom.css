@@ -1,5 +1,18 @@
+@import url(https://fonts.googleapis.com/css?family=Orbitron:400,500,700);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,400italic,600italic,700italic);
+
+
 body {
   background-color: #1f1222;
+}
+
+.reveal {
+  font-family: 'Source Sans Pro', sans-serif;
+  /*font-weight: 600;*/
+}
+
+.reveal .slides > section, .reveal .slides > section > section {
+  line-height: 1.1;
 }
 
 .reveal a {
@@ -23,6 +36,15 @@ body {
 
 .reveal .slides {
   text-align: left;
+}
+
+.reveal cite {
+  font-style: italic;
+}
+
+.reveal code {
+  font-size: 90%;
+  line-height: 120%;
 }
 
 .reveal pre {
@@ -78,6 +100,7 @@ body {
 .reveal h6 {
   line-height: 1.05;
   text-shadow: none;
+  font-family: Orbitron, sans-serif
 }
 
 .reveal h1 code,
@@ -229,7 +252,7 @@ body {
 }
 
 .reveal code mark {
-  background-color: #0473b3;
+  background-color: #045393;
   padding-left: 0;
   padding-right: 0;
 }
@@ -266,10 +289,12 @@ body {
 
 .reveal .layers--layer.is-modal {
   transform: rotateY(60deg) translateZ(50px);
+  background-color: rgba(200, 50, 40, 0.5);
 }
 
 .reveal .layers--layer.is-popup {
   transform: rotateY(60deg) translateZ(100px);
+  background-color: rgba(40, 200, 150, 0.5);
 }
 
 .reveal .layers:hover .layers--layer.is-modal {
@@ -279,4 +304,6 @@ body {
 .reveal .layers:hover .layers--layer.is-popup {
   margin-left: 200px;
 }
+
+
 

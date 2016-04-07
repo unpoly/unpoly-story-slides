@@ -31,7 +31,7 @@
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class='slides'>
         <section>
-          <h2>Unpoly Logo</h2>
+          <img class='plain' src='pictures/logos/unpoly.png' width='50%'>
         </section>
         <section>
           <h3>Javascript at makandra</h3>
@@ -109,8 +109,8 @@
             </div>
           </h3>
           <ul>
-            <li>No routing, so no real URLs for changed state</li>
             <li>Crawlable content must always be rendered on the server,<br />so we can't really use this for important state changes</li>
+            <li>No routing, so no real URLs for changed state</li>
             <li>Compile time is an issue on large pages</li>
             <li>All things considered, we're not very happy with this</li>
           </ul>
@@ -123,18 +123,19 @@
             <li>
               Javascript is mainly:
               <ul>
-                <li>copy &amp; paste of untested (and flawed!) code snippets</li>
-                <li>endless spaghetti of jQuery mixing data and DOM manipulation</li>
+                <li>copy &amp; paste of untested (and flawed!) code snippets from cards and old projects</li>
+                <li>anything non-trivial is implemented with a wall of jQuery</li>
                 <li>initialized randomly (on load, <code>$.unobtrusive</code>, <code>&lt;script&gt;</code> tags...)</li>
               </ul>
             </li>
             <li>
               UX in Random.js projects usually quite mediocre:
               <Ul>
-                <li>Endless CRUD tunnels</li>
-                <li>Tedious navigation</li>
+                <li>Tedious navigation through endless CRUD tunnels</li>
                 <li>List context is lost on every click</li>
-                <li>giant nested forms</li>
+                <li>Feels like a slide show</li>
+                <li>Giant nested forms</li>
+                <li>Need to leave the current screen if a required record is missing</li>
               </Ul>
             </li>
             <li>
@@ -185,8 +186,13 @@
             </tr>
           </table>
         </section>
-        <section data-background-color='#2c3e50'>
-          <h3>What server-side apps do well</h3>
+        <section>
+          <h3>
+            What server-side apps
+            <div class='green'>
+              do well
+            </div>
+          </h3>
           <ol>
             <li>Wide choice of great and mature languages</li>
             <li>Synchronous data access</li>
@@ -197,12 +203,17 @@
             <li>Works on low-end devices</li>
           </ol>
         </section>
-        <section data-background-color='#921'>
-          <h3>What server-side apps don't do well</h3>
+        <section>
+          <h3>
+            What server-side apps
+            <div class='red'>
+              don't do well
+            </div>
+          </h3>
           <ol>
             <li>Slow interaction feedback</li>
             <li>Partial page updates require additional code on client & server</li>
-            <li>Can't do animated transitions</li>
+            <li>Animation is complicated</li>
             <li>
               Page loads destroy transient state
               <div class='subtle'>(scroll positions, unsaved form values)</div>
@@ -214,7 +225,7 @@
           </ol>
         </section>
         <section>
-          <h2>Unpoly Logo</h2>
+          <img class='plain' src='pictures/logos/unpoly.png' width='50%'>
         </section>
         <section>
           <table>
@@ -273,6 +284,9 @@
         <section>
           <h2>Unpoly</h2>
           <ul>
+            <li>Unobtrusive Javascript framework</li>
+            <li>Snappy UI for server-side apps</li>
+            <li>Structure for Javascript code</li>
             <li>In development for 18 months</li>
             <li>
               Largest open-source project we have
@@ -284,7 +298,7 @@
               Currently powers:
               <br>
               Nanomize, railslts.com, H&Z Smart Brain,<br />
-              new makandra.de, new makandra cards version
+              <a href="http://staging.makandra.de">new makandra.de</a>, <a href="https://makandracards-up.makandra.de">new makandra cards version</a>
             </li>
           </ul>
         </section>
@@ -302,53 +316,6 @@
                 (although we have some really nice Rails bindings)
               </div>
             </li>
-          </ul>
-        </section>
-        <section>
-          <h3>
-            Close the UX gap
-            <div class='subtle'>
-              Between server-side apps and SPAs
-            </div>
-          </h3>
-          <ul>
-            <li>Perceived speed</li>
-            <li>Keep DOM and Javascript VM between requests</li>
-            <li>Layered interactions</li>
-          </ul>
-        </section>
-        <section>
-          <h3>Batteries included</h3>
-          <p>
-            Unpoly ships with a basic implementation for established UI patterns:
-          </p>
-          <ul>
-            <li>navigation bars</li>
-            <li>infinite scrolling</li>
-            <li>drop-down menus</li>
-            <li>modals dialogs</li>
-            <li>...</li>
-          </ul>
-        </section>
-        <section>
-          <h3>URLs are important</h3>
-          <ul>
-            <li>Everything has an URL</li>
-            <li>Support Google, <code>curl</code> and legacy browsers</li>
-          </ul>
-        </section>
-        <section>
-          <h3>
-            Enable things that are hard
-            <div class='subtle'>
-              (even in Angular!)
-            </div>
-          </h3>
-          <ul>
-            <li>Page transitions</li>
-            <li>Scroll positions</li>
-            <li>Keep persistent elements</li>
-            <li>Testing async code</li>
           </ul>
         </section>
         <section>
@@ -389,7 +356,7 @@
         </section>
         <section>
           <h3>
-            Open a fragment in a modal dialog
+            Open fragment in modal dialog
             <div class='subtle'>
               without Javascript
             </div>
@@ -405,6 +372,10 @@
             <li><mark>Unpoly displays the new fragment in a <code>&lt;div class="up-modal"&gt;</code></mark></li>
             <li>Unpoly changes the browser URL to <code>http://host/full.html</code></li>
           </ul>
+        </section>
+        <section>
+          <h3>Appending instead of replacing</h3>
+          <pre><code class='html' data-noescape>&lt;div class="tasks"&gt;&#x000A;  &lt;li&gt;Wash car&lt;/li&gt;&#x000A;  &lt;li&gt;Purchase supplies&lt;/li&gt;&#x000A;  &lt;li&gt;Fix tent&lt;/li&gt;&#x000A;&lt;/ul&gt;&#x000A;&#x000A;&lt;a class="next-page" href="/tasks?page=2"&#x000A;  up-target=".next-page, <mark>.tasks:after</mark>"&gt;Next page&lt;/a&gt;&#x000A;</code></pre>
         </section>
         <section>
           <h3>Layers</h3>
@@ -434,34 +405,38 @@
           <img src='pictures/gmail_layers.png'>
         </section>
         <section>
-          <h3>Appending instead of replacing</h3>
-          <pre><code class='html' data-noescape>&lt;div class="tasks"&gt;&#x000A;  &lt;li&gt;Wash car&lt;/li&gt;&#x000A;  &lt;li&gt;Purchase supplies&lt;/li&gt;&#x000A;  &lt;li&gt;Fix tent&lt;/li&gt;&#x000A;&lt;/ul&gt;&#x000A;&#x000A;&lt;a class="next-page" href="/tasks?page=2"&#x000A;  up-target=".next-page, .tasks:after"&gt;Next page&lt;/a&gt;&#x000A;</code></pre>
-        </section>
-        <section>
-          <h3>Appending instead of replacing</h3>
-          <pre><code class='html' data-noescape>&lt;div class="tasks"&gt;&#x000A;  &lt;li&gt;Wash car&lt;/li&gt;&#x000A;  &lt;li&gt;Purchase supplies&lt;/li&gt;&#x000A;  &lt;li&gt;Fix tent&lt;/li&gt;&#x000A;&lt;/ul&gt;&#x000A;&#x000A;&lt;a class="next-page" href="/tasks?page=2"&#x000A;  up-target=".next-page, <mark>.tasks:after</mark>"&gt;Next page&lt;/a&gt;&#x000A;</code></pre>
-        </section>
-        <section>
           <h3>Navigation</h3>
           <ul>
             <li>
               All fragment updates change the browser URL by default.
             </li>
             <li>
-              Back/Forward buttons work as expected.<br />
-              Even scroll positions are restored.
+              <div class='line'>
+                Back/Forward buttons work as expected.
+              </div>
+              <div class='subtle'>
+                Even scroll positions are restored.
+              </div>
             </li>
             <li>
-              Linking to a fragment will <b>scroll the viewport</b> to reveal the fragment.<br />
-              Unpoly is aware of fixed navigation bars and will scroll further/less.
+              <div class='line'>
+                Linking to a fragment will <b>scroll the viewport</b> to reveal the fragment.
+              </div>
+              <div class='subtle'>
+                Unpoly is aware of fixed navigation bars and will scroll further/less.
+              </div>
             </li>
             <li>
               Links to the current URL get an <a href="http://unpoly.com/up-current"><code>up-current</code></a>
               class automatically.
             </li>
             <li>
-              Modals and popups have their own URL.<br />
-              When a modal closes, the background URL is restored.
+              <div class='line'>
+                Modals and popups have their own URL.
+              </div>
+              <div class='subtle'>
+                When a modal closes, the background URL is restored.
+              </div>
             </li>
             <li>
               Use <a href="http://unpoly.com/up-back"><code>[up-back]</code></a> to link to a previous state.
@@ -481,17 +456,28 @@
           </ul>
         </section>
         <section>
-          <h3>Memory leaks</h3>
+          <h3>Symmmetry to BEM blocks</h3>
+        </section>
+        <section>
+          <h3>
+            <div class='subtle'>
+              We need to talk about
+            </div>
+            <div class='line'>
+              Memory leaks
+            </div>
+          </h3>
           <ul>
             <li>
-              Our Random.js is full of memory leaks.
+              Our shitty Random.js is <b>full of memory leaks</b>.
             </li>
             <li>
-              We just don't notice because the Javascript VM is reset between page loads.
+              We just don't notice because the Javascript VM is reset between page loads!
             </li>
             <li>
               We can't have memory leaks in persistent Javascript VMs
-              like Unpoly or Angular.js.
+              <br>
+              like Angular.js, Unpoly, Turbolinks.
             </li>
             <li>
               Background: <a href="https://makandracards.com/makandra/31325-how-to-create-memory-leaks-in-jquery">one</a>,
@@ -501,57 +487,156 @@
         </section>
         <section>
           <h3>Prevent memory leaks</h3>
-          <h4>HTML</h4>
+          <h4 class='subtle'>HTML</h4>
           <pre class='xs'><code class='html' data-noescape>&lt;clock&gt;&lt;/clock&gt;&#x000A;</code></pre>
-          <h4>Javascript</h4>
+          <h4 class='subtle'>Javascript</h4>
           <pre class='xs'><code class='javascript' data-noescape>$.unobtrusive(function() {&#x000A;  $(this).find('clock', function() {&#x000A;&#x000A;    var $clock = $(this);&#x000A;&#x000A;    function updateClock() {&#x000A;      var now = new Date();&#x000A;      $clock.html(now.toString());&#x000A;    }&#x000A;&#x000A;    setInterval(updateClock, 1000);&#x000A;&#x000A;  });&#x000A;});&#x000A;</code></pre>
         </section>
         <section>
           <h3>Prevent memory leaks</h3>
-          <h4>HTML</h4>
+          <h4 class='subtle'>HTML</h4>
           <pre class='xs'><code class='html' data-noescape>&lt;clock&gt;&lt;/clock&gt;&#x000A;</code></pre>
-          <h4>Javascript</h4>
-          <pre class='xs'><code class='javascript' data-noescape>$.unobtrusive(function() {&#x000A;  $(this).find('clock', function() {&#x000A;&#x000A;    var $clock = $(this);&#x000A;&#x000A;    function updateClock() {&#x000A;      var now = new Date();&#x000A;      $clock.html(now.toString());&#x000A;    }&#x000A;&#x000A;    <mark>setInterval(updateClock, 1000);</mark>&#x000A;&#x000A;  });&#x000A;});&#x000A;</code></pre>
+          <h4 class='subtle'>Javascript</h4>
+          <pre class='xs'><code class='javascript' data-noescape>$.unobtrusive(function() {&#x000A;  $(this).find('clock', function() {&#x000A;&#x000A;    var $clock = $(this);&#x000A;&#x000A;    function updateClock() {&#x000A;      var now = new Date();&#x000A;      $clock.html(now.toString());&#x000A;    }&#x000A;&#x000A;    <mark>setInterval(updateClock, 1000);</mark> // creates one interval per &lt;clock&gt;!&#x000A;&#x000A;  });&#x000A;});&#x000A;</code></pre>
         </section>
         <section>
           <h3>Prevent memory leaks</h3>
-          <h4>HTML</h4>
+          <h4 class='subtle'>HTML</h4>
           <pre class='xs'><code class='html' data-noescape>&lt;clock&gt;&lt;/clock&gt;&#x000A;</code></pre>
-          <h4>Javascript</h4>
-          <pre class='xs'><code class='javascript' data-noescape>up.compiler('clock', function($clock) {&#x000A;&#x000A;  function updateClock() {&#x000A;    var now = new Date();&#x000A;    $clock.html(now.toString());&#x000A;  }&#x000A;&#x000A;  setInterval(updateClock, 1000);&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
+          <h4 class='subtle'>Javascript</h4>
+          <pre class='xs'><code class='javascript' data-noescape>up.compiler('clock', function($clock) {&#x000A;&#x000A;  function updateClock() {&#x000A;    var now = new Date();&#x000A;    $clock.html(now.toString());&#x000A;  }&#x000A;&#x000A;  setInterval(updateClock, 1000); // this still leaks memory!&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
         </section>
         <section>
           <h3>Prevent memory leaks</h3>
-          <h4>HTML</h4>
+          <h4 class='subtle'>HTML</h4>
           <pre class='xs'><code class='html' data-noescape>&lt;clock&gt;&lt;/clock&gt;&#x000A;</code></pre>
-          <h4>Javascript</h4>
+          <h4 class='subtle'>Javascript</h4>
           <pre class='xs'><code class='javascript' data-noescape>up.compiler('clock', function($clock) {&#x000A;&#x000A;  function updateClock() {&#x000A;    var now = new Date();&#x000A;    $clock.html(now.toString());&#x000A;  }&#x000A;&#x000A;  var interval = setInterval(updateClock, 1000);&#x000A;&#x000A;  <mark>return function() { clearInterval(interval) };</mark>&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
         </section>
         <section>
-          <h3>Speed</h3>
+          <h3>Response times</h3>
+          <ul class='s'>
+            <li>
+              <b>0.1 second</b> is about the limit for having the user feel that the system is reacting
+              instantaneously, meaning that no special feedback is necessary except to display the
+              result.
+            </li>
+            <li>
+              <b>1.0 second</b> is about the limit for the user's flow of thought to stay uninterrupted, even
+              though the user will notice the delay. Normally, no special feedback is necessary during
+              delays of more than 0.1 but less than 1.0 second, but the user does lose the feeling of
+              operating directly on the data.
+            </li>
+            <li>
+              <b>10 seconds</b> is about the limit for keeping the user's attention focused on the dialogue.
+              For longer delays, users will want to perform other tasks while waiting for the computer
+              to finish, so they should be given feedback indicating when the computer expects to be
+              done. Feedback during the delay is especially important if the response time is likely to
+              be highly variable, since users will then not know what to expect.
+            </li>
+          </ul>
+          <p>
+            <cite>
+              Miller 1968; Card et al. 1991; Jacob Nielsen 1993
+            </cite>
+          </p>
+        </section>
+        <section>
+          <h3>
+            <div class='line'>
+              Reponse times
+            </div>
+            <div class='subtle'>
+              Compared to AngularJS
+            </div>
+          </h3>
+          <ul>
+            <li>We write very few AngularJS interactions that don't rely on an connection.<br /></li>
+            <li>Most AngularJS interactions are still bound by server speed.</li>
+            <li>
+              <div class='line'>
+                Writing JSON takes time, too.
+              </div>
+              <div class='subtle'>
+                60-300ms for index views in AMC backend
+              </div>
+            </li>
+          </ul>
+          <li>
+            Client-side rendering time is an issue for large screens.
+          </li>
+        </section>
+        <section>
+          <h3>Freeing our time budget</h3>
           <div class='s'>
             <ul>
-              <li>Clicked links/forms get an <a href="http://unpoly.com/up-active"><code>up-active</code></a> class while loading</li>
+              <li>
+                Clicked links/forms get an <a href="http://unpoly.com/up-active"><code>up-active</code></a> class while loading
+                <div class='subtle'>
+                  Get into a habit of styling this!<br>
+                  Use throttling and Chrome's network tab
+                </div>
+              </li>
+              <li>
+                We no longer parse and execute CSS, Javascript and build the DOM on every request
+                <div class='subtle'>
+                  makandra deck on Cards (140 ms), AMC frontend (360 ms)
+                </div>
+              </li>
               <li>
                 Links with an <a href="http://unpoly.com/up-instant"><code>up-instant</code></a> attribute load on <code>mousedown</code> instead of <code>click</code>
                 <div class='subtle'>
-                  (your Linux/Windows apps do that, too!)
+                  Saves ~70 ms with a mouse (<a href="http://instantclick.io/click-test">test yourself</a>)
+                  <br>
+                  Saves ~300 ms on unoptimized sites with touch device
+                  <br>
+                  Your Linux/Windows apps do that, too!
                 </div>
               </li>
-              <li>Links with <a href="http://unpoly.com/up-preload"><code>up-preload</code></a> attribute preload their destination<br />when hovering over the link.</li>
-              <li><a href="http://unpoly.com"><code>up-dash</code></a> is a <a href="http://unpoly.com/up.macro">macro</a> for <code>up-target</code>, <code>up-instant</code> and <code>up-preload</code>.</li>
+              <li>
+                Links with <a href="http://unpoly.com/up-preload"><code>up-preload</code></a> attribute preload destination while hovering
+                <div class='subtle'>
+                  Saves ~200-300 ms (<a href="http://instantclick.io/click-test">test yourself</a>)
+                </div>
+              </li>
               <li><code>GET</code> requests are cached for 5 minutes</li>
+              <li>Servers can optimize responses for the <code>X-Up-Target</code> header</li>
+              <li>We can still implement client-side interactions</li>
             </ul>
-            <p>
-              Feel speed by opening a card on
-              <a href="http://makandracards-up.makandra.de/makandra">makandracards-up.makandra.de</a>.
-            </p>
           </div>
         </section>
         <section>
+          <p>
+            Feel the response time of an Unpoly app by opening a card on
+            <br>
+            <a href="http://makandracards-up.makandra.de/makandra">makandracards-up.makandra.de</a>.
+          </p>
+        </section>
+        <section>
           <h3>Spinners</h3>
+          <p>
+            For the occasional long-running request, you can configure this globally:
+          </p>
           <pre class='xs'><code class='html' data-noescape>&lt;div class="spinner"&gt;Please wait!&lt;/div&gt;&#x000A;</code></pre>
-          <pre class='xs'><code class='javascript' data-noescape>up.compiler('.spinner', function($element) {&#x000A;&#x000A;  up.on('up:proxy:slow', show);&#x000A;  up.on('up:proxy:recover', hide);&#x000A;&#x000A;  hide();&#x000A;&#x000A;  return function() {&#x000A;    up.off('up:proxy:slow', show);&#x000A;    up.off('up:proxy:recover', hide);&#x000A;  };&#x000A;&#x000A;});&#x000A;</code></pre>
+          <pre class='xs'><code class='javascript' data-noescape>up.compiler('.spinner', function($element) {&#x000A;  function show() { $element.show() };&#x000A;  function hide() { $element.hide() };&#x000A;  up.on('up:proxy:slow', show);&#x000A;  up.on('up:proxy:recover', hide);&#x000A;  hide();&#x000A;  return function() {&#x000A;    up.off('up:proxy:slow', show);&#x000A;    up.off('up:proxy:recover', hide);&#x000A;  };&#x000A;});&#x000A;</code></pre>
+          <p>
+            The <code>up:proxy:slow</code> event is triggered after 300 ms (configurable).
+          </p>
+        </section>
+        <section>
+          <h3>
+            <div class='subtle'>
+              Or go nuclear
+            </div>
+            <div class='line'>
+              Two-way bindings
+            </div>
+          </h3>
+          <p>
+            Use <a href="http://rivetsjs.com/">Rivets.js</a> (6 KB):
+          </p>
+          <pre><code class='html' data-noescape>&lt;div class='template' up-data='{ "name": "Arne" }'&gt;&#x000A;  &lt;input rv-value='name'>&#x000A;  Hello, { name }!&#x000A;&lt;/div&gt;&#x000A;</code></pre>
+          <pre><code class='javascript' data-noescape>up.compiler('.template', function($element, data) {&#x000A;  var view = rivets.bind($element, data);&#x000A;  return view.unbind;&#x000A;});&#x000A;</code></pre>
         </section>
         <section>
           <h3>Animation</h3>
@@ -715,14 +800,6 @@
         <section>
           <h3>Keep elements</h3>
           <pre><code class='html' data-noescape>&lt;div class="story"&gt;&#x000A;&#x000A;  &lt;video <mark>up-keep</mark> src="movie.mp4"&gt;&lt;/video&gt;&#x000A;&#x000A;  &lt;p&gt;Story summary&lt;/p&gt;&#x000A;&#x000A;  &lt;a href="full.html" up-target=".story"&gt;&#x000A;    Read full story&#x000A;  &lt;/a&gt;&#x000A;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
-        </section>
-        <section>
-          <h3>Two-way bindings</h3>
-          <p>
-            Use <a href="http://rivetsjs.com/">Rivets.js</a> (6 KB):
-          </p>
-          <pre><code class='html' data-noescape>&lt;div class='template' up-data='{ "name": "Arne" }'&gt;&#x000A;  &lt;input rv-value='name'>&#x000A;  Hello, { name }!&#x000A;&lt;/div&gt;&#x000A;</code></pre>
-          <pre><code class='javascript' data-noescape>up.compiler('.template', function($element, data) {&#x000A;  var view = rivets.bind($element, data);&#x000A;  return view.unbind;&#x000A;});&#x000A;</code></pre>
         </section>
         <section>
           <h3>Getting started</h3>
