@@ -366,6 +366,25 @@
         </section>
         <section>
           <h3>
+            Update a page fragment
+            <div class='subtle'>
+              without Javascript
+            </div>
+          </h3>
+          <p>
+            <a href='http://unpoly.com/examples/update-fragment/'>Run example on unpoly.com</a>
+          </p>
+          <pre class='xs'><code class='html' data-noescape>&lt;div class="story"&gt;&#x000A;&#x000A;  &lt;p&gt;Story summary&lt;/p&gt;&#x000A;&#x000A;  &lt;a href="full.html" <mark>up-target=".story"</mark>&gt;&#x000A;    Read full story&#x000A;  &lt;/a&gt;&#x000A;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
+          <ul>
+            <li>Unpoly requests <code>full.html</code> via AJAX</li>
+            <li>Server returns a <u>full HTML page</u> as usual</li>
+            <li>Unpoly extracts the fragment that matches <code>.story</code></li>
+            <li>Unpoly swaps the old and new fragment</li>
+            <li>Unpoly changes the browser URL to <code>http://host/full.html</code></li>
+          </ul>
+        </section>
+        <section>
+          <h3>
             Open fragment in modal dialog
             <div class='subtle'>
               without Javascript
@@ -384,8 +403,23 @@
           </ul>
         </section>
         <section>
-          <h3>Appending instead of replacing</h3>
-          <pre><code class='html' data-noescape>&lt;div class="tasks"&gt;&#x000A;  &lt;li&gt;Wash car&lt;/li&gt;&#x000A;  &lt;li&gt;Purchase supplies&lt;/li&gt;&#x000A;  &lt;li&gt;Fix tent&lt;/li&gt;&#x000A;&lt;/ul&gt;&#x000A;&#x000A;&lt;a class="next-page" href="/tasks?page=2"&#x000A;  up-target=".next-page, <mark>.tasks:after</mark>"&gt;Next page&lt;/a&gt;&#x000A;</code></pre>
+          <h3>
+            Open fragment in popup overlay
+            <div class='subtle'>
+              without Javascript
+            </div>
+          </h3>
+          <p style='visibility: hidden'>
+            <a href='http://unpoly.com/examples/modal/'>Run example on unpoly.com</a>
+          </p>
+          <pre class='xs'><code class='html' data-noescape>&lt;div class="story"&gt;&#x000A;&#x000A;  &lt;p&gt;Story summary&lt;/p&gt;&#x000A;&#x000A;  &lt;a href="full.html" <mark>up-popup=".story"</mark>&gt;&#x000A;    Read full story&#x000A;  &lt;/a&gt;&#x000A;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
+          <ul>
+            <li>Unpoly requests <code>full.html</code> via AJAX</li>
+            <li>Server returns a <u>full HTML page</u> as usual</li>
+            <li>Unpoly extracts the fragment that matches <code>.story</code></li>
+            <li><mark>Unpoly displays the new fragment in a <code>&lt;div class="up-popup"&gt;</code></mark></li>
+            <li>Unpoly changes the browser URL to <code>http://host/full.html</code></li>
+          </ul>
         </section>
         <section>
           <h3>Layers</h3>
@@ -453,6 +487,10 @@
               Use <a href="http://unpoly.com/up-back"><code>[up-back]</code></a> to link to a previous state.
             </li>
           </ul>
+        </section>
+        <section>
+          <h3>Appending instead of replacing</h3>
+          <pre><code class='html' data-noescape>&lt;div class="tasks"&gt;&#x000A;  &lt;li&gt;Wash car&lt;/li&gt;&#x000A;  &lt;li&gt;Purchase supplies&lt;/li&gt;&#x000A;  &lt;li&gt;Fix tent&lt;/li&gt;&#x000A;&lt;/ul&gt;&#x000A;&#x000A;&lt;a class="next-page" href="/tasks?page=2"&#x000A;  up-target=".next-page, <mark>.tasks:after</mark>"&gt;Next page&lt;/a&gt;&#x000A;</code></pre>
         </section>
         <section>
           <h3>Enhancing elements</h3>
@@ -528,6 +566,12 @@
           <pre class='xs'><code class='javascript' data-noescape>up.compiler('clock', function($clock) {&#x000A;&#x000A;  function updateClock() {&#x000A;    var now = new Date();&#x000A;    $clock.html(now.toString());&#x000A;  }&#x000A;&#x000A;  var interval = setInterval(updateClock, 1000);&#x000A;&#x000A;  <mark>return function() { clearInterval(interval) };</mark> // clean up when destroyed&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
         </section>
         <section>
+          <h2>Response times</h2>
+          <p>
+            Users expect more than a slide show.
+          </p>
+        </section>
+        <section>
           <h3>Response times</h3>
           <ul class='s'>
             <li>
@@ -587,12 +631,20 @@
                 60-300ms for index views in AMC backend
               </div>
             </li>
+            <li>
+              <div class='line'>
+                Client-side rendering time is an issue for long pages.
+              </div>
+            </li>
+            <li>
+              <div class='line'>
+                Users do like the instantaneous feedback
+              </div>
+              <div class='subtle'>
+                (even if it just shows to an empty screen that is then populated over the wire)
+              </div>
+            </li>
           </ul>
-          <li>
-            <div class='line'>
-              Client-side rendering time is an issue for long pages.
-            </div>
-          </li>
         </section>
         <section>
           <h3>
