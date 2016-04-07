@@ -257,6 +257,9 @@ body {
   padding-right: 0;
 }
 
+.reveal code mark.bad {
+  background-color: #932104;
+}
 
 .reveal blockquote {
   margin-left: 0;

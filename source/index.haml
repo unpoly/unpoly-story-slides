@@ -29,16 +29,7 @@
       .slides
 
         %section
-          -#%p(style='text-align: right')
-          -#  %img.plain(src='pictures/makandra/makandra-inverted.png' width='22%')
           %img.plain(src='pictures/logos/unpoly.png' width='50%')
-
-          -#%p
-          -#  %a(href='mailto:henning.koch@makandra.de') henning.koch@makandra.de
-          -#  %br
-          -#  %a(href='https://twitter.com/triskweline') @triskweline
-          -#%p
-          -#  &nbsp;
 
         %section
           %h3 Javascript at makandra
@@ -128,14 +119,14 @@
 
           %ul.s
             %li All other projects
-            %li Server-side applications
-            %li
-              Javascript is mainly:
+            %li.green Server-side Ruby applications
+            %li.red
+              Javascript:
               %ul
-                %li copy &amp; paste of untested (and flawed!) code snippets from cards and old projects
-                %li anything non-trivial is implemented with a wall of jQuery
-                %li initialized randomly (on load, <code>$.unobtrusive</code>, <code>&lt;script&gt;</code> tags...)
-            %li
+                %li Copy &amp; paste of untested (and flawed!) code snippets from cards and old projects
+                %li Anything non-trivial is implemented with a wall of jQuery
+                %li Initialized randomly (on load, <code>$.unobtrusive</code>, <code>&lt;script&gt;</code> tags...)
+            %li.red
               UX in Random.js projects usually quite mediocre:
               %Ul
                 %li Tedious navigation through endless CRUD tunnels
@@ -143,7 +134,7 @@
                 %li Feels like a slide show
                 %li Giant nested forms
                 %li Need to leave the current screen if a required record is missing
-            %li
+            %li.red
               We go to great lengths to avoid writing JS in Random.js projects
 
         %section
@@ -176,6 +167,9 @@
               %td
                 Expensive
 
+        %section
+          %p
+            Can we bring learnings from AngularJS into the server-side paradigm?
 
         %section
           %h3
@@ -210,9 +204,7 @@
               .subtle (modals, drop-downs, drawers)
 
         %section
-          %img.plain(src='pictures/logos/unpoly.png' width='50%')
 
-        %section
           %table
             %tr
               %th
@@ -268,7 +260,9 @@
 
 
         %section
-          %h2 Design goals
+          %h2
+            .subtle Unpoly
+            .line Design goals
           %ul
             %li Close UX-gap between server-side apps and SPAs
             %li Batteries included
@@ -328,8 +322,6 @@
 
 
         %section
-          %h2 Unpoly
-
           %p
             Gleicher serverseitiger Code:
 
@@ -465,29 +457,32 @@
               .line
                 Modals and popups have their own URL.
               .subtle
-                When a modal closes, the background URL is restored.
+                When a modal closes, the background URL is restored.<br />
+                Reloading a modal's URL shows the content as a full page.
             %li
               Use <a href="http://unpoly.com/up-back"><code>[up-back]</code></a> to link to a previous state.
 
         %section
           %h3 Enhancing elements
 
+          %p.red
+            TODO
+
           %ul
             %li Keiner checkt $.unobtrusive
             %li Vgl. Angular
             %li up.compiler
-            %li up.on
-            %li up-data
             %li Legacy-Bibliotheken einbinden
-            %li Adding structured data
+            %li
+              Adding structured data
+              %ul
+                %li up-keep with reload
 
         %section
           %h3 Symmmetry to BEM blocks
 
         %section
           %h3
-            .subtle
-              We need to talk about
             .line
               Memory leaks
 
@@ -505,7 +500,7 @@
               <a href="https://makandracards.com/makandra/31289-how-to-create-giant-memory-leaks-in-angularjs">two</a>.
 
         %section
-          %h3 Prevent memory leaks
+          %h3 Random.js
 
           %h4.subtle HTML
 
@@ -535,7 +530,8 @@
                 });
 
         %section
-          %h3 Prevent memory leaks
+          %h3 Random.js: <span class="red">Leaky</span>
+
 
           %h4.subtle HTML
 
@@ -559,13 +555,13 @@
                       $clock.html(now.toString());
                     }
 
-                    <mark>setInterval(updateClock, 1000);</mark> // creates one interval per &lt;clock&gt;!
+                    <mark class="bad">setInterval(updateClock, 1000);</mark> // creates one interval per &lt;clock&gt;!
 
                   });
                 });
 
         %section
-          %h3 Prevent memory leaks
+          %h3 Unpoly compiler: <span class="red">Still leaky</span>
 
           %h4.subtle HTML
 
@@ -586,7 +582,7 @@
                     $clock.html(now.toString());
                   }
 
-                  setInterval(updateClock, 1000); // this still leaks memory!
+                  <mark class="bad">setInterval(updateClock, 1000);</mark> // this still leaks memory!
                 });
                 &nbsp;
                 &nbsp;
@@ -595,7 +591,7 @@
                 &nbsp;
 
         %section
-          %h3 Prevent memory leaks
+          %h3 Unpoly compiler: <span class="green">Clean</span>
 
           %h4.subtle HTML
 
@@ -618,7 +614,7 @@
 
                   var interval = setInterval(updateClock, 1000);
 
-                  <mark>return function() { clearInterval(interval) };</mark>
+                  <mark>return function() { clearInterval(interval) };</mark> // clean up when destroyed
                 });
                 &nbsp;
                 &nbsp;
@@ -630,40 +626,64 @@
           %ul.s
             %li
               <b>0.1 second</b> is about the limit for having the user feel that the system is reacting
-              instantaneously, meaning that no special feedback is necessary except to display the
-              result.
+              instantaneously,
+              <span class="subtle">meaning that no special feedback is necessary except to display the
+              result.</span>
             %li
               <b>1.0 second</b> is about the limit for the user's flow of thought to stay uninterrupted, even
-              though the user will notice the delay. Normally, no special feedback is necessary during
+              though the user will notice the delay. <span class="subtle">Normally, no special feedback is necessary during
               delays of more than 0.1 but less than 1.0 second, but the user does lose the feeling of
-              operating directly on the data.
+              operating directly on the data.</span>
             %li
               <b>10 seconds</b> is about the limit for keeping the user's attention focused on the dialogue.
+              <span class="subtle">
               For longer delays, users will want to perform other tasks while waiting for the computer
               to finish, so they should be given feedback indicating when the computer expects to be
               done. Feedback during the delay is especially important if the response time is likely to
-              be highly variable, since users will then not know what to expect.
+              be highly variable, since users will then not know what to expect.</span>
           %p
             %cite
               Miller 1968; Card et al. 1991; Jacob Nielsen 1993
 
+          %p
+            Also see Google's <a href="https://developers.google.com/web/tools/chrome-devtools/profile/evaluate-performance/rail">RAIL Performance Model</a>.
+
         %section
           %h3
-            .line
-              Reponse times
             .subtle
-              Compared to AngularJS
+              Reponse times
+            .line
+              In AngularJS
 
           %ul
-            %li We write very few AngularJS interactions that don't rely on an connection.<br />
-            %li Most AngularJS interactions are still bound by server speed.
+            %li
+              .line
+                We write very few AngularJS interactions that don't rely on a connection.
+              .subtle
+                Template builder, Holly
+
+            %li Most of our AngularJS interactions are still bound by server speed.
             %li
               .line
                 Writing JSON takes time, too.
               .subtle
                 60-300ms for index views in AMC backend
           %li
-            Client-side rendering time is an issue for large screens.
+            .line
+              Client-side rendering time is an issue for long pages.
+
+        %section
+          %h3
+            .subtle
+              Response times
+            .line
+              Unpoly's approach
+
+          %ul
+            %li Provide instantaneous feedback to all user input
+            %li Make interactions appear faster than they really are
+            %li Free up enough time budget that we can afford to render<br />full pages on the server
+            %li Use best practices for server performance
 
         %section
           %h3 Freeing our time budget
@@ -674,7 +694,7 @@
               %li
                 Clicked links/forms get an <a href="http://unpoly.com/up-active"><code>up-active</code></a> class while loading
                 .subtle
-                  Get into a habit of styling this!<br>
+                  Get into a habit of styling <code>.up-active</code> for instantaneous feedback<br>
                   Use throttling and Chrome's network tab
 
               %li
@@ -738,7 +758,7 @@
         %section
           %h3
             .subtle
-              Or go nuclear
+              Going nuclear
             .line
               Two-way bindings
 
@@ -777,15 +797,14 @@
               Unpoly's default UJS behavior is a thin wrapper around a Javascript API
             %li
               If the default UJS behavior doesn't fit your use case, you can use
-              that Javascript API to compose your own behavior
+              that Javascript API from your own code, or invent new UJS syntax
 
 
         %section
           %h3
-            .subtle Composability
             .line Dual interfaces
 
-          %h4 Unobtrusive
+          %h4.subtle Unobtrusive
 
           %pre
             %code.html(data-noescape)
@@ -800,7 +819,7 @@
 
                 &lt;/div&gt;
 
-          %h4 Programmatic
+          %h4.subtle Programmatic
 
           %pre
             %code.javascript
@@ -808,8 +827,57 @@
                 up.replace('.story', 'full.html');
 
         %section
+
           %h3
-            .subtle Composability
+            .line Invent your own UJS syntax
+
+          %h4.subtle HTML
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;a class="menu-link" href="/details"&gt;Show more&lt;/span&gt;
+
+          %h4.subtle Javascript
+
+          %pre
+            %code.javascript
+              :preserve
+                up.compiler('.menu-link', function($link) {
+                  up.popup.attach($link, {
+                    target: '.menu',
+                    position: 'bottom-left',
+                    animation: 'roll-down'
+                  });
+                });
+
+        %section
+
+          %h3
+            .line Invent your own UJS syntax
+
+          %h4.subtle HTML
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;a class="menu-link" href="/details"&gt;Show more&lt;/span&gt;
+
+          %h4.subtle Javascript
+
+          %pre
+            %code.javascript
+              :preserve
+                up.macro('.menu-link', function($link) {
+                  $link.attr(
+                    'up-target': '.menu',
+                    'up-position': 'bottom-left',
+                    'up-animation': 'roll-down'
+                  });
+                });
+
+        %section
+          %h3
             .line Events
 
           %pre
@@ -823,7 +891,6 @@
 
         %section
           %h3
-            .subtle Composability
             .line All Async actions return promises
 
           %pre
@@ -837,7 +904,7 @@
             %code.javascript
               :preserve
                 up.morph('.old', '.new', 'cross-fade').then(function() {
-                  // Animation completed!
+                  // Transition has completed
                 });
 
         %section
@@ -857,6 +924,8 @@
               marking current navigation taps, etc.
             %li
               Makes Unpoly aware of fixed Bootstrap layout components when scrolling the viewport.
+            %li
+              In general we try to not do things that would totally clash with Bootstrap.
 
         %section
           %h3 Legacy browsers
@@ -884,9 +953,9 @@
           %h3 Rails integration
 
           %p
-            In your <code>Gemfile</code>:
+            Include <a href="http://www.rubydoc.info/gems/unpoly-rails/">unpoly-rails</a> In your <code>Gemfile</code>:
 
-          %pre
+          %pre.xs
             %code.ruby
               :preserve
                 gem 'unpoly-rails'
@@ -894,13 +963,13 @@
           %p
             In your controllers, views and helpers:
 
-          %pre
+          %pre.xs
             %code.ruby
               :preserve
-                up?
-                up.target # '.story'
-                up.title = 'Title from server'
-                up.validate?
+                up?                            # request.headers['X-Up-Target'].present?
+                up.target                      # request.headers['X-Up-Target']
+                up.title = 'Title from server' # response.headers['X-Up-Title'] = 'Title ...'
+                up.validate?                   # request.headers['X-Up-Validate'].present?
 
           %p
             The gem also provides the JS and CSS assets for the latest Unpoly.
@@ -954,8 +1023,11 @@
         %section
           %h3 Forms within a modal
 
+          %ol.fragment
+            %li Target a selector within the modal.
+
           %p.fragment
-            Target a selector within the modal. Done.
+            Done.
 
         %section
           %h3 Validations without a page load
@@ -1052,7 +1124,7 @@
             %code.html(data-noescape)
               :preserve
                 &lt;form action="/contracts"&gt;
-                  &lt;select name="department" up-validate="[name=employee]"&gt;...&lt;/select&gt;
+                  &lt;select name="department" <mark>up-validate="[name=employee]"</mark>&gt;...&lt;/select&gt;
                   &lt;select name="employee"&gt;...&lt;/select&gt;
                 &lt;/form&gt;
 
@@ -1079,7 +1151,7 @@
           %ul
             %li Read through <a href="http://unpoly.com">unpoly.com</a>
             %li <code>gem 'unpoly-rails'</code>
-            %li Replace half your Javascript with <code>up-target</code>
+            %li Replace half your Javascript with <code>up-target</code> links
             %li Convert remaining Javascripts into <code>up.compiler</code>
 
         %section
@@ -1166,7 +1238,7 @@
             %code.ruby(data-noescape)
               :preserve
                 AfterStep do
-                  sleep 0.05 while page.evaluate_script('up && up.proxy.isBusy()')
+                  sleep 0.05 while page.evaluate_script('window.up && up.proxy.isBusy()')
                 end
           %p
             (Or use <a href="https://github.com/makandra/spreewald#waiting-for-page-load"><code>patiently</code></a>).
@@ -1174,15 +1246,18 @@
         %section
           %h2 Project state
           %ul
-            %li In development since Oct 2014
-            %li Powers Nanomize, railslts.com, H&Z Smart Brain
-            %li 423 specs
+            %li In development since October 2014
+            %li Has seen some real world pain
+            %li= "~ 500 specs"
             %li
               Release policy
               %ul
-                %li Stable vs. Experimental
-                %li Breaking changes
-                %li Compatible changes
+                %li <a href="http://unpoly.com/changelog">Changelog</a> lists breaking changes and compatible changes separately
+                %li <a href="http://unpoly.com/search/">API</a> marks features as either <i>stable</i> or <i>experimental</i>
+                %li There will be breaking changes, but always a simple upgrade path
+
+        %section
+          %img.plain(src='pictures/logos/unpoly.png' width='50%')
 
     %script{:src => "lib/js/head.min.js"}
     %script{:src => "js/reveal.js"}
