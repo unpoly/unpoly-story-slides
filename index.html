@@ -75,7 +75,7 @@
             <li class='red'>
               Many concepts make training difficult
               <div class='subtle'>
-                (scope inheritance, isolation, dependency injection, digest cycle...)
+                (scope inheritance, isolation, dependency injection, dot rule, digest cycle...)
               </div>
             </li>
             <li class='red'>Angular 1 is EOL, leaving us in an awkward situation.</li>
@@ -83,18 +83,20 @@
           </ul>
         </section>
         <section>
+          <div class='s'>
+            <pre><code class='javascript'>angular.module('app', []).directive('myPane', ['$http', function($http) {&#x000A;  return {&#x000A;    require: ['^^myTabs', 'ngModel'],&#x000A;    restrict: 'AEC',&#x000A;    transclude: true,&#x000A;    scope: {&#x000A;      title: '@',&#x000A;      info: '='&#x000A;    },&#x000A;    link: function(scope, element, attrs, controllers) {&#x000A;      ...&#x000A;    },&#x000A;  };&#x000A;});&#x000A;&#x000A;</code></pre>
+          </div>
+        </section>
+        <section>
           <h3>Half-assed AngularJS</h3>
           <ul>
             <li>AMC frontend, REALCUBE</li>
             <li>
-              Uses Angular directives to run JS on matching HTML elements
-              <div class='subtle'>
-                (like an <code>$.unobtrusive</code> replacement):
-              </div>
+              Uses Angular directives to run JS on matching HTML elements:
               <pre class='xs'><code class='javascript' data-noescape>app.directive('foo', function() {&#x000A;  return {&#x000A;    link: function(scope, $element) {&#x000A;      // do something with an $element that has class "foo"&#x000A;    };&#x000A;  }&#x000A;});&#x000A;</code></pre>
             </li>
             <li>
-              Use local scopes to toggle UI states:
+              Uses local scopes to toggle UI states:
               <pre class='xs'><code class='html' data-noescape>&lt;div ng-init="more = false"&gt;&#x000A;  &lt;span ng-click="more = true"&gt;Show more&lt;/a&gt;&#x000A;  &lt;div ng-if="more"&gt;More information&lt;/div&gt;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
             </li>
           </ul>
@@ -108,7 +110,7 @@
               Issues
             </div>
           </h3>
-          <ul>
+          <ul class='red'>
             <li>Crawlable content must always be rendered on the server,<br />so we can't really use this for important state changes</li>
             <li>No routing, so no real URLs for changed state</li>
             <li>Compile time is an issue on large pages</li>
@@ -125,7 +127,7 @@
               <ul>
                 <li>Copy &amp; paste of untested (and flawed!) code snippets from cards and old projects</li>
                 <li>Anything non-trivial is implemented with a wall of jQuery</li>
-                <li>Initialized randomly (on load, <code>$.unobtrusive</code>, <code>&lt;script&gt;</code> tags...)</li>
+                <li>Initialized randomly (on load, <code>$.unobtrusive</code>, <code>&lt;script&gt;</code> tags, by library internals...)</li>
               </ul>
             </li>
             <li class='red'>
@@ -188,6 +190,9 @@
         </section>
         <section>
           <p>
+            We just spent three years learning how Javascript works.
+          </p>
+          <p>
             Can we bring learnings from AngularJS into the server-side paradigm?
           </p>
         </section>
@@ -230,6 +235,7 @@
           </ol>
         </section>
         <section>
+          <h2>Unpoly</h2>
           <table>
             <tr>
               <th></th>
@@ -325,14 +331,14 @@
         </section>
         <section>
           <p>
-            Gleicher serverseitiger Code:
+            Same code on the server:
           </p>
           <ul>
             <li>
-              <a href='http://demo.upjs.io/sessions/CSARbQ/cards/6463?up_enabled=false'>ohne Unpoly</a>
+              <a href='http://demo.upjs.io/sessions/CSARbQ/cards/6463?up_enabled=false'>No Unpoly</a>
             </li>
             <li>
-              <a href='http://demo.upjs.io/sessions/CSARbQ/cards/6463?up_enabled=true'>mit Unpoly</a>
+              <a href='http://demo.upjs.io/sessions/CSARbQ/cards/6463?up_enabled=true'>With Unpoly</a>
             </li>
           </ul>
         </section>
@@ -605,7 +611,7 @@
           </ul>
         </section>
         <section>
-          <h3>Freeing our time budget</h3>
+          <h3>Freeing up time budget</h3>
           <div class='s'>
             <ul>
               <li>
@@ -712,18 +718,18 @@
             <div class='line'>Invent your own UJS syntax</div>
           </h3>
           <h4 class='subtle'>HTML</h4>
-          <pre><code class='html' data-noescape>&lt;a class="menu-link" href="/details"&gt;Show more&lt;/span&gt;&#x000A;</code></pre>
+          <pre class='l'><code class='html' data-noescape>&lt;a class="menu-link" href="/details"&gt;Show more&lt;/span&gt;&#x000A;</code></pre>
           <h4 class='subtle'>Javascript</h4>
-          <pre><code class='javascript'>up.compiler('.menu-link', function($link) {&#x000A;  up.popup.attach($link, {&#x000A;    target: '.menu',&#x000A;    position: 'bottom-left',&#x000A;    animation: 'roll-down'&#x000A;  });&#x000A;});&#x000A;</code></pre>
+          <pre class='l'><code class='javascript'>up.compiler('.menu-link', function($link) {&#x000A;  $link.on('click', function(event) {&#x000A;    event.preventDefault();&#x000A;    up.popup.attach($link, {&#x000A;      target: '.menu',&#x000A;      position: 'bottom-left',&#x000A;      animation: 'roll-down'&#x000A;    });&#x000A;  });&#x000A;});&#x000A;</code></pre>
         </section>
         <section>
           <h3>
-            <div class='line'>Invent your own UJS syntax</div>
+            <div class='line'>Repurpose existing UJS syntax</div>
           </h3>
           <h4 class='subtle'>HTML</h4>
-          <pre><code class='html' data-noescape>&lt;a class="menu-link" href="/details"&gt;Show more&lt;/span&gt;&#x000A;</code></pre>
+          <pre class='l'><code class='html' data-noescape>&lt;a class="menu-link" href="/details"&gt;Show more&lt;/span&gt;&#x000A;</code></pre>
           <h4 class='subtle'>Javascript</h4>
-          <pre><code class='javascript'>up.macro('.menu-link', function($link) {&#x000A;  $link.attr(&#x000A;    'up-target': '.menu',&#x000A;    'up-position': 'bottom-left',&#x000A;    'up-animation': 'roll-down'&#x000A;  });&#x000A;});&#x000A;</code></pre>
+          <pre class='l'><code class='javascript'>up.macro('.menu-link', function($link) {&#x000A;  $link.attr(&#x000A;    'up-target': '.menu',&#x000A;    'up-position': 'bottom-left',&#x000A;    'up-animation': 'roll-down'&#x000A;  });&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
         </section>
         <section>
           <h3>
@@ -764,6 +770,20 @@
           </ul>
         </section>
         <section>
+          <h3>Rails integration</h3>
+          <p>
+            Include <a href="http://www.rubydoc.info/gems/unpoly-rails/">unpoly-rails</a> In your <code>Gemfile</code>:
+          </p>
+          <pre class='xs'><code class='ruby'>gem 'unpoly-rails'&#x000A;</code></pre>
+          <p>
+            In your controllers, views and helpers:
+          </p>
+          <pre class='xs'><code class='ruby'>up?                            # request.headers['X-Up-Target'].present?&#x000A;up.target                      # request.headers['X-Up-Target']&#x000A;up.title = 'Title from server' # response.headers['X-Up-Title'] = 'Title ...'&#x000A;up.validate?                   # request.headers['X-Up-Validate'].present?&#x000A;</code></pre>
+          <p>
+            The gem also provides the JS and CSS assets for the latest Unpoly.
+          </p>
+        </section>
+        <section>
           <h3>Legacy browsers</h3>
           <p>
             Unpoly gracefully degrades with old versions of Internet Explorer:
@@ -789,20 +809,6 @@
               <td>Unpoly prevents itself from booting,<br>leaving you with a classic server-side application</td>
             </tr>
           </table>
-        </section>
-        <section>
-          <h3>Rails integration</h3>
-          <p>
-            Include <a href="http://www.rubydoc.info/gems/unpoly-rails/">unpoly-rails</a> In your <code>Gemfile</code>:
-          </p>
-          <pre class='xs'><code class='ruby'>gem 'unpoly-rails'&#x000A;</code></pre>
-          <p>
-            In your controllers, views and helpers:
-          </p>
-          <pre class='xs'><code class='ruby'>up?                            # request.headers['X-Up-Target'].present?&#x000A;up.target                      # request.headers['X-Up-Target']&#x000A;up.title = 'Title from server' # response.headers['X-Up-Title'] = 'Title ...'&#x000A;up.validate?                   # request.headers['X-Up-Validate'].present?&#x000A;</code></pre>
-          <p>
-            The gem also provides the JS and CSS assets for the latest Unpoly.
-          </p>
         </section>
         <section>
           <h2>Forms</h2>
@@ -857,8 +863,44 @@
           <pre class='xs'><code class='html' data-noescape>&lt;form action="/contracts"&gt;&#x000A;  &lt;select name="department" <mark>up-validate="[name=employee]"</mark>&gt;...&lt;/select&gt;&#x000A;  &lt;select name="employee"&gt;...&lt;/select&gt;&#x000A;&lt;/form&gt;&#x000A;</code></pre>
         </section>
         <section>
-          <h3>Keep elements</h3>
-          <pre><code class='html' data-noescape>&lt;div class="story"&gt;&#x000A;&#x000A;  &lt;video <mark>up-keep</mark> src="movie.mp4"&gt;&lt;/video&gt;&#x000A;&#x000A;  &lt;p&gt;Story summary&lt;/p&gt;&#x000A;&#x000A;  &lt;a href="full.html" up-target=".story"&gt;&#x000A;    Read full story&#x000A;  &lt;/a&gt;&#x000A;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
+          <h3>Persisting elements</h3>
+          <pre class='l'><code class='html' data-noescape>&lt;div class="story"&gt;&#x000A;&#x000A;  &lt;video <mark>up-keep</mark> src="movie.mp4"&gt;&lt;/video&gt;&#x000A;&#x000A;  &lt;p&gt;Story summary&lt;/p&gt;&#x000A;&#x000A;  &lt;a href="full.html" up-target=".story"&gt;&#x000A;    Read full story&#x000A;  &lt;/a&gt;&#x000A;&#x000A;&lt;/div&gt;&#x000A;&#x000A;</code></pre>
+        </section>
+        <section>
+          <pre><code class='html' data-noescape>&lt;div class="map" up-data="[&#x000A;  { lat: 48.36, lng: 10.99 },&#x000A;  { lat: 48.75, lng: 11.45 }&#x000A;]"&gt;&lt;/div&gt;&#x000A;&#x000A;&lt;form method="post" action="/pins"&gt;&#x000A;  Lat: &lt;input name="lat"&gt;&#x000A;  Lng: &lt;input name="lng"&gt;&#x000A;  &lt;button&gt;Add pin&lt;/button&gt;&#x000A;&lt;/form&gt;&#x000A;</code></pre>
+          <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, pins) {&#x000A;  var map = new google.maps.Map($element);&#x000A;  pins.forEach(function(pin) {&#x000A;    var position = new google.maps.LatLng(pin.lat, pin.lng);&#x000A;    new google.maps.Marker({&#x000A;      position: position,&#x000A;      map: map&#x000A;    });&#x000A;});&#x000A;</code></pre>
+        </section>
+        <section>
+          <pre><code class='html' data-noescape>&lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
+          <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, pins) {&#x000A;  var map = new google.maps.Map($element);&#x000A;  pins.forEach(function(pin) {&#x000A;    var position = new google.maps.LatLng(pin.lat, pin.lng);&#x000A;    new google.maps.Marker({&#x000A;      position: position,&#x000A;      map: map&#x000A;    });&#x000A;});&#x000A;</code></pre>
+        </section>
+        <section>
+          <pre><code class='html' data-noescape>&lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;&#x000A;&#x000A;&lt;%= form_for Pin.new do |form| %&gt;&#x000A;  Lat: &lt;%= form.text_field :lat %&gt;&#x000A;  Lng: &lt;%= form.text_field :lng %&gt;&#x000A;  &lt;%= form.submit 'Add pin' %&gt;&#x000A;&lt;/form&gt;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
+          <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, pins) {&#x000A;  var map = new google.maps.Map($element);&#x000A;  pins.forEach(function(pin) {&#x000A;    var position = new google.maps.LatLng(pin.lat, pin.lng);&#x000A;    new google.maps.Marker({&#x000A;      position: position,&#x000A;      map: map&#x000A;    });&#x000A;});&#x000A;</code></pre>
+        </section>
+        <section>
+          <pre><code class='html' data-noescape>&lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;&#x000A;&#x000A;&lt;%= form_for Pin.new do |form| %&gt;&#x000A;  Lat: &lt;%= form.text_field :lat %&gt;&#x000A;  Lng: &lt;%= form.text_field :lng %&gt;&#x000A;  &lt;%= form.submit 'Add pin' %&gt;&#x000A;&lt;/form&gt;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
+          <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, initialPins) {&#x000A;  var map = new google.maps.Map($element);&#x000A;  function renderPins(pins) { ... }&#x000A;  renderPins(initialPins);&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
+        </section>
+        <section>
+          <pre><code class='html' data-noescape>&lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;" <mark>up-keep</mark>&gt;&lt;/div&gt;&#x000A;&#x000A;&lt;%= form_for Pin.new do |form| %&gt;&#x000A;  Lat: &lt;%= form.text_field :lat %&gt;&#x000A;  Lng: &lt;%= form.text_field :lng %&gt;&#x000A;  &lt;%= form.submit 'Add pin' %&gt;&#x000A;&lt;/form&gt;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
+          <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, initialPins) {&#x000A;  var map = new google.maps.Map($element);&#x000A;  function renderPins(pins) { ... }&#x000A;  renderPins(initialPins);&#x000A;  <mark>$element.on('up:fragment:keep', function(event) {</mark>&#x000A;  <mark>  renderPins(event.newData);                     </mark>&#x000A;  <mark>});                                              </mark>&#x000A;});&#x000A;&nbsp;&#x000A;</code></pre>
+        </section>
+        <section>
+          <h3>Find-as-you-type search</h3>
+          <pre><code class='html' data-noescape>&lt;form action="/users" up-target=".list" <mark>up-observe="up.submit(this)"</mark>&gt;&#x000A;  &lt;input type="search" name="query" /&gt;&#x000A;&lt;/form&gt;&#x000A;&#x000A;&lt;div class="list"&gt;&#x000A;  &lt;% @users.each do |user| %&gt;&#x000A;    = link_to user.email, user&#x000A;  &lt;% end %&gt;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
+          <p>
+            <code>up-observe</code> reacts faster than our vintage <code>observeField</code> helper
+            and has no concurrency issues.
+          </p>
+        </section>
+        <section>
+          <h3>Find-as-you-type search</h3>
+          <pre><code class='html' data-noescape>&lt;form action="/users" up-target=".list" <mark>up-autosubmit</mark>&gt;&#x000A;  &lt;input type="search" name="query" /&gt;&#x000A;&lt;/form&gt;&#x000A;&#x000A;&lt;div class="list"&gt;&#x000A;  &lt;% @users.each do |user| %&gt;&#x000A;    = link_to user.email, user&#x000A;  &lt;% end %&gt;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
+          <p>
+            <code>up-observe</code> reacts faster than our vintage <code>observeField</code> helper
+            and has no concurrency issues.
+          </p>
         </section>
         <section>
           <h3>Getting started</h3>
@@ -905,19 +947,16 @@
           </p>
         </section>
         <section>
-          <h2>Project state</h2>
+          <h2>Should I use this for my project?</h2>
           <ul>
             <li>In development since October 2014</li>
-            <li>Has seen some real world pain</li>
             <li>~ 500 specs</li>
+            <li>Has seen some real world pain, but we're still learning new things</li>
+            <li><a href="http://unpoly.com/changelog">Changelog</a> lists breaking changes and compatible changes separately</li>
             <li>
-              Release policy
-              <ul>
-                <li><a href="http://unpoly.com/changelog">Changelog</a> lists breaking changes and compatible changes separately</li>
-                <li><a href="http://unpoly.com/search/">API</a> marks features as either <i>stable</i> or <i>experimental</i></li>
-                <li>There will be breaking changes, but always a simple upgrade path</li>
-              </ul>
+              <a href="http://unpoly.com/search/">API</a> marks features as either <i>stable</i> or <i>experimental</i>.
             </li>
+            <li>There will be breaking changes, but always a simple upgrade path</li>
           </ul>
         </section>
         <section>

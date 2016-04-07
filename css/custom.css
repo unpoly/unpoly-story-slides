@@ -174,19 +174,19 @@ body {
 /*}*/
 
 .reveal .xxxl {
-  font-size: 1.4em;
-}
-
-.reveal .xxl {
-  font-size: 1.3em;
-}
-
-.reveal .xl {
   font-size: 1.2em;
 }
 
-.reveal .l {
+.reveal .xxl {
+  font-size: 1.15em;
+}
+
+.reveal .xl {
   font-size: 1.1em;
+}
+
+.reveal .l {
+  font-size: 1.05em;
 }
 
 .reveal .m {
@@ -252,7 +252,7 @@ body {
 }
 
 .reveal code mark {
-  background-color: #045393;
+  background-color: #2d3c6c;
   padding-left: 0;
   padding-right: 0;
 }

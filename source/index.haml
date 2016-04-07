@@ -65,9 +65,30 @@
             %li.red
               Many concepts make training difficult
               .subtle
-                (scope inheritance, isolation, dependency injection, digest cycle...)
+                (scope inheritance, isolation, dependency injection, dot rule, digest cycle...)
             %li.red Angular 1 is EOL, leaving us in an awkward situation.
             %li.red We don't know how we're going to build SPAs in 2016+.
+
+        %section
+          .s
+            %pre
+              %code.javascript
+                :preserve
+                  angular.module('app', []).directive('myPane', ['$http', function($http) {
+                    return {
+                      require: ['^^myTabs', 'ngModel'],
+                      restrict: 'AEC',
+                      transclude: true,
+                      scope: {
+                        title: '@',
+                        info: '='
+                      },
+                      link: function(scope, element, attrs, controllers) {
+                        ...
+                      },
+                    };
+                  });
+
 
         %section
           %h3 Half-assed AngularJS
@@ -75,9 +96,7 @@
           %ul
             %li AMC frontend, REALCUBE
             %li
-              Uses Angular directives to run JS on matching HTML elements
-              .subtle
-                (like an <code>$.unobtrusive</code> replacement):
+              Uses Angular directives to run JS on matching HTML elements:
 
               %pre.xs
                 %code.javascript(data-noescape)
@@ -91,7 +110,7 @@
                     });
 
             %li
-              Use local scopes to toggle UI states:
+              Uses local scopes to toggle UI states:
               %pre.xs
                 %code.html(data-noescape)
                   :preserve
@@ -107,7 +126,7 @@
             .line
               Issues
 
-          %ul
+          %ul.red
             %li Crawlable content must always be rendered on the server,<br />so we can't really use this for important state changes
             %li No routing, so no real URLs for changed state
             %li Compile time is an issue on large pages
@@ -125,7 +144,7 @@
               %ul
                 %li Copy &amp; paste of untested (and flawed!) code snippets from cards and old projects
                 %li Anything non-trivial is implemented with a wall of jQuery
-                %li Initialized randomly (on load, <code>$.unobtrusive</code>, <code>&lt;script&gt;</code> tags...)
+                %li Initialized randomly (on load, <code>$.unobtrusive</code>, <code>&lt;script&gt;</code> tags, by library internals...)
             %li.red
               UX in Random.js projects usually quite mediocre:
               %Ul
@@ -169,6 +188,8 @@
 
         %section
           %p
+            We just spent three years learning how Javascript works.
+          %p
             Can we bring learnings from AngularJS into the server-side paradigm?
 
         %section
@@ -204,6 +225,8 @@
               .subtle (modals, drop-downs, drawers)
 
         %section
+
+          %h2 Unpoly
 
           %table
             %tr
@@ -323,13 +346,13 @@
 
         %section
           %p
-            Gleicher serverseitiger Code:
+            Same code on the server:
 
           %ul
             %li
-              %a(href='http://demo.upjs.io/sessions/CSARbQ/cards/6463?up_enabled=false') ohne Unpoly
+              %a(href='http://demo.upjs.io/sessions/CSARbQ/cards/6463?up_enabled=false') No Unpoly
             %li
-              %a(href='http://demo.upjs.io/sessions/CSARbQ/cards/6463?up_enabled=true') mit Unpoly
+              %a(href='http://demo.upjs.io/sessions/CSARbQ/cards/6463?up_enabled=true') With Unpoly
 
         %section
           %img(src='pictures/fragment_flow.svg' width='100%')
@@ -686,7 +709,7 @@
             %li Use best practices for server performance
 
         %section
-          %h3 Freeing our time budget
+          %h3 Freeing up time budget
 
           .s
             %ul
@@ -833,39 +856,42 @@
 
           %h4.subtle HTML
 
-          %pre
+          %pre.l
             %code.html(data-noescape)
               :preserve
                 &lt;a class="menu-link" href="/details"&gt;Show more&lt;/span&gt;
 
           %h4.subtle Javascript
 
-          %pre
+          %pre.l
             %code.javascript
               :preserve
                 up.compiler('.menu-link', function($link) {
-                  up.popup.attach($link, {
-                    target: '.menu',
-                    position: 'bottom-left',
-                    animation: 'roll-down'
+                  $link.on('click', function(event) {
+                    event.preventDefault();
+                    up.popup.attach($link, {
+                      target: '.menu',
+                      position: 'bottom-left',
+                      animation: 'roll-down'
+                    });
                   });
                 });
 
         %section
 
           %h3
-            .line Invent your own UJS syntax
+            .line Repurpose existing UJS syntax
 
           %h4.subtle HTML
 
-          %pre
+          %pre.l
             %code.html(data-noescape)
               :preserve
                 &lt;a class="menu-link" href="/details"&gt;Show more&lt;/span&gt;
 
           %h4.subtle Javascript
 
-          %pre
+          %pre.l
             %code.javascript
               :preserve
                 up.macro('.menu-link', function($link) {
@@ -875,6 +901,9 @@
                     'up-animation': 'roll-down'
                   });
                 });
+                &nbsp;
+                &nbsp;
+                &nbsp;
 
         %section
           %h3
@@ -928,28 +957,6 @@
               In general we try to not do things that would totally clash with Bootstrap.
 
         %section
-          %h3 Legacy browsers
-
-          %p
-            Unpoly gracefully degrades with old versions of Internet Explorer:
-
-          %table
-            %tr
-              %th Edge
-              %td Full support
-            %tr
-              %th IE 10
-              %td Full support
-            %tr
-              %th IE 9
-              %td
-                Page updates that change browser history<br>fall back to a classic page load.<br />
-                Animations and transitions are skipped.
-            %tr
-              %th IE8
-              %td Unpoly prevents itself from booting,<br>leaving you with a classic server-side application
-
-        %section
           %h3 Rails integration
 
           %p
@@ -973,6 +980,28 @@
 
           %p
             The gem also provides the JS and CSS assets for the latest Unpoly.
+
+        %section
+          %h3 Legacy browsers
+
+          %p
+            Unpoly gracefully degrades with old versions of Internet Explorer:
+
+          %table
+            %tr
+              %th Edge
+              %td Full support
+            %tr
+              %th IE 10
+              %td Full support
+            %tr
+              %th IE 9
+              %td
+                Page updates that change browser history<br>fall back to a classic page load.<br />
+                Animations and transitions are skipped.
+            %tr
+              %th IE8
+              %td Unpoly prevents itself from booting,<br>leaving you with a classic server-side application
 
         %section
           %h2 Forms
@@ -1129,8 +1158,8 @@
                 &lt;/form&gt;
 
         %section
-          %h3 Keep elements
-          %pre
+          %h3 Persisting elements
+          %pre.l
             %code.html(data-noescape)
               :preserve
                 &lt;div class="story"&gt;
@@ -1144,6 +1173,191 @@
                   &lt;/a&gt;
 
                 &lt;/div&gt;
+
+
+        %section
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="map" up-data="[
+                  { lat: 48.36, lng: 10.99 },
+                  { lat: 48.75, lng: 11.45 }
+                ]"&gt;&lt;/div&gt;
+
+                &lt;form method="post" action="/pins"&gt;
+                  Lat: &lt;input name="lat"&gt;
+                  Lng: &lt;input name="lng"&gt;
+                  &lt;button&gt;Add pin&lt;/button&gt;
+                &lt;/form&gt;
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                up.compiler('.map', function($element, pins) {
+                  var map = new google.maps.Map($element);
+                  pins.forEach(function(pin) {
+                    var position = new google.maps.LatLng(pin.lat, pin.lng);
+                    new google.maps.Marker({
+                      position: position,
+                      map: map
+                    });
+                });
+
+        %section
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                up.compiler('.map', function($element, pins) {
+                  var map = new google.maps.Map($element);
+                  pins.forEach(function(pin) {
+                    var position = new google.maps.LatLng(pin.lat, pin.lng);
+                    new google.maps.Marker({
+                      position: position,
+                      map: map
+                    });
+                });
+
+        %section
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;
+
+                &lt;%= form_for Pin.new do |form| %&gt;
+                  Lat: &lt;%= form.text_field :lat %&gt;
+                  Lng: &lt;%= form.text_field :lng %&gt;
+                  &lt;%= form.submit 'Add pin' %&gt;
+                &lt;/form&gt;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                up.compiler('.map', function($element, pins) {
+                  var map = new google.maps.Map($element);
+                  pins.forEach(function(pin) {
+                    var position = new google.maps.LatLng(pin.lat, pin.lng);
+                    new google.maps.Marker({
+                      position: position,
+                      map: map
+                    });
+                });
+
+        %section
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;
+
+                &lt;%= form_for Pin.new do |form| %&gt;
+                  Lat: &lt;%= form.text_field :lat %&gt;
+                  Lng: &lt;%= form.text_field :lng %&gt;
+                  &lt;%= form.submit 'Add pin' %&gt;
+                &lt;/form&gt;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                up.compiler('.map', function($element, initialPins) {
+                  var map = new google.maps.Map($element);
+                  function renderPins(pins) { ... }
+                  renderPins(initialPins);
+                });
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+
+        %section
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;" <mark>up-keep</mark>&gt;&lt;/div&gt;
+
+                &lt;%= form_for Pin.new do |form| %&gt;
+                  Lat: &lt;%= form.text_field :lat %&gt;
+                  Lng: &lt;%= form.text_field :lng %&gt;
+                  &lt;%= form.submit 'Add pin' %&gt;
+                &lt;/form&gt;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                up.compiler('.map', function($element, initialPins) {
+                  var map = new google.maps.Map($element);
+                  function renderPins(pins) { ... }
+                  renderPins(initialPins);
+                  <mark>$element.on('up:fragment:keep', function(event) {</mark>
+                  <mark>  renderPins(event.newData);                     </mark>
+                  <mark>});                                              </mark>
+                });
+                &nbsp;
+
+        %section
+          %h3 Find-as-you-type search
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;form action="/users" up-target=".list" <mark>up-observe="up.submit(this)"</mark>&gt;
+                  &lt;input type="search" name="query" /&gt;
+                &lt;/form&gt;
+
+                &lt;div class="list"&gt;
+                  &lt;% @users.each do |user| %&gt;
+                    = link_to user.email, user
+                  &lt;% end %&gt;
+                &lt;/div&gt;
+
+          %p
+            <code>up-observe</code> reacts faster than our vintage <code>observeField</code> helper
+            and has no concurrency issues.
+
+        %section
+          %h3 Find-as-you-type search
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;form action="/users" up-target=".list" <mark>up-autosubmit</mark>&gt;
+                  &lt;input type="search" name="query" /&gt;
+                &lt;/form&gt;
+
+                &lt;div class="list"&gt;
+                  &lt;% @users.each do |user| %&gt;
+                    = link_to user.email, user
+                  &lt;% end %&gt;
+                &lt;/div&gt;
+
+          %p
+            <code>up-observe</code> reacts faster than our vintage <code>observeField</code> helper
+            and has no concurrency issues.
 
         %section
           %h3 Getting started
@@ -1244,17 +1458,15 @@
             (Or use <a href="https://github.com/makandra/spreewald#waiting-for-page-load"><code>patiently</code></a>).
 
         %section
-          %h2 Project state
+          %h2 Should I use this for my project?
           %ul
             %li In development since October 2014
-            %li Has seen some real world pain
             %li= "~ 500 specs"
+            %li Has seen some real world pain, but we're still learning new things
+            %li <a href="http://unpoly.com/changelog">Changelog</a> lists breaking changes and compatible changes separately
             %li
-              Release policy
-              %ul
-                %li <a href="http://unpoly.com/changelog">Changelog</a> lists breaking changes and compatible changes separately
-                %li <a href="http://unpoly.com/search/">API</a> marks features as either <i>stable</i> or <i>experimental</i>
-                %li There will be breaking changes, but always a simple upgrade path
+              <a href="http://unpoly.com/search/">API</a> marks features as either <i>stable</i> or <i>experimental</i>.
+            %li There will be breaking changes, but always a simple upgrade path
 
         %section
           %img.plain(src='pictures/logos/unpoly.png' width='50%')
