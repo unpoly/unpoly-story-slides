@@ -62,7 +62,9 @@
                 2013-2016
 
         %section
-          %h3 AngularJS
+          %h3
+            AngularJS
+            %span.subtle (2013-2016)
 
           %ul
             %li Used for: AMC backend, Blogger Ranking, KITT
@@ -122,24 +124,29 @@
                   });
 
         %section
-          %h3 AngularJS
+          %h3
+            AngularJS
+            %span.subtle (2013-2016)
 
           %ul
             %li.green Changes to data are visible immediately
             %li.green Good fit for:<br>Template builder, complex forms, calendar, Holly, PH-planner
-            %li.red Mediocre fit for:<br>Everything else
             %li.red
-              Many concepts make training difficult
+              Many concepts increase complexity and make training difficult
               .subtle
                 (scope inheritance, isolation, dependency injection, dot rule, digest cycle...)
             %li.red Angular 1 is EOL, leaving us in an awkward situation
             %li.red We don't know how we're going to build SPAs in 2016+
 
         %section
-          %h3 Half-assed AngularJS
+          %h3
+            Half-assed AngularJS
+            %span.subtle (2013-2016)
 
           %ul
             %li AMC frontend, REALCUBE
+            %li Rendering is mostly on the server, then compiled again on the browser
+
             %li
               Uses Angular directives to run JS on matching HTML elements:
 
@@ -177,7 +184,9 @@
 
 
         %section
-          %h3 Random.js
+          %h3
+            Random.js
+            %span.subtle (2008-2016)
 
           %ul.s
             %li All other projects
@@ -238,7 +247,7 @@
           %p
             We just spent three years learning how Javascript works.
           %p
-            Can we bring learnings from AngularJS into the server-side paradigm?
+            Can we take some of those learnings back into the server-side paradigm?
 
         %section
           %h3
@@ -267,16 +276,19 @@
             %li Animation is complicated
             %li
               Page loads destroy transient state
-              .subtle (scroll positions, unsaved form values)
+              .subtle (scroll positions, unsaved form values, focus)
             %li
               Layered interactions are hard
               .subtle (modals, drop-downs, drawers)
 
         %section
 
-          %h2 Unpoly
+          %h2
+            Unpoly
+            %span.subtle
+              (2014-2016)
 
-          %table
+          %table.fragment
             %tr
               %th
               %th Random.js
@@ -317,7 +329,7 @@
           %ul
             %li Unobtrusive Javascript framework
             %li Snappy UI for server-side apps
-            %li Structure for Javascript code
+            %li Structure for organizing Javascript snippets
             %li In development for 18 months
             %li
               Largest open-source project we have
@@ -338,12 +350,12 @@
             %li Close UX-gap between server-side apps and SPAs
             %li Batteries included
             %li Enable some things that are hard (even in Angular)
-            %li Not for ambitious UI
             %li Works with existing code
             %li
               Backend-agnostic
               .subtle
                 (although we have some really nice Rails bindings)
+            %li Not for ambitious UI
 
         -#%section
         -#  %h3
@@ -412,27 +424,44 @@
             .subtle
               without Javascript
 
-          %p
-            %a(href='http://unpoly.com/examples/update-fragment/' target='_blank') Run example on unpoly.com
+          .columns
+            .column
+              %h4.subtle short.html
+              %pre.xxs
+                %code.html(data-noescape)
+                  :preserve
+                    &lt;div class="story"&gt;
 
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="story"&gt;
+                      &lt;p&gt;Story summary&lt;/p&gt;
 
-                  &lt;p&gt;Story summary&lt;/p&gt;
+                      &lt;a href="full.html" <mark>up-target=".story"</mark>&gt;
+                        Read full story
+                      &lt;/a&gt;
 
-                  &lt;a href="full.html" <mark>up-target=".story"</mark>&gt;
-                    Read full story
-                  &lt;/a&gt;
+                    &lt;/div&gt;
 
-                &lt;/div&gt;
+                    <mark>&lt;p&gt;This text won't change&lt;/p&gt;</mark>
 
+            .column
+              %h4.subtle full.html
+              %pre.xxs
+                %code.html(data-noescape)
+                  :preserve
+                    &lt;div class="story"&gt;
+                    
+                      &lt;h1&gt;Full story&lt;/h1&gt;
+
+                      &lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;
+                    
+                      &lt;a href="short.html" <mark>up-target=".story"&gt;</mark>
+                        Read summary
+                      &lt;/a&gt;
+
+                    &lt;/div&gt;
           %ul
             %li.fragment Unpoly requests <code>full.html</code> via AJAX
             %li.fragment Server returns a <u>full HTML page</u> as usual
             %li.fragment Unpoly extracts the fragment that matches <code>.story</code>
-            %li.fragment Unpoly activates Javascript on the new fragment
             %li.fragment Unpoly swaps the old and new fragment
             %li.fragment Unpoly changes the browser URL to <code>http://host/full.html</code>
 
@@ -463,7 +492,6 @@
             %li Unpoly requests <code>full.html</code> via AJAX
             %li Server returns a <u>full HTML page</u> as usual
             %li Unpoly extracts the fragment that matches <code>.story</code>
-            %li Unpoly activates Javascript on the new fragment
             %li Unpoly swaps the old and new fragment
             %li Unpoly changes the browser URL to <code>http://host/full.html</code>
 
@@ -494,7 +522,6 @@
             %li Unpoly requests <code>full.html</code> via AJAX
             %li Server returns a <u>full HTML page</u> as usual
             %li Unpoly extracts the fragment that matches <code>.story</code>
-            %li Unpoly activates Javascript on the new fragment
             %li <mark>Unpoly displays the new fragment in a <code>&lt;div class="up-modal"&gt;</code></mark>
             %li Unpoly changes the browser URL to <code>http://host/full.html</code>
 
@@ -525,7 +552,6 @@
             %li Unpoly requests <code>full.html</code> via AJAX
             %li Server returns a <u>full HTML page</u> as usual
             %li Unpoly extracts the fragment that matches <code>.story</code>
-            %li Unpoly activates Javascript on the new fragment
             %li <mark>Unpoly displays the new fragment in a <code>&lt;div class="up-popup"&gt;</code></mark>
             %li Unpoly changes the browser URL to <code>http://host/full.html</code>
 
@@ -616,6 +642,12 @@
         %section
           %h3
             <span class="subtle">Toggle all: </span> On load
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;span class="toggle-all"&gt;Toggle all&lt;/span&gt;
+
           %pre
             %code.javascript(data-noescape)
               :preserve
@@ -634,13 +666,19 @@
                 &nbsp;
 
           %p
-            <a href="http://codepen.io/triskweline/pen/MyrVgG">Run example on codepen.io</a>.<br>
+            <a href="http://codepen.io/triskweline/pen/MyrVgG" target="_blank">Run example on codepen.io</a>.<br>
             This is what you see in jQuery tutorials.<br>
             HTML fragments loaded via AJAX don't get Javascriptified.
 
         %section
           %h3
             <span class="subtle">Toggle all: </span> $.unobtrusive
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;span class="toggle-all"&gt;Toggle all&lt;/span&gt;
+
           %pre
             %code.javascript(data-noescape)
               :preserve
@@ -668,6 +706,12 @@
         %section
           %h3
             <span class="subtle">Toggle all: </span> Angular directive
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;span class="toggle-all"&gt;Toggle all&lt;/span&gt;
+
           %pre
             %code.javascript(data-noescape)
               :preserve
@@ -690,11 +734,17 @@
             <br>
             Also we don't need to manually Javascriptify new fragments
             <br>
-            as long as we insert them through Angular mechanisms (like bindings).
+            as long as we insert them through Angular templates
 
         %section
           %h3
             <span class="subtle">Toggle all: </span> Unpoly compiler
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;span class="toggle-all"&gt;Toggle all&lt;/span&gt;
+
           %pre
             %code.javascript(data-noescape)
               :preserve
@@ -764,7 +814,7 @@
                     initMap($('.map'), pins);
                   &lt;/script&gt;
 
-            %pre
+            %pre.fragment
               %code.javascript(data-noescape)
                 :preserve
                   function initMap($element, pins) {
@@ -1043,7 +1093,7 @@
             .subtle
               Reponse times
             .line
-              In AngularJS
+              Baseline: AngularJS
 
           %ul
             %li
@@ -1060,7 +1110,7 @@
                 60-300ms for index views in AMC backend
             %li
               .line
-                Client-side rendering time is an issue for long pages.
+                Client-side rendering takes time, too.
             %li
               .line
                 Users do like the instantaneous feedback
@@ -1077,47 +1127,59 @@
           %ul
             %li Provide instantaneous feedback to all user input
             %li Make interactions appear faster than they really are
-            %li Free up enough time budget that we can afford to render<br />full pages on the server
             %li Use best practices for server performance
+            %li Free up enough time budget that we can afford to render<br />full pages on the server
 
         %section
-          .s
-            %ul
+          %h3 What you get out of the box
+          %ul
 
-              %li
-                Clicked links/forms get an <a href="http://unpoly.com/up-active"><code>up-active</code></a> class while loading
-                .subtle
-                  Get into a habit of styling <code>.up-active</code> for instantaneous feedback<br>
-                  Use throttling and Chrome's network tab
+            %li
+              Clicked links/forms get an <a href="http://unpoly.com/up-active"><code>up-active</code></a> class while loading
+              .subtle
+                Get into a habit of styling <code>.up-active</code> for instantaneous feedback<br>
+                Use throttling and Chrome's network tab
 
-              %li
-                We no longer parse and execute CSS, Javascript and build the DOM on every request
-                .subtle
-                  makandra deck on Cards (140 ms), AMC frontend (360 ms)
+            %li
+              We no longer parse and execute CSS, Javascript and build the DOM on every request
+              .subtle
+                makandra deck on Cards (140 ms), AMC frontend (360 ms)
 
-              %li
-                Links with an <a href="http://unpoly.com/up-instant"><code>up-instant</code></a> attribute load on <code>mousedown</code> instead of <code>click</code>
-                .subtle
-                  Saves ~70 ms with a mouse (<a href="http://instantclick.io/click-test">test yourself</a>)
-                  %br
-                  Saves ~300 ms on unoptimized sites with touch device
-                  %br
-                  Your Linux/Windows apps do that, too!
-              %li
-                Links with <a href="http://unpoly.com/up-preload"><code>up-preload</code></a> attribute preload destination while hovering
-                .subtle
-                  Saves ~200-300 ms (<a href="http://instantclick.io/click-test">test yourself</a>)
+            %li
+              Links with an <a href="http://unpoly.com/up-instant"><code>up-instant</code></a> attribute load on <code>mousedown</code> instead of <code>click</code>
+              .subtle
+                Saves ~70 ms with a mouse (<a href="http://instantclick.io/click-test" target="_blank">test yourself</a>)
+                %br
+                Saves ~300 ms on unoptimized sites with touch device
+                %br
+                Your Linux/Windows apps do that, too!
+            %li
+              Links with <a href="http://unpoly.com/up-preload"><code>up-preload</code></a> attribute preload destination while hovering
+              .subtle
+                Saves ~200-400 ms minus configured delay (<a href="http://instantclick.io/click-test" target="_blank">test yourself</a>)
 
-              -#%li <a href="http://unpoly.com"><code>up-dash</code></a> is a <a href="http://unpoly.com/up.macro">macro</a> for <code>up-target</code>, <code>up-instant</code> and <code>up-preload</code>.
-              %li <code>GET</code> requests are cached for 5 minutes
-              %li Servers can optimize responses for the <code>X-Up-Target</code> header
-              %li We can still implement client-side interactions
+            -#%li <a href="http://unpoly.com"><code>up-dash</code></a> is a <a href="http://unpoly.com/up.macro">macro</a> for <code>up-target</code>, <code>up-instant</code> and <code>up-preload</code>.
+            %li <code>GET</code> requests are cached for 5 minutes
 
         %section
           %p
             Feel the response time of an Unpoly app by opening a card on
             %br
             <a href="http://makandracards-up.makandra.de/makandra">makandracards-up.makandra.de</a>.
+
+
+        %section
+          %h3 How you can optimize further
+
+          %ul
+            %li Caching (duh!)
+            %li Tailor responses for the <code>X-Up-Target</code> header
+            %li Spinners
+            %li We can still implement client-side interactions
+
+        %section
+          %h3 Optimize responses
+
 
         %section
           %h3 Spinners
@@ -1219,7 +1281,7 @@
           %h3
             .line Dual interfaces
 
-          %h4.subtle Unobtrusive
+          %h4.subtle <u>U</u>nobtrusive
 
           %pre
             %code.html(data-noescape)
@@ -1234,7 +1296,7 @@
 
                 &lt;/div&gt;
 
-          %h4.subtle Programmatic
+          %h4.subtle <u>P</u>rogrammatic
 
           %pre
             %code.javascript
@@ -1251,14 +1313,14 @@
           %pre.l
             %code.html(data-noescape)
               :preserve
-                &lt;a class="menu-link" href="/details"&gt;Show more&lt;/span&gt;
+                &lt;a menu-link href="/details"&gt;Show more&lt;/span&gt;
 
           %h4.subtle Javascript
 
           %pre.l
             %code.javascript
               :preserve
-                up.compiler('.menu-link', function($link) {
+                up.compiler('[menu-link]', function($link) {
                   $link.on('click', function(event) {
                     event.preventDefault();
                     up.popup.attach($link, {
@@ -1279,14 +1341,14 @@
           %pre.l
             %code.html(data-noescape)
               :preserve
-                &lt;a class="menu-link" href="/details"&gt;Show more&lt;/span&gt;
+                &lt;a menu-link href="/details"&gt;Show more&lt;/span&gt;
 
           %h4.subtle Javascript
 
           %pre.l
             %code.javascript
               :preserve
-                up.macro('.menu-link', function($link) {
+                up.macro('[menu-link]', function($link) {
                   $link.attr(
                     'up-target': '.menu',
                     'up-position': 'bottom-left',
@@ -1310,17 +1372,17 @@
                   }
                 });
 
-          .fragment
-            %p
-              You can also use <a href="http://unpoly.com/up.on"><code>up.on</code></a> to bind event handlers to <code>document</code>.<br />
-              <code>up.on</code> supports <a href="http://unpoly.com/up-data"><code>up-data</code></a> and discards handlers on unsupported browsers.
-
-            %pre
-              %code.javascript
-                :preserve
-                  up.on('click', '.map', function(event, $element, data) {
-                    // ...
-                  });
+          -#.fragment
+          -#  %p
+          -#    You can also use <a href="http://unpoly.com/up.on"><code>up.on</code></a> to bind event handlers to <code>document</code>.<br />
+          -#    <code>up.on</code> supports <a href="http://unpoly.com/up-data"><code>up-data</code></a> and discards handlers on unsupported browsers.
+          -#
+          -#  %pre
+          -#    %code.javascript
+          -#      :preserve
+          -#        up.on('click', '.map', function(event, $element, data) {
+          -#          // ...
+          -#        });
 
         %section
           %h3
@@ -1348,6 +1410,254 @@
           %p
             View full documentation of JS functions,<br> events and UJS selectors on
             <a href="http://unpoly.com/">unpoly.com</a>.
+
+        %section
+          %h2 Forms
+
+          %p
+            Hard things with forms:
+
+          %ul
+            %li Submitting a form via AJAX
+            %li File uploads via AJAX
+            %li Detecting redirects
+            %li Dealing with validation errors
+            %li Server-side validations without a page load
+            %li Submitting a form within a modal and staying within the modal
+
+        %section
+          %h3 Ajax forms
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;form method="post" action="/users" <mark>up-target=".main"</mark>&gt;
+                  ...
+                &lt;/form&gt;
+
+          %ul
+            %li A successful submission (status 200) will update <code>.main</code>
+            %li
+              A failed submission will (non-200 status) update the form itself
+              .subtle
+                (Or use an <code>up-fail-target</code> attribute)
+
+        %section
+
+          %h3 Return non-200 status<br />when validations fail
+
+          %pre
+            %code.ruby(data-noescape)
+              :preserve
+                class UsersController < ApplicationController
+
+                  def create
+                    user_params = params[:user].permit(:email, :password)
+                    @user = User.new(user_params)
+                    if @user.save?
+                      sign_in @user
+                    else
+                      render 'form', <mark>status: :bad_request</mark>
+                    end
+                  end
+
+                end
+
+        %section
+          %h3 Forms within a modal
+
+          %ol
+            %li Target a selector within the modal to stay within the modal.
+            %li Target a selector behind the modal to close the modal.
+
+        %section
+          %h3 Validations without a page load
+
+          %pre.xs
+            %code.html(data-noescape)
+              :preserve
+                &lt;form action="/users"&gt;
+
+                  &lt;fieldset&gt;
+                    &lt;label&gt;E-mail&lt;/label&gt;
+                    &lt;input type="text" name="email" <mark>up-validate</mark>&gt;
+                  &lt;/label&gt;
+
+                  &lt;fieldset&gt;
+                    &lt;label&gt;Password&lt;/label&gt;
+                    &lt;input type="password" name="password"&gt;
+                  &lt;/fieldset&gt;
+
+                  &lt;button type="submit"&gt;Register&lt;/button&gt;
+
+                &lt;/form&gt;
+
+        %section
+          %h3 Validations without a page load
+
+          %pre.xs
+            %code.html(data-noescape)
+              :preserve
+                &lt;form action="/users"&gt;
+
+                  <mark>&lt;fieldset&gt;                                    </mark>
+                  <mark>  &lt;label&gt;E-mail&lt;/label&gt;                       </mark>
+                  <mark>  &lt;input type="text" name="email" up-validate&gt;</mark>
+                  <mark>&lt;/label&gt;                                      </mark>
+
+                  &lt;fieldset&gt;
+                    &lt;label&gt;Password&lt;/label&gt;
+                    &lt;input type="password" name="password"&gt;
+                  &lt;/fieldset&gt;
+
+                  &lt;button type="submit"&gt;Register&lt;/button&gt;
+
+                &lt;/form&gt;
+
+        %section
+          %h3 Validations without a page load
+
+          %pre.xs
+            %code.html(data-noescape)
+              :preserve
+                &lt;form action="/users"&gt;
+
+                  <mark>&lt;fieldset class="has-error"&gt;                                      </mark>
+                  <mark>  &lt;label&gt;E-mail has already been taken!&lt;/label&gt;                   </mark>
+                  <mark>  &lt;input type="text" name="email" up-validate value="foo@bar.com"&gt;</mark>
+                  <mark>&lt;/label&gt;                                                          </mark>
+
+                  &lt;fieldset&gt;
+                    &lt;label&gt;Password&lt;/label&gt;
+                    &lt;input type="password" name="password"&gt;
+                  &lt;/fieldset&gt;
+
+                  &lt;button type="submit"&gt;Register&lt;/button&gt;
+
+                &lt;/form&gt;
+
+        %section
+          %h3 Validations without a page load
+
+          %pre
+            %code.ruby(data-noescape)
+              :preserve
+                class UsersController &lt; ApplicationController
+
+                  def create
+                    @user = User.new(user_params)
+                    if up.validate?
+                      @user.valid?  # run validations, but don't save to DB
+                      render 'form' # render form with error messages
+                    elsif @user.save?
+                      sign_in @user
+                    else
+                      render 'form', status: :bad_request
+                    end
+                  end
+
+                end
+
+        %section
+          %h3 Validations without a page load
+
+          %pre
+            %code.ruby(data-noescape)
+              :preserve
+                class UsersController &lt; ApplicationController
+
+                  def create
+                    @user = User.new(user_params)
+                    <mark>if up.validate?</mark>
+                    <mark>  @user.valid? </mark> # run validations, but don't save to DB
+                    <mark>  render 'form'</mark> # render form with error messages
+                    elsif @user.save?
+                      sign_in @user
+                    else
+                      render 'form', status: :bad_request
+                    end
+                  end
+
+                end
+
+        %section
+          %h3 Updating dependent fields
+
+          %pre.xs
+            %code.html(data-noescape)
+              :preserve
+                &lt;form action="/contracts"&gt;
+                  &lt;select name="department" <mark>up-validate="[name=employee]"</mark>&gt;...&lt;/select&gt;
+                  &lt;select name="employee"&gt;...&lt;/select&gt;
+                &lt;/form&gt;
+
+
+        %section
+          %h3 Persisting elements
+          %pre.l
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="story"&gt;
+
+                  &lt;video <mark>up-keep</mark> src="movie.mp4"&gt;&lt;/video&gt;
+
+                  &lt;p&gt;Story summary&lt;/p&gt;
+
+                  &lt;a href="full.html" up-target=".story"&gt;
+                    Read full story
+                  &lt;/a&gt;
+
+                &lt;/div&gt;
+
+        %section
+          %h3 Find-as-you-type search
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;form action="/users" up-target=".list" <mark>up-observe="up.submit(this)"</mark>&gt;
+                  &lt;input type="search" name="query" /&gt;
+                &lt;/form&gt;
+
+                &lt;div class="list"&gt;
+                  &lt;% @users.each do |user| %&gt;
+                    = link_to user.email, user
+                  &lt;% end %&gt;
+                &lt;/div&gt;
+
+          %p
+            <code>up-observe</code> reacts faster than our vintage <code>observeField</code> helper
+            and has no concurrency issues.
+
+        %section
+          %h3 Find-as-you-type search
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;form action="/users" up-target=".list" <mark>up-autosubmit</mark>&gt;
+                  &lt;input type="search" name="query" /&gt;
+                &lt;/form&gt;
+
+                &lt;div class="list"&gt;
+                  &lt;% @users.each do |user| %&gt;
+                    = link_to user.email, user
+                  &lt;% end %&gt;
+                &lt;/div&gt;
+
+          %p
+            <code>up-observe</code> reacts faster than our vintage <code>observeField</code> helper
+            and has no concurrency issues.
+
+        %section
+          %h3 Getting started
+
+          %ul
+            %li Read through <a href="http://unpoly.com">unpoly.com</a>
+            %li <code>gem 'unpoly-rails'</code>
+            %li Replace half your Javascript with <code>up-target</code> links
+            %li Convert remaining Javascripts into <code>up.compiler</code>
+
 
         %section
           %h3 Rails integration
@@ -1407,396 +1717,6 @@
               In general we try to not do things that would totally clash with Bootstrap.
 
         %section
-          %h3 Legacy browsers
-
-          %p
-            Unpoly gracefully degrades with old versions of Internet Explorer:
-
-          %table
-            %tr
-              %th Edge
-              %td Full support
-            %tr
-              %th IE 10
-              %td Full support
-            %tr
-              %th IE 9
-              %td
-                Page updates that change browser history<br>fall back to a classic page load.<br />
-                Animations and transitions are skipped.
-            %tr
-              %th IE8
-              %td Unpoly prevents itself from booting,<br>leaving you with a classic server-side application
-
-        %section
-          %h2 Forms
-
-          %p
-            Hard things with forms:
-
-          %ul
-            %li Submitting a form via AJAX
-            %li File uploads via AJAX
-            %li Submitting a form within a modal and stay within the modal
-            %li Dealing with validation errors
-            %li Detecting redirects
-            %li Server-side validations without a page load
-
-        %section
-          %h3 Ajax forms
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;form method="post" action="/users" up-target=".main"&gt;
-                  ...
-                &lt;/form&gt;
-
-          %ul
-            %li A successful submission (status 200) will update <code>.main</code>
-            %li A failed submission will (non-200 status) update the form itself
-
-        %section
-
-          %h3 Return non-200 status<br />when validations fail
-
-          %pre
-            %code.ruby(data-noescape)
-              :preserve
-                class UsersController < ApplicationController
-
-                  def create
-                    user_params = params[:user].permit(:email, :password)
-                    @user = User.new(user_params)
-                    if @user.save?
-                      sign_in @user
-                    else
-                      render 'form', <mark>status: :bad_request</mark>
-                    end
-                  end
-
-                end
-
-        %section
-          %h3 Forms within a modal
-
-          %ol.fragment
-            %li Target a selector within the modal.
-
-          %p.fragment
-            Done.
-
-        %section
-          %h3 Validations without a page load
-
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;form action="/users"&gt;
-
-                  &lt;fieldset&gt;
-                    &lt;label&gt;E-mail&lt;/label&gt;
-                    &lt;input type="text" name="email" <mark>up-validate</mark> /&gt;
-                  &lt;/label&gt;
-
-                  &lt;fieldset&gt;
-                    &lt;label&gt;Password&lt;/label&gt;
-                    &lt;input type="password" name="password" <mark>up-validate</mark> /&gt;
-                  &lt;/fieldset&gt;
-
-                  &lt;button type="submit"&gt;Register&lt;/button&gt;
-
-                &lt;/form&gt;
-
-        %section
-          %h3 Validations without a page load
-
-          %pre
-            %code.ruby(data-noescape)
-              :preserve
-                class UsersController &lt; ApplicationController
-
-                  def create
-                    @user = User.new(user_params)
-                    if up.validate?
-                      @user.valid?  # run validations, but don't save to DB
-                      render 'form' # render form with error messages
-                    elsif @user.save?
-                      sign_in @user
-                    else
-                      render 'form', status: :bad_request
-                    end
-                  end
-
-                end
-
-        %section
-          %h3 Validations without a page load
-
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;form action="/users"&gt;
-
-                  <mark>&lt;fieldset&gt;                                      </mark>
-                  <mark>  &lt;label&gt;E-mail&lt;/label&gt;                         </mark>
-                  <mark>  &lt;input type="text" name="email" up-validate /&gt;</mark>
-                  <mark>&lt;/label&gt;                                        </mark>
-
-                  &lt;fieldset&gt;
-                    &lt;label&gt;Password&lt;/label&gt;
-                    &lt;input type="password" name="password" up-validate /&gt;
-                  &lt;/fieldset&gt;
-
-                  &lt;button type="submit"&gt;Register&lt;/button&gt;
-
-                &lt;/form&gt;
-
-        %section
-          %h3 Validations without a page load
-
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;form action="/users"&gt;
-
-                  <mark>&lt;fieldset class="has-error"&gt;                                       </mark>
-                  <mark>  &lt;label&gt;E-mail has already been taken!&lt;/label&gt;                    </mark>
-                  <mark>  &lt;input type="text" name="email" up-validate value="foo@bar.com"/&gt;</mark>
-                  <mark>&lt;/label&gt;                                                           </mark>
-
-                  &lt;fieldset&gt;
-                    &lt;label&gt;Password&lt;/label&gt;
-                    &lt;input type="password" name="password" up-validate /&gt;
-                  &lt;/fieldset&gt;
-
-                  &lt;button type="submit"&gt;Register&lt;/button&gt;
-
-                &lt;/form&gt;
-
-        %section
-          %h3 Updating dependent fields
-
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;form action="/contracts"&gt;
-                  &lt;select name="department" <mark>up-validate="[name=employee]"</mark>&gt;...&lt;/select&gt;
-                  &lt;select name="employee"&gt;...&lt;/select&gt;
-                &lt;/form&gt;
-
-        %section
-          %h3 Persisting elements
-          %pre.l
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="story"&gt;
-
-                  &lt;video <mark>up-keep</mark> src="movie.mp4"&gt;&lt;/video&gt;
-
-                  &lt;p&gt;Story summary&lt;/p&gt;
-
-                  &lt;a href="full.html" up-target=".story"&gt;
-                    Read full story
-                  &lt;/a&gt;
-
-                &lt;/div&gt;
-
-
-        %section
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="map" up-data="[
-                  { lat: 48.36, lng: 10.99 },
-                  { lat: 48.75, lng: 11.45 }
-                ]"&gt;&lt;/div&gt;
-
-                &lt;form method="post" action="/pins"&gt;
-                  Lat: &lt;input name="lat"&gt;
-                  Lng: &lt;input name="lng"&gt;
-                  &lt;button&gt;Add pin&lt;/button&gt;
-                &lt;/form&gt;
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('.map', function($element, pins) {
-                  var map = new google.maps.Map($element);
-                  pins.forEach(function(pin) {
-                    var position = new google.maps.LatLng(pin.lat, pin.lng);
-                    new google.maps.Marker({
-                      position: position,
-                      map: map
-                    });
-                });
-
-        %section
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('.map', function($element, pins) {
-                  var map = new google.maps.Map($element);
-                  pins.forEach(function(pin) {
-                    var position = new google.maps.LatLng(pin.lat, pin.lng);
-                    new google.maps.Marker({
-                      position: position,
-                      map: map
-                    });
-                });
-
-        %section
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;
-
-                &lt;%= form_for Pin.new do |form| %&gt;
-                  Lat: &lt;%= form.text_field :lat %&gt;
-                  Lng: &lt;%= form.text_field :lng %&gt;
-                  &lt;%= form.submit 'Add pin' %&gt;
-                &lt;/form&gt;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('.map', function($element, pins) {
-                  var map = new google.maps.Map($element);
-                  pins.forEach(function(pin) {
-                    var position = new google.maps.LatLng(pin.lat, pin.lng);
-                    new google.maps.Marker({
-                      position: position,
-                      map: map
-                    });
-                });
-
-        %section
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;
-
-                &lt;%= form_for Pin.new do |form| %&gt;
-                  Lat: &lt;%= form.text_field :lat %&gt;
-                  Lng: &lt;%= form.text_field :lng %&gt;
-                  &lt;%= form.submit 'Add pin' %&gt;
-                &lt;/form&gt;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('.map', function($element, initialPins) {
-                  var map = new google.maps.Map($element);
-                  function renderPins(pins) { ... }
-                  renderPins(initialPins);
-                });
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-
-        %section
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;" <mark>up-keep</mark>&gt;&lt;/div&gt;
-
-                &lt;%= form_for Pin.new do |form| %&gt;
-                  Lat: &lt;%= form.text_field :lat %&gt;
-                  Lng: &lt;%= form.text_field :lng %&gt;
-                  &lt;%= form.submit 'Add pin' %&gt;
-                &lt;/form&gt;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('.map', function($element, initialPins) {
-                  var map = new google.maps.Map($element);
-                  function renderPins(pins) { ... }
-                  renderPins(initialPins);
-                  <mark>$element.on('up:fragment:keep', function(event) {</mark>
-                  <mark>  renderPins(event.newData);                     </mark>
-                  <mark>});                                              </mark>
-                });
-                &nbsp;
-
-        %section
-          %h3 Find-as-you-type search
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;form action="/users" up-target=".list" <mark>up-observe="up.submit(this)"</mark>&gt;
-                  &lt;input type="search" name="query" /&gt;
-                &lt;/form&gt;
-
-                &lt;div class="list"&gt;
-                  &lt;% @users.each do |user| %&gt;
-                    = link_to user.email, user
-                  &lt;% end %&gt;
-                &lt;/div&gt;
-
-          %p
-            <code>up-observe</code> reacts faster than our vintage <code>observeField</code> helper
-            and has no concurrency issues.
-
-        %section
-          %h3 Find-as-you-type search
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;form action="/users" up-target=".list" <mark>up-autosubmit</mark>&gt;
-                  &lt;input type="search" name="query" /&gt;
-                &lt;/form&gt;
-
-                &lt;div class="list"&gt;
-                  &lt;% @users.each do |user| %&gt;
-                    = link_to user.email, user
-                  &lt;% end %&gt;
-                &lt;/div&gt;
-
-          %p
-            <code>up-observe</code> reacts faster than our vintage <code>observeField</code> helper
-            and has no concurrency issues.
-
-        %section
-          %h3 Getting started
-
-          %ul
-            %li Read through <a href="http://unpoly.com">unpoly.com</a>
-            %li <code>gem 'unpoly-rails'</code>
-            %li Replace half your Javascript with <code>up-target</code> links
-            %li Convert remaining Javascripts into <code>up.compiler</code>
-
-        %section
           %h3 Unit testing
 
           %p
@@ -1821,36 +1741,6 @@
                     up.hello($element);
                     year = new Date().getFullYear();
                     expect($element).toHaveText(year.toString());
-                  });
-                });
-
-        %section
-          %p
-            Use <a href="https://github.com/jasmine/jasmine-ajax">jasmine-ajax</a> to mock the network:
-
-          %pre.xxs
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('.server-time', function($element) {
-                  $element.text('Loading ...');
-                  up.ajax('/time').then(function(time) { $element.text(time) };
-                });
-
-          %pre.xxs
-            %code.javascript(data-noescape)
-              :preserve
-                describe('.current-year', function() {
-                  it('fetches and displays the current time from the server', function() {
-                    jasmine.Ajax.install();
-                    var $element = affix('.server-time');
-                    up.hello($element);
-                    expect($element).toHaveText('Loading...');
-                    jasmine.Ajax.requests.mostRecent().respondWith({
-                      status: 200,
-                      contentType: 'text/plain',
-                      responseText: '13:37:00'
-                    });
-                    expect($element).toHaveText('13:37:00');
                   });
                 });
 
@@ -1885,6 +1775,66 @@
           %p
             (Or use <a href="https://github.com/makandra/spreewald#waiting-for-page-load"><code>patiently</code></a>).
 
+
+        %section
+          %h3 Legacy browsers
+
+          %p
+            Unpoly gracefully degrades with old versions of Internet Explorer:
+
+          %table
+            %tr
+              %th Edge
+              %td Full support
+            %tr
+              %th IE 10
+              %td Full support
+            %tr
+              %th IE 9
+              %td
+                Page updates that change browser history<br>fall back to a classic page load.<br />
+                Animations and transitions are skipped.
+            %tr
+              %th IE8
+              %td Unpoly prevents itself from booting,<br>leaving you with a classic server-side application
+
+        %section
+          %table
+            %tr
+              %th
+              %th Random.js
+              %th
+                Unpoly app
+              %th Single-page app
+            %tr
+              %th
+                Code
+              %td
+                %span.green Simple
+              %td
+                %span.green Simple
+              %td
+                %span.red Complex
+            %tr
+              %th
+                UX
+              %td
+                %span.red Painful
+              %td
+                %span.yellow-green Friendly
+              %td
+                %span.green Refined
+            %tr
+              %th
+                Cost
+              %td
+                %span.green Affordable
+              %td
+                %span.green Affordable
+              %td
+                %span.red Expensive
+
+
         %section
           %h3 Is Unpoly right for <br>my project?
           %ul
@@ -1905,6 +1855,185 @@
         %section
           %p
             <a href="https://www.flickr.com/photos/127580645@N07/15215520777">iOS 8 icons</a> by Microsiervos
+
+
+        %section
+          %h2 Additional slides
+
+        %section
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="map" up-data="[
+                  { lat: 48.36, lng: 10.99 },
+                  { lat: 48.75, lng: 11.45 }
+                ]"&gt;&lt;/div&gt;
+
+                &lt;form method="post" action="/pins" <mark>up-target=".map"</mark>&gt;
+                  Lat: &lt;input name="lat"&gt;
+                  Lng: &lt;input name="lng"&gt;
+                  &lt;button&gt;Add pin&lt;/button&gt;
+                &lt;/form&gt;
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                up.compiler('.map', function($element, pins) {
+                  var map = new google.maps.Map($element);
+                  pins.forEach(function(pin) {
+                    var position = new google.maps.LatLng(pin.lat, pin.lng);
+                    new google.maps.Marker({
+                      position: position,
+                      map: map
+                    });
+                });
+
+        %section
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &lt;form method="post" action="/pins" <mark>up-target=".map"</mark>&gt;
+                  Lat: &lt;input name="lat"&gt;
+                  Lng: &lt;input name="lng"&gt;
+                  &lt;button&gt;Add pin&lt;/button&gt;
+                &lt;/form&gt;
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                up.compiler('.map', function($element, pins) {
+                  var map = new google.maps.Map($element);
+                  pins.forEach(function(pin) {
+                    var position = new google.maps.LatLng(pin.lat, pin.lng);
+                    new google.maps.Marker({
+                      position: position,
+                      map: map
+                    });
+                });
+
+        %section
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;
+
+
+
+
+                &lt;%= form_for Pin.new, html: { 'up-target' =&gt; '.map' } do |form| %&gt;
+                  Lat: &lt;%= form.text_field :lat %&gt;
+                  Lng: &lt;%= form.text_field :lng %&gt;
+                  &lt;%= form.submit 'Add pin' %&gt;
+                &lt;% end %&gt;
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                up.compiler('.map', function($element, pins) {
+                  var map = new google.maps.Map($element);
+                  pins.forEach(function(pin) {
+                    var position = new google.maps.LatLng(pin.lat, pin.lng);
+                    new google.maps.Marker({
+                      position: position,
+                      map: map
+                    });
+                });
+
+        %section
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;
+
+
+
+
+                &lt;%= form_for Pin.new, html: { 'up-target' =&gt; '.map' } do |form| %&gt;
+                  Lat: &lt;%= form.text_field :lat %&gt;
+                  Lng: &lt;%= form.text_field :lng %&gt;
+                  &lt;%= form.submit 'Add pin' %&gt;
+                &lt;% end %&gt;
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                up.compiler('.map', function($element, initialPins) {
+                  var map = new google.maps.Map($element);
+                  function renderPins(pins) { ... }
+                  renderPins(initialPins);
+                });
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+
+        %section
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;" <mark>up-keep</mark>&gt;&lt;/div&gt;
+
+
+
+
+                &lt;%= form_for Pin.new, html: { 'up-target' =&gt; '.map' } do |form| %&gt;
+                  Lat: &lt;%= form.text_field :lat %&gt;
+                  Lng: &lt;%= form.text_field :lng %&gt;
+                  &lt;%= form.submit 'Add pin' %&gt;
+                &lt;% end %&gt;
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                up.compiler('.map', function($element, initialPins) {
+                  var map = new google.maps.Map($element);
+                  function renderPins(pins) { ... }
+                  renderPins(initialPins);
+                  <mark>$element.on('up:fragment:keep', function(event) {</mark>
+                  <mark>  renderPins(event.newData);                     </mark>
+                  <mark>});                                              </mark>
+                });
+                &nbsp;
+
+
+        %section
+          %p
+            Use <a href="https://github.com/jasmine/jasmine-ajax">jasmine-ajax</a> to mock the network:
+
+          %pre.xxs
+            %code.javascript(data-noescape)
+              :preserve
+                up.compiler('.server-time', function($element) {
+                  $element.text('Loading ...');
+                  up.ajax('/time').then(function(time) { $element.text(time) };
+                });
+
+          %pre.xxs
+            %code.javascript(data-noescape)
+              :preserve
+                describe('.current-year', function() {
+                  it('fetches and displays the current time from the server', function() {
+                    jasmine.Ajax.install();
+                    var $element = affix('.server-time');
+                    up.hello($element);
+                    expect($element).toHaveText('Loading...');
+                    jasmine.Ajax.requests.mostRecent().respondWith({
+                      status: 200,
+                      contentType: 'text/plain',
+                      responseText: '13:37:00'
+                    });
+                    expect($element).toHaveText('13:37:00');
+                  });
+                });
 
     %script{:src => "lib/js/head.min.js"}
     %script{:src => "js/reveal.js"}
