@@ -31,6 +31,12 @@
         %section
           %img.plain(src='pictures/logos/unpoly.png' width='50%')
 
+        -#%section
+        -#  %img.plain(src='pictures/logos/unpoly2.png' width='50%')
+        -#
+        -#%section
+        -#  %img.plain(src='pictures/logos/unpoly3.png' width='50%')
+
         %section
           %h3 Javascript at makandra
 
@@ -59,36 +65,75 @@
           %h3 AngularJS
 
           %ul
-            %li AMC backend, Blogger Ranking, KITT
+            %li Used for: AMC backend, Blogger Ranking, KITT
+            %li Client-side rendering
+            %li Bidirectional mapping between Javascript data and HTML
+
+        %section
+          %h3.green This is AngularJS
+
+          %pre
+            %code.javascript
+              :preserve
+                app.controller('Todos', function($scope) {
+                  $scope.tasks = ['Milk', 'Toast', 'Honey'];
+                  $scope.addTask = function () {
+                    $scope.tasks.push($scope.newTask);
+                  }
+                });
+
+          %pre
+            %code.html
+              :preserve
+                &lt;div ng-app='app' ng-controller='Todos'&gt;
+                  &lt;div class="task" ng-repeat='task in tasks'&gt;
+                    {{task}}
+                  &lt;/div&gt;
+                  &lt;input ng-model='newTask'&gt;
+                  &lt;button ng-click='addTask()'&gt;Add task&lt;/button&gt;
+                &lt;/div&gt;
+
+          %p
+            %a(href='http://codepen.io/triskweline/pen/yOpvNV' target='_blank') Run example on codepen.io
+
+        %section
+          %h3
+            .red This is also AngularJS
+          .s
+            %pre
+              %code.javascript
+                :preserve
+                  angular.module('app', []).directive('pane', ['$http', function($http) {
+                    return {
+                      require: ['^^tabs', 'ngModel'],
+                      restrict: 'AEC',
+                      transclude: true,
+                      scope: {
+                        title: '@',
+                        info: '=description'
+                        click: '&'
+                      },
+                      link: function(scope, element, attrs, controllers) {
+                        ...
+                      },
+                      template: '&lt;div class='info'&gt;{{info}}&lt;/div&gt;' +
+                                '&lt;ng-transclude&gt;&lt;/ng-transclude&gt;'
+                    };
+                  });
+
+        %section
+          %h3 AngularJS
+
+          %ul
+            %li.green Changes to data are visible immediately
             %li.green Good fit for:<br>Template builder, complex forms, calendar, Holly, PH-planner
             %li.red Mediocre fit for:<br>Everything else
             %li.red
               Many concepts make training difficult
               .subtle
                 (scope inheritance, isolation, dependency injection, dot rule, digest cycle...)
-            %li.red Angular 1 is EOL, leaving us in an awkward situation.
-            %li.red We don't know how we're going to build SPAs in 2016+.
-
-        %section
-          .s
-            %pre
-              %code.javascript
-                :preserve
-                  angular.module('app', []).directive('myPane', ['$http', function($http) {
-                    return {
-                      require: ['^^myTabs', 'ngModel'],
-                      restrict: 'AEC',
-                      transclude: true,
-                      scope: {
-                        title: '@',
-                        info: '='
-                      },
-                      link: function(scope, element, attrs, controllers) {
-                        ...
-                      },
-                    };
-                  });
-
+            %li.red Angular 1 is EOL, leaving us in an awkward situation
+            %li.red We don't know how we're going to build SPAs in 2016+
 
         %section
           %h3 Half-assed AngularJS
@@ -101,10 +146,10 @@
               %pre.xs
                 %code.javascript(data-noescape)
                   :preserve
-                    app.directive('foo', function() {
+                    app.directive('screenshot', function() {
                       return {
                         link: function(scope, $element) {
-                          // do something with an $element that has class "foo"
+                          // do something with an $element that has class "screenshot"
                         };
                       }
                     });
@@ -121,16 +166,14 @@
 
         %section
           %h3
-            .subtle
-              Half-assed AngularJS
-            .line
-              Issues
+            Half-assed AngularJS
 
-          %ul.red
-            %li Crawlable content must always be rendered on the server,<br />so we can't really use this for important state changes
-            %li No routing, so no real URLs for changed state
-            %li Compile time is an issue on large pages
-            %li All things considered, we're not very happy with this
+          %ul
+            %li.green Marrying HTML/Javascript through directives is great
+            %li.red Crawlable content must always be rendered on the server,<br />so we can't really use this for important state changes
+            %li.red No routing, so no real URLs for changed state
+            %li.red Compile time is an issue on large pages
+            %li.red All things considered, we're not very happy with this
 
 
         %section
@@ -138,22 +181,27 @@
 
           %ul.s
             %li All other projects
-            %li.green Server-side Ruby applications
-            %li.red
+            %li.green Rendered on the server using Ruby
+            %li.fragment.red
               Javascript:
               %ul
                 %li Copy &amp; paste of untested (and flawed!) code snippets from cards and old projects
                 %li Anything non-trivial is implemented with a wall of jQuery
-                %li Initialized randomly (on load, <code>$.unobtrusive</code>, <code>&lt;script&gt;</code> tags, by library internals...)
-            %li.red
+                %li
+                  .line Initialized randomly
+                  .subtle (on load, <code>$.unobtrusive</code>, <code>&lt;script&gt;</code> tags, by library internals...)
+                %li Cannot be composed to form new functionality
+            %li.fragment.red
               UX in Random.js projects usually quite mediocre:
               %Ul
                 %li Tedious navigation through endless CRUD tunnels
                 %li List context is lost on every click
+                %li Transient state (scroll positions, focus, unsaved form values) is lost on every click
                 %li Feels like a slide show
-                %li Giant nested forms
-                %li Need to leave the current screen if a required record is missing
-            %li.red
+                %li Screen flashes between clicks
+                %li No layered interactions forces user to abandon forms
+                %li Giant nested forms to work around some of these issues
+            %li.fragment.red
               We go to great lengths to avoid writing JS in Random.js projects
 
         %section
@@ -168,23 +216,23 @@
               %th
                 Code
               %td
-                Simple
+                %span.green Simple
               %td
-                Complex
+                %span.red Complex
             %tr
               %th
                 UX
               %td
-                Painful
+                %span.red Painful
               %td
-                Fancy
+                %span.green Refined
             %tr
               %th
                 Cost
               %td
-                Cheap
+                %span.green Affordable
               %td
-                Expensive
+                %span.red Expensive
 
         %section
           %p
@@ -232,36 +280,36 @@
             %tr
               %th
               %th Random.js
-              %th.green
+              %th
                 Unpoly app
               %th Single-page app
             %tr
               %th
                 Code
               %td
-                Simple
-              %td.green
-                Simple
+                %span.green Simple
               %td
-                Complex
+                %span.green Simple
+              %td
+                %span.red Complex
             %tr
               %th
                 UX
               %td
-                Painful
-              %td.green
-                Friendly
+                %span.red Painful
               %td
-                Fancy
+                %span.yellow-green Friendly
+              %td
+                %span.green Refined
             %tr
               %th
                 Cost
               %td
-                Cheap
-              %td.green
-                Cheap
+                %span.green Affordable
               %td
-                Expensive
+                %span.green Affordable
+              %td
+                %span.red Expensive
 
 
         %section
@@ -274,7 +322,7 @@
             %li
               Largest open-source project we have
               .subtle
-                #{540 + 130} commits (Spreewald: 259, Geordi: 282, ActiveType: 154)
+                #{552 + 130} commits (Spreewald: 259, Geordi: 282, ActiveType: 154)
             %li
               Currently powers:
               %br
@@ -289,7 +337,7 @@
           %ul
             %li Close UX-gap between server-side apps and SPAs
             %li Batteries included
-            %li Enable things that are hard (even in Angular)
+            %li Enable some things that are hard (even in Angular)
             %li Not for ambitious UI
             %li Works with existing code
             %li
@@ -365,7 +413,7 @@
               without Javascript
 
           %p
-            %a(href='http://unpoly.com/examples/update-fragment/') Run example on unpoly.com
+            %a(href='http://unpoly.com/examples/update-fragment/' target='_blank') Run example on unpoly.com
 
           %pre.xs
             %code.html(data-noescape)
@@ -384,6 +432,7 @@
             %li.fragment Unpoly requests <code>full.html</code> via AJAX
             %li.fragment Server returns a <u>full HTML page</u> as usual
             %li.fragment Unpoly extracts the fragment that matches <code>.story</code>
+            %li.fragment Unpoly activates Javascript on the new fragment
             %li.fragment Unpoly swaps the old and new fragment
             %li.fragment Unpoly changes the browser URL to <code>http://host/full.html</code>
 
@@ -395,7 +444,7 @@
               without Javascript
 
           %p
-            %a(href='http://unpoly.com/examples/update-fragment/') Run example on unpoly.com
+            %a(href='http://unpoly.com/examples/update-fragment/' target='_blank') Run example on unpoly.com
 
           %pre.xs
             %code.html(data-noescape)
@@ -414,6 +463,7 @@
             %li Unpoly requests <code>full.html</code> via AJAX
             %li Server returns a <u>full HTML page</u> as usual
             %li Unpoly extracts the fragment that matches <code>.story</code>
+            %li Unpoly activates Javascript on the new fragment
             %li Unpoly swaps the old and new fragment
             %li Unpoly changes the browser URL to <code>http://host/full.html</code>
 
@@ -444,6 +494,7 @@
             %li Unpoly requests <code>full.html</code> via AJAX
             %li Server returns a <u>full HTML page</u> as usual
             %li Unpoly extracts the fragment that matches <code>.story</code>
+            %li Unpoly activates Javascript on the new fragment
             %li <mark>Unpoly displays the new fragment in a <code>&lt;div class="up-modal"&gt;</code></mark>
             %li Unpoly changes the browser URL to <code>http://host/full.html</code>
 
@@ -474,6 +525,7 @@
             %li Unpoly requests <code>full.html</code> via AJAX
             %li Server returns a <u>full HTML page</u> as usual
             %li Unpoly extracts the fragment that matches <code>.story</code>
+            %li Unpoly activates Javascript on the new fragment
             %li <mark>Unpoly displays the new fragment in a <code>&lt;div class="up-popup"&gt;</code></mark>
             %li Unpoly changes the browser URL to <code>http://host/full.html</code>
 
@@ -484,14 +536,20 @@
           .layers
             .layers--layer.is-document
               Document
+              .layers--url
+                http://app/list
             .layers--layer.is-modal
               Modal
+              .layers--url
+                http://app/new
             .layers--layer.is-popup
               Popup
+              .layers--url
+                http://app/autocomplete
 
           %ul
-            %li Changing a modal doesn't change the document<br />
-            %li Changing a popup doesn't change the modal
+            %li Unpoly apps can layer up to three pages on top of each other
+            %li Each layer has its own URL and can navigate without changing the others
             %li Links in an layer prefer to update fragments within the layer
             %li Changing a fragment behind the layer will close the layer
             %li Use this to <b>keep context</b> during interactions
@@ -528,7 +586,11 @@
                 When a modal closes, the background URL is restored.<br />
                 Reloading a modal's URL shows the content as a full page.
             %li
-              Use <a href="http://unpoly.com/up-back"><code>[up-back]</code></a> to link to a previous state.
+              .line
+                Use <a href="http://unpoly.com/up-back"><code>[up-back]</code></a> to link to a previous state.
+              .subtle
+                That's a real link with a URL, not <code>location.back()</code>
+
 
         %section
           %h3 Appending instead of replacing
@@ -548,21 +610,259 @@
         %section
           %h3 Enhancing elements
 
-          %p.red
-            TODO
-
           %ul
-            %li Keiner checkt $.unobtrusive
-            %li Vgl. Angular
-            %li up.compiler
-            %li Legacy-Bibliotheken einbinden
-            %li
-              Adding structured data
-              %ul
-                %li up-keep with reload
+            %li We need to marry HTML and Javascript
+
+        %section
+          %h3
+            <span class="subtle">Toggle all: </span> On load
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                $(function() {
+                  $('.toggle-all').each(function() {
+                    var $link = $(this);
+                    $link.on('click', function() {
+                      var $form = $link.closest('form');
+                      var $checkboxes = $form.find(':checkbox');
+                      var someUnchecked = $checkboxes.is(':not(:checked)');
+                      $checkboxes.prop('checked', someUnchecked);
+                    });
+                  });
+                });
+                &nbsp;
+                &nbsp;
+
+          %p
+            <a href="http://codepen.io/triskweline/pen/MyrVgG">Run example on codepen.io</a>.<br>
+            This is what you see in jQuery tutorials.<br>
+            HTML fragments loaded via AJAX don't get Javascriptified.
+
+        %section
+          %h3
+            <span class="subtle">Toggle all: </span> $.unobtrusive
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                $.unobtrusive(function() {
+                  var $fragment = $(this);
+                  $fragment.find('.toggle-all').each(function() {
+                    var $link = $(this);
+                    $link.on('click', function() {
+                      var $form = $link.closest('form');
+                      var $checkboxes = $form.find(':checkbox');
+                      var someUnchecked = $checkboxes.is(':not(:checked)');
+                      $checkboxes.prop('checked', someUnchecked);
+                    });
+                  });
+                });
+                &nbsp;
+
+          %p
+            AJAX-loaded fragments can be Javascriptified manually by calling
+            <br>
+            <code>$fragment.activateUnobtrusiveJavascript()</code>.
+            <br>
+            Unfortunately devs often forget to only <code>find(...)</code> within in the new fragment.
+
+        %section
+          %h3
+            <span class="subtle">Toggle all: </span> Angular directive
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                app.directive('toggle-all', function() {
+                  return {
+                    restrict: 'C',
+                    link: function(scope, $link) {
+                      $link.on('click', function() {
+                        var $form = $link.closest('form');
+                        var $checkboxes = $form.find(':checkbox');
+                        var someUnchecked = $checkboxes.is(':not(:checked)');
+                        $checkboxes.prop('checked', someUnchecked);
+                      });
+                    }
+                  }
+                });
+
+          %p
+            It's nice how Angular lets us register a compiling function for a CSS selector.
+            <br>
+            Also we don't need to manually Javascriptify new fragments
+            <br>
+            as long as we insert them through Angular mechanisms (like bindings).
+
+        %section
+          %h3
+            <span class="subtle">Toggle all: </span> Unpoly compiler
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                up.compiler('.toggle-all', function($link) {
+                  $link.on('click', function() {
+                    var $form = $link.closest('form');
+                    var $checkboxes = $form.find(':checkbox');
+                    var someUnchecked = $checkboxes.is(':not(:checked)');
+                    $checkboxes.prop('checked', someUnchecked);
+                  });
+                });
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+
+          %p
+            This is the <b>only</b> way you run Javascript in Unpoly.
+            No <code>&lt;script&gt;</code>. No <code>$(...)</code>.
+            <br>
+            Unpoly automatically compiles all fragments that it inserts or updates.
+            <br>
+            If you insert content without Unpoly (why??) use <a href="http://unpoly.com/up.hello"><code>up.hello(fragment)</code></a>.
+
+        %section
+          %h3 Integrating jQuery plugins
+
+          %h4.subtle Random.js
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                $(function() {
+                  var $areas = $('textarea.wysiwyg');
+                  $areas.redactor();
+                });
+
+          %h4.subtle Unpoly
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                up.compiler('textarea.wysiwyg', function($area) {
+                  $area.redactor();
+                });
+
+          %p.fragment
+            Again: All Javascript must be applied from an <code>up.compiler</code>.<br>
+            No <code>&lt;script&gt;</code>. No <code>$(...)</code>. No <code>window.onload</code>.
+
+        %section
+          %h3 Getting data into your JS
+          %h4.subtle Random.js
+
+          .s
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;div class="map"&gt;&lt;/div&gt;
+
+                  &lt;script type="text/javascript"&gt;
+                    var pins = [
+                      { lat: 48.36, lng: 10.99, title: 'Friedberg' },
+                      { lat: 48.75, lng: 11.45, title: 'Ingolstadt' }
+                    ];
+                    initMap($('.map'), pins);
+                  &lt;/script&gt;
+
+            %pre
+              %code.javascript(data-noescape)
+                :preserve
+                  function initMap($element, pins) {
+                    var map = new google.maps.Map($element);
+                    pins.forEach(function(pin) {
+                      var position = new google.maps.LatLng(pin.lat, pin.lng);
+                      new google.maps.Marker({
+                        position: position,
+                        map: map,
+                        title: pin.title
+                      });
+                    });
+                  });
+
+        %section
+          %h3 Getting data into your JS
+          %h4.subtle Unpoly
+
+          .s
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;div class="map" up-data="[
+                    { lat: 48.36, lng: 10.99, title: 'Friedberg' },
+                    { lat: 48.75, lng: 11.45, title: 'Ingolstadt' }
+                  ]"&gt;&lt;/div&gt;
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+
+            %pre
+              %code.javascript(data-noescape)
+                :preserve
+                  up.compiler('.map', function($element, <mark>pins</mark>) {
+                    var map = new google.maps.Map($element);
+                    pins.forEach(function(pin) {
+                      var position = new google.maps.LatLng(pin.lat, pin.lng);
+                      new google.maps.Marker({
+                        position: position,
+                        map: map,
+                        title: pin.title
+                      });
+                    });
+                  });
+
+        %section
+          %h3 Getting data into your JS
+          %h4.subtle Unpoly
+
+          .s
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+
+            %pre
+              %code.javascript(data-noescape)
+                :preserve
+                  up.compiler('.map', function($element, <mark>pins</mark>) {
+                    var map = new google.maps.Map($element);
+                    pins.forEach(function(pin) {
+                      var position = new google.maps.LatLng(pin.lat, pin.lng);
+                      new google.maps.Marker({
+                        position: position,
+                        map: map,
+                        title: pin.title
+                      });
+                    });
+                  });
 
         %section
           %h3 Symmmetry to BEM blocks
+
+          %pre
+            %code.nohighlight(data-noescape)
+              :preserve
+                <b>app/assets/stylesheets/blocks</b>
+                  head.css
+                  map.css
+                  photo_hero.css
+                  screenshot.css
+                  tail.css
+
+                <b>app/assets/javascripts/compilers</b>
+                  head.js
+                  map.js
+                  photo_hero.js
+                  screenshot.js
 
         %section
           %h3
@@ -576,8 +876,8 @@
               We just don't notice because the Javascript VM is reset between page loads!
             %li
               We can't have memory leaks in persistent Javascript VMs
-              %br
-              like Angular.js, Unpoly, Turbolinks.
+              .subtle
+                like Angular.js, Unpoly, Turbolinks
             %li
               Background: <a href="https://makandracards.com/makandra/31325-how-to-create-memory-leaks-in-jquery">one</a>,
               <a href="https://makandracards.com/makandra/31289-how-to-create-giant-memory-leaks-in-angularjs">two</a>.
@@ -706,7 +1006,9 @@
         %section
           %h2 Response times
           %p
-            Users expect more than a slide show.
+            %img.plain(src='pictures/ios_8_icons.jpg' width='50%')
+          %p
+            Users in 2016 expect more than a slide show.
 
         %section
           %h3 Response times
@@ -779,8 +1081,6 @@
             %li Use best practices for server performance
 
         %section
-          %h3 Freeing up time budget
-
           .s
             %ul
 
@@ -849,6 +1149,28 @@
             The <code>up:proxy:slow</code> event is triggered after 300 ms (configurable).
 
         %section
+          %h3 We can still implement interactions on the client
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class='greeter'&gt;
+                  &lt;input class='greeter--input'>
+                  Hello &lt;span class='greeter--name'&gt;&lt;span&gt;!
+                &lt;/div&gt;
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                up.compiler('.greeter', function($element) {
+                  var $input = $element.find('.greeter--input');
+                  var $name = $element.find('.greeter--name');
+                  $input.on('input', function() {
+                    $name.text($input.val());
+                  });
+                });
+
+        %section
           %h3
             .subtle
               Going nuclear
@@ -856,14 +1178,14 @@
               Two-way bindings
 
           %p
-            Use <a href="http://rivetsjs.com/">Rivets.js</a> (6 KB):
+            With <a href="http://rivetsjs.com/">Rivets.js</a> (6 KB):
 
           %pre
             %code.html(data-noescape)
               :preserve
                 &lt;div class='template' up-data='{ "name": "Arne" }'&gt;
                   &lt;input rv-value='name'>
-                  Hello, { name }!
+                  Hello { name }!
                 &lt;/div&gt;
 
           %pre
@@ -882,14 +1204,14 @@
             %li View example on new makandra.de
 
         %section
-          %h3
+          %h2
             Composability
 
           %ul
             %li
               Unpoly's default UJS behavior is a thin wrapper around a Javascript API
             %li
-              If the default UJS behavior doesn't fit your use case, you can use
+              If the default UJS behavior doesn't fit your use case,<br>you can use
               that Javascript API from your own code, or invent new UJS syntax
 
 
@@ -988,6 +1310,18 @@
                   }
                 });
 
+          .fragment
+            %p
+              You can also use <a href="http://unpoly.com/up.on"><code>up.on</code></a> to bind event handlers to <code>document</code>.<br />
+              <code>up.on</code> supports <a href="http://unpoly.com/up-data"><code>up-data</code></a> and discards handlers on unsupported browsers.
+
+            %pre
+              %code.javascript
+                :preserve
+                  up.on('click', '.map', function(event, $element, data) {
+                    // ...
+                  });
+
         %section
           %h3
             .line All Async actions return promises
@@ -1006,25 +1340,14 @@
                   // Transition has completed
                 });
 
-        %section
           %p
-            View full documentation of JS functions,<br> events and CSS selectors on
-            <a href="http://unpoly.com/">unpoly.com</a>.
+            <a href="https://makandracards.com/curriculum/35275-javascript-writing-asynchronous-code" target="_blank">Curriculum lesson on promises</a>
 
         %section
-          %h3 Bootstrap integration
-
-          %ul
-            %li
-              Include <a href="https://raw.githubusercontent.com/unpoly/unpoly/master/dist/unpoly-bootstrap3.js">unpoly-bootstrap3.js</a> and
-              <a href="https://raw.githubusercontent.com/unpoly/unpoly/master/dist/unpoly-bootstrap3.css">unpoly-bootstrap3.css</a>
-            %li
-              Configures Unpoly to use Bootstrap styles for dialogs,<br />
-              marking current navigation taps, etc.
-            %li
-              Makes Unpoly aware of fixed Bootstrap layout components when scrolling the viewport.
-            %li
-              In general we try to not do things that would totally clash with Bootstrap.
+          %h3 Documentation
+          %p
+            View full documentation of JS functions,<br> events and UJS selectors on
+            <a href="http://unpoly.com/">unpoly.com</a>.
 
         %section
           %h3 Rails integration
@@ -1050,6 +1373,38 @@
 
           %p
             The gem also provides the JS and CSS assets for the latest Unpoly.
+
+        %section
+          %h3 Other installation methods
+
+          %ul
+            %li
+              %a(href='http://unpoly.com/download#bower') Install with Bower
+            %li
+              %a(href='http://unpoly.com/download#cdn') Link to a CDN
+            %li
+              %a(href='http://unpoly.com/download#zip') Download as ZIP
+            %li
+              %a(hrf='http://unpoly.com/download#git') Clone with Git
+
+          %p
+            Although the Rails bindings are nice, Unpoly works with any kind of backend.<br>
+            E.g. <a href="http://unpoly.com">unpoly.com</a> is a static middleman site using Unpoly.
+
+        %section
+          %h3 Bootstrap integration
+
+          %ul
+            %li
+              Include <a href="https://raw.githubusercontent.com/unpoly/unpoly/master/dist/unpoly-bootstrap3.js">unpoly-bootstrap3.js</a> and
+              <a href="https://raw.githubusercontent.com/unpoly/unpoly/master/dist/unpoly-bootstrap3.css">unpoly-bootstrap3.css</a>
+            %li
+              Configures Unpoly to use Bootstrap styles for dialogs,<br />
+              marking current navigation tabs, etc.
+            %li
+              Makes Unpoly aware of fixed Bootstrap layout components when scrolling the viewport.
+            %li
+              In general we try to not do things that would totally clash with Bootstrap.
 
         %section
           %h3 Legacy browsers
@@ -1081,7 +1436,10 @@
 
           %ul
             %li Submitting a form via AJAX
+            %li File uploads via AJAX
             %li Submitting a form within a modal and stay within the modal
+            %li Dealing with validation errors
+            %li Detecting redirects
             %li Server-side validations without a page load
 
         %section
@@ -1528,10 +1886,13 @@
             (Or use <a href="https://github.com/makandra/spreewald#waiting-for-page-load"><code>patiently</code></a>).
 
         %section
-          %h2 Should I use this for my project?
+          %h3 Is Unpoly right for <br>my project?
           %ul
             %li In development since October 2014
-            %li= "~ 500 specs"
+            %li
+              = "~ 500 specs"
+              .subtle
+                How many specs has your Random.js?
             %li Has seen some real world pain, but we're still learning new things
             %li <a href="http://unpoly.com/changelog">Changelog</a> lists breaking changes and compatible changes separately
             %li
@@ -1540,6 +1901,10 @@
 
         %section
           %img.plain(src='pictures/logos/unpoly.png' width='50%')
+
+        %section
+          %p
+            <a href="https://www.flickr.com/photos/127580645@N07/15215520777">iOS 8 icons</a> by Microsiervos
 
     %script{:src => "lib/js/head.min.js"}
     %script{:src => "js/reveal.js"}
