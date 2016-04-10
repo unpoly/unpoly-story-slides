@@ -38,6 +38,13 @@
         -#  %img.plain(src='pictures/logos/unpoly3.png' width='50%')
 
         %section
+          %p
+            I want us to write better user interfaces.
+
+          %p
+            This involves Javascript.
+
+        %section
           %h3 Javascript at makandra
 
           .fragment
@@ -75,16 +82,6 @@
           %h3.green This is AngularJS
 
           %pre
-            %code.javascript
-              :preserve
-                app.controller('Todos', function($scope) {
-                  $scope.tasks = ['Milk', 'Toast', 'Honey'];
-                  $scope.addTask = function () {
-                    $scope.tasks.push($scope.newTask);
-                  }
-                });
-
-          %pre
             %code.html
               :preserve
                 &lt;div ng-app='app' ng-controller='Todos'&gt;
@@ -95,8 +92,19 @@
                   &lt;button ng-click='addTask()'&gt;Add task&lt;/button&gt;
                 &lt;/div&gt;
 
-          %p
-            %a(href='http://codepen.io/triskweline/pen/yOpvNV' target='_blank') Run example on codepen.io
+          .fragment
+            %pre
+              %code.javascript
+                :preserve
+                  app.controller('Todos', function($scope) {
+                    $scope.tasks = ['Milk', 'Toast', 'Honey'];
+                    $scope.addTask = function () {
+                      $scope.tasks.push($scope.newTask);
+                    }
+                  });
+
+            %p
+              %a(href='http://codepen.io/triskweline/pen/yOpvNV' target='_blank') Run example on codepen.io
 
         %section
           %h3
@@ -132,7 +140,7 @@
             %li.green Changes to data are visible immediately
             %li.green Good fit for:<br>Template builder, complex forms, calendar, Holly, PH-planner
             %li.red
-              Many concepts increase complexity and make training difficult
+              Many concepts increase complexity and complicate training
               .subtle
                 (scope inheritance, isolation, dependency injection, dot rule, digest cycle...)
             %li.red Angular 1 is EOL, leaving us in an awkward situation
@@ -141,10 +149,11 @@
         %section
           %h3
             Half-assed AngularJS
+            %br
             %span.subtle (2013-2016)
 
           %ul
-            %li AMC frontend, REALCUBE
+            %li REALCUBE, AMC frontend
             %li Rendering is mostly on the server, then compiled again on the browser
 
             %li
@@ -189,8 +198,9 @@
             %span.subtle (2008-2016)
 
           %ul.s
-            %li All other projects
-            %li.green Rendered on the server using Ruby
+            %li All other projects.
+            %li We still start new Random.js projects despite having AngularJS.
+            %li.fragment.green Rendered on the server using Ruby
             %li.fragment.red
               Javascript:
               %ul
@@ -334,7 +344,7 @@
             %li
               Largest open-source project we have
               .subtle
-                #{552 + 130} commits (Spreewald: 259, Geordi: 282, ActiveType: 154)
+                #{553 + 130} commits (Spreewald: 259, Geordi: 282, ActiveType: 154)
             %li
               Currently powers:
               %br
@@ -779,8 +789,8 @@
             %code.javascript(data-noescape)
               :preserve
                 $(function() {
-                  var $areas = $('textarea.wysiwyg');
-                  $areas.redactor();
+                  var $textareas = $('textarea.wysiwyg');
+                  $textareas.redactor();
                 });
 
           %h4.subtle Unpoly
@@ -788,8 +798,8 @@
           %pre
             %code.javascript(data-noescape)
               :preserve
-                up.compiler('textarea.wysiwyg', function($area) {
-                  $area.redactor();
+                up.compiler('textarea.wysiwyg', function($textarea) {
+                  $textarea.redactor();
                 });
 
           %p.fragment
@@ -915,7 +925,7 @@
                   screenshot.js
 
         %section
-          %h3
+          %h2
             .line
               Memory leaks
 
@@ -1054,6 +1064,32 @@
                 &nbsp;
 
         %section
+          %h3 Unpoly compiler: <span class="red">Leaky</span>
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                up.compiler('textarea.wysiwyg', function($textarea) {
+                  $textarea.redactor();
+                });
+                &nbsp;
+                &nbsp;
+                &nbsp;
+
+        %section
+          %h3 Unpoly compiler: <span class="green">Clean</span>
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                up.compiler('textarea.wysiwyg', function($textarea) {
+                  $textarea.redactor();
+                  return function() {
+                    $textarea.redactor('destroy');
+                  }
+                });
+
+        %section
           %h2 Response times
           %p
             %img.plain(src='pictures/ios_8_icons.jpg' width='50%')
@@ -1105,7 +1141,7 @@
             %li Most of our AngularJS interactions are still bound by server speed.
             %li
               .line
-                Writing JSON takes time, too.
+                Rendering to JSON takes time, too.
               .subtle
                 60-300ms for index views in AMC backend
             %li
@@ -1174,12 +1210,26 @@
           %ul
             %li Caching (duh!)
             %li Tailor responses for the <code>X-Up-Target</code> header
-            %li Spinners
+            %li Spinners for long-running requests
             %li We can still implement client-side interactions
 
         %section
-          %h3 Optimize responses
+          %h3 Tailored responses
 
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;body&gt;
+
+                  &lt;% if up.target?('.side') %&gt;
+                    &lt;%= render 'side' %&gt;
+                  &lt;% end %&gt;
+
+                  &lt;% if up.target?('main?') %&gt;
+                    yield
+                  &lt;% end %&gt;
+
+                &lt;/body&gt;
 
         %section
           %h3 Spinners
@@ -1264,6 +1314,14 @@
             %li Why it's hard
             %li Ghosting ...
             %li View example on new makandra.de
+
+        %section(data-background-color='#000')
+          .transition-issue-illustration(style='width: 960px; height: 460px')
+            %img(src='pictures/transition_desired.svg' width='100%')
+
+        %section(data-background-color='#000')
+          .transition-issue-illustration(style='width: 960px; height: 460px')
+            %img(src='pictures/transition_naive.svg' width='100%')
 
         %section
           %h2

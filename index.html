@@ -34,6 +34,14 @@
           <img class='plain' src='pictures/logos/unpoly.png' width='50%'>
         </section>
         <section>
+          <p>
+            I want us to write better user interfaces.
+          </p>
+          <p>
+            This involves Javascript.
+          </p>
+        </section>
+        <section>
           <h3>Javascript at makandra</h3>
           <div class='fragment'>
             <p>
@@ -79,11 +87,13 @@
         </section>
         <section>
           <h3 class='green'>This is AngularJS</h3>
-          <pre><code class='javascript'>app.controller('Todos', function($scope) {&#x000A;  $scope.tasks = ['Milk', 'Toast', 'Honey'];&#x000A;  $scope.addTask = function () {&#x000A;    $scope.tasks.push($scope.newTask);&#x000A;  }&#x000A;});&#x000A;</code></pre>
           <pre><code class='html'>&lt;div ng-app='app' ng-controller='Todos'&gt;&#x000A;  &lt;div class="task" ng-repeat='task in tasks'&gt;&#x000A;    {{task}}&#x000A;  &lt;/div&gt;&#x000A;  &lt;input ng-model='newTask'&gt;&#x000A;  &lt;button ng-click='addTask()'&gt;Add task&lt;/button&gt;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
-          <p>
-            <a href='http://codepen.io/triskweline/pen/yOpvNV' target='_blank'>Run example on codepen.io</a>
-          </p>
+          <div class='fragment'>
+            <pre><code class='javascript'>app.controller('Todos', function($scope) {&#x000A;  $scope.tasks = ['Milk', 'Toast', 'Honey'];&#x000A;  $scope.addTask = function () {&#x000A;    $scope.tasks.push($scope.newTask);&#x000A;  }&#x000A;});&#x000A;</code></pre>
+            <p>
+              <a href='http://codepen.io/triskweline/pen/yOpvNV' target='_blank'>Run example on codepen.io</a>
+            </p>
+          </div>
         </section>
         <section>
           <h3>
@@ -102,7 +112,7 @@
             <li class='green'>Changes to data are visible immediately</li>
             <li class='green'>Good fit for:<br>Template builder, complex forms, calendar, Holly, PH-planner</li>
             <li class='red'>
-              Many concepts increase complexity and make training difficult
+              Many concepts increase complexity and complicate training
               <div class='subtle'>
                 (scope inheritance, isolation, dependency injection, dot rule, digest cycle...)
               </div>
@@ -114,10 +124,11 @@
         <section>
           <h3>
             Half-assed AngularJS
+            <br>
             <span class='subtle'>(2013-2016)</span>
           </h3>
           <ul>
-            <li>AMC frontend, REALCUBE</li>
+            <li>REALCUBE, AMC frontend</li>
             <li>Rendering is mostly on the server, then compiled again on the browser</li>
             <li>
               Uses Angular directives to run JS on matching HTML elements:
@@ -147,8 +158,9 @@
             <span class='subtle'>(2008-2016)</span>
           </h3>
           <ul class='s'>
-            <li>All other projects</li>
-            <li class='green'>Rendered on the server using Ruby</li>
+            <li>All other projects.</li>
+            <li>We still start new Random.js projects despite having AngularJS.</li>
+            <li class='fragment green'>Rendered on the server using Ruby</li>
             <li class='fragment red'>
               Javascript:
               <ul>
@@ -337,7 +349,7 @@
             <li>
               Largest open-source project we have
               <div class='subtle'>
-                682 commits (Spreewald: 259, Geordi: 282, ActiveType: 154)
+                683 commits (Spreewald: 259, Geordi: 282, ActiveType: 154)
               </div>
             </li>
             <li>
@@ -614,9 +626,9 @@
         <section>
           <h3>Integrating jQuery plugins</h3>
           <h4 class='subtle'>Random.js</h4>
-          <pre><code class='javascript' data-noescape>$(function() {&#x000A;  var $areas = $('textarea.wysiwyg');&#x000A;  $areas.redactor();&#x000A;});&#x000A;</code></pre>
+          <pre><code class='javascript' data-noescape>$(function() {&#x000A;  var $textareas = $('textarea.wysiwyg');&#x000A;  $textareas.redactor();&#x000A;});&#x000A;</code></pre>
           <h4 class='subtle'>Unpoly</h4>
-          <pre><code class='javascript' data-noescape>up.compiler('textarea.wysiwyg', function($area) {&#x000A;  $area.redactor();&#x000A;});&#x000A;</code></pre>
+          <pre><code class='javascript' data-noescape>up.compiler('textarea.wysiwyg', function($textarea) {&#x000A;  $textarea.redactor();&#x000A;});&#x000A;</code></pre>
           <p class='fragment'>
             Again: All Javascript must be applied from an <code>up.compiler</code>.<br>
             No <code>&lt;script&gt;</code>. No <code>$(...)</code>. No <code>window.onload</code>.
@@ -651,11 +663,11 @@
           <pre><code class='nohighlight' data-noescape><b>app/assets/stylesheets/blocks</b>&#x000A;  head.css&#x000A;  map.css&#x000A;  photo_hero.css&#x000A;  screenshot.css&#x000A;  tail.css&#x000A;&#x000A;<b>app/assets/javascripts/compilers</b>&#x000A;  head.js&#x000A;  map.js&#x000A;  photo_hero.js&#x000A;  screenshot.js&#x000A;</code></pre>
         </section>
         <section>
-          <h3>
+          <h2>
             <div class='line'>
               Memory leaks
             </div>
-          </h3>
+          </h2>
           <ul>
             <li>
               Our shitty Random.js is <b>full of memory leaks</b>.
@@ -702,6 +714,14 @@
           <pre class='xs'><code class='html' data-noescape>&lt;clock&gt;&lt;/clock&gt;&#x000A;</code></pre>
           <h4 class='subtle'>Javascript</h4>
           <pre class='xs'><code class='javascript' data-noescape>up.compiler('clock', function($clock) {&#x000A;&#x000A;  function updateClock() {&#x000A;    var now = new Date();&#x000A;    $clock.html(now.toString());&#x000A;  }&#x000A;&#x000A;  var interval = setInterval(updateClock, 1000);&#x000A;&#x000A;  <mark>return function() { clearInterval(interval) };</mark> // clean up when destroyed&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
+        </section>
+        <section>
+          <h3>Unpoly compiler: <span class="red">Leaky</span></h3>
+          <pre><code class='javascript' data-noescape>up.compiler('textarea.wysiwyg', function($textarea) {&#x000A;  $textarea.redactor();&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
+        </section>
+        <section>
+          <h3>Unpoly compiler: <span class="green">Clean</span></h3>
+          <pre><code class='javascript' data-noescape>up.compiler('textarea.wysiwyg', function($textarea) {&#x000A;  $textarea.redactor();&#x000A;  return function() {&#x000A;    $textarea.redactor('destroy');&#x000A;  }&#x000A;});&#x000A;</code></pre>
         </section>
         <section>
           <h2>Response times</h2>
@@ -766,7 +786,7 @@
             <li>Most of our AngularJS interactions are still bound by server speed.</li>
             <li>
               <div class='line'>
-                Writing JSON takes time, too.
+                Rendering to JSON takes time, too.
               </div>
               <div class='subtle'>
                 60-300ms for index views in AMC backend
@@ -850,12 +870,13 @@
           <ul>
             <li>Caching (duh!)</li>
             <li>Tailor responses for the <code>X-Up-Target</code> header</li>
-            <li>Spinners</li>
+            <li>Spinners for long-running requests</li>
             <li>We can still implement client-side interactions</li>
           </ul>
         </section>
         <section>
-          <h3>Optimize responses</h3>
+          <h3>Tailored responses</h3>
+          <pre><code class='html' data-noescape>&lt;body&gt;&#x000A;&#x000A;  &lt;% if up.target?('.side') %&gt;&#x000A;    &lt;%= render 'side' %&gt;&#x000A;  &lt;% end %&gt;&#x000A;&#x000A;  &lt;% if up.target?('main?') %&gt;&#x000A;    yield&#x000A;  &lt;% end %&gt;&#x000A;&#x000A;&lt;/body&gt;&#x000A;</code></pre>
         </section>
         <section>
           <h3>Spinners</h3>
@@ -895,6 +916,16 @@
             <li>Ghosting ...</li>
             <li>View example on new makandra.de</li>
           </ul>
+        </section>
+        <section data-background-color='#000'>
+          <div class='transition-issue-illustration' style='width: 960px; height: 460px'>
+            <img src='pictures/transition_desired.svg' width='100%'>
+          </div>
+        </section>
+        <section data-background-color='#000'>
+          <div class='transition-issue-illustration' style='width: 960px; height: 460px'>
+            <img src='pictures/transition_naive.svg' width='100%'>
+          </div>
         </section>
         <section>
           <h2>

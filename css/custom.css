@@ -235,6 +235,9 @@ body {
   background: none; /* wtf */
   vertical-align: middle;
   box-shadow: none;
+  max-width: none;
+  max-height: none;
+  margin: 0;
 }
 
 .reveal .red {
@@ -337,4 +340,10 @@ body {
   background-color: rgba(40, 200, 150, 0.3);
 }
 
+.reveal .transition-issue-illustration {
+  background-color: #000;
+}
 
+.reveal .transition-issue-illustration img {
+  vertical-align: top;
+}
