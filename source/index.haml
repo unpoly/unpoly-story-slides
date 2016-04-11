@@ -39,7 +39,7 @@
 
         %section
           %p
-            I want us to write better user interfaces.
+            I want us to deliver better user interfaces.
 
           %p
             This involves Javascript.
@@ -425,7 +425,10 @@
               %a(href='http://demo.upjs.io/sessions/CSARbQ/cards/6463?up_enabled=true') With Unpoly
 
         %section
-          %img(src='pictures/fragment_flow.svg' width='100%')
+          %img(src='pictures/fragment_flow_vanilla.svg' width='100%')
+
+        %section
+          %img(src='pictures/fragment_flow_unpoly.svg' width='100%')
 
         %section
 
@@ -629,25 +632,24 @@
 
 
         %section
-          %h3 Appending instead of replacing
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="tasks"&gt;
-                  &lt;li&gt;Wash car&lt;/li&gt;
-                  &lt;li&gt;Purchase supplies&lt;/li&gt;
-                  &lt;li&gt;Fix tent&lt;/li&gt;
-                &lt;/ul&gt;
-
-                &lt;a class="next-page" href="/tasks?page=2"
-                  up-target=".next-page, <mark>.tasks:after</mark>"&gt;Next page&lt;/a&gt;
-
-        %section
           %h3 Enhancing elements
 
+          %p
+            Every app needs a way to activate Javascript snippets<br />on certain HTML elements:
+
           %ul
-            %li We need to marry HTML and Javascript
+            %li An <code>a[title]</code> attribute should activate Poshytip on mouseover
+            %li A <code>textarea.wysiwyg</code> should activate Redactor on load
+            %li
+              An <code>input[type=search]</code> field should automatically request new results
+              %br
+              when the user types something
+            %li
+              A <code>.google-map</code> should render a map with pins via the Google Maps JS API
+            %li
+              A <code>.button.toggle-all</code> class should toggle all checkboxes in a form
+              %br
+              when clicked
 
         %section
           %h3
@@ -1310,18 +1312,163 @@
 
         %section
           %h3 Animation
-          %ul
-            %li Why it's hard
-            %li Ghosting ...
-            %li View example on new makandra.de
+
+          %p
+            When a new element enters the DOM, you can <b>animate</b> the appearance:
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;a href="/settings" up-modal=".menu" up-animation="fade-in"&gt;
+                  Open settings
+                &lt;/a&gt;
+
+
+          %p
+            When you swap an element, you can <b>transition</b> between the old and new states:
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;a href="/users" up-target=".list" up-transition="cross-fade"&gt;
+                  Show users
+                &lt;/a&gt;
+
+          %p
+            Animations are implemented via CSS transforms on a 3D-accelerated layer.
+
+          %hr
+
+          %p
+            %a(href='https://staging.makandra.de' target='_blank')
+              View examples on new makandra.de
+            %br
+            %span.subtle (page transitions, screenshot animation, responsive nav)
 
         %section(data-background-color='#000')
+          %h3 Why transitions are hard
+          %br
           .transition-issue-illustration(style='width: 960px; height: 460px')
             %img(src='pictures/transition_desired.svg' width='100%')
 
         %section(data-background-color='#000')
+          %h3 Why transitions are hard
+          %br
           .transition-issue-illustration(style='width: 960px; height: 460px')
             %img(src='pictures/transition_naive.svg' width='100%')
+
+
+        %section
+          %h3 Ghosting
+
+          .ghosts
+            .ghosts--layer.is-old
+              Old
+              .ghosts--css
+                position: static<br>
+                display: hidden
+            .ghosts--layer.is-new
+              New
+              .ghosts--css
+                position: static<br>
+                opacity: 0
+            .ghosts--layer.is-old-ghost
+              Old (ghost)
+              .ghosts--css
+                position: absolute
+            .ghosts--layer.is-new-ghost
+              New (ghost)
+              .ghosts--css
+                position: absolute
+
+
+        %section(data-background-color='#000')
+          %h3 Without ghosting
+          %br
+          .transition-issue-illustration(style='width: 960px; height: 460px')
+            %img(src='pictures/transition_naive.svg' width='100%')
+
+
+        %section(data-background-color='#000')
+          %h3 With ghosting
+          %br
+          .transition-issue-illustration(style='width: 960px; height: 460px')
+            %img(src='pictures/transition_desired.svg' width='100%')
+
+        %section
+          .columns
+
+            .column
+              %h4 Predefined animations
+              %pre
+                %code.nohighlight(data-noescape)
+                  :preserve
+                    fade-in
+                    fade-out
+                    move-to-top
+                    move-from-bottom
+                    move-to-bottom
+                    move-from-top
+                    move-to-left
+                    move-from-right
+                    move-to-right
+                    move-from-left
+
+            .column
+              %h4 Predefined transitions
+              %pre
+                %code.nohighlight(data-noescape)
+                  :preserve
+                    cross-fade
+                    move-top
+                    move-bottom
+                    move-left
+                    move-right
+
+        %section
+          %h3 Custom animations
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                up.animation('zoom-in', function($element, options) {
+
+                  var firstFrame = {
+                    opacity: 0,
+                    transform: 'scale(0.5)'
+                  };
+
+                  var lastFrame = {
+                    opacity: 1,
+                    transform: 'scale(1)'
+                  };
+
+                  $element.css(firstFrame);
+                  return up.animate($element, lastFrame, options);
+
+                });
+
+        %section
+          %h3 Legacy browsers
+
+          %p
+            Unpoly gracefully degrades with old versions of Internet Explorer:
+
+          %table
+            %tr
+              %th Edge
+              %td Full support
+            %tr
+              %th IE 10
+              %td Full support
+            %tr
+              %th IE 9
+              %td
+                Page updates that change browser history<br>fall back to a classic page load.<br />
+                Animations and transitions are skipped.
+            %tr
+              %th IE8
+              %td Unpoly prevents itself from booting,<br>leaving you with a classic server-side application
 
         %section
           %h2
@@ -1524,9 +1671,25 @@
         %section
           %h3 Forms within a modal
 
-          %ol
-            %li Target a selector within the modal to stay within the modal.
-            %li Target a selector behind the modal to close the modal.
+          %p
+            To <b>stay</b> within the modal, target a selector <b>within</b> the modal:
+
+          %pre.xs
+            %code.html(data-noescape)
+              :preserve
+                &lt;form up-target=".selector-within-modal"&gt;
+                  ...
+                &lt;/form&gt;
+
+          %p
+            To <b>close</b> the modal, target a selector <b>behind</b> the modal:
+
+          %pre.xs
+            %code.html(data-noescape)
+              :preserve
+                &lt;form up-target=".selector-behind-modal"&gt;
+                  ...
+                &lt;/form&gt;
 
         %section
           %h3 Validations without a page load
@@ -1708,6 +1871,21 @@
             and has no concurrency issues.
 
         %section
+          %h3 Bootstrap integration
+
+          %ul
+            %li
+              Include <a href="https://raw.githubusercontent.com/unpoly/unpoly/master/dist/unpoly-bootstrap3.js">unpoly-bootstrap3.js</a> and
+              <a href="https://raw.githubusercontent.com/unpoly/unpoly/master/dist/unpoly-bootstrap3.css">unpoly-bootstrap3.css</a>
+            %li
+              Configures Unpoly to use Bootstrap styles for dialogs,<br />
+              marking current navigation tabs, etc.
+            %li
+              Makes Unpoly aware of fixed Bootstrap layout components when scrolling the viewport.
+            %li
+              In general we try to not do things that would totally clash with Bootstrap.
+
+        %section
           %h3 Getting started
 
           %ul
@@ -1758,21 +1936,6 @@
           %p
             Although the Rails bindings are nice, Unpoly works with any kind of backend.<br>
             E.g. <a href="http://unpoly.com">unpoly.com</a> is a static middleman site using Unpoly.
-
-        %section
-          %h3 Bootstrap integration
-
-          %ul
-            %li
-              Include <a href="https://raw.githubusercontent.com/unpoly/unpoly/master/dist/unpoly-bootstrap3.js">unpoly-bootstrap3.js</a> and
-              <a href="https://raw.githubusercontent.com/unpoly/unpoly/master/dist/unpoly-bootstrap3.css">unpoly-bootstrap3.css</a>
-            %li
-              Configures Unpoly to use Bootstrap styles for dialogs,<br />
-              marking current navigation tabs, etc.
-            %li
-              Makes Unpoly aware of fixed Bootstrap layout components when scrolling the viewport.
-            %li
-              In general we try to not do things that would totally clash with Bootstrap.
 
         %section
           %h3 Unit testing
@@ -1834,29 +1997,33 @@
             (Or use <a href="https://github.com/makandra/spreewald#waiting-for-page-load"><code>patiently</code></a>).
 
 
+
         %section
-          %h3 Legacy browsers
+          %h3 Project state
+          %ul
+            %li In development since October 2014
+            %li
+              = "~ 500 specs"
+              .subtle
+                (how many specs has your Random.js?)
+            %li Has seen some real world pain, but we're still learning new things
+            %li <a href="http://unpoly.com/changelog">Changelog</a> lists breaking changes and compatible changes separately
+            %li <a href="http://unpoly.com/search/">API</a> marks features as either <i>stable</i> or <i>experimental</i>.
+            %li There will be breaking changes, but always an upgrade path
+
+
+        %section
+          %h3 Is Unpoly right for my project?
 
           %p
-            Unpoly gracefully degrades with old versions of Internet Explorer:
+            ☑ You are not writing the template editor
+            %br
+            ☑ You are ready to convert 100% of your Javascript to <code>up.compiler</code>
+            %br
+            ☑ You have some control over the UI requirements
+            %br
+            ☑ You're OK with dealing with the occasional breaking change
 
-          %table
-            %tr
-              %th Edge
-              %td Full support
-            %tr
-              %th IE 10
-              %td Full support
-            %tr
-              %th IE 9
-              %td
-                Page updates that change browser history<br>fall back to a classic page load.<br />
-                Animations and transitions are skipped.
-            %tr
-              %th IE8
-              %td Unpoly prevents itself from booting,<br>leaving you with a classic server-side application
-
-        %section
           %table
             %tr
               %th
@@ -1892,21 +2059,6 @@
               %td
                 %span.red Expensive
 
-
-        %section
-          %h3 Is Unpoly right for <br>my project?
-          %ul
-            %li In development since October 2014
-            %li
-              = "~ 500 specs"
-              .subtle
-                How many specs has your Random.js?
-            %li Has seen some real world pain, but we're still learning new things
-            %li <a href="http://unpoly.com/changelog">Changelog</a> lists breaking changes and compatible changes separately
-            %li
-              <a href="http://unpoly.com/search/">API</a> marks features as either <i>stable</i> or <i>experimental</i>.
-            %li There will be breaking changes, but always a simple upgrade path
-
         %section
           %img.plain(src='pictures/logos/unpoly.png' width='50%')
 
@@ -1917,6 +2069,25 @@
 
         %section
           %h2 Additional slides
+
+
+        %section
+          %h3 Appending instead of replacing
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="tasks"&gt;
+                  &lt;li&gt;Wash car&lt;/li&gt;
+                  &lt;li&gt;Purchase supplies&lt;/li&gt;
+                  &lt;li&gt;Fix tent&lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;a class="next-page" href="/tasks?page=2"
+                  up-target=".next-page, <mark>.tasks:after</mark>"&gt;Next page&lt;/a&gt;
+
+        %section
+          %h2 Updating persisted elements
 
         %section
           %pre
@@ -2061,7 +2232,6 @@
                   <mark>});                                              </mark>
                 });
                 &nbsp;
-
 
         %section
           %p

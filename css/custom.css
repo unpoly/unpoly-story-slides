@@ -11,6 +11,10 @@ body {
   /*font-weight: 600;*/
 }
 
+.reveal .slide-background {
+  transition: none;
+}
+
 .reveal .slides > section, .reveal .slides > section > section {
   line-height: 1.1;
 }
@@ -339,6 +343,77 @@ body {
   margin-left: 200px;
   background-color: rgba(40, 200, 150, 0.3);
 }
+
+
+
+
+.reveal .ghosts {
+  position: relative;
+  margin: 50px 0 40px 0;
+  height: 200px;
+}
+
+.reveal .ghosts--layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200px;
+  height: 200px;
+  padding: 10px;
+  box-sizing: border-box;
+  transition: margin-left 1s, background-color 1s;
+}
+
+.reveal .ghosts--css {
+  font-size: 16px;
+  line-height: 22px;
+  opacity: 0.6;
+}
+
+.reveal .ghosts--layer.is-old {
+  background-color: rgba(80, 120, 200, 0.2);
+  transform: rotateY(60deg) translateZ(0px);
+  border: 1px dashed rgba(255,255,255,0.3)
+}
+
+.reveal .ghosts--layer.is-new {
+  transform: rotateY(60deg) translateZ(50px);
+  background-color: rgba(200, 50, 40, 0.2);
+  border: 1px dashed rgba(255,255,255,0.3)
+}
+
+.reveal .ghosts--layer.is-old-ghost {
+  transform: rotateY(60deg) translateZ(100px);
+  background-color: rgba(80, 120, 200, 0.8);
+  border: 1px solid white;
+}
+
+.reveal .ghosts--layer.is-new-ghost {
+  transform: rotateY(60deg) translateZ(150px);
+  background-color: rgba(200, 50, 40, 0.8);
+  border: 1px solid white;
+}
+
+
+.reveal .ghosts:hover .ghosts--layer.is-old {
+  margin-left: 0;
+}
+
+.reveal .ghosts:hover .ghosts--layer.is-new {
+  margin-left: 80px;
+}
+
+.reveal .ghosts:hover .ghosts--layer.is-old-ghost {
+  margin-left: 160px;
+}
+
+.reveal .ghosts:hover .ghosts--layer.is-new-ghost {
+  margin-left: 240px;
+}
+
+
+
+
 
 .reveal .transition-issue-illustration {
   background-color: #000;

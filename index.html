@@ -35,7 +35,7 @@
         </section>
         <section>
           <p>
-            I want us to write better user interfaces.
+            I want us to deliver better user interfaces.
           </p>
           <p>
             This involves Javascript.
@@ -393,7 +393,10 @@
           </ul>
         </section>
         <section>
-          <img src='pictures/fragment_flow.svg' width='100%'>
+          <img src='pictures/fragment_flow_vanilla.svg' width='100%'>
+        </section>
+        <section>
+          <img src='pictures/fragment_flow_unpoly.svg' width='100%'>
         </section>
         <section>
           <h3>
@@ -559,13 +562,26 @@
           </ul>
         </section>
         <section>
-          <h3>Appending instead of replacing</h3>
-          <pre><code class='html' data-noescape>&lt;div class="tasks"&gt;&#x000A;  &lt;li&gt;Wash car&lt;/li&gt;&#x000A;  &lt;li&gt;Purchase supplies&lt;/li&gt;&#x000A;  &lt;li&gt;Fix tent&lt;/li&gt;&#x000A;&lt;/ul&gt;&#x000A;&#x000A;&lt;a class="next-page" href="/tasks?page=2"&#x000A;  up-target=".next-page, <mark>.tasks:after</mark>"&gt;Next page&lt;/a&gt;&#x000A;</code></pre>
-        </section>
-        <section>
           <h3>Enhancing elements</h3>
+          <p>
+            Every app needs a way to activate Javascript snippets<br />on certain HTML elements:
+          </p>
           <ul>
-            <li>We need to marry HTML and Javascript</li>
+            <li>An <code>a[title]</code> attribute should activate Poshytip on mouseover</li>
+            <li>A <code>textarea.wysiwyg</code> should activate Redactor on load</li>
+            <li>
+              An <code>input[type=search]</code> field should automatically request new results
+              <br>
+              when the user types something
+            </li>
+            <li>
+              A <code>.google-map</code> should render a map with pins via the Google Maps JS API
+            </li>
+            <li>
+              A <code>.button.toggle-all</code> class should toggle all checkboxes in a form
+              <br>
+              when clicked
+            </li>
           </ul>
         </section>
         <section>
@@ -911,21 +927,127 @@
         </section>
         <section>
           <h3>Animation</h3>
-          <ul>
-            <li>Why it's hard</li>
-            <li>Ghosting ...</li>
-            <li>View example on new makandra.de</li>
-          </ul>
+          <p>
+            When a new element enters the DOM, you can <b>animate</b> the appearance:
+          </p>
+          <pre><code class='html' data-noescape>&lt;a href="/settings" up-modal=".menu" up-animation="fade-in"&gt;&#x000A;  Open settings&#x000A;&lt;/a&gt;&#x000A;&#x000A;</code></pre>
+          <p>
+            When you swap an element, you can <b>transition</b> between the old and new states:
+          </p>
+          <pre><code class='html' data-noescape>&lt;a href="/users" up-target=".list" up-transition="cross-fade"&gt;&#x000A;  Show users&#x000A;&lt;/a&gt;&#x000A;</code></pre>
+          <p>
+            Animations are implemented via CSS transforms on a 3D-accelerated layer.
+          </p>
+          <hr>
+          <p>
+            <a href='https://staging.makandra.de' target='_blank'>
+              View examples on new makandra.de
+            </a>
+            <br>
+            <span class='subtle'>(page transitions, screenshot animation, responsive nav)</span>
+          </p>
         </section>
         <section data-background-color='#000'>
+          <h3>Why transitions are hard</h3>
+          <br>
           <div class='transition-issue-illustration' style='width: 960px; height: 460px'>
             <img src='pictures/transition_desired.svg' width='100%'>
           </div>
         </section>
         <section data-background-color='#000'>
+          <h3>Why transitions are hard</h3>
+          <br>
           <div class='transition-issue-illustration' style='width: 960px; height: 460px'>
             <img src='pictures/transition_naive.svg' width='100%'>
           </div>
+        </section>
+        <section>
+          <h3>Ghosting</h3>
+          <div class='ghosts'>
+            <div class='ghosts--layer is-old'>
+              Old
+              <div class='ghosts--css'>
+                position: static<br>
+                display: hidden
+              </div>
+            </div>
+            <div class='ghosts--layer is-new'>
+              New
+              <div class='ghosts--css'>
+                position: static<br>
+                opacity: 0
+              </div>
+            </div>
+            <div class='ghosts--layer is-old-ghost'>
+              Old (ghost)
+              <div class='ghosts--css'>
+                position: absolute
+              </div>
+            </div>
+            <div class='ghosts--layer is-new-ghost'>
+              New (ghost)
+              <div class='ghosts--css'>
+                position: absolute
+              </div>
+            </div>
+          </div>
+        </section>
+        <section data-background-color='#000'>
+          <h3>Without ghosting</h3>
+          <br>
+          <div class='transition-issue-illustration' style='width: 960px; height: 460px'>
+            <img src='pictures/transition_naive.svg' width='100%'>
+          </div>
+        </section>
+        <section data-background-color='#000'>
+          <h3>With ghosting</h3>
+          <br>
+          <div class='transition-issue-illustration' style='width: 960px; height: 460px'>
+            <img src='pictures/transition_desired.svg' width='100%'>
+          </div>
+        </section>
+        <section>
+          <div class='columns'>
+            <div class='column'>
+              <h4>Predefined animations</h4>
+              <pre><code class='nohighlight' data-noescape>fade-in&#x000A;fade-out&#x000A;move-to-top&#x000A;move-from-bottom&#x000A;move-to-bottom&#x000A;move-from-top&#x000A;move-to-left&#x000A;move-from-right&#x000A;move-to-right&#x000A;move-from-left&#x000A;</code></pre>
+            </div>
+            <div class='column'>
+              <h4>Predefined transitions</h4>
+              <pre><code class='nohighlight' data-noescape>cross-fade&#x000A;move-top&#x000A;move-bottom&#x000A;move-left&#x000A;move-right&#x000A;</code></pre>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h3>Custom animations</h3>
+          <pre><code class='javascript' data-noescape>up.animation('zoom-in', function($element, options) {&#x000A;&#x000A;  var firstFrame = {&#x000A;    opacity: 0,&#x000A;    transform: 'scale(0.5)'&#x000A;  };&#x000A;&#x000A;  var lastFrame = {&#x000A;    opacity: 1,&#x000A;    transform: 'scale(1)'&#x000A;  };&#x000A;&#x000A;  $element.css(firstFrame);&#x000A;  return up.animate($element, lastFrame, options);&#x000A;&#x000A;});&#x000A;</code></pre>
+        </section>
+        <section>
+          <h3>Legacy browsers</h3>
+          <p>
+            Unpoly gracefully degrades with old versions of Internet Explorer:
+          </p>
+          <table>
+            <tr>
+              <th>Edge</th>
+              <td>Full support</td>
+            </tr>
+            <tr>
+              <th>IE 10</th>
+              <td>Full support</td>
+            </tr>
+            <tr>
+              <th>IE 9</th>
+              <td>
+                Page updates that change browser history<br>fall back to a classic page load.<br />
+                Animations and transitions are skipped.
+              </td>
+            </tr>
+            <tr>
+              <th>IE8</th>
+              <td>Unpoly prevents itself from booting,<br>leaving you with a classic server-side application</td>
+            </tr>
+          </table>
         </section>
         <section>
           <h2>
@@ -1024,10 +1146,14 @@
         </section>
         <section>
           <h3>Forms within a modal</h3>
-          <ol>
-            <li>Target a selector within the modal to stay within the modal.</li>
-            <li>Target a selector behind the modal to close the modal.</li>
-          </ol>
+          <p>
+            To <b>stay</b> within the modal, target a selector <b>within</b> the modal:
+          </p>
+          <pre class='xs'><code class='html' data-noescape>&lt;form up-target=".selector-within-modal"&gt;&#x000A;  ...&#x000A;&lt;/form&gt;&#x000A;</code></pre>
+          <p>
+            To <b>close</b> the modal, target a selector <b>behind</b> the modal:
+          </p>
+          <pre class='xs'><code class='html' data-noescape>&lt;form up-target=".selector-behind-modal"&gt;&#x000A;  ...&#x000A;&lt;/form&gt;&#x000A;</code></pre>
         </section>
         <section>
           <h3>Validations without a page load</h3>
@@ -1074,6 +1200,25 @@
           </p>
         </section>
         <section>
+          <h3>Bootstrap integration</h3>
+          <ul>
+            <li>
+              Include <a href="https://raw.githubusercontent.com/unpoly/unpoly/master/dist/unpoly-bootstrap3.js">unpoly-bootstrap3.js</a> and
+              <a href="https://raw.githubusercontent.com/unpoly/unpoly/master/dist/unpoly-bootstrap3.css">unpoly-bootstrap3.css</a>
+            </li>
+            <li>
+              Configures Unpoly to use Bootstrap styles for dialogs,<br />
+              marking current navigation tabs, etc.
+            </li>
+            <li>
+              Makes Unpoly aware of fixed Bootstrap layout components when scrolling the viewport.
+            </li>
+            <li>
+              In general we try to not do things that would totally clash with Bootstrap.
+            </li>
+          </ul>
+        </section>
+        <section>
           <h3>Getting started</h3>
           <ul>
             <li>Read through <a href="http://unpoly.com">unpoly.com</a></li>
@@ -1118,25 +1263,6 @@
           </p>
         </section>
         <section>
-          <h3>Bootstrap integration</h3>
-          <ul>
-            <li>
-              Include <a href="https://raw.githubusercontent.com/unpoly/unpoly/master/dist/unpoly-bootstrap3.js">unpoly-bootstrap3.js</a> and
-              <a href="https://raw.githubusercontent.com/unpoly/unpoly/master/dist/unpoly-bootstrap3.css">unpoly-bootstrap3.css</a>
-            </li>
-            <li>
-              Configures Unpoly to use Bootstrap styles for dialogs,<br />
-              marking current navigation tabs, etc.
-            </li>
-            <li>
-              Makes Unpoly aware of fixed Bootstrap layout components when scrolling the viewport.
-            </li>
-            <li>
-              In general we try to not do things that would totally clash with Bootstrap.
-            </li>
-          </ul>
-        </section>
-        <section>
           <h3>Unit testing</h3>
           <p>
             Use <a href="http://jasmine.github.io/">Jasmine</a> to describe examples.<br />
@@ -1165,33 +1291,32 @@
           </p>
         </section>
         <section>
-          <h3>Legacy browsers</h3>
-          <p>
-            Unpoly gracefully degrades with old versions of Internet Explorer:
-          </p>
-          <table>
-            <tr>
-              <th>Edge</th>
-              <td>Full support</td>
-            </tr>
-            <tr>
-              <th>IE 10</th>
-              <td>Full support</td>
-            </tr>
-            <tr>
-              <th>IE 9</th>
-              <td>
-                Page updates that change browser history<br>fall back to a classic page load.<br />
-                Animations and transitions are skipped.
-              </td>
-            </tr>
-            <tr>
-              <th>IE8</th>
-              <td>Unpoly prevents itself from booting,<br>leaving you with a classic server-side application</td>
-            </tr>
-          </table>
+          <h3>Project state</h3>
+          <ul>
+            <li>In development since October 2014</li>
+            <li>
+              ~ 500 specs
+              <div class='subtle'>
+                (how many specs has your Random.js?)
+              </div>
+            </li>
+            <li>Has seen some real world pain, but we're still learning new things</li>
+            <li><a href="http://unpoly.com/changelog">Changelog</a> lists breaking changes and compatible changes separately</li>
+            <li><a href="http://unpoly.com/search/">API</a> marks features as either <i>stable</i> or <i>experimental</i>.</li>
+            <li>There will be breaking changes, but always an upgrade path</li>
+          </ul>
         </section>
         <section>
+          <h3>Is Unpoly right for my project?</h3>
+          <p>
+            ☑ You are not writing the template editor
+            <br>
+            ☑ You are ready to convert 100% of your Javascript to <code>up.compiler</code>
+            <br>
+            ☑ You have some control over the UI requirements
+            <br>
+            ☑ You're OK with dealing with the occasional breaking change
+          </p>
           <table>
             <tr>
               <th></th>
@@ -1246,24 +1371,6 @@
           </table>
         </section>
         <section>
-          <h3>Is Unpoly right for <br>my project?</h3>
-          <ul>
-            <li>In development since October 2014</li>
-            <li>
-              ~ 500 specs
-              <div class='subtle'>
-                How many specs has your Random.js?
-              </div>
-            </li>
-            <li>Has seen some real world pain, but we're still learning new things</li>
-            <li><a href="http://unpoly.com/changelog">Changelog</a> lists breaking changes and compatible changes separately</li>
-            <li>
-              <a href="http://unpoly.com/search/">API</a> marks features as either <i>stable</i> or <i>experimental</i>.
-            </li>
-            <li>There will be breaking changes, but always a simple upgrade path</li>
-          </ul>
-        </section>
-        <section>
           <img class='plain' src='pictures/logos/unpoly.png' width='50%'>
         </section>
         <section>
@@ -1273,6 +1380,13 @@
         </section>
         <section>
           <h2>Additional slides</h2>
+        </section>
+        <section>
+          <h3>Appending instead of replacing</h3>
+          <pre><code class='html' data-noescape>&lt;div class="tasks"&gt;&#x000A;  &lt;li&gt;Wash car&lt;/li&gt;&#x000A;  &lt;li&gt;Purchase supplies&lt;/li&gt;&#x000A;  &lt;li&gt;Fix tent&lt;/li&gt;&#x000A;&lt;/ul&gt;&#x000A;&#x000A;&lt;a class="next-page" href="/tasks?page=2"&#x000A;  up-target=".next-page, <mark>.tasks:after</mark>"&gt;Next page&lt;/a&gt;&#x000A;</code></pre>
+        </section>
+        <section>
+          <h2>Updating persisted elements</h2>
         </section>
         <section>
           <pre><code class='html' data-noescape>&lt;div class="map" up-data="[&#x000A;  { lat: 48.36, lng: 10.99 },&#x000A;  { lat: 48.75, lng: 11.45 }&#x000A;]"&gt;&lt;/div&gt;&#x000A;&#x000A;&lt;form method="post" action="/pins" <mark>up-target=".map"</mark>&gt;&#x000A;  Lat: &lt;input name="lat"&gt;&#x000A;  Lng: &lt;input name="lng"&gt;&#x000A;  &lt;button&gt;Add pin&lt;/button&gt;&#x000A;&lt;/form&gt;&#x000A;</code></pre>
@@ -1292,7 +1406,7 @@
         </section>
         <section>
           <pre><code class='html' data-noescape>&lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;" <mark>up-keep</mark>&gt;&lt;/div&gt;&#x000A;&#x000A;&#x000A;&#x000A;&#x000A;&lt;%= form_for Pin.new, html: { 'up-target' =&gt; '.map' } do |form| %&gt;&#x000A;  Lat: &lt;%= form.text_field :lat %&gt;&#x000A;  Lng: &lt;%= form.text_field :lng %&gt;&#x000A;  &lt;%= form.submit 'Add pin' %&gt;&#x000A;&lt;% end %&gt;&#x000A;</code></pre>
-          <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, initialPins) {&#x000A;  var map = new google.maps.Map($element);&#x000A;  function renderPins(pins) { ... }&#x000A;  renderPins(initialPins);&#x000A;  <mark>$element.on('up:fragment:keep', function(event) {</mark>&#x000A;  <mark>  renderPins(event.newData);                     </mark>&#x000A;  <mark>});                                              </mark>&#x000A;});&#x000A;&nbsp;&#x000A;&#x000A;</code></pre>
+          <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, initialPins) {&#x000A;  var map = new google.maps.Map($element);&#x000A;  function renderPins(pins) { ... }&#x000A;  renderPins(initialPins);&#x000A;  <mark>$element.on('up:fragment:keep', function(event) {</mark>&#x000A;  <mark>  renderPins(event.newData);                     </mark>&#x000A;  <mark>});                                              </mark>&#x000A;});&#x000A;&nbsp;&#x000A;</code></pre>
         </section>
         <section>
           <p>
