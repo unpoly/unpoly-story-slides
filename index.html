@@ -66,7 +66,7 @@
           <div class='fragment'>
             <p>
               <div class='line'>
-                Half-assed AngularJS
+                Hybrid AngularJS
               </div>
               <div class='subtle'>
                 2013-2016
@@ -123,7 +123,7 @@
         </section>
         <section>
           <h3>
-            Half-assed AngularJS
+            Hybrid AngularJS
             <br>
             <span class='subtle'>(2013-2016)</span>
           </h3>
@@ -132,7 +132,7 @@
             <li>Rendering is mostly on the server, then compiled again on the browser</li>
             <li>
               Uses Angular directives to run JS on matching HTML elements:
-              <pre class='xs'><code class='javascript' data-noescape>app.directive('screenshot', function() {&#x000A;  return {&#x000A;    link: function(scope, $element) {&#x000A;      // do something with an $element that has class "screenshot"&#x000A;    };&#x000A;  }&#x000A;});&#x000A;</code></pre>
+              <pre class='xs'><code class='javascript' data-noescape>app.directive('screenshot', function() {&#x000A;  return {&#x000A;    link: function(scope, $element) {&#x000A;      // do something with an $element that has class "screenshot"&#x000A;    }&#x000A;  }&#x000A;});&#x000A;</code></pre>
             </li>
             <li>
               Uses local scopes to toggle UI states:
@@ -142,7 +142,7 @@
         </section>
         <section>
           <h3>
-            Half-assed AngularJS
+            Hybrid AngularJS
           </h3>
           <ul>
             <li class='green'>Marrying HTML/Javascript through directives is great</li>
@@ -559,10 +559,19 @@
                 That's a real link with a URL, not <code>location.back()</code>
               </div>
             </li>
+            <li>
+              <div class='line'>
+                Everything is opt-in
+              </div>
+              <div class='subtle'>
+                Links without <code>up-target</code> will do a regular page load.<br>
+                This is different to Turbolinks, where you need to opt-out.
+              </div>
+            </li>
           </ul>
         </section>
         <section>
-          <h3>Enhancing elements</h3>
+          <h2>Enhancing elements</h2>
           <p>
             Every app needs a way to activate Javascript snippets<br />on certain HTML elements:
           </p>
@@ -686,7 +695,7 @@
           </h2>
           <ul>
             <li>
-              Our shitty Random.js is <b>full of memory leaks</b>.
+              Our Random.js is <b>full of memory leaks</b>.
             </li>
             <li>
               We just don't notice because the Javascript VM is reset between page loads!
@@ -884,7 +893,7 @@
         <section>
           <h3>How you can optimize further</h3>
           <ul>
-            <li>Caching (duh!)</li>
+            <li>Server-side fragment caching (duh!)</li>
             <li>Tailor responses for the <code>X-Up-Target</code> header</li>
             <li>Spinners for long-running requests</li>
             <li>We can still implement client-side interactions</li>
@@ -892,7 +901,7 @@
         </section>
         <section>
           <h3>Tailored responses</h3>
-          <pre><code class='html' data-noescape>&lt;body&gt;&#x000A;&#x000A;  &lt;% if up.target?('.side') %&gt;&#x000A;    &lt;%= render 'side' %&gt;&#x000A;  &lt;% end %&gt;&#x000A;&#x000A;  &lt;% if up.target?('main?') %&gt;&#x000A;    yield&#x000A;  &lt;% end %&gt;&#x000A;&#x000A;&lt;/body&gt;&#x000A;</code></pre>
+          <pre class='xs'><code class='html' data-noescape>&lt;html&gt;&#x000A;&#x000A;  &lt;% if up.target?('head') %&gt;&#x000A;    &lt;%= render 'head' %&gt;&#x000A;  &lt;% end %&gt;&#x000A;&#x000A;  &lt;body&gt;&#x000A;&#x000A;    &lt;% if up.target?('.side') %&gt;&#x000A;      &lt;%= render 'side' %&gt;&#x000A;    &lt;% end %&gt;&#x000A;&#x000A;    &lt;% if up.target?('.main') %&gt;&#x000A;      &lt;%= yield %&gt;&#x000A;    &lt;% end %&gt;&#x000A;&#x000A;  &lt;/body&gt;&#x000A;&lt;/html&gt;&#x000A;</code></pre>
         </section>
         <section>
           <h3>Spinners</h3>
@@ -1219,6 +1228,60 @@
           </ul>
         </section>
         <section>
+          <table>
+            <tr>
+              <th></th>
+              <th>Random.js</th>
+              <th>
+                Unpoly app
+              </th>
+              <th>Single-page app</th>
+            </tr>
+            <tr>
+              <th>
+                Code
+              </th>
+              <td>
+                <span class='green'>Simple</span>
+              </td>
+              <td>
+                <span class='green'>Simple</span>
+              </td>
+              <td>
+                <span class='red'>Complex</span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                UX
+              </th>
+              <td>
+                <span class='red'>Painful</span>
+              </td>
+              <td>
+                <span class='yellow-green'>Friendly</span>
+              </td>
+              <td>
+                <span class='green'>Refined</span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Cost
+              </th>
+              <td>
+                <span class='green'>Affordable</span>
+              </td>
+              <td>
+                <span class='green'>Affordable</span>
+              </td>
+              <td>
+                <span class='red'>Expensive</span>
+              </td>
+            </tr>
+          </table>
+        </section>
+        <section>
           <h3>Getting started</h3>
           <ul>
             <li>Read through <a href="http://unpoly.com">unpoly.com</a></li>
@@ -1297,7 +1360,7 @@
             <li>
               ~ 500 specs
               <div class='subtle'>
-                (how many specs has your Random.js?)
+                (how many specs has our Random.js?)
               </div>
             </li>
             <li>Has seen some real world pain, but we're still learning new things</li>
@@ -1311,64 +1374,15 @@
           <p>
             ☑ You are not writing the template editor
             <br>
-            ☑ You are ready to convert 100% of your Javascript to <code>up.compiler</code>
-            <br>
             ☑ You have some control over the UI requirements
+            <br>
+            ☑ You're ready to launch 100% of your Javascript from <code>up.compiler</code>
             <br>
             ☑ You're OK with dealing with the occasional breaking change
           </p>
-          <table>
-            <tr>
-              <th></th>
-              <th>Random.js</th>
-              <th>
-                Unpoly app
-              </th>
-              <th>Single-page app</th>
-            </tr>
-            <tr>
-              <th>
-                Code
-              </th>
-              <td>
-                <span class='green'>Simple</span>
-              </td>
-              <td>
-                <span class='green'>Simple</span>
-              </td>
-              <td>
-                <span class='red'>Complex</span>
-              </td>
-            </tr>
-            <tr>
-              <th>
-                UX
-              </th>
-              <td>
-                <span class='red'>Painful</span>
-              </td>
-              <td>
-                <span class='yellow-green'>Friendly</span>
-              </td>
-              <td>
-                <span class='green'>Refined</span>
-              </td>
-            </tr>
-            <tr>
-              <th>
-                Cost
-              </th>
-              <td>
-                <span class='green'>Affordable</span>
-              </td>
-              <td>
-                <span class='green'>Affordable</span>
-              </td>
-              <td>
-                <span class='red'>Expensive</span>
-              </td>
-            </tr>
-          </table>
+          <p>
+            Is your alternative home-growing an informal Random.js framework?
+          </p>
         </section>
         <section>
           <img class='plain' src='pictures/logos/unpoly.png' width='50%'>

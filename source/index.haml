@@ -64,7 +64,7 @@
           .fragment
             %p
               .line
-                Half-assed AngularJS
+                Hybrid AngularJS
               .subtle
                 2013-2016
 
@@ -148,7 +148,7 @@
 
         %section
           %h3
-            Half-assed AngularJS
+            Hybrid AngularJS
             %br
             %span.subtle (2013-2016)
 
@@ -166,7 +166,7 @@
                       return {
                         link: function(scope, $element) {
                           // do something with an $element that has class "screenshot"
-                        };
+                        }
                       }
                     });
 
@@ -182,7 +182,7 @@
 
         %section
           %h3
-            Half-assed AngularJS
+            Hybrid AngularJS
 
           %ul
             %li.green Marrying HTML/Javascript through directives is great
@@ -629,10 +629,15 @@
                 Use <a href="http://unpoly.com/up-back"><code>[up-back]</code></a> to link to a previous state.
               .subtle
                 That's a real link with a URL, not <code>location.back()</code>
-
+            %li
+              .line
+                Everything is opt-in
+              .subtle
+                Links without <code>up-target</code> will do a regular page load.<br>
+                This is different to Turbolinks, where you need to opt-out.
 
         %section
-          %h3 Enhancing elements
+          %h2 Enhancing elements
 
           %p
             Every app needs a way to activate Javascript snippets<br />on certain HTML elements:
@@ -933,7 +938,7 @@
 
           %ul
             %li
-              Our shitty Random.js is <b>full of memory leaks</b>.
+              Our Random.js is <b>full of memory leaks</b>.
             %li
               We just don't notice because the Javascript VM is reset between page loads!
             %li
@@ -1210,7 +1215,7 @@
           %h3 How you can optimize further
 
           %ul
-            %li Caching (duh!)
+            %li Server-side fragment caching (duh!)
             %li Tailor responses for the <code>X-Up-Target</code> header
             %li Spinners for long-running requests
             %li We can still implement client-side interactions
@@ -1218,20 +1223,27 @@
         %section
           %h3 Tailored responses
 
-          %pre
+          %pre.xs
             %code.html(data-noescape)
               :preserve
-                &lt;body&gt;
+                &lt;html&gt;
 
-                  &lt;% if up.target?('.side') %&gt;
-                    &lt;%= render 'side' %&gt;
+                  &lt;% if up.target?('head') %&gt;
+                    &lt;%= render 'head' %&gt;
                   &lt;% end %&gt;
 
-                  &lt;% if up.target?('main?') %&gt;
-                    yield
-                  &lt;% end %&gt;
+                  &lt;body&gt;
 
-                &lt;/body&gt;
+                    &lt;% if up.target?('.side') %&gt;
+                      &lt;%= render 'side' %&gt;
+                    &lt;% end %&gt;
+
+                    &lt;% if up.target?('.main') %&gt;
+                      &lt;%= yield %&gt;
+                    &lt;% end %&gt;
+
+                  &lt;/body&gt;
+                &lt;/html&gt;
 
         %section
           %h3 Spinners
@@ -1885,6 +1897,45 @@
             %li
               In general we try to not do things that would totally clash with Bootstrap.
 
+
+        %section
+
+          %table
+            %tr
+              %th
+              %th Random.js
+              %th
+                Unpoly app
+              %th Single-page app
+            %tr
+              %th
+                Code
+              %td
+                %span.green Simple
+              %td
+                %span.green Simple
+              %td
+                %span.red Complex
+            %tr
+              %th
+                UX
+              %td
+                %span.red Painful
+              %td
+                %span.yellow-green Friendly
+              %td
+                %span.green Refined
+            %tr
+              %th
+                Cost
+              %td
+                %span.green Affordable
+              %td
+                %span.green Affordable
+              %td
+                %span.red Expensive
+
+
         %section
           %h3 Getting started
 
@@ -2005,11 +2056,13 @@
             %li
               = "~ 500 specs"
               .subtle
-                (how many specs has your Random.js?)
+                (how many specs has our Random.js?)
             %li Has seen some real world pain, but we're still learning new things
             %li <a href="http://unpoly.com/changelog">Changelog</a> lists breaking changes and compatible changes separately
             %li <a href="http://unpoly.com/search/">API</a> marks features as either <i>stable</i> or <i>experimental</i>.
             %li There will be breaking changes, but always an upgrade path
+
+
 
 
         %section
@@ -2018,46 +2071,14 @@
           %p
             ☑ You are not writing the template editor
             %br
-            ☑ You are ready to convert 100% of your Javascript to <code>up.compiler</code>
-            %br
             ☑ You have some control over the UI requirements
+            %br
+            ☑ You're ready to launch 100% of your Javascript from <code>up.compiler</code>
             %br
             ☑ You're OK with dealing with the occasional breaking change
 
-          %table
-            %tr
-              %th
-              %th Random.js
-              %th
-                Unpoly app
-              %th Single-page app
-            %tr
-              %th
-                Code
-              %td
-                %span.green Simple
-              %td
-                %span.green Simple
-              %td
-                %span.red Complex
-            %tr
-              %th
-                UX
-              %td
-                %span.red Painful
-              %td
-                %span.yellow-green Friendly
-              %td
-                %span.green Refined
-            %tr
-              %th
-                Cost
-              %td
-                %span.green Affordable
-              %td
-                %span.green Affordable
-              %td
-                %span.red Expensive
+          %p
+            Is your alternative home-growing an informal Random.js framework?
 
         %section
           %img.plain(src='pictures/logos/unpoly.png' width='50%')
