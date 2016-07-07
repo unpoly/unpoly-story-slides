@@ -413,16 +413,10 @@
               <div class='project-dots--dot'>1</div>
               <div class='project-dots--dot'>2</div>
               <div class='project-dots--dot'>3</div>
-            </div>
-            <div class='project-dots--row'>
               <div class='project-dots--dot'>4</div>
               <div class='project-dots--dot'>5</div>
               <div class='project-dots--dot'>6</div>
-            </div>
-            <div class='project-dots--row'>
               <div class='project-dots--dot'>7</div>
-              <div class='project-dots--dot'>8</div>
-              <div class='project-dots--dot'>9</div>
             </div>
           </div>
           <p>
@@ -436,18 +430,12 @@
           <div class='project-dots'>
             <div class='project-dots--row'>
               <div class='project-dots--dot'>1</div>
-              <div class='project-dots--dot'>2</div>
+              <div class='project-dots--dot is-positive'>2</div>
               <div class='project-dots--dot'>3</div>
-            </div>
-            <div class='project-dots--row'>
-              <div class='project-dots--dot'>4</div>
-              <div class='project-dots--dot is-positive'>5</div>
+              <div class='project-dots--dot is-positive'>4</div>
+              <div class='project-dots--dot'>5</div>
               <div class='project-dots--dot'>6</div>
-            </div>
-            <div class='project-dots--row'>
-              <div class='project-dots--dot is-positive'>7</div>
-              <div class='project-dots--dot'>8</div>
-              <div class='project-dots--dot'>9</div>
+              <div class='project-dots--dot'>7</div>
             </div>
           </div>
           <p>
@@ -520,37 +508,30 @@
           </ul>
         </section>
         <section>
-          <div class='columns'>
-            <div class='column'>
-              <h3>Thought experiment</h3>
-              <p>
-                Imagine HTML6 was all about server-side apps
-              </p>
-              <p>
-                What features would be in that spec?
-                <br>
-                <span>
-                  <span class='subtle'>Partial page updates?</span>
-                </span>
-                <br>
-                <span>
-                  <span class='subtle'>Animated transitions?</span>
-                </span>
-                <br>
-                <span>
-                  <span class='subtle'>First-class modals?</span>
-                </span>
-              </p>
-              <p class='fragment'>
-                We can polyfill all of that!
-                <br>
-                <span class='subtle'>Because it's 2016.</span>
-              </p>
-            </div>
-            <div class='column'>
-              <img height='420' src='pictures/html6.png'>
-            </div>
-          </div>
+          <h3>Thought experiment</h3>
+          <p>
+            Imagine HTML6 was all about server-side apps
+          </p>
+          <p>
+            What features would be in that spec?
+            <br>
+            <span>
+              <span class='subtle'>Partial page updates?</span>
+            </span>
+            <br>
+            <span>
+              <span class='subtle'>Animated transitions?</span>
+            </span>
+            <br>
+            <span>
+              <span class='subtle'>Layered interactions?</span>
+            </span>
+          </p>
+          <p class='fragment'>
+            We can polyfill all of that!
+            <br>
+            <span class='subtle'>Because it's 2016.</span>
+          </p>
         </section>
         <section>
           <h2>
@@ -583,7 +564,7 @@
             <li>Scroll positions are kept during navigation</li>
             <li>Opened card is kept when flipping the page</li>
             <li>Unsaved form content is kept when changing the pattern</li>
-            <li>Live form validation</li>
+            <li><code>up-*</code> attributes on links and forms</li>
           </ul>
         </section>
         <section>
@@ -627,7 +608,7 @@
         <section>
           <section>
             <h3>Layers</h3>
-            <pre class='s'><code class='html' data-noescape>&lt;a href="/list" up-target=".main"&gt;Replace fragment in document&lt;/a&gt;&#x000A;&#x000A;&lt;a href="/new" up-modal=".main"&gt;Open fragment in dialog&lt;/a&gt;&#x000A;&#x000A;&lt;a href="/menu" up-popup=".main"&gt;Open fragment in dropdown&lt;/a&gt;&#x000A;</code></pre>
+            <pre class='s'><code class='html' data-noescape>&lt;a href="/list" up-target=".main"&gt;Replace fragment&lt;/a&gt;&#x000A;&#x000A;&lt;a href="/new" up-modal=".main"&gt;Open fragment in dialog&lt;/a&gt;&#x000A;&#x000A;&lt;a href="/menu" up-popup=".main"&gt;Open fragment in dropdown&lt;/a&gt;&#x000A;</code></pre>
             <p>Links in an layer prefer to update fragments within the layer</p>
             <p>Changing a fragment behind the layer will close the layer</p>
           </section>
@@ -715,46 +696,48 @@
           </section>
         </section>
         <section>
-          <h2>Response times</h2>
-          <p>
-            <img class='plain' src='pictures/ios_8_icons.jpg' width='50%'>
-          </p>
-          <p>
-            Users in 2016 expect more than a slide show.
-          </p>
-        </section>
-        <section>
-          <h3>Response times</h3>
-          <ul class='s'>
-            <li>
-              <b>0.1 second</b> is about the limit for having the user feel that the system is reacting
-              instantaneously,
-              <span class="subtle">meaning that no special feedback is necessary except to display the
-              result.</span>
-            </li>
-            <li>
-              <b>1.0 second</b> is about the limit for the user's flow of thought to stay uninterrupted, even
-              though the user will notice the delay. <span class="subtle">Normally, no special feedback is necessary during
-              delays of more than 0.1 but less than 1.0 second, but the user does lose the feeling of
-              operating directly on the data.</span>
-            </li>
-            <li>
-              <b>10 seconds</b> is about the limit for keeping the user's attention focused on the dialogue.
-              <span class="subtle">
-              For longer delays, users will want to perform other tasks while waiting for the computer
-              to finish, so they should be given feedback indicating when the computer expects to be
-              done. Feedback during the delay is especially important if the response time is likely to
-              be highly variable, since users will then not know what to expect.</span>
-            </li>
-          </ul>
-          <p>
-            <cite>
-              Miller 1968; Card et al. 1991; Jacob Nielsen 1993
-            </cite>
-          </p>
-          <p>
-            Also see Google's <a href="https://developers.google.com/web/tools/chrome-devtools/profile/evaluate-performance/rail">RAIL Performance Model</a>.
-          </p>
+          <section>
+            <h2>Response times</h2>
+            <p>
+              <img class='plain' src='pictures/ios_8_icons.jpg' width='50%'>
+            </p>
+            <p>
+              Users in 2016 expect more than a slide show.
+            </p>
+          </section>
+          <section>
+            <h3>Response times</h3>
+            <ul class='s'>
+              <li>
+                <b>0.1 second</b> is about the limit for having the user feel that the system is reacting
+                instantaneously,
+                <span class="subtle">meaning that no special feedback is necessary except to display the
+                result.</span>
+              </li>
+              <li>
+                <b>1.0 second</b> is about the limit for the user's flow of thought to stay uninterrupted, even
+                though the user will notice the delay. <span class="subtle">Normally, no special feedback is necessary during
+                delays of more than 0.1 but less than 1.0 second, but the user does lose the feeling of
+                operating directly on the data.</span>
+              </li>
+              <li>
+                <b>10 seconds</b> is about the limit for keeping the user's attention focused on the dialogue.
+                <span class="subtle">
+                For longer delays, users will want to perform other tasks while waiting for the computer
+                to finish, so they should be given feedback indicating when the computer expects to be
+                done. Feedback during the delay is especially important if the response time is likely to
+                be highly variable, since users will then not know what to expect.</span>
+              </li>
+            </ul>
+            <p>
+              <cite>
+                Miller 1968; Card et al. 1991; Jacob Nielsen 1993
+              </cite>
+            </p>
+            <p>
+              Also see Google's <a href="https://developers.google.com/web/tools/chrome-devtools/profile/evaluate-performance/rail">RAIL Performance Model</a>.
+            </p>
+          </section>
         </section>
         <section>
           <h3>
@@ -810,24 +793,24 @@
           <ul>
             <li>Provide instantaneous feedback to all user input</li>
             <li>Make interactions appear faster than they really are</li>
-            <li>Use best practices for server performance</li>
             <li>Free up enough time budget that we can afford to render<br />full pages on the server</li>
+            <li>Use best practices for server performance</li>
           </ul>
         </section>
         <section>
           <h3>What you get out of the box</h3>
           <ul>
             <li>
+              We no longer parse and execute CSS, Javascript and build the DOM on every request
+              <div class='subtle'>
+                makandra deck on Cards (140 ms), AMC frontend (360 ms)
+              </div>
+            </li>
+            <li>
               Clicked links/forms get an <a href="http://unpoly.com/up-active"><code>up-active</code></a> class while loading
               <div class='subtle'>
                 Get into a habit of styling <code>.up-active</code> for instantaneous feedback<br>
                 Use throttling and Chrome's network tab
-              </div>
-            </li>
-            <li>
-              We no longer parse and execute CSS, Javascript and build the DOM on every request
-              <div class='subtle'>
-                makandra deck on Cards (140 ms), AMC frontend (360 ms)
               </div>
             </li>
             <li>
@@ -899,150 +882,7 @@
               With <a href="http://rivetsjs.com/">Rivets.js</a> (6 KB):
             </p>
             <pre><code class='html' data-noescape>&lt;div class='template' up-data='{ "name": "Arne" }'&gt;&#x000A;  &lt;input rv-value='name'>&#x000A;  Hello { name }!&#x000A;&lt;/div&gt;&#x000A;</code></pre>
-            <pre><code class='javascript' data-noescape>up.compiler('.template', function($element, data) {&#x000A;  var view = rivets.bind($element, data);&#x000A;  return view.unbind;&#x000A;});&#x000A;&#x000A;&#x000A;</code></pre>
-          </section>
-        </section>
-        <section>
-          <h2>Activating JS snippets</h2>
-          <p>
-            Every app needs a way to pair Javascript snippets<br />with certain HTML elements:
-          </p>
-          <ul>
-            <li>An <code>a[title]</code> attribute should activate qTip on mouseover</li>
-            <li>A <code>textarea.wysiwyg</code> should activate Redactor on load</li>
-            <li>
-              An <code>input[type=search]</code> field should automatically request new results
-              <br>
-              when the user types something
-            </li>
-            <li>
-              A <code>.map</code> should render a map with pins via the Google Maps JS API
-            </li>
-            <li>
-              A <code>.button.toggle-all</code> should toggle all checkboxes in a form
-              <br>
-              when clicked
-            </li>
-          </ul>
-        </section>
-        <section>
-          <h3>
-            <div class='line'>
-              Activating JS snippets
-            </div>
-            <div class='subtle'>
-              Random.js
-            </div>
-          </h3>
-          <pre><code class='html' data-noescape>&lt;div class="map"&gt;&lt;/span&gt;&#x000A;&#x000A;&#x000A;&#x000A;&#x000A;</code></pre>
-          <pre><code class='javascript' data-noescape>$(function() {&#x000A;  $('.map').each(function() {&#x000A;    new google.maps.Map(this);&#x000A;  });&#x000A;});&#x000A;</code></pre>
-          <p>
-            This is what you see in jQuery tutorials.<br>
-            HTML fragments loaded via AJAX don't get Javascriptified.
-          </p>
-        </section>
-        <section>
-          <h3>
-            <div class='line'>
-              Activating JS snippets
-            </div>
-            <div class='subtle'>
-              Unpoly
-            </div>
-          </h3>
-          <pre><code class='html' data-noescape>&lt;div class="map"&gt;&lt;/span&gt;&#x000A;&#x000A;&#x000A;&#x000A;&#x000A;</code></pre>
-          <pre><code class='javascript' data-noescape>up.compiler('.map', function($map) {&#x000A;  new google.maps.Map($map, { center: pin });&#x000A;});&#x000A;&#x000A;&#x000A;</code></pre>
-          <p>
-            Unpoly automatically compiles all fragments that it inserts or updates.
-            <br>
-            &nbsp;
-          </p>
-        </section>
-        <section>
-          <h3>
-            <div class='line'>Getting data into your JS</div>
-            <div class='subtle'>Random.js</div>
-          </h3>
-          <pre><code class='html' data-noescape>&lt;div class="map"&gt;&lt;/div&gt;&#x000A;&#x000A;&lt;script type="text/javascript"&gt;&#x000A;  initMap($('.map'), { lat: 48.75, lng: 11.45 });&#x000A;&lt;/script&gt;&#x000A;</code></pre>
-          <pre><code class='javascript' data-noescape>function initMap($element, pin) {&#x000A;  new google.maps.Map($element, { center: pin });&#x000A;});&#x000A;&#x000A;&#x000A;</code></pre>
-          <p>
-            &nbsp;
-            <br>
-            &nbsp;
-          </p>
-        </section>
-        <section>
-          <h3>
-            <div class='line'>Getting data into your JS</div>
-            <div class='subtle'>Unpoly</div>
-          </h3>
-          <pre><code class='html' data-noescape>&lt;div class="map" up-data="{ lat: 48.36, lng: 10.99 }"&lt;/div&gt;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
-          <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, <mark>pin</mark>) {&#x000A;  new google.maps.Map($element, center: pin);&#x000A;});&#x000A;&#x000A;&#x000A;</code></pre>
-          <p>
-            &nbsp;
-            <br>
-            &nbsp;
-          </p>
-        </section>
-        <section>
-          <section>
-            <h2>
-              Composability
-            </h2>
-            <ul>
-              <li>
-                Unpoly's default UJS behavior is a thin wrapper around a Javascript API
-              </li>
-              <li>
-                If the default UJS behavior doesn't fit your use case,<br>you can use
-                that Javascript API from your own code, or invent new UJS syntax
-              </li>
-            </ul>
-          </section>
-        </section>
-        <section>
-          <section>
-            <h3>
-              <div class='line'>Dual interfaces</div>
-            </h3>
-            <h4 class='subtle'><u>U</u>nobtrusive</h4>
-            <pre><code class='html' data-noescape>&lt;div class="story"&gt;&#x000A;&#x000A;  &lt;p&gt;Story summary&lt;/p&gt;&#x000A;&#x000A;  &lt;a href="full.html" up-target=".story"&gt;&#x000A;    Read full story&#x000A;  &lt;/a&gt;&#x000A;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
-            <h4 class='subtle'><u>P</u>rogrammatic</h4>
-            <pre><code class='javascript'>up.replace('.story', 'full.html');&#x000A;&#x000A;</code></pre>
-          </section>
-          <section>
-            <h3>
-              <div class='line'>Invent your own UJS syntax</div>
-            </h3>
-            <h4 class='subtle'>HTML</h4>
-            <pre class='l'><code class='html' data-noescape>&lt;a menu-link href="/details"&gt;Show more&lt;/span&gt;&#x000A;</code></pre>
-            <h4 class='subtle'>Javascript</h4>
-            <pre class='l'><code class='javascript'>up.compiler('[menu-link]', function($link) {&#x000A;  $link.on('click', function(event) {&#x000A;    event.preventDefault();&#x000A;    up.popup.attach($link, {&#x000A;      target: '.menu',&#x000A;      position: 'bottom-left',&#x000A;      animation: 'roll-down'&#x000A;    });&#x000A;  });&#x000A;});&#x000A;</code></pre>
-          </section>
-          <section>
-            <h3>
-              <div class='line'>Repurpose existing UJS syntax</div>
-            </h3>
-            <h4 class='subtle'>HTML</h4>
-            <pre class='l'><code class='html' data-noescape>&lt;a menu-link href="/details"&gt;Show more&lt;/span&gt;&#x000A;</code></pre>
-            <h4 class='subtle'>Javascript</h4>
-            <pre class='l'><code class='javascript'>up.macro('[menu-link]', function($link) {&#x000A;  $link.attr(&#x000A;    'up-target': '.menu',&#x000A;    'up-position': 'bottom-left',&#x000A;    'up-animation': 'roll-down'&#x000A;  });&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
-          </section>
-          <section>
-            <h3>
-              <div class='line'>Events</div>
-            </h3>
-            <pre><code class='javascript'>$(document).on('up:modal:open', function(event) {&#x000A;  if (dontLikeModals()) {&#x000A;    event.preventDefault();&#x000A;  }&#x000A;});&#x000A;</code></pre>
-          </section>
-          <section>
-            <h3>
-              <div class='line'>All Async actions return promises</div>
-            </h3>
-            <pre><code class='javascript'>up.replace('.story', 'full.html').then(function() {&#x000A;  // Fragments were loaded and swapped&#x000A;});&#x000A;</code></pre>
-            <pre><code class='javascript'>up.morph('.old', '.new', 'cross-fade').then(function() {&#x000A;  // Transition has completed&#x000A;});&#x000A;</code></pre>
-            <p>
-              <a href="https://makandracards.com/curriculum/35275-javascript-writing-asynchronous-code" target="_blank">Curriculum lesson on promises</a>
-            </p>
+            <pre><code class='javascript' data-noescape>up.compiler('.template', function($element, data) {&#x000A;  var view = rivets.bind($element, data);&#x000A;  return view.unbind;&#x000A;});&#x000A;&#x000A;&#x000A;&#x000A;</code></pre>
           </section>
         </section>
         <section>
@@ -1060,7 +900,9 @@
               <li>Submitting a form within a modal and staying within the modal</li>
             </ul>
             <p>
-              That's all solved by Unpoly.
+              These are all solved by Unpoly.
+              <br>
+              <span class='subtle'>(But we don't have time for that today)</span>
             </p>
           </section>
           <section>
@@ -1113,8 +955,183 @@
           </section>
           <section>
             <h3>Updating dependent fields</h3>
-            <pre class='xs'><code class='html' data-noescape>&lt;form action="/contracts"&gt;&#x000A;  &lt;select name="department" <mark>up-validate="[name=employee]"</mark>&gt;...&lt;/select&gt;&#x000A;  &lt;select name="employee"&gt;...&lt;/select&gt;&#x000A;&lt;/form&gt;&#x000A;&#x000A;&#x000A;</code></pre>
+            <pre class='xs'><code class='html' data-noescape>&lt;form action="/contracts"&gt;&#x000A;  &lt;select name="department" <mark>up-validate="[name=employee]"</mark>&gt;...&lt;/select&gt;&#x000A;  &lt;select name="employee"&gt;...&lt;/select&gt;&#x000A;&lt;/form&gt;&#x000A;&#x000A;</code></pre>
           </section>
+        </section>
+        <section>
+          <section>
+            <h2>But I have this really custom <span class="subtle">Javascript / jQuery library / behavior</span> that I need to integrate</h2>
+            <ul>
+              <li>Pairing Javascript snippets with HTML elements</li>
+              <li>Integrating libraries (WYSIWYG editor, jQuery plugins, ...)</li>
+              <li>Passing structured data to Javascript snippets</li>
+              <li>Reuse existing Unpoly functionality from your own code</li>
+              <li>Invent your own UJS syntax</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Activating JS snippets</h2>
+            <p>
+              Every app needs a way to pair Javascript snippets<br />with certain HTML elements:
+            </p>
+            <ul>
+              <li>An <code>a[title]</code> attribute should activate qTip on mouseover</li>
+              <li>A <code>textarea.wysiwyg</code> should activate Redactor on load</li>
+              <li>
+                An <code>input[type=search]</code> field should automatically request new results
+                <br>
+                when the user types something
+              </li>
+              <li>
+                A <code>.map</code> should render a map with pins via the Google Maps JS API
+              </li>
+              <li>
+                A <code>.button.toggle-all</code> should toggle all checkboxes in a form
+                <br>
+                when clicked
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h3>
+              <div class='line'>
+                Activating JS snippets
+              </div>
+              <div class='subtle'>
+                Random.js
+              </div>
+            </h3>
+            <pre><code class='html' data-noescape>&lt;div class="map"&gt;&lt;/span&gt;&#x000A;&#x000A;&#x000A;&#x000A;&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>$(function() {&#x000A;  $('.map').each(function() {&#x000A;    new google.maps.Map(this);&#x000A;  });&#x000A;});&#x000A;</code></pre>
+            <p>
+              This is what you see in jQuery tutorials.<br>
+              HTML fragments loaded via AJAX don't get Javascriptified.
+            </p>
+          </section>
+          <section>
+            <h3>
+              <div class='line'>
+                Activating JS snippets
+              </div>
+              <div class='subtle'>
+                Unpoly
+              </div>
+            </h3>
+            <pre><code class='html' data-noescape>&lt;div class="map"&gt;&lt;/span&gt;&#x000A;&#x000A;&#x000A;&#x000A;&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>up.compiler('.map', function($map) {&#x000A;  new google.maps.Map($map, { center: pin });&#x000A;});&#x000A;&#x000A;&#x000A;</code></pre>
+            <p>
+              Unpoly automatically compiles all fragments that it inserts or updates.
+              <br>
+              &nbsp;
+            </p>
+          </section>
+          <section>
+            <h3>
+              <div class='line'>Getting data into your JS</div>
+              <div class='subtle'>Random.js</div>
+            </h3>
+            <pre><code class='html' data-noescape>&lt;div class="map"&gt;&lt;/div&gt;&#x000A;&#x000A;&lt;script type="text/javascript"&gt;&#x000A;  initMap($('.map'), { lat: 48.75, lng: 11.45 });&#x000A;&lt;/script&gt;&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>function initMap($element, pin) {&#x000A;  new google.maps.Map($element, { center: pin });&#x000A;});&#x000A;&#x000A;&#x000A;</code></pre>
+            <p>
+              &nbsp;
+              <br>
+              &nbsp;
+            </p>
+          </section>
+          <section>
+            <h3>
+              <div class='line'>Getting data into your JS</div>
+              <div class='subtle'>Unpoly</div>
+            </h3>
+            <pre><code class='html' data-noescape>&lt;div class="map" up-data="{ lat: 48.36, lng: 10.99 }"&lt;/div&gt;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, <mark>pin</mark>) {&#x000A;  new google.maps.Map($element, center: pin);&#x000A;});&#x000A;&#x000A;&#x000A;</code></pre>
+            <p>
+              &nbsp;
+              <br>
+              &nbsp;
+            </p>
+          </section>
+          <section>
+            <section>
+              <h2>
+                Composability
+              </h2>
+              <ul>
+                <li>
+                  Unpoly's default UJS behavior is a thin wrapper around a Javascript API
+                </li>
+                <li>
+                  If the default UJS behavior doesn't fit your use case,<br>you can use
+                  that Javascript API from your own code, or invent new UJS syntax
+                </li>
+              </ul>
+            </section>
+          </section>
+          <section>
+            <section>
+              <h3>
+                <div class='line'>Dual interfaces</div>
+              </h3>
+              <h4 class='subtle'><u>U</u>nobtrusive</h4>
+              <pre><code class='html' data-noescape>&lt;div class="story"&gt;&#x000A;&#x000A;  &lt;p&gt;Story summary&lt;/p&gt;&#x000A;&#x000A;  &lt;a href="full.html" up-target=".story"&gt;&#x000A;    Read full story&#x000A;  &lt;/a&gt;&#x000A;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
+              <h4 class='subtle'><u>P</u>rogrammatic</h4>
+              <pre><code class='javascript'>up.replace('.story', 'full.html');&#x000A;&#x000A;</code></pre>
+            </section>
+            <section>
+              <h3>
+                <div class='line'>Invent your own UJS syntax</div>
+              </h3>
+              <h4 class='subtle'>HTML</h4>
+              <pre class='l'><code class='html' data-noescape>&lt;a menu-link href="/details"&gt;Show more&lt;/span&gt;&#x000A;</code></pre>
+              <h4 class='subtle'>Javascript</h4>
+              <pre class='l'><code class='javascript'>up.compiler('[menu-link]', function($link) {&#x000A;  $link.on('click', function(event) {&#x000A;    event.preventDefault();&#x000A;    up.popup.attach($link, {&#x000A;      target: '.menu',&#x000A;      position: 'bottom-left',&#x000A;      animation: 'roll-down'&#x000A;    });&#x000A;  });&#x000A;});&#x000A;</code></pre>
+            </section>
+            <section>
+              <h3>
+                <div class='line'>Repurpose existing UJS syntax</div>
+              </h3>
+              <h4 class='subtle'>HTML</h4>
+              <pre class='l'><code class='html' data-noescape>&lt;a menu-link href="/details"&gt;Show more&lt;/span&gt;&#x000A;</code></pre>
+              <h4 class='subtle'>Javascript</h4>
+              <pre class='l'><code class='javascript'>up.macro('[menu-link]', function($link) {&#x000A;  $link.attr(&#x000A;    'up-target': '.menu',&#x000A;    'up-position': 'bottom-left',&#x000A;    'up-animation': 'roll-down'&#x000A;  });&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
+            </section>
+            <section>
+              <h3>
+                <div class='line'>Events</div>
+              </h3>
+              <pre><code class='javascript'>$(document).on('up:modal:open', function(event) {&#x000A;  if (dontLikeModals()) {&#x000A;    event.preventDefault();&#x000A;  }&#x000A;});&#x000A;</code></pre>
+            </section>
+            <section>
+              <h3>
+                <div class='line'>All Async actions return promises</div>
+              </h3>
+              <pre><code class='javascript'>up.replace('.story', 'full.html').then(function() {&#x000A;  // Fragments were loaded and swapped&#x000A;});&#x000A;</code></pre>
+              <pre><code class='javascript'>up.morph('.old', '.new', 'cross-fade').then(function() {&#x000A;  // Transition has completed&#x000A;});&#x000A;</code></pre>
+              <p>
+                <a href="https://makandracards.com/curriculum/35275-javascript-writing-asynchronous-code" target="_blank">Curriculum lesson on promises</a>
+              </p>
+            </section>
+          </section>
+        </section>
+        <section>
+          <h3>Getting started</h3>
+          <ul>
+            <li>Read through <a href="http://unpoly.com">unpoly.com</a></li>
+            <li><code>gem 'unpoly-rails'</code> (<a href="http://unpoly.com/download">other methods</a>)</li>
+            <li>Replace half your Javascript with <code>up-target</code> links</li>
+            <li>Convert remaining Javascripts into <code>up.compiler</code></li>
+          </ul>
+        </section>
+        <section>
+          <img class='plain' src='pictures/logos/unpoly.png' width='50%'>
+        </section>
+        <section>
+          <p>
+            <a href="https://www.flickr.com/photos/127580645@N07/15215520777">iOS 8 icons</a> by Microsiervos
+          </p>
+        </section>
+        <section>
+          <h2>Additional slides</h2>
         </section>
         <section>
           <section>
@@ -1142,28 +1159,8 @@
           </section>
           <section>
             <pre><code class='html' data-noescape>&lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;" <mark>up-keep</mark>&gt;&lt;/div&gt;&#x000A;&#x000A;&#x000A;&#x000A;&#x000A;&lt;%= form_for Pin.new, html: { 'up-target' =&gt; '.map' } do |form| %&gt;&#x000A;  Lat: &lt;%= form.text_field :lat %&gt;&#x000A;  Lng: &lt;%= form.text_field :lng %&gt;&#x000A;  &lt;%= form.submit 'Add pin' %&gt;&#x000A;&lt;% end %&gt;&#x000A;</code></pre>
-            <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, initialPins) {&#x000A;  var map = new google.maps.Map($element);&#x000A;  function renderPins(pins) { ... }&#x000A;  renderPins(initialPins);&#x000A;  <mark>$element.on('up:fragment:keep', function(event) {</mark>&#x000A;  <mark>  renderPins(event.newData);                     </mark>&#x000A;  <mark>});                                              </mark>&#x000A;});&#x000A;&nbsp;&#x000A;&#x000A;&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, initialPins) {&#x000A;  var map = new google.maps.Map($element);&#x000A;  function renderPins(pins) { ... }&#x000A;  renderPins(initialPins);&#x000A;  <mark>$element.on('up:fragment:keep', function(event) {</mark>&#x000A;  <mark>  renderPins(event.newData);                     </mark>&#x000A;  <mark>});                                              </mark>&#x000A;});&#x000A;&nbsp;&#x000A;&#x000A;</code></pre>
           </section>
-        </section>
-        <section>
-          <h3>Getting started</h3>
-          <ul>
-            <li>Read through <a href="http://unpoly.com">unpoly.com</a></li>
-            <li><code>gem 'unpoly-rails'</code></li>
-            <li>Replace half your Javascript with <code>up-target</code> links</li>
-            <li>Convert remaining Javascripts into <code>up.compiler</code></li>
-          </ul>
-        </section>
-        <section>
-          <img class='plain' src='pictures/logos/unpoly.png' width='50%'>
-        </section>
-        <section>
-          <p>
-            <a href="https://www.flickr.com/photos/127580645@N07/15215520777">iOS 8 icons</a> by Microsiervos
-          </p>
-        </section>
-        <section>
-          <h2>Additional slides</h2>
         </section>
         <section>
           <h3>Navigation</h3>
@@ -1551,6 +1548,23 @@
             <pre class='xxs'><code class='javascript' data-noescape>up.compiler('.server-time', function($element) {&#x000A;  $element.text('Loading ...');&#x000A;  up.ajax('/time').then(function(time) { $element.text(time) };&#x000A;});&#x000A;</code></pre>
             <pre class='xxs'><code class='javascript' data-noescape>describe('.current-year', function() {&#x000A;  it('fetches and displays the current time from the server', function() {&#x000A;    jasmine.Ajax.install();&#x000A;    var $element = affix('.server-time');&#x000A;    up.hello($element);&#x000A;    expect($element).toHaveText('Loading...');&#x000A;    jasmine.Ajax.requests.mostRecent().respondWith({&#x000A;      status: 200,&#x000A;      contentType: 'text/plain',&#x000A;      responseText: '13:37:00'&#x000A;    });&#x000A;    expect($element).toHaveText('13:37:00');&#x000A;  });&#x000A;});&#x000A;&#x000A;</code></pre>
           </section>
+        </section>
+        <section>
+          <h3>Who else went back?</h3>
+          <ul>
+            <li>
+              <a href='https://engineering.shopify.com/17489056-rebuilding-the-shopify-admin-improving-developer-productivity-by-deleting-28-000-lines-of-javascript'>Shopify</a>
+            </li>
+            <li>
+              Formkeep by Thoughtbot
+            </li>
+            <li>
+              <a href='https://twitter.com/stympy/status/727495130018512897'>Honeybadger</a>
+            </li>
+            <li>
+              <a href='https://www.betterment.com/resources/inside-betterment/engineering/server-javascript-a-single-page-app-toa-single-page-app/'>Betterment</a>
+            </li>
+          </ul>
         </section>
         <section>
           <h3>Project state</h3>

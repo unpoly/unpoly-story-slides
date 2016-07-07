@@ -387,14 +387,10 @@
               .project-dots--dot 1
               .project-dots--dot 2
               .project-dots--dot 3
-            .project-dots--row
               .project-dots--dot 4
               .project-dots--dot 5
               .project-dots--dot 6
-            .project-dots--row
               .project-dots--dot 7
-              .project-dots--dot 8
-              .project-dots--dot 9
 
           %p
             &nbsp;
@@ -407,16 +403,12 @@
           .project-dots
             .project-dots--row
               .project-dots--dot 1
-              .project-dots--dot 2
+              .project-dots--dot.is-positive 2
               .project-dots--dot 3
-            .project-dots--row
-              .project-dots--dot 4
-              .project-dots--dot.is-positive 5
+              .project-dots--dot.is-positive 4
+              .project-dots--dot 5
               .project-dots--dot 6
-            .project-dots--row
-              .project-dots--dot.is-positive 7
-              .project-dots--dot 8
-              .project-dots--dot 9
+              .project-dots--dot 7
 
           %p
             YMMV.
@@ -661,29 +653,27 @@
 
         %section
 
-          .columns
-            .column
-              %h3 Thought experiment
+          %h3 Thought experiment
 
-              %p
-                Imagine HTML6 was all about server-side apps
-              %p
-                What features would be in that spec?
-                %br
-                %span
-                  %span.subtle Partial page updates?
-                %br
-                %span
-                  %span.subtle Animated transitions?
-                %br
-                %span
-                  %span.subtle First-class modals?
-              %p.fragment
-                We can polyfill all of that!
-                %br
-                %span.subtle Because it's 2016.
-            .column
-              %img(src='pictures/html6.png' height=420)
+          %p
+            Imagine HTML6 was all about server-side apps
+          %p
+            What features would be in that spec?
+            %br
+            %span
+              %span.subtle Partial page updates?
+            %br
+            %span
+              %span.subtle Animated transitions?
+            %br
+            %span
+              %span.subtle Layered interactions?
+          %p.fragment
+            We can polyfill all of that!
+            %br
+            %span.subtle Because it's 2016.
+
+          -#%img(src='pictures/html6.png' height=420)
 
 
         %section
@@ -822,7 +812,8 @@
             %li Scroll positions are kept during navigation
             %li Opened card is kept when flipping the page
             %li Unsaved form content is kept when changing the pattern
-            %li Live form validation
+            -#%li Live form validation
+            %li <code>up-*</code> attributes on links and forms
 
 
         %section
@@ -866,7 +857,7 @@
             %pre.s
               %code.html(data-noescape)
                 :preserve
-                  &lt;a href="/list" up-target=".main"&gt;Replace fragment in document&lt;/a&gt;
+                  &lt;a href="/list" up-target=".main"&gt;Replace fragment&lt;/a&gt;
 
                   &lt;a href="/new" up-modal=".main"&gt;Open fragment in dialog&lt;/a&gt;
 
@@ -1015,41 +1006,42 @@
 
 
 
-
         %section
-          %h2 Response times
-          %p
-            %img.plain(src='pictures/ios_8_icons.jpg' width='50%')
-          %p
-            Users in 2016 expect more than a slide show.
 
-        %section
-          %h3 Response times
+          %section
+            %h2 Response times
+            %p
+              %img.plain(src='pictures/ios_8_icons.jpg' width='50%')
+            %p
+              Users in 2016 expect more than a slide show.
 
-          %ul.s
-            %li
-              <b>0.1 second</b> is about the limit for having the user feel that the system is reacting
-              instantaneously,
-              <span class="subtle">meaning that no special feedback is necessary except to display the
-              result.</span>
-            %li
-              <b>1.0 second</b> is about the limit for the user's flow of thought to stay uninterrupted, even
-              though the user will notice the delay. <span class="subtle">Normally, no special feedback is necessary during
-              delays of more than 0.1 but less than 1.0 second, but the user does lose the feeling of
-              operating directly on the data.</span>
-            %li
-              <b>10 seconds</b> is about the limit for keeping the user's attention focused on the dialogue.
-              <span class="subtle">
-              For longer delays, users will want to perform other tasks while waiting for the computer
-              to finish, so they should be given feedback indicating when the computer expects to be
-              done. Feedback during the delay is especially important if the response time is likely to
-              be highly variable, since users will then not know what to expect.</span>
-          %p
-            %cite
-              Miller 1968; Card et al. 1991; Jacob Nielsen 1993
+          %section
+            %h3 Response times
 
-          %p
-            Also see Google's <a href="https://developers.google.com/web/tools/chrome-devtools/profile/evaluate-performance/rail">RAIL Performance Model</a>.
+            %ul.s
+              %li
+                <b>0.1 second</b> is about the limit for having the user feel that the system is reacting
+                instantaneously,
+                <span class="subtle">meaning that no special feedback is necessary except to display the
+                result.</span>
+              %li
+                <b>1.0 second</b> is about the limit for the user's flow of thought to stay uninterrupted, even
+                though the user will notice the delay. <span class="subtle">Normally, no special feedback is necessary during
+                delays of more than 0.1 but less than 1.0 second, but the user does lose the feeling of
+                operating directly on the data.</span>
+              %li
+                <b>10 seconds</b> is about the limit for keeping the user's attention focused on the dialogue.
+                <span class="subtle">
+                For longer delays, users will want to perform other tasks while waiting for the computer
+                to finish, so they should be given feedback indicating when the computer expects to be
+                done. Feedback during the delay is especially important if the response time is likely to
+                be highly variable, since users will then not know what to expect.</span>
+            %p
+              %cite
+                Miller 1968; Card et al. 1991; Jacob Nielsen 1993
+
+            %p
+              Also see Google's <a href="https://developers.google.com/web/tools/chrome-devtools/profile/evaluate-performance/rail">RAIL Performance Model</a>.
 
         %section
           %h3
@@ -1090,23 +1082,23 @@
           %ul
             %li Provide instantaneous feedback to all user input
             %li Make interactions appear faster than they really are
-            %li Use best practices for server performance
             %li Free up enough time budget that we can afford to render<br />full pages on the server
+            %li Use best practices for server performance
 
         %section
           %h3 What you get out of the box
           %ul
 
             %li
+              We no longer parse and execute CSS, Javascript and build the DOM on every request
+              .subtle
+                makandra deck on Cards (140 ms), AMC frontend (360 ms)
+
+            %li
               Clicked links/forms get an <a href="http://unpoly.com/up-active"><code>up-active</code></a> class while loading
               .subtle
                 Get into a habit of styling <code>.up-active</code> for instantaneous feedback<br>
                 Use throttling and Chrome's network tab
-
-            %li
-              We no longer parse and execute CSS, Javascript and build the DOM on every request
-              .subtle
-                makandra deck on Cards (140 ms), AMC frontend (360 ms)
 
             %li
               Links with an <a href="http://unpoly.com/up-instant"><code>up-instant</code></a> attribute load on <code>mousedown</code> instead of <code>click</code>
@@ -1247,289 +1239,6 @@
 
 
 
-        %section
-          %h2 Activating JS snippets
-
-          %p
-            Every app needs a way to pair Javascript snippets<br />with certain HTML elements:
-
-          %ul
-            %li An <code>a[title]</code> attribute should activate qTip on mouseover
-            %li A <code>textarea.wysiwyg</code> should activate Redactor on load
-            %li
-              An <code>input[type=search]</code> field should automatically request new results
-              %br
-              when the user types something
-            %li
-              A <code>.map</code> should render a map with pins via the Google Maps JS API
-            %li
-              A <code>.button.toggle-all</code> should toggle all checkboxes in a form
-              %br
-              when clicked
-
-        %section
-          %h3
-            .line
-              Activating JS snippets
-            .subtle
-              Random.js
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="map"&gt;&lt;/span&gt;
-
-
-
-
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                $(function() {
-                  $('.map').each(function() {
-                    new google.maps.Map(this);
-                  });
-                });
-
-          %p
-            This is what you see in jQuery tutorials.<br>
-            HTML fragments loaded via AJAX don't get Javascriptified.
-
-
-        %section
-          %h3
-            .line
-              Activating JS snippets
-            .subtle
-              Unpoly
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="map"&gt;&lt;/span&gt;
-
-
-
-
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('.map', function($map) {
-                  new google.maps.Map($map, { center: pin });
-                });
-
-
-
-          %p
-            Unpoly automatically compiles all fragments that it inserts or updates.
-            %br
-            &nbsp;
-
-        %section
-          %h3
-            .line Getting data into your JS
-            .subtle Random.js
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="map"&gt;&lt;/div&gt;
-
-                &lt;script type="text/javascript"&gt;
-                  initMap($('.map'), { lat: 48.75, lng: 11.45 });
-                &lt;/script&gt;
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                function initMap($element, pin) {
-                  new google.maps.Map($element, { center: pin });
-                });
-
-
-
-          %p
-            &nbsp;
-            %br
-            &nbsp;
-
-
-        %section
-          %h3
-            .line Getting data into your JS
-            .subtle Unpoly
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="map" up-data="{ lat: 48.36, lng: 10.99 }"&lt;/div&gt;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('.map', function($element, <mark>pin</mark>) {
-                  new google.maps.Map($element, center: pin);
-                });
-
-
-
-          %p
-            &nbsp;
-            %br
-            &nbsp;
-
-
-        %section
-
-          %section
-            %h2
-              Composability
-
-            %ul
-              %li
-                Unpoly's default UJS behavior is a thin wrapper around a Javascript API
-              %li
-                If the default UJS behavior doesn't fit your use case,<br>you can use
-                that Javascript API from your own code, or invent new UJS syntax
-
-
-        %section
-          %section
-            %h3
-              .line Dual interfaces
-
-            %h4.subtle <u>U</u>nobtrusive
-
-            %pre
-              %code.html(data-noescape)
-                :preserve
-                  &lt;div class="story"&gt;
-
-                    &lt;p&gt;Story summary&lt;/p&gt;
-
-                    &lt;a href="full.html" up-target=".story"&gt;
-                      Read full story
-                    &lt;/a&gt;
-
-                  &lt;/div&gt;
-
-            %h4.subtle <u>P</u>rogrammatic
-
-            %pre
-              %code.javascript
-                :preserve
-                  up.replace('.story', 'full.html');
-
-
-          %section
-
-            %h3
-              .line Invent your own UJS syntax
-
-            %h4.subtle HTML
-
-            %pre.l
-              %code.html(data-noescape)
-                :preserve
-                  &lt;a menu-link href="/details"&gt;Show more&lt;/span&gt;
-
-            %h4.subtle Javascript
-
-            %pre.l
-              %code.javascript
-                :preserve
-                  up.compiler('[menu-link]', function($link) {
-                    $link.on('click', function(event) {
-                      event.preventDefault();
-                      up.popup.attach($link, {
-                        target: '.menu',
-                        position: 'bottom-left',
-                        animation: 'roll-down'
-                      });
-                    });
-                  });
-
-          %section
-
-            %h3
-              .line Repurpose existing UJS syntax
-
-            %h4.subtle HTML
-
-            %pre.l
-              %code.html(data-noescape)
-                :preserve
-                  &lt;a menu-link href="/details"&gt;Show more&lt;/span&gt;
-
-            %h4.subtle Javascript
-
-            %pre.l
-              %code.javascript
-                :preserve
-                  up.macro('[menu-link]', function($link) {
-                    $link.attr(
-                      'up-target': '.menu',
-                      'up-position': 'bottom-left',
-                      'up-animation': 'roll-down'
-                    });
-                  });
-                  &nbsp;
-                  &nbsp;
-                  &nbsp;
-
-          %section
-            %h3
-              .line Events
-
-            %pre
-              %code.javascript
-                :preserve
-                  $(document).on('up:modal:open', function(event) {
-                    if (dontLikeModals()) {
-                      event.preventDefault();
-                    }
-                  });
-
-            -#.fragment
-            -#  %p
-            -#    You can also use <a href="http://unpoly.com/up.on"><code>up.on</code></a> to bind event handlers to <code>document</code>.<br />
-            -#    <code>up.on</code> supports <a href="http://unpoly.com/up-data"><code>up-data</code></a> and discards handlers on unsupported browsers.
-            -#
-            -#  %pre
-            -#    %code.javascript
-            -#      :preserve
-            -#        up.on('click', '.map', function(event, $element, data) {
-            -#          // ...
-            -#        });
-
-          %section
-            %h3
-              .line All Async actions return promises
-
-            %pre
-              %code.javascript
-                :preserve
-                  up.replace('.story', 'full.html').then(function() {
-                    // Fragments were loaded and swapped
-                  });
-
-            %pre
-              %code.javascript
-                :preserve
-                  up.morph('.old', '.new', 'cross-fade').then(function() {
-                    // Transition has completed
-                  });
-
-            %p
-              <a href="https://makandracards.com/curriculum/35275-javascript-writing-asynchronous-code" target="_blank">Curriculum lesson on promises</a>
-
-
 
         %section
 
@@ -1548,7 +1257,9 @@
               %li Submitting a form within a modal and staying within the modal
 
             %p
-              That's all solved by Unpoly.
+              These are all solved by Unpoly.
+              %br
+              %span.subtle (But we don't have time for that today)
 
           %section
             %h3 Ajax forms
@@ -1733,6 +1444,326 @@
                   &lt;/form&gt;
 
 
+        %section
+
+          %section
+            %h2 But I have this really custom <span class="subtle">Javascript / jQuery library / behavior</span> that I need to integrate
+
+            %ul
+              %li Pairing Javascript snippets with HTML elements
+              %li Integrating libraries (WYSIWYG editor, jQuery plugins, ...)
+              %li Passing structured data to Javascript snippets
+              %li Reuse existing Unpoly functionality from your own code
+              %li Invent your own UJS syntax
+
+          %section
+            %h2 Activating JS snippets
+
+            %p
+              Every app needs a way to pair Javascript snippets<br />with certain HTML elements:
+
+            %ul
+              %li An <code>a[title]</code> attribute should activate qTip on mouseover
+              %li A <code>textarea.wysiwyg</code> should activate Redactor on load
+              %li
+                An <code>input[type=search]</code> field should automatically request new results
+                %br
+                when the user types something
+              %li
+                A <code>.map</code> should render a map with pins via the Google Maps JS API
+              %li
+                A <code>.button.toggle-all</code> should toggle all checkboxes in a form
+                %br
+                when clicked
+
+          %section
+            %h3
+              .line
+                Activating JS snippets
+              .subtle
+                Random.js
+
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;div class="map"&gt;&lt;/span&gt;
+
+
+
+
+
+            %pre
+              %code.javascript(data-noescape)
+                :preserve
+                  $(function() {
+                    $('.map').each(function() {
+                      new google.maps.Map(this);
+                    });
+                  });
+
+            %p
+              This is what you see in jQuery tutorials.<br>
+              HTML fragments loaded via AJAX don't get Javascriptified.
+
+
+          %section
+            %h3
+              .line
+                Activating JS snippets
+              .subtle
+                Unpoly
+
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;div class="map"&gt;&lt;/span&gt;
+
+
+
+
+
+            %pre
+              %code.javascript(data-noescape)
+                :preserve
+                  up.compiler('.map', function($map) {
+                    new google.maps.Map($map, { center: pin });
+                  });
+
+
+
+            %p
+              Unpoly automatically compiles all fragments that it inserts or updates.
+              %br
+              &nbsp;
+
+          %section
+            %h3
+              .line Getting data into your JS
+              .subtle Random.js
+
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;div class="map"&gt;&lt;/div&gt;
+
+                  &lt;script type="text/javascript"&gt;
+                    initMap($('.map'), { lat: 48.75, lng: 11.45 });
+                  &lt;/script&gt;
+
+            %pre
+              %code.javascript(data-noescape)
+                :preserve
+                  function initMap($element, pin) {
+                    new google.maps.Map($element, { center: pin });
+                  });
+
+
+
+            %p
+              &nbsp;
+              %br
+              &nbsp;
+
+
+          %section
+            %h3
+              .line Getting data into your JS
+              .subtle Unpoly
+
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;div class="map" up-data="{ lat: 48.36, lng: 10.99 }"&lt;/div&gt;
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+
+            %pre
+              %code.javascript(data-noescape)
+                :preserve
+                  up.compiler('.map', function($element, <mark>pin</mark>) {
+                    new google.maps.Map($element, center: pin);
+                  });
+
+
+
+            %p
+              &nbsp;
+              %br
+              &nbsp;
+
+
+          %section
+
+            %section
+              %h2
+                Composability
+
+              %ul
+                %li
+                  Unpoly's default UJS behavior is a thin wrapper around a Javascript API
+                %li
+                  If the default UJS behavior doesn't fit your use case,<br>you can use
+                  that Javascript API from your own code, or invent new UJS syntax
+
+
+          %section
+            %section
+              %h3
+                .line Dual interfaces
+
+              %h4.subtle <u>U</u>nobtrusive
+
+              %pre
+                %code.html(data-noescape)
+                  :preserve
+                    &lt;div class="story"&gt;
+
+                      &lt;p&gt;Story summary&lt;/p&gt;
+
+                      &lt;a href="full.html" up-target=".story"&gt;
+                        Read full story
+                      &lt;/a&gt;
+
+                    &lt;/div&gt;
+
+              %h4.subtle <u>P</u>rogrammatic
+
+              %pre
+                %code.javascript
+                  :preserve
+                    up.replace('.story', 'full.html');
+
+
+            %section
+
+              %h3
+                .line Invent your own UJS syntax
+
+              %h4.subtle HTML
+
+              %pre.l
+                %code.html(data-noescape)
+                  :preserve
+                    &lt;a menu-link href="/details"&gt;Show more&lt;/span&gt;
+
+              %h4.subtle Javascript
+
+              %pre.l
+                %code.javascript
+                  :preserve
+                    up.compiler('[menu-link]', function($link) {
+                      $link.on('click', function(event) {
+                        event.preventDefault();
+                        up.popup.attach($link, {
+                          target: '.menu',
+                          position: 'bottom-left',
+                          animation: 'roll-down'
+                        });
+                      });
+                    });
+
+            %section
+
+              %h3
+                .line Repurpose existing UJS syntax
+
+              %h4.subtle HTML
+
+              %pre.l
+                %code.html(data-noescape)
+                  :preserve
+                    &lt;a menu-link href="/details"&gt;Show more&lt;/span&gt;
+
+              %h4.subtle Javascript
+
+              %pre.l
+                %code.javascript
+                  :preserve
+                    up.macro('[menu-link]', function($link) {
+                      $link.attr(
+                        'up-target': '.menu',
+                        'up-position': 'bottom-left',
+                        'up-animation': 'roll-down'
+                      });
+                    });
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+
+            %section
+              %h3
+                .line Events
+
+              %pre
+                %code.javascript
+                  :preserve
+                    $(document).on('up:modal:open', function(event) {
+                      if (dontLikeModals()) {
+                        event.preventDefault();
+                      }
+                    });
+
+              -#.fragment
+              -#  %p
+              -#    You can also use <a href="http://unpoly.com/up.on"><code>up.on</code></a> to bind event handlers to <code>document</code>.<br />
+              -#    <code>up.on</code> supports <a href="http://unpoly.com/up-data"><code>up-data</code></a> and discards handlers on unsupported browsers.
+              -#
+              -#  %pre
+              -#    %code.javascript
+              -#      :preserve
+              -#        up.on('click', '.map', function(event, $element, data) {
+              -#          // ...
+              -#        });
+
+            %section
+              %h3
+                .line All Async actions return promises
+
+              %pre
+                %code.javascript
+                  :preserve
+                    up.replace('.story', 'full.html').then(function() {
+                      // Fragments were loaded and swapped
+                    });
+
+              %pre
+                %code.javascript
+                  :preserve
+                    up.morph('.old', '.new', 'cross-fade').then(function() {
+                      // Transition has completed
+                    });
+
+              %p
+                <a href="https://makandracards.com/curriculum/35275-javascript-writing-asynchronous-code" target="_blank">Curriculum lesson on promises</a>
+
+
+
+
+
+        %section
+          %h3 Getting started
+
+          %ul
+            %li Read through <a href="http://unpoly.com">unpoly.com</a>
+            %li <code>gem 'unpoly-rails'</code> (<a href="http://unpoly.com/download">other methods</a>)
+            %li Replace half your Javascript with <code>up-target</code> links
+            %li Convert remaining Javascripts into <code>up.compiler</code>
+
+
+
+        %section
+          %img.plain(src='pictures/logos/unpoly.png' width='50%')
+
+        %section
+          %p
+            <a href="https://www.flickr.com/photos/127580645@N07/15215520777">iOS 8 icons</a> by Microsiervos
+
+
+        %section
+          %h2 Additional slides
+
 
         %section
 
@@ -1902,30 +1933,6 @@
                     <mark>});                                              </mark>
                   });
                   &nbsp;
-
-
-
-        %section
-          %h3 Getting started
-
-          %ul
-            %li Read through <a href="http://unpoly.com">unpoly.com</a>
-            %li <code>gem 'unpoly-rails'</code>
-            %li Replace half your Javascript with <code>up-target</code> links
-            %li Convert remaining Javascripts into <code>up.compiler</code>
-
-
-
-        %section
-          %img.plain(src='pictures/logos/unpoly.png' width='50%')
-
-        %section
-          %p
-            <a href="https://www.flickr.com/photos/127580645@N07/15215520777">iOS 8 icons</a> by Microsiervos
-
-
-        %section
-          %h2 Additional slides
 
 
         %section
@@ -2583,6 +2590,19 @@
                     });
                   });
 
+
+        %section
+          %h3 Who else went back?
+
+          %ul
+            %li
+              %a(href='https://engineering.shopify.com/17489056-rebuilding-the-shopify-admin-improving-developer-productivity-by-deleting-28-000-lines-of-javascript') Shopify
+            %li
+              Formkeep by Thoughtbot
+            %li
+              %a(href='https://twitter.com/stympy/status/727495130018512897') Honeybadger
+            %li
+              %a(href='https://www.betterment.com/resources/inside-betterment/engineering/server-javascript-a-single-page-app-toa-single-page-app/') Betterment
 
         %section
           %h3 Project state
