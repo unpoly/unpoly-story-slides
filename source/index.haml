@@ -3,7 +3,7 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:charset => "utf-8"}/
-    %title Unpoly
+    %title We're breaking up with Javascript frontends
     %meta{:content => "A framework for easily creating beautiful presentations using HTML", :name => "description"}/
     %meta{:content => "Hakim El Hattab", :name => "author"}/
     %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}/
@@ -29,7 +29,18 @@
       .slides
 
         %section
-          %img.plain(src='pictures/logos/unpoly.png' width='50%')
+          -#%img.plain(src='pictures/logos/unpoly.png' width='50%')
+          %h3
+            .subtle
+              It's not you, it's us
+            .line
+              We're breaking up with Javascript frontends
+          %p
+            Henning Koch, makandra GmbH
+            %br
+            %a(href='https://twitter.com/triskweline') @triskweline
+
+
 
         -#%section
         -#  %img.plain(src='pictures/logos/unpoly2.png' width='50%')
@@ -38,226 +49,570 @@
         -#  %img.plain(src='pictures/logos/unpoly3.png' width='50%')
 
         %section
-          %p
-            I want us to deliver better user interfaces.
-
-          %p
-            This involves Javascript.
+          %p.subtle
+            Give it 10 minutes.
 
         %section
-          %h3 Javascript at makandra
-
-          .fragment
-            %p
-              .line
-                Random.js
-              .subtle
-                2008-2016
-
-          .fragment
-            %p
-              .line
-                AngularJS
-              .subtle
-                2013-2016
-
-          .fragment
-            %p
-              .line
-                Hybrid AngularJS
-              .subtle
-                2013-2016
-
-        %section
-          %h3
-            AngularJS
-            %span.subtle (2013-2016)
+          %h3 Context
 
           %ul
-            %li Used for: AMC backend, Blogger Ranking, KITT
-            %li Client-side rendering
-            %li Bidirectional mapping between Javascript data and HTML
+            %li makandra is a Ruby on Rails consultancy
+            %li We start a new application every 3 months
+            %li We maintain apps for a <u>really</u> long time
+
+        -#%section
+        -#  %img(src='pictures/rails_lts.png')
 
         %section
-          %h3.green This is AngularJS
+          %h2 Scary 2025 tweet
+          %img(src='pictures/future_tweet.png')
 
-          %pre
-            %code.html
-              :preserve
-                &lt;div ng-app='app' ng-controller='Todos'&gt;
-                  &lt;div class="task" ng-repeat='task in tasks'&gt;
-                    {{task}}
-                  &lt;/div&gt;
-                  &lt;input ng-model='newTask'&gt;
-                  &lt;button ng-click='addTask()'&gt;Add task&lt;/button&gt;
-                &lt;/div&gt;
-
-          .fragment
-            %pre
-              %code.javascript
-                :preserve
-                  app.controller('Todos', function($scope) {
-                    $scope.tasks = ['Milk', 'Toast', 'Honey'];
-                    $scope.addTask = function () {
-                      $scope.tasks.push($scope.newTask);
-                    }
-                  });
-
-            %p
-              %a(href='http://codepen.io/triskweline/pen/yOpvNV' target='_blank') Run example on codepen.io
-
-        %section
-          %h3
-            .red This is also AngularJS
-          .s
-            %pre
-              %code.javascript
-                :preserve
-                  angular.module('app', []).directive('pane', ['$http', function($http) {
-                    return {
-                      require: ['^^tabs', 'ngModel'],
-                      restrict: 'AEC',
-                      transclude: true,
-                      scope: {
-                        title: '@',
-                        info: '=description'
-                        click: '&'
-                      },
-                      link: function(scope, element, attrs, controllers) {
-                        ...
-                      },
-                      template: '&lt;div class='info'&gt;{{info}}&lt;/div&gt;' +
-                                '&lt;ng-transclude&gt;&lt;/ng-transclude&gt;'
-                    };
-                  });
+        -#%section
+        -#
+        -#  %div(style='margin-bottom: 55px')
+        -#    %h3 2007
+        -#    %p
+        -#      We are rendering server-side views from Rails.
+        -#      %br
+        -#      Life is simple.
+        -#
+        -#  %div.fragment(style='margin-bottom: 55px')
+        -#    %h3 2008-2012
+        -#    %p
+        -#      Users demand more complex UI.
+        -#      %br
+        -#      Our code is a tangle of jQuery spaghetti.
+        -#      %br
+        -#      We're not happy.
+        -#      %br
+        -#      We turn to SPAs in hope for better organization and more power.
+        -#
+        -#  %div.fragment
+        -#    %h3 2013-2016
+        -#    %p
+        -#      Code complexity <b>explodes</b> on the client.
+        -#      %br
+        -#      Our code is a tangle of AngularJS spaghetti.
+        -#      %br
+        -#      What have we done?
+        -#
 
         %section
-          %h3
-            AngularJS
-            %span.subtle (2013-2016)
+          .complexity
 
-          %ul
-            %li.green Changes to data are visible immediately
-            %li.green Good fit for:<br>Template builder, complex forms, calendar, Holly, PH-planner
-            %li.red
-              Many concepts increase complexity and complicate training
-              .subtle
-                (scope inheritance, isolation, dependency injection, dot rule, digest cycle...)
-            %li.red Angular 1 is EOL, leaving us in an awkward situation
-            %li.red We don't know how we're going to build SPAs in 2016+
+            .complexity--title
+              Complexity
 
-        %section
-          %h3
-            Hybrid AngularJS
-            %br
-            %span.subtle (2013-2016)
+            .complexity--side
 
-          %ul
-            %li REALCUBE, AMC frontend
-            %li Rendering is mostly on the server, then compiled again on the browser
+              .complexity--stack
 
-            %li
-              Uses Angular directives to run JS on matching HTML elements:
+              .complexity--side-name
+                Server
 
-              %pre.xs
-                %code.javascript(data-noescape)
-                  :preserve
-                    app.directive('screenshot', function() {
-                      return {
-                        link: function(scope, $element) {
-                          // do something with an $element that has class "screenshot"
-                        }
-                      }
-                    });
+            .complexity--side
 
-            %li
-              Uses local scopes to toggle UI states:
-              %pre.xs
-                %code.html(data-noescape)
-                  :preserve
-                    &lt;div ng-init="more = false"&gt;
-                      &lt;span ng-click="more = true"&gt;Show more&lt;/a&gt;
-                      &lt;div ng-if="more"&gt;More information&lt;/div&gt;
-                    &lt;/div&gt;
+              .complexity--stack
+
+              .complexity--side-name
+                Client
+
+          %p.subtle.xs(style='margin-top: 5px; text-align: center')
+            Based on chart by <a href="https://twitter.com/ryanstout">@ryanstout</a>
 
         %section
-          %h3
-            Hybrid AngularJS
+          .complexity
 
-          %ul
-            %li.green Marrying HTML/Javascript through directives is great
-            %li.red Crawlable content must always be rendered on the server,<br />so we can't really use this for important state changes
-            %li.red No routing, so no real URLs for changed state
-            %li.red Compile time is an issue on large pages
-            %li.red All things considered, we're not very happy with this
+            .complexity--title
+              Complexity in 2005
 
+            .complexity--side
 
-        %section
-          %h3
-            Random.js
-            %span.subtle (2008-2016)
+              .complexity--stack
+                .complexity--slice.is-color6.is-weight1
+                  Authorization
+                .complexity--slice.is-color5.is-weight1
+                  Routing
+                .complexity--slice.is-color4.is-weight4
+                  Models
+                .complexity--slice.is-color3.is-weight2
+                  Controllers
+                .complexity--slice.is-color2.is-weight3
+                  Views
+                .complexity--slice.is-color1.is-weight2
+                  Dependencies
 
-          %ul.s
-            %li All other projects.
-            %li We still start new Random.js projects despite having AngularJS.
-            %li.fragment.green Rendered on the server using Ruby
-            %li.fragment.red
-              Javascript:
-              %ul
-                %li Copy &amp; paste of untested (and flawed!) code snippets from cards and old projects
-                %li Anything non-trivial is implemented with a wall of jQuery
-                %li
-                  .line Initialized randomly
-                  .subtle (on load, <code>$.unobtrusive</code>, <code>&lt;script&gt;</code> tags, by library internals...)
-                %li Cannot be composed to form new functionality
-            %li.fragment.red
-              UX in Random.js projects usually quite mediocre:
-              %Ul
-                %li Tedious navigation through endless CRUD tunnels
-                %li List context is lost on every click
-                %li Transient state (scroll positions, focus, unsaved form values) is lost on every click
-                %li Feels like a slide show
-                %li Screen flashes between clicks
-                %li No layered interactions forces user to abandon forms
-                %li Giant nested forms to work around some of these issues
-            %li.fragment.red
-              We go to great lengths to avoid writing JS in Random.js projects
+              .complexity--side-name
+                Server
+
+            .complexity--side
+
+              .complexity--stack
+
+              .complexity--side-name
+                Client
+
+          %p.subtle.xs(style='margin-top: 5px; text-align: center')
+            Based on chart by <a href="https://twitter.com/ryanstout">@ryanstout</a>
 
         %section
-          %h3 A shitty decision for our clients
+          .complexity
 
-          %table
-            %tr
-              %th
-              %th Random.js
-              %th Single-page app
-            %tr
-              %th
-                Code
-              %td
-                %span.green Simple
-              %td
-                %span.red Complex
-            %tr
-              %th
-                UX
-              %td
-                %span.red Painful
-              %td
-                %span.green Refined
-            %tr
-              %th
-                Cost
-              %td
-                %span.green Affordable
-              %td
-                %span.red Expensive
+            .complexity--title
+              Complexity in 2008
+
+            .complexity--side
+
+              .complexity--stack
+                .complexity--slice.is-color6.is-weight1
+                  Authorization
+                .complexity--slice.is-color5.is-weight1
+                  Routing
+                .complexity--slice.is-color4.is-weight4
+                  Models
+                .complexity--slice.is-color3.is-weight2
+                  Controllers
+                .complexity--slice.is-color2.is-weight4
+                  Views
+                .complexity--slice.is-color1.is-weight2
+                  Dependencies
+
+              .complexity--side-name
+                Server
+
+            .complexity--side
+
+              .complexity--stack
+                .complexity--slice.is-color2.is-weight3
+                  RandomJS
+                .complexity--slice.is-color1.is-weight1
+                  Dependencies
+
+              .complexity--side-name
+                Client
+
+          %p.subtle.xs(style='margin-top: 5px; text-align: center')
+            Based on chart by <a href="https://twitter.com/ryanstout">@ryanstout</a>
+
+        %section
+          .complexity
+
+
+            .complexity--title
+              Complexity in 2009
+
+            .complexity--side
+
+              .complexity--stack
+                .complexity--slice.is-color7.is-weight2
+                  API
+                .complexity--slice.is-color6.is-weight1
+                  Authorization
+                .complexity--slice.is-color5.is-weight1
+                  Routing
+                .complexity--slice.is-color4.is-weight4
+                  Models
+                .complexity--slice.is-color3.is-weight2
+                  Controllers
+                .complexity--slice.is-color2.is-weight4
+                  Views
+                .complexity--slice.is-color1.is-weight2
+                  Dependencies
+
+              .complexity--side-name
+                Server
+
+            .complexity--side
+
+              .complexity--stack
+                .complexity--slice.is-color2.is-weight6
+                  RandomJS
+                .complexity--slice.is-color1.is-weight2
+                  Dependencies
+
+              .complexity--side-name
+                Client
+
+          %p.subtle.xs(style='margin-top: 5px; text-align: center')
+            Based on chart by <a href="https://twitter.com/ryanstout">@ryanstout</a>
+
+        %section
+          .complexity
+
+            .complexity--title
+              Complexity in 2011
+
+            .complexity--side
+
+              .complexity--stack
+                .complexity--slice.is-color8.is-weight1
+                  Asset packing
+                .complexity--slice.is-color7.is-weight2
+                  API
+                .complexity--slice.is-color6.is-weight1
+                  Authorization
+                .complexity--slice.is-color5.is-weight1
+                  Routing
+                .complexity--slice.is-color4.is-weight4
+                  Models
+                .complexity--slice.is-color3.is-weight2
+                  Controllers
+                .complexity--slice.is-color2.is-weight4
+                  Views
+                .complexity--slice.is-color1.is-weight3
+                  Dependencies
+
+              .complexity--side-name
+                Server
+
+            .complexity--side
+
+              .complexity--stack
+                .complexity--slice.is-color2.is-weight9
+                  RandomJS
+                .complexity--slice.is-color1.is-weight3
+                  Dependencies
+
+              .complexity--side-name
+                Client
+
+          %p.subtle.xs(style='margin-top: 5px; text-align: center')
+            Based on chart by <a href="https://twitter.com/ryanstout">@ryanstout</a>
+
+        %section
+          .complexity
+
+            .complexity--title
+              Complexity in 2013
+
+            .complexity--side
+
+              .complexity--stack
+                .complexity--slice.is-color8.is-weight1
+                  Asset packing
+                .complexity--slice.is-color7.is-weight4
+                  API
+                .complexity--slice.is-color6.is-weight1
+                  Authorization
+                .complexity--slice.is-color5.is-weight1
+                  Routing
+                .complexity--slice.is-color4.is-weight4
+                  Models
+                .complexity--slice.is-color3.is-weight2
+                  Controllers
+                .complexity--slice.is-color2.is-weight2
+                  Views
+                .complexity--slice.is-color1.is-weight3
+                  Dependencies
+
+              .complexity--side-name
+                Server
+
+            .complexity--side
+
+              .complexity--stack
+                .complexity--slice.is-color4.is-weight5
+                  Models / API client
+                .complexity--slice.is-color3.is-weight5
+                  Controllers
+                .complexity--slice.is-color2.is-weight3
+                  Views
+                .complexity--slice.is-color1.is-weight6
+                  Dependencies
+
+              .complexity--side-name
+                Client
+
+          %p.subtle.xs(style='margin-top: 5px; text-align: center')
+            Based on chart by <a href="https://twitter.com/ryanstout">@ryanstout</a>
+
+        %section
+          .complexity
+
+            .complexity--title
+              Complexity in 2015
+
+            .complexity--side
+
+              .complexity--stack
+                .complexity--slice.is-color8.is-weight1
+                  Asset packing
+                .complexity--slice.is-color7.is-weight4
+                  API
+                .complexity--slice.is-color6.is-weight1
+                  Authorization
+                .complexity--slice.is-color5.is-weight1
+                  Routing
+                .complexity--slice.is-color4.is-weight4
+                  Models
+                .complexity--slice.is-color3.is-weight2
+                  Controllers
+                .complexity--slice.is-color2.is-weight2
+                  Views
+                .complexity--slice.is-color1.is-weight3
+                  Dependencies
+
+              .complexity--side-name
+                Server
+
+            .complexity--side
+
+              .complexity--stack
+                .complexity--slice.is-color6.is-weight1
+                  Authorization
+                .complexity--slice.is-color5.is-weight2
+                  Routing
+                .complexity--slice.is-color4.is-weight7
+                  Models / API client
+                .complexity--slice.is-color3.is-weight6
+                  Controllers
+                .complexity--slice.is-color2.is-weight3
+                  Views
+                .complexity--slice.is-color1.is-weight7
+                  Dependencies
+
+              .complexity--side-name
+                Client
+
+          %p.subtle.xs(style='margin-top: 5px; text-align: center')
+            Based on chart by <a href="https://twitter.com/ryanstout">@ryanstout</a>
+
+        %section
+
+          %p
+            We looked back at the AngularJS projects that we wrote from 2013-2016:
+
+          .project-dots
+            .project-dots--row
+              .project-dots--dot 1
+              .project-dots--dot 2
+              .project-dots--dot 3
+            .project-dots--row
+              .project-dots--dot 4
+              .project-dots--dot 5
+              .project-dots--dot 6
+            .project-dots--row
+              .project-dots--dot 7
+              .project-dots--dot 8
+              .project-dots--dot 9
+
+          %p
+            &nbsp;
+
+        %section
+
+          %p
+            In hindsight, these are the projects that should have been a SPA:
+
+          .project-dots
+            .project-dots--row
+              .project-dots--dot 1
+              .project-dots--dot 2
+              .project-dots--dot 3
+            .project-dots--row
+              .project-dots--dot 4
+              .project-dots--dot.is-positive 5
+              .project-dots--dot 6
+            .project-dots--row
+              .project-dots--dot.is-positive 7
+              .project-dots--dot 8
+              .project-dots--dot 9
+
+          %p
+            YMMV.
+
 
         %section
           %p
-            We just spent three years learning how Javascript works.
+            There's a trade-off between UI fidelity and code complexity.
           %p
-            Can we take some of those learnings back into the server-side paradigm?
+            SPAs are a good fit for a certain class of UI.
+          %p
+            For us that's the exception, not the default.
+          %p
+            We think we can fix most of the problems with server-side apps.
+
+
+        -#%section
+        -#  %h3.green This is AngularJS
+        -#
+        -#  %pre
+        -#    %code.html
+        -#      :preserve
+        -#        &lt;div ng-app='app' ng-controller='Todos'&gt;
+        -#          &lt;div class="task" ng-repeat='task in tasks'&gt;
+        -#            {{task}}
+        -#          &lt;/div&gt;
+        -#          &lt;input ng-model='newTask'&gt;
+        -#          &lt;button ng-click='addTask()'&gt;Add task&lt;/button&gt;
+        -#        &lt;/div&gt;
+        -#
+        -#  .fragment
+        -#    %pre
+        -#      %code.javascript
+        -#        :preserve
+        -#          app.controller('Todos', function($scope) {
+        -#            $scope.tasks = ['Milk', 'Toast', 'Honey'];
+        -#            $scope.addTask = function () {
+        -#              $scope.tasks.push($scope.newTask);
+        -#            }
+        -#          });
+        -#
+        -#    %p
+        -#      %a(href='http://codepen.io/triskweline/pen/yOpvNV' target='_blank') Run example on codepen.io
+        -#
+        -#%section
+        -#  %h3
+        -#    .red This is also AngularJS
+        -#  .s
+        -#    %pre
+        -#      %code.javascript
+        -#        :preserve
+        -#          angular.module('app', []).directive('pane', ['$http', function($http) {
+        -#            return {
+        -#              require: ['^^tabs', 'ngModel'],
+        -#              restrict: 'AEC',
+        -#              transclude: true,
+        -#              scope: {
+        -#                title: '@',
+        -#                info: '=description'
+        -#                click: '&'
+        -#              },
+        -#              link: function(scope, element, attrs, controllers) {
+        -#                ...
+        -#              },
+        -#              template: '&lt;div class='info'&gt;{{info}}&lt;/div&gt;' +
+        -#                        '&lt;ng-transclude&gt;&lt;/ng-transclude&gt;'
+        -#            };
+        -#          });
+        -#
+        -#%section
+        -#  %h3
+        -#    AngularJS
+        -#    %span.subtle (2013-2016)
+        -#
+        -#  %ul
+        -#    %li.green Changes to data are visible immediately
+        -#    %li.green Good fit for:<br>Template builder, complex forms, calendar, Holly, PH-planner
+        -#    %li.red
+        -#      Many concepts increase complexity and complicate training
+        -#      .subtle
+        -#        (scope inheritance, isolation, dependency injection, dot rule, digest cycle...)
+        -#    %li.red Angular 1 is EOL, leaving us in an awkward situation
+        -#    %li.red We don't know how we're going to build SPAs in 2016+
+        -#
+        -#%section
+        -#  %h3
+        -#    Hybrid AngularJS
+        -#    %br
+        -#    %span.subtle (2013-2016)
+        -#
+        -#  %ul
+        -#    %li REALCUBE, AMC frontend
+        -#    %li Rendering is mostly on the server, then compiled again on the browser
+        -#
+        -#    %li
+        -#      Uses Angular directives to run JS on matching HTML elements:
+        -#
+        -#      %pre.xs
+        -#        %code.javascript(data-noescape)
+        -#          :preserve
+        -#            app.directive('screenshot', function() {
+        -#              return {
+        -#                link: function(scope, $element) {
+        -#                  // do something with an $element that has class "screenshot"
+        -#                }
+        -#              }
+        -#            });
+        -#
+        -#    %li
+        -#      Uses local scopes to toggle UI states:
+        -#      %pre.xs
+        -#        %code.html(data-noescape)
+        -#          :preserve
+        -#            &lt;div ng-init="more = false"&gt;
+        -#              &lt;span ng-click="more = true"&gt;Show more&lt;/a&gt;
+        -#              &lt;div ng-if="more"&gt;More information&lt;/div&gt;
+        -#            &lt;/div&gt;
+        -#
+        -#%section
+        -#  %h3
+        -#    Hybrid AngularJS
+        -#
+        -#  %ul
+        -#    %li.green Marrying HTML/Javascript through directives is great
+        -#    %li.red Crawlable content must always be rendered on the server,<br />so we can't really use this for important state changes
+        -#    %li.red No routing, so no real URLs for changed state
+        -#    %li.red Compile time is an issue on large pages
+        -#    %li.red All things considered, we're not very happy with this
+        -#
+        -#
+        -#%section
+        -#  %h3
+        -#    Random.js
+        -#    %span.subtle (2008-2016)
+        -#
+        -#  %ul.s
+        -#    %li All other projects.
+        -#    %li We still start new Random.js projects despite having AngularJS.
+        -#    %li.fragment.green Rendered on the server using Ruby
+        -#    %li.fragment.red
+        -#      Javascript:
+        -#      %ul
+        -#        %li Copy &amp; paste of untested (and flawed!) code snippets from cards and old projects
+        -#        %li Anything non-trivial is implemented with a wall of jQuery
+        -#        %li
+        -#          .line Initialized randomly
+        -#          .subtle (on load, <code>$.unobtrusive</code>, <code>&lt;script&gt;</code> tags, by library internals...)
+        -#        %li Cannot be composed to form new functionality
+        -#    %li.fragment.red
+        -#      UX in Random.js projects usually quite mediocre:
+        -#      %Ul
+        -#        %li Tedious navigation through endless CRUD tunnels
+        -#        %li List context is lost on every click
+        -#        %li Transient state (scroll positions, focus, unsaved form values) is lost on every click
+        -#        %li Feels like a slide show
+        -#        %li Screen flashes between clicks
+        -#        %li No layered interactions forces user to abandon forms
+        -#        %li Giant nested forms to work around some of these issues
+        -#    %li.fragment.red
+        -#      We go to great lengths to avoid writing JS in Random.js projects
+        -#
+        -#%section
+        -#  %h3 A shitty decision for our clients
+        -#
+        -#  %table
+        -#    %tr
+        -#      %th
+        -#      %th Random.js
+        -#      %th Single-page app
+        -#    %tr
+        -#      %th
+        -#        Code
+        -#      %td
+        -#        %span.green Simple
+        -#      %td
+        -#        %span.red Complex
+        -#    %tr
+        -#      %th
+        -#        UX
+        -#      %td
+        -#        %span.red Painful
+        -#      %td
+        -#        %span.green Refined
+        -#    %tr
+        -#      %th
+        -#        Cost
+        -#      %td
+        -#        %span.green Affordable
+        -#      %td
+        -#        %span.red Expensive
+
+        -#%section
+        -#  %p
+        -#    We just spent three years learning how Javascript works.
+        -#  %p
+        -#    Can we take some of those learnings back into the server-side paradigm?
 
         %section
           %h3
@@ -267,11 +622,9 @@
 
           %ol
             %li Wide choice of great and mature languages
+            %li Low complexity stack
             %li Synchronous data access
             %li Time to first render
-            %li Everything has a URL
-            %li Accessible for Google and <code>curl</code>
-            %li Low complexity stack
             %li Works on low-end devices
 
         %section
@@ -282,90 +635,130 @@
 
           %ol
             %li Slow interaction feedback
-            %li Partial page updates require additional code on client & server
-            %li Animation is complicated
             %li
               Page loads destroy transient state
               .subtle (scroll positions, unsaved form values, focus)
             %li
               Layered interactions are hard
               .subtle (modals, drop-downs, drawers)
-
-        %section
-
-          %h2
-            Unpoly
-            %span.subtle
-              (2014-2016)
-
-          %table.fragment
-            %tr
-              %th
-              %th Random.js
-              %th
-                Unpoly app
-              %th Single-page app
-            %tr
-              %th
-                Code
-              %td
-                %span.green Simple
-              %td
-                %span.green Simple
-              %td
-                %span.red Complex
-            %tr
-              %th
-                UX
-              %td
-                %span.red Painful
-              %td
-                %span.yellow-green Friendly
-              %td
-                %span.green Refined
-            %tr
-              %th
-                Cost
-              %td
-                %span.green Affordable
-              %td
-                %span.green Affordable
-              %td
-                %span.red Expensive
+            %li Animation is complicated
 
 
         %section
-          %h2 Unpoly
+          .line
+            %a(href='http://demo.unpoly.com/')
+              Demo of problematic app
+            %a.subtle(href='http://localhost:3000/') (Local)
+
+          %p
+            Observe these points:
+
           %ul
-            %li Unobtrusive Javascript framework
-            %li Snappy UI for server-side apps
-            %li Structure for organizing Javascript snippets
-            %li In development for 18 months
-            %li
-              Largest open-source project we have
-              .subtle
-                #{553 + 130} commits (Spreewald: 259, Geordi: 282, ActiveType: 154)
-            %li
-              Currently powers:
-              %br
-              Nanomize, railslts.com, H&Z Smart Brain,<br />
-              <a href="http://staging.makandra.de">new makandra.de</a>, <a href="https://makandracards-up.makandra.de">new makandra cards version</a>
+            %li Scroll positions get lost during navigation
+            %li Opened card gets lost when flipping the page
+            %li Unsaved form content gets lost when changing the pattern
+
+
+        %section
+
+          .columns
+            .column
+              %h3 Thought experiment
+
+              %p
+                Imagine HTML6 was all about server-side apps
+              %p
+                What features would be in that spec?
+                %br
+                %span
+                  %span.subtle Partial page updates?
+                %br
+                %span
+                  %span.subtle Animated transitions?
+                %br
+                %span
+                  %span.subtle First-class modals?
+              %p.fragment
+                We can polyfill all of that!
+                %br
+                %span.subtle Because it's 2016.
+            .column
+              %img(src='pictures/html6.png' height=420)
 
 
         %section
           %h2
-            .subtle Unpoly
-            .line Design goals
+            %img.plain(src='pictures/logos/unpoly.png' width='50%')
           %ul
-            %li Close UX-gap between server-side apps and SPAs
-            %li Batteries included
-            %li Enable some things that are hard (even in Angular)
+            %li 25 new HTML attributes to write modern UI, but keep logic on the server
             %li Works with existing code
             %li
               Backend-agnostic
               .subtle
                 (although we have some really nice Rails bindings)
-            %li Not for ambitious UI
+            %li In development for two years, in production with multiple apps
+
+        -#
+        -#%section
+        -#
+        -#  %h2
+        -#    Unpoly
+        -#    %span.subtle
+        -#      (2014-2016)
+        -#
+        -#  %table.fragment
+        -#    %tr
+        -#      %th
+        -#      %th Random.js
+        -#      %th
+        -#        Unpoly app
+        -#      %th Single-page app
+        -#    %tr
+        -#      %th
+        -#        Code
+        -#      %td
+        -#        %span.green Simple
+        -#      %td
+        -#        %span.green Simple
+        -#      %td
+        -#        %span.red Complex
+        -#    %tr
+        -#      %th
+        -#        UX
+        -#      %td
+        -#        %span.red Painful
+        -#      %td
+        -#        %span.yellow-green Friendly
+        -#      %td
+        -#        %span.green Refined
+        -#    %tr
+        -#      %th
+        -#        Cost
+        -#      %td
+        -#        %span.green Affordable
+        -#      %td
+        -#        %span.green Affordable
+        -#      %td
+        -#        %span.red Expensive
+        -#
+        -#
+        -#%section
+        -#  %h2 Unpoly
+        -#  %ul
+        -#    %li Unobtrusive Javascript framework
+        -#    %li Snappy UI for server-side apps
+        -#    %li Structure for organizing Javascript snippets
+        -#    %li In development for 18 months
+        -#    %li
+        -#      Largest open-source project we have
+        -#      .subtle
+        -#        #{553 + 130} commits (Spreewald: 259, Geordi: 282, ActiveType: 154)
+        -#    %li
+        -#      Currently powers:
+        -#      %br
+        -#      Nanomize, railslts.com, H&Z Smart Brain,<br />
+        -#      <a href="http://staging.makandra.de">new makandra.de</a>, <a href="https://makandracards.com">new makandra cards version</a>
+        -#
 
         -#%section
         -#  %h3
@@ -414,160 +807,29 @@
         -#    %li Testing async code
 
 
+
         %section
+          .line
+            %a(href='http://demo.unpoly.com/')
+              Demo of enhanced app
+            %a.subtle(href='http://localhost:3000/') (Local)
+
           %p
-            Same code on the server:
+            Observe these points:
 
           %ul
-            %li
-              %a(href='http://demo.upjs.io/sessions/CSARbQ/cards/6463?up_enabled=false') No Unpoly
-            %li
-              %a(href='http://demo.upjs.io/sessions/CSARbQ/cards/6463?up_enabled=true') With Unpoly
+            %li Animated transitions
+            %li Scroll positions are kept during navigation
+            %li Opened card is kept when flipping the page
+            %li Unsaved form content is kept when changing the pattern
+            %li Live form validation
+
 
         %section
           %img(src='pictures/fragment_flow_vanilla.svg' width='100%')
 
         %section
           %img(src='pictures/fragment_flow_unpoly.svg' width='100%')
-
-        %section
-
-          %h3
-            Update a page fragment
-            .subtle
-              without Javascript
-
-          .columns
-            .column
-              %h4.subtle short.html
-              %pre.xxs
-                %code.html(data-noescape)
-                  :preserve
-                    &lt;div class="story"&gt;
-
-                      &lt;p&gt;Story summary&lt;/p&gt;
-
-                      &lt;a href="full.html" <mark>up-target=".story"</mark>&gt;
-                        Read full story
-                      &lt;/a&gt;
-
-                    &lt;/div&gt;
-
-                    <mark>&lt;p&gt;This text won't change&lt;/p&gt;</mark>
-
-            .column
-              %h4.subtle full.html
-              %pre.xxs
-                %code.html(data-noescape)
-                  :preserve
-                    &lt;div class="story"&gt;
-                    
-                      &lt;h1&gt;Full story&lt;/h1&gt;
-
-                      &lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;
-                    
-                      &lt;a href="short.html" <mark>up-target=".story"&gt;</mark>
-                        Read summary
-                      &lt;/a&gt;
-
-                    &lt;/div&gt;
-          %ul
-            %li.fragment Unpoly requests <code>full.html</code> via AJAX
-            %li.fragment Server returns a <u>full HTML page</u> as usual
-            %li.fragment Unpoly extracts the fragment that matches <code>.story</code>
-            %li.fragment Unpoly swaps the old and new fragment
-            %li.fragment Unpoly changes the browser URL to <code>http://host/full.html</code>
-
-        %section
-
-          %h3
-            Update a page fragment
-            .subtle
-              without Javascript
-
-          %p
-            %a(href='http://unpoly.com/examples/update-fragment/' target='_blank') Run example on unpoly.com
-
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="story"&gt;
-
-                  &lt;p&gt;Story summary&lt;/p&gt;
-
-                  &lt;a href="full.html" <mark>up-target=".story"</mark>&gt;
-                    Read full story
-                  &lt;/a&gt;
-
-                &lt;/div&gt;
-
-          %ul
-            %li Unpoly requests <code>full.html</code> via AJAX
-            %li Server returns a <u>full HTML page</u> as usual
-            %li Unpoly extracts the fragment that matches <code>.story</code>
-            %li Unpoly swaps the old and new fragment
-            %li Unpoly changes the browser URL to <code>http://host/full.html</code>
-
-        %section
-
-          %h3
-            Open fragment in modal dialog
-            .subtle
-              without Javascript
-
-          %p
-            %a(href='http://unpoly.com/examples/modal/') Run example on unpoly.com
-
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="story"&gt;
-
-                  &lt;p&gt;Story summary&lt;/p&gt;
-
-                  &lt;a href="full.html" <mark>up-modal=".story"</mark>&gt;
-                    Read full story
-                  &lt;/a&gt;
-
-                &lt;/div&gt;
-
-          %ul
-            %li Unpoly requests <code>full.html</code> via AJAX
-            %li Server returns a <u>full HTML page</u> as usual
-            %li Unpoly extracts the fragment that matches <code>.story</code>
-            %li <mark>Unpoly displays the new fragment in a <code>&lt;div class="up-modal"&gt;</code></mark>
-            %li Unpoly changes the browser URL to <code>http://host/full.html</code>
-
-        %section
-
-          %h3
-            Open fragment in popup overlay
-            .subtle
-              without Javascript
-
-          %p(style='visibility: hidden')
-            %a(href='http://unpoly.com/examples/modal/') Run example on unpoly.com
-
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="story"&gt;
-
-                  &lt;p&gt;Story summary&lt;/p&gt;
-
-                  &lt;a href="full.html" <mark>up-popup=".story"</mark>&gt;
-                    Read full story
-                  &lt;/a&gt;
-
-                &lt;/div&gt;
-
-          %ul
-            %li Unpoly requests <code>full.html</code> via AJAX
-            %li Server returns a <u>full HTML page</u> as usual
-            %li Unpoly extracts the fragment that matches <code>.story</code>
-            %li <mark>Unpoly displays the new fragment in a <code>&lt;div class="up-popup"&gt;</code></mark>
-            %li Unpoly changes the browser URL to <code>http://host/full.html</code>
-
 
         %section
           %h3 Layers
@@ -584,14 +846,11 @@
             .layers--layer.is-popup
               Popup
               .layers--url
-                http://app/autocomplete
+                http://app/search
 
-          %ul
-            %li Unpoly apps can layer up to three pages on top of each other
-            %li Each layer has its own URL and can navigate without changing the others
-            %li Links in an layer prefer to update fragments within the layer
-            %li Changing a fragment behind the layer will close the layer
-            %li Use this to <b>keep context</b> during interactions
+          %p Unpoly apps can layer up to three pages on top of each other
+          %p Each layer has its own URL and can navigate without changing the others
+          %p Use this to <b>keep context</b> during interactions
 
         %section
           %img(src='pictures/gmail.png')
@@ -600,501 +859,162 @@
           %img(src='pictures/gmail_layers.png')
 
         %section
-          %h3 Navigation
 
-          %ul
-            %li
-              All fragment updates change the browser URL by default.
-            %li
-              .line
-                Back/Forward buttons work as expected.
-              .subtle
-                Even scroll positions are restored.
-            %li
-              .line
-                Linking to a fragment will <b>scroll the viewport</b> to reveal the fragment.
-              .subtle
-                Unpoly is aware of fixed navigation bars and will scroll further/less.
-            %li
-              Links to the current URL get an <a href="http://unpoly.com/up-current"><code>up-current</code></a>
-              class automatically.
-            %li
-              .line
-                Modals and popups have their own URL.
-              .subtle
-                When a modal closes, the background URL is restored.<br />
-                Reloading a modal's URL shows the content as a full page.
-            %li
-              .line
-                Use <a href="http://unpoly.com/up-back"><code>[up-back]</code></a> to link to a previous state.
-              .subtle
-                That's a real link with a URL, not <code>location.back()</code>
-            %li
-              .line
-                Everything is opt-in
-              .subtle
-                Links without <code>up-target</code> will do a regular page load.<br>
-                This is different to Turbolinks, where you need to opt-out.
+          %section
+            %h3 Layers
 
-        %section
-          %h2 Enhancing elements
-
-          %p
-            Every app needs a way to activate Javascript snippets<br />on certain HTML elements:
-
-          %ul
-            %li An <code>a[title]</code> attribute should activate Poshytip on mouseover
-            %li A <code>textarea.wysiwyg</code> should activate Redactor on load
-            %li
-              An <code>input[type=search]</code> field should automatically request new results
-              %br
-              when the user types something
-            %li
-              A <code>.google-map</code> should render a map with pins via the Google Maps JS API
-            %li
-              A <code>.button.toggle-all</code> class should toggle all checkboxes in a form
-              %br
-              when clicked
-
-        %section
-          %h3
-            <span class="subtle">Toggle all: </span> On load
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;span class="toggle-all"&gt;Toggle all&lt;/span&gt;
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                $(function() {
-                  $('.toggle-all').each(function() {
-                    var $link = $(this);
-                    $link.on('click', function() {
-                      var $form = $link.closest('form');
-                      var $checkboxes = $form.find(':checkbox');
-                      var someUnchecked = $checkboxes.is(':not(:checked)');
-                      $checkboxes.prop('checked', someUnchecked);
-                    });
-                  });
-                });
-                &nbsp;
-                &nbsp;
-
-          %p
-            <a href="http://codepen.io/triskweline/pen/MyrVgG" target="_blank">Run example on codepen.io</a>.<br>
-            This is what you see in jQuery tutorials.<br>
-            HTML fragments loaded via AJAX don't get Javascriptified.
-
-        %section
-          %h3
-            <span class="subtle">Toggle all: </span> $.unobtrusive
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;span class="toggle-all"&gt;Toggle all&lt;/span&gt;
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                $.unobtrusive(function() {
-                  var $fragment = $(this);
-                  $fragment.find('.toggle-all').each(function() {
-                    var $link = $(this);
-                    $link.on('click', function() {
-                      var $form = $link.closest('form');
-                      var $checkboxes = $form.find(':checkbox');
-                      var someUnchecked = $checkboxes.is(':not(:checked)');
-                      $checkboxes.prop('checked', someUnchecked);
-                    });
-                  });
-                });
-                &nbsp;
-
-          %p
-            AJAX-loaded fragments can be Javascriptified manually by calling
-            <br>
-            <code>$fragment.activateUnobtrusiveJavascript()</code>.
-            <br>
-            Unfortunately devs often forget to only <code>find(...)</code> within in the new fragment.
-
-        %section
-          %h3
-            <span class="subtle">Toggle all: </span> Angular directive
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;span class="toggle-all"&gt;Toggle all&lt;/span&gt;
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                app.directive('toggle-all', function() {
-                  return {
-                    restrict: 'C',
-                    link: function(scope, $link) {
-                      $link.on('click', function() {
-                        var $form = $link.closest('form');
-                        var $checkboxes = $form.find(':checkbox');
-                        var someUnchecked = $checkboxes.is(':not(:checked)');
-                        $checkboxes.prop('checked', someUnchecked);
-                      });
-                    }
-                  }
-                });
-
-          %p
-            It's nice how Angular lets us register a compiling function for a CSS selector.
-            <br>
-            Also we don't need to manually Javascriptify new fragments
-            <br>
-            as long as we insert them through Angular templates
-
-        %section
-          %h3
-            <span class="subtle">Toggle all: </span> Unpoly compiler
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;span class="toggle-all"&gt;Toggle all&lt;/span&gt;
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('.toggle-all', function($link) {
-                  $link.on('click', function() {
-                    var $form = $link.closest('form');
-                    var $checkboxes = $form.find(':checkbox');
-                    var someUnchecked = $checkboxes.is(':not(:checked)');
-                    $checkboxes.prop('checked', someUnchecked);
-                  });
-                });
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-
-          %p
-            This is the <b>only</b> way you run Javascript in Unpoly.
-            No <code>&lt;script&gt;</code>. No <code>$(...)</code>.
-            <br>
-            Unpoly automatically compiles all fragments that it inserts or updates.
-            <br>
-            If you insert content without Unpoly (why??) use <a href="http://unpoly.com/up.hello"><code>up.hello(fragment)</code></a>.
-
-        %section
-          %h3 Integrating jQuery plugins
-
-          %h4.subtle Random.js
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                $(function() {
-                  var $textareas = $('textarea.wysiwyg');
-                  $textareas.redactor();
-                });
-
-          %h4.subtle Unpoly
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('textarea.wysiwyg', function($textarea) {
-                  $textarea.redactor();
-                });
-
-          %p.fragment
-            Again: All Javascript must be applied from an <code>up.compiler</code>.<br>
-            No <code>&lt;script&gt;</code>. No <code>$(...)</code>. No <code>window.onload</code>.
-
-        %section
-          %h3 Getting data into your JS
-          %h4.subtle Random.js
-
-          .s
-            %pre
+            %pre.s
               %code.html(data-noescape)
                 :preserve
-                  &lt;div class="map"&gt;&lt;/div&gt;
+                  &lt;a href="/list" up-target=".main"&gt;Replace fragment in document&lt;/a&gt;
 
-                  &lt;script type="text/javascript"&gt;
-                    var pins = [
-                      { lat: 48.36, lng: 10.99, title: 'Friedberg' },
-                      { lat: 48.75, lng: 11.45, title: 'Ingolstadt' }
-                    ];
-                    initMap($('.map'), pins);
-                  &lt;/script&gt;
+                  &lt;a href="/new" up-modal=".main"&gt;Open fragment in dialog&lt;/a&gt;
 
-            %pre.fragment
-              %code.javascript(data-noescape)
-                :preserve
-                  function initMap($element, pins) {
-                    var map = new google.maps.Map($element);
-                    pins.forEach(function(pin) {
-                      var position = new google.maps.LatLng(pin.lat, pin.lng);
-                      new google.maps.Marker({
-                        position: position,
-                        map: map,
-                        title: pin.title
-                      });
-                    });
-                  });
+                  &lt;a href="/menu" up-popup=".main"&gt;Open fragment in dropdown&lt;/a&gt;
 
-        %section
-          %h3 Getting data into your JS
-          %h4.subtle Unpoly
+            %p Links in an layer prefer to update fragments within the layer
+            %p Changing a fragment behind the layer will close the layer
 
-          .s
-            %pre
-              %code.html(data-noescape)
-                :preserve
-                  &lt;div class="map" up-data="[
-                    { lat: 48.36, lng: 10.99, title: 'Friedberg' },
-                    { lat: 48.75, lng: 11.45, title: 'Ingolstadt' }
-                  ]"&gt;&lt;/div&gt;
-                  &nbsp;
-                  &nbsp;
-                  &nbsp;
-                  &nbsp;
-                  &nbsp;
+          %section
 
-            %pre
-              %code.javascript(data-noescape)
-                :preserve
-                  up.compiler('.map', function($element, <mark>pins</mark>) {
-                    var map = new google.maps.Map($element);
-                    pins.forEach(function(pin) {
-                      var position = new google.maps.LatLng(pin.lat, pin.lng);
-                      new google.maps.Marker({
-                        position: position,
-                        map: map,
-                        title: pin.title
-                      });
-                    });
-                  });
-
-        %section
-          %h3 Getting data into your JS
-          %h4.subtle Unpoly
-
-          .s
-            %pre
-              %code.html(data-noescape)
-                :preserve
-                  &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;
-                  &nbsp;
-                  &nbsp;
-                  &nbsp;
-                  &nbsp;
-                  &nbsp;
-                  &nbsp;
-                  &nbsp;
-                  &nbsp;
-
-            %pre
-              %code.javascript(data-noescape)
-                :preserve
-                  up.compiler('.map', function($element, <mark>pins</mark>) {
-                    var map = new google.maps.Map($element);
-                    pins.forEach(function(pin) {
-                      var position = new google.maps.LatLng(pin.lat, pin.lng);
-                      new google.maps.Marker({
-                        position: position,
-                        map: map,
-                        title: pin.title
-                      });
-                    });
-                  });
-
-        %section
-          %h3 Symmmetry to BEM blocks
-
-          %pre
-            %code.nohighlight(data-noescape)
-              :preserve
-                <b>app/assets/stylesheets/blocks</b>
-                  head.css
-                  map.css
-                  photo_hero.css
-                  screenshot.css
-                  tail.css
-
-                <b>app/assets/javascripts/compilers</b>
-                  head.js
-                  map.js
-                  photo_hero.js
-                  screenshot.js
-
-        %section
-          %h2
-            .line
-              Memory leaks
-
-          %ul
-            %li
-              Our Random.js is <b>full of memory leaks</b>.
-            %li
-              We just don't notice because the Javascript VM is reset between page loads!
-            %li
-              We can't have memory leaks in persistent Javascript VMs
+            %h3
+              Update a page fragment
               .subtle
-                like Angular.js, Unpoly, Turbolinks
-            %li
-              Background: <a href="https://makandracards.com/makandra/31325-how-to-create-memory-leaks-in-jquery">one</a>,
-              <a href="https://makandracards.com/makandra/31289-how-to-create-giant-memory-leaks-in-angularjs">two</a>.
+                without Javascript
 
-        %section
-          %h3 Random.js
+            .columns
+              .column
+                %h4.subtle short.html
+                %pre.xxs
+                  %code.html(data-noescape)
+                    :preserve
+                      &lt;div class="story"&gt;
 
-          %h4.subtle HTML
+                        &lt;p&gt;Story summary&lt;/p&gt;
 
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;clock&gt;&lt;/clock&gt;
+                        &lt;a href="full.html" <mark>up-target=".story"</mark>&gt;
+                          Read full story
+                        &lt;/a&gt;
 
-          %h4.subtle Javascript
+                      &lt;/div&gt;
 
-          %pre.xs
-            %code.javascript(data-noescape)
-              :preserve
-                $.unobtrusive(function() {
-                  $(this).find('clock', function() {
+                      <mark>&lt;p&gt;This text won't change&lt;/p&gt;</mark>
 
-                    var $clock = $(this);
+              .column
+                %h4.subtle full.html
+                %pre.xxs
+                  %code.html(data-noescape)
+                    :preserve
+                      &lt;div class="story"&gt;
 
-                    function updateClock() {
-                      var now = new Date();
-                      $clock.html(now.toString());
-                    }
+                        &lt;h1&gt;Full story&lt;/h1&gt;
 
-                    setInterval(updateClock, 1000);
+                        &lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;
 
-                  });
-                });
+                        &lt;a href="short.html" <mark>up-target=".story"&gt;</mark>
+                          Read summary
+                        &lt;/a&gt;
 
-        %section
-          %h3 Random.js: <span class="red">Leaky</span>
+                      &lt;/div&gt;
+            %ul
+              %li Unpoly requests <code>full.html</code> via AJAX
+              %li Server returns a <u>full HTML page</u> as usual
+              %li Unpoly extracts the fragment that matches <code>.story</code>
+              %li Unpoly swaps the old and new fragment
+              %li Unpoly changes the browser URL to <code>http://host/full.html</code>
+
+          %section
+
+            %h3
+              Update a page fragment
+              .subtle
+                without Javascript
+
+            %p
+              %a(href='http://unpoly.com/examples/update-fragment/' target='_blank') Run example on unpoly.com
+
+            %pre.xs
+              %code.html(data-noescape)
+                :preserve
+                  &lt;div class="story"&gt;
+
+                    &lt;p&gt;Story summary&lt;/p&gt;
+
+                    &lt;a href="full.html" <mark>up-target=".story"</mark>&gt;
+                      Read full story
+                    &lt;/a&gt;
+
+                  &lt;/div&gt;
+
+            %ul
+              %li Unpoly requests <code>full.html</code> via AJAX
+              %li Server returns a <u>full HTML page</u> as usual
+              %li Unpoly extracts the fragment that matches <code>.story</code>
+              %li Unpoly swaps the old and new fragment
+              %li Unpoly changes the browser URL to <code>http://host/full.html</code>
+
+          %section
+
+            %h3
+              Open fragment in modal dialog
+              .subtle
+                without Javascript
+
+            %p
+              %a(href='http://unpoly.com/examples/modal/') Run example on unpoly.com
+
+            %pre.xs
+              %code.html(data-noescape)
+                :preserve
+                  &lt;div class="story"&gt;
+
+                    &lt;p&gt;Story summary&lt;/p&gt;
+
+                    &lt;a href="full.html" <mark>up-modal=".story"</mark>&gt;
+                      Read full story
+                    &lt;/a&gt;
+
+                  &lt;/div&gt;
+
+            %ul
+              %li Unpoly requests <code>full.html</code> via AJAX
+              %li Server returns a <u>full HTML page</u> as usual
+              %li Unpoly extracts the fragment that matches <code>.story</code>
+              %li <mark>Unpoly displays the new fragment in a <code>&lt;div class="up-modal"&gt;</code></mark>
+              %li Unpoly changes the browser URL to <code>http://host/full.html</code>
+
+          %section
+
+            %h3
+              Open fragment in popup overlay
+              .subtle
+                without Javascript
+
+            %p(style='visibility: hidden')
+              %a(href='http://unpoly.com/examples/modal/') Run example on unpoly.com
+
+            %pre.xs
+              %code.html(data-noescape)
+                :preserve
+                  &lt;div class="story"&gt;
+
+                    &lt;p&gt;Story summary&lt;/p&gt;
+
+                    &lt;a href="full.html" <mark>up-popup=".story"</mark>&gt;
+                      Read full story
+                    &lt;/a&gt;
+
+                  &lt;/div&gt;
+
+            %ul
+              %li Unpoly requests <code>full.html</code> via AJAX
+              %li Server returns a <u>full HTML page</u> as usual
+              %li Unpoly extracts the fragment that matches <code>.story</code>
+              %li <mark>Unpoly displays the new fragment in a <code>&lt;div class="up-popup"&gt;</code></mark>
+              %li Unpoly changes the browser URL to <code>http://host/full.html</code>
 
 
-          %h4.subtle HTML
 
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;clock&gt;&lt;/clock&gt;
-
-          %h4.subtle Javascript
-
-          %pre.xs
-            %code.javascript(data-noescape)
-              :preserve
-                $.unobtrusive(function() {
-                  $(this).find('clock', function() {
-
-                    var $clock = $(this);
-
-                    function updateClock() {
-                      var now = new Date();
-                      $clock.html(now.toString());
-                    }
-
-                    <mark class="bad">setInterval(updateClock, 1000);</mark> // creates one interval per &lt;clock&gt;!
-
-                  });
-                });
-
-        %section
-          %h3 Unpoly compiler: <span class="red">Still leaky</span>
-
-          %h4.subtle HTML
-
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;clock&gt;&lt;/clock&gt;
-
-          %h4.subtle Javascript
-
-          %pre.xs
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('clock', function($clock) {
-
-                  function updateClock() {
-                    var now = new Date();
-                    $clock.html(now.toString());
-                  }
-
-                  <mark class="bad">setInterval(updateClock, 1000);</mark> // this still leaks memory!
-                });
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-
-        %section
-          %h3 Unpoly compiler: <span class="green">Clean</span>
-
-          %h4.subtle HTML
-
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;clock&gt;&lt;/clock&gt;
-
-          %h4.subtle Javascript
-
-          %pre.xs
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('clock', function($clock) {
-
-                  function updateClock() {
-                    var now = new Date();
-                    $clock.html(now.toString());
-                  }
-
-                  var interval = setInterval(updateClock, 1000);
-
-                  <mark>return function() { clearInterval(interval) };</mark> // clean up when destroyed
-                });
-                &nbsp;
-                &nbsp;
-                &nbsp;
-
-        %section
-          %h3 Unpoly compiler: <span class="red">Leaky</span>
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('textarea.wysiwyg', function($textarea) {
-                  $textarea.redactor();
-                });
-                &nbsp;
-                &nbsp;
-                &nbsp;
-
-        %section
-          %h3 Unpoly compiler: <span class="green">Clean</span>
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('textarea.wysiwyg', function($textarea) {
-                  $textarea.redactor();
-                  return function() {
-                    $textarea.redactor('destroy');
-                  }
-                });
 
         %section
           %h2 Response times
@@ -1143,7 +1063,7 @@
               .line
                 We write very few AngularJS interactions that don't rely on a connection.
               .subtle
-                Template builder, Holly
+                AMC CMS, Holly
 
             %li Most of our AngularJS interactions are still bound by server speed.
             %li
@@ -1208,257 +1128,1288 @@
           %p
             Feel the response time of an Unpoly app by opening a card on
             %br
-            <a href="http://makandracards-up.makandra.de/makandra">makandracards-up.makandra.de</a>.
+            <a href="http://makandracards.com/makandra">makandracards.com</a>.
 
 
         %section
-          %h3 How you can optimize further
+
+          %section
+            %h3 How you can optimize further
+
+            %ul
+              %li Server-side fragment caching (duh!)
+              %li Tailor responses for the <code>X-Up-Target</code> header
+              %li Spinners for long-running requests
+              %li We can still implement client-side interactions
+
+
+          %section
+            %h3 Tailored responses
+
+            %pre.xs
+              %code.html(data-noescape)
+                :preserve
+                  &lt;html&gt;
+
+                    &lt;% if up.target?('head') %&gt;
+                      &lt;%= render 'head' %&gt;
+                    &lt;% end %&gt;
+
+                    &lt;body&gt;
+
+                      &lt;% if up.target?('.side') %&gt;
+                        &lt;%= render 'side' %&gt;
+                      &lt;% end %&gt;
+
+                      &lt;% if up.target?('.main') %&gt;
+                        &lt;%= yield %&gt;
+                      &lt;% end %&gt;
+
+                    &lt;/body&gt;
+                  &lt;/html&gt;
+
+          %section
+            %h3 Spinners
+
+            %p
+              For the occasional long-running request, you can configure this globally:
+
+            %pre.xs
+              %code.html(data-noescape)
+                :preserve
+                  &lt;div class="spinner"&gt;Please wait!&lt;/div&gt;
+
+            %pre.xs
+              %code.javascript(data-noescape)
+                :preserve
+                  up.compiler('.spinner', function($element) {
+                    function show() { $element.show() };
+                    function hide() { $element.hide() };
+                    up.on('up:proxy:slow', show);
+                    up.on('up:proxy:recover', hide);
+                    hide();
+                    return function() {
+                      up.off('up:proxy:slow', show);
+                      up.off('up:proxy:recover', hide);
+                    };
+                  });
+
+            %p
+              The <code>up:proxy:slow</code> event is triggered after 300 ms (configurable).
+
+          %section
+            %h3 We can still implement interactions on the client
+
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;div class='greeter'&gt;
+                    &lt;input class='greeter--input'>
+                    Hello &lt;span class='greeter--name'&gt;&lt;span&gt;!
+                  &lt;/div&gt;
+
+            %pre
+              %code.javascript(data-noescape)
+                :preserve
+                  up.compiler('.greeter', function($element) {
+                    var $input = $element.find('.greeter--input');
+                    var $name = $element.find('.greeter--name');
+                    $input.on('input', function() {
+                      $name.text($input.val());
+                    });
+                  });
+
+          %section
+            %h3
+              .subtle
+                Going nuclear
+              .line
+                Two-way bindings
+
+            %p
+              With <a href="http://rivetsjs.com/">Rivets.js</a> (6 KB):
+
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;div class='template' up-data='{ "name": "Arne" }'&gt;
+                    &lt;input rv-value='name'>
+                    Hello { name }!
+                  &lt;/div&gt;
+
+            %pre
+              %code.javascript(data-noescape)
+                :preserve
+                  up.compiler('.template', function($element, data) {
+                    var view = rivets.bind($element, data);
+                    return view.unbind;
+                  });
+
+
+
+        %section
+          %h2 Activating JS snippets
+
+          %p
+            Every app needs a way to pair Javascript snippets<br />with certain HTML elements:
 
           %ul
-            %li Server-side fragment caching (duh!)
-            %li Tailor responses for the <code>X-Up-Target</code> header
-            %li Spinners for long-running requests
-            %li We can still implement client-side interactions
-
-        %section
-          %h3 Tailored responses
-
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;html&gt;
-
-                  &lt;% if up.target?('head') %&gt;
-                    &lt;%= render 'head' %&gt;
-                  &lt;% end %&gt;
-
-                  &lt;body&gt;
-
-                    &lt;% if up.target?('.side') %&gt;
-                      &lt;%= render 'side' %&gt;
-                    &lt;% end %&gt;
-
-                    &lt;% if up.target?('.main') %&gt;
-                      &lt;%= yield %&gt;
-                    &lt;% end %&gt;
-
-                  &lt;/body&gt;
-                &lt;/html&gt;
-
-        %section
-          %h3 Spinners
-
-          %p
-            For the occasional long-running request, you can configure this globally:
-
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="spinner"&gt;Please wait!&lt;/div&gt;
-
-          %pre.xs
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('.spinner', function($element) {
-                  function show() { $element.show() };
-                  function hide() { $element.hide() };
-                  up.on('up:proxy:slow', show);
-                  up.on('up:proxy:recover', hide);
-                  hide();
-                  return function() {
-                    up.off('up:proxy:slow', show);
-                    up.off('up:proxy:recover', hide);
-                  };
-                });
-
-          %p
-            The <code>up:proxy:slow</code> event is triggered after 300 ms (configurable).
-
-        %section
-          %h3 We can still implement interactions on the client
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class='greeter'&gt;
-                  &lt;input class='greeter--input'>
-                  Hello &lt;span class='greeter--name'&gt;&lt;span&gt;!
-                &lt;/div&gt;
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('.greeter', function($element) {
-                  var $input = $element.find('.greeter--input');
-                  var $name = $element.find('.greeter--name');
-                  $input.on('input', function() {
-                    $name.text($input.val());
-                  });
-                });
+            %li An <code>a[title]</code> attribute should activate qTip on mouseover
+            %li A <code>textarea.wysiwyg</code> should activate Redactor on load
+            %li
+              An <code>input[type=search]</code> field should automatically request new results
+              %br
+              when the user types something
+            %li
+              A <code>.map</code> should render a map with pins via the Google Maps JS API
+            %li
+              A <code>.button.toggle-all</code> should toggle all checkboxes in a form
+              %br
+              when clicked
 
         %section
           %h3
-            .subtle
-              Going nuclear
             .line
-              Two-way bindings
-
-          %p
-            With <a href="http://rivetsjs.com/">Rivets.js</a> (6 KB):
+              Activating JS snippets
+            .subtle
+              Random.js
 
           %pre
             %code.html(data-noescape)
               :preserve
-                &lt;div class='template' up-data='{ "name": "Arne" }'&gt;
-                  &lt;input rv-value='name'>
-                  Hello { name }!
+                &lt;div class="map"&gt;&lt;/span&gt;
+
+
+
+
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                $(function() {
+                  $('.map').each(function() {
+                    new google.maps.Map(this);
+                  });
+                });
+
+          %p
+            This is what you see in jQuery tutorials.<br>
+            HTML fragments loaded via AJAX don't get Javascriptified.
+
+
+        %section
+          %h3
+            .line
+              Activating JS snippets
+            .subtle
+              Unpoly
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="map"&gt;&lt;/span&gt;
+
+
+
+
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                up.compiler('.map', function($map) {
+                  new google.maps.Map($map, { center: pin });
+                });
+
+
+
+          %p
+            Unpoly automatically compiles all fragments that it inserts or updates.
+            %br
+            &nbsp;
+
+        %section
+          %h3
+            .line Getting data into your JS
+            .subtle Random.js
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="map"&gt;&lt;/div&gt;
+
+                &lt;script type="text/javascript"&gt;
+                  initMap($('.map'), { lat: 48.75, lng: 11.45 });
+                &lt;/script&gt;
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                function initMap($element, pin) {
+                  new google.maps.Map($element, { center: pin });
+                });
+
+
+
+          %p
+            &nbsp;
+            %br
+            &nbsp;
+
+
+        %section
+          %h3
+            .line Getting data into your JS
+            .subtle Unpoly
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="map" up-data="{ lat: 48.36, lng: 10.99 }"&lt;/div&gt;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+
+          %pre
+            %code.javascript(data-noescape)
+              :preserve
+                up.compiler('.map', function($element, <mark>pin</mark>) {
+                  new google.maps.Map($element, center: pin);
+                });
+
+
+
+          %p
+            &nbsp;
+            %br
+            &nbsp;
+
+
+        %section
+
+          %section
+            %h2
+              Composability
+
+            %ul
+              %li
+                Unpoly's default UJS behavior is a thin wrapper around a Javascript API
+              %li
+                If the default UJS behavior doesn't fit your use case,<br>you can use
+                that Javascript API from your own code, or invent new UJS syntax
+
+
+        %section
+          %section
+            %h3
+              .line Dual interfaces
+
+            %h4.subtle <u>U</u>nobtrusive
+
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;div class="story"&gt;
+
+                    &lt;p&gt;Story summary&lt;/p&gt;
+
+                    &lt;a href="full.html" up-target=".story"&gt;
+                      Read full story
+                    &lt;/a&gt;
+
+                  &lt;/div&gt;
+
+            %h4.subtle <u>P</u>rogrammatic
+
+            %pre
+              %code.javascript
+                :preserve
+                  up.replace('.story', 'full.html');
+
+
+          %section
+
+            %h3
+              .line Invent your own UJS syntax
+
+            %h4.subtle HTML
+
+            %pre.l
+              %code.html(data-noescape)
+                :preserve
+                  &lt;a menu-link href="/details"&gt;Show more&lt;/span&gt;
+
+            %h4.subtle Javascript
+
+            %pre.l
+              %code.javascript
+                :preserve
+                  up.compiler('[menu-link]', function($link) {
+                    $link.on('click', function(event) {
+                      event.preventDefault();
+                      up.popup.attach($link, {
+                        target: '.menu',
+                        position: 'bottom-left',
+                        animation: 'roll-down'
+                      });
+                    });
+                  });
+
+          %section
+
+            %h3
+              .line Repurpose existing UJS syntax
+
+            %h4.subtle HTML
+
+            %pre.l
+              %code.html(data-noescape)
+                :preserve
+                  &lt;a menu-link href="/details"&gt;Show more&lt;/span&gt;
+
+            %h4.subtle Javascript
+
+            %pre.l
+              %code.javascript
+                :preserve
+                  up.macro('[menu-link]', function($link) {
+                    $link.attr(
+                      'up-target': '.menu',
+                      'up-position': 'bottom-left',
+                      'up-animation': 'roll-down'
+                    });
+                  });
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+
+          %section
+            %h3
+              .line Events
+
+            %pre
+              %code.javascript
+                :preserve
+                  $(document).on('up:modal:open', function(event) {
+                    if (dontLikeModals()) {
+                      event.preventDefault();
+                    }
+                  });
+
+            -#.fragment
+            -#  %p
+            -#    You can also use <a href="http://unpoly.com/up.on"><code>up.on</code></a> to bind event handlers to <code>document</code>.<br />
+            -#    <code>up.on</code> supports <a href="http://unpoly.com/up-data"><code>up-data</code></a> and discards handlers on unsupported browsers.
+            -#
+            -#  %pre
+            -#    %code.javascript
+            -#      :preserve
+            -#        up.on('click', '.map', function(event, $element, data) {
+            -#          // ...
+            -#        });
+
+          %section
+            %h3
+              .line All Async actions return promises
+
+            %pre
+              %code.javascript
+                :preserve
+                  up.replace('.story', 'full.html').then(function() {
+                    // Fragments were loaded and swapped
+                  });
+
+            %pre
+              %code.javascript
+                :preserve
+                  up.morph('.old', '.new', 'cross-fade').then(function() {
+                    // Transition has completed
+                  });
+
+            %p
+              <a href="https://makandracards.com/curriculum/35275-javascript-writing-asynchronous-code" target="_blank">Curriculum lesson on promises</a>
+
+
+
+        %section
+
+          %section
+            %h2 Forms
+
+            %p
+              Hard things with forms:
+
+            %ul
+              %li Submitting a form via AJAX
+              %li File uploads via AJAX
+              %li Detecting redirects
+              %li Dealing with validation errors
+              %li Server-side validations without a page load
+              %li Submitting a form within a modal and staying within the modal
+
+            %p
+              That's all solved by Unpoly.
+
+          %section
+            %h3 Ajax forms
+
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;form method="post" action="/users" <mark>up-target=".main"</mark>&gt;
+                    ...
+                  &lt;/form&gt;
+
+            %ul
+              %li A successful submission (status 200) will update <code>.main</code>
+              %li
+                A failed submission will (non-200 status) update the form itself
+                .subtle
+                  (Or use an <code>up-fail-target</code> attribute)
+
+          %section
+
+            %h3 Return non-200 status<br />when validations fail
+
+            %pre
+              %code.ruby(data-noescape)
+                :preserve
+                  class UsersController < ApplicationController
+
+                    def create
+                      user_params = params[:user].permit(:email, :password)
+                      @user = User.new(user_params)
+                      if @user.save?
+                        sign_in @user
+                      else
+                        render 'form', <mark>status: :bad_request</mark>
+                      end
+                    end
+
+                  end
+
+          %section
+            %h3 Forms within a modal
+
+            %p
+              To <b>stay</b> within the modal, target a selector <b>within</b> the modal:
+
+            %pre.xs
+              %code.html(data-noescape)
+                :preserve
+                  &lt;form up-target=".selector-within-modal"&gt;
+                    ...
+                  &lt;/form&gt;
+
+            %p
+              To <b>close</b> the modal, target a selector <b>behind</b> the modal:
+
+            %pre.xs
+              %code.html(data-noescape)
+                :preserve
+                  &lt;form up-target=".selector-behind-modal"&gt;
+                    ...
+                  &lt;/form&gt;
+
+          %section
+            %h3 Validations without a page load
+
+            %pre.xs
+              %code.html(data-noescape)
+                :preserve
+                  &lt;form action="/users"&gt;
+
+                    &lt;fieldset&gt;
+                      &lt;label&gt;E-mail&lt;/label&gt;
+                      &lt;input type="text" name="email" <mark>up-validate</mark>&gt;
+                    &lt;/label&gt;
+
+                    &lt;fieldset&gt;
+                      &lt;label&gt;Password&lt;/label&gt;
+                      &lt;input type="password" name="password"&gt;
+                    &lt;/fieldset&gt;
+
+                    &lt;button type="submit"&gt;Register&lt;/button&gt;
+
+                  &lt;/form&gt;
+
+          %section
+            %h3 Validations without a page load
+
+            %pre.xs
+              %code.html(data-noescape)
+                :preserve
+                  &lt;form action="/users"&gt;
+
+                    <mark>&lt;fieldset&gt;                                    </mark>
+                    <mark>  &lt;label&gt;E-mail&lt;/label&gt;                       </mark>
+                    <mark>  &lt;input type="text" name="email" up-validate&gt;</mark>
+                    <mark>&lt;/label&gt;                                      </mark>
+
+                    &lt;fieldset&gt;
+                      &lt;label&gt;Password&lt;/label&gt;
+                      &lt;input type="password" name="password"&gt;
+                    &lt;/fieldset&gt;
+
+                    &lt;button type="submit"&gt;Register&lt;/button&gt;
+
+                  &lt;/form&gt;
+
+          %section
+            %h3 Validations without a page load
+
+            %pre.xs
+              %code.html(data-noescape)
+                :preserve
+                  &lt;form action="/users"&gt;
+
+                    <mark>&lt;fieldset class="has-error"&gt;                                      </mark>
+                    <mark>  &lt;label&gt;E-mail has already been taken!&lt;/label&gt;                   </mark>
+                    <mark>  &lt;input type="text" name="email" up-validate value="foo@bar.com"&gt;</mark>
+                    <mark>&lt;/label&gt;                                                          </mark>
+
+                    &lt;fieldset&gt;
+                      &lt;label&gt;Password&lt;/label&gt;
+                      &lt;input type="password" name="password"&gt;
+                    &lt;/fieldset&gt;
+
+                    &lt;button type="submit"&gt;Register&lt;/button&gt;
+
+                  &lt;/form&gt;
+
+          %section
+            %h3 Validations without a page load
+
+            %pre
+              %code.ruby(data-noescape)
+                :preserve
+                  class UsersController &lt; ApplicationController
+
+                    def create
+                      @user = User.new(user_params)
+                      if up.validate?
+                        @user.valid?  # run validations, but don't save to DB
+                        render 'form' # render form with error messages
+                      elsif @user.save?
+                        sign_in @user
+                      else
+                        render 'form', status: :bad_request
+                      end
+                    end
+
+                  end
+
+          %section
+            %h3 Validations without a page load
+
+            %pre
+              %code.ruby(data-noescape)
+                :preserve
+                  class UsersController &lt; ApplicationController
+
+                    def create
+                      @user = User.new(user_params)
+                      <mark>if up.validate?</mark>
+                      <mark>  @user.valid? </mark> # run validations, but don't save to DB
+                      <mark>  render 'form'</mark> # render form with error messages
+                      elsif @user.save?
+                        sign_in @user
+                      else
+                        render 'form', status: :bad_request
+                      end
+                    end
+
+                  end
+
+          %section
+            %h3 Updating dependent fields
+
+            %pre.xs
+              %code.html(data-noescape)
+                :preserve
+                  &lt;form action="/contracts"&gt;
+                    &lt;select name="department" <mark>up-validate="[name=employee]"</mark>&gt;...&lt;/select&gt;
+                    &lt;select name="employee"&gt;...&lt;/select&gt;
+                  &lt;/form&gt;
+
+
+
+        %section
+
+          %section
+            %h3 Persisting elements
+            %pre.l
+              %code.html(data-noescape)
+                :preserve
+                  &lt;div class="story"&gt;
+
+                    &lt;video <mark>up-keep</mark> src="movie.mp4"&gt;&lt;/video&gt;
+
+                    &lt;p&gt;Story summary&lt;/p&gt;
+
+                    &lt;a href="full.html" up-target=".story"&gt;
+                      Read full story
+                    &lt;/a&gt;
+
+                  &lt;/div&gt;
+
+
+
+
+          %section
+            %h2 Updating persisted elements
+
+          %section
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;div class="map" up-data="[
+                    { lat: 48.36, lng: 10.99 },
+                    { lat: 48.75, lng: 11.45 }
+                  ]"&gt;&lt;/div&gt;
+
+                  &lt;form method="post" action="/pins" <mark>up-target=".map"</mark>&gt;
+                    Lat: &lt;input name="lat"&gt;
+                    Lng: &lt;input name="lng"&gt;
+                    &lt;button&gt;Add pin&lt;/button&gt;
+                  &lt;/form&gt;
+
+            %pre
+              %code.javascript(data-noescape)
+                :preserve
+                  up.compiler('.map', function($element, pins) {
+                    var map = new google.maps.Map($element);
+                    pins.forEach(function(pin) {
+                      var position = new google.maps.LatLng(pin.lat, pin.lng);
+                      new google.maps.Marker({
+                        position: position,
+                        map: map
+                      });
+                  });
+
+          %section
+
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                  &lt;form method="post" action="/pins" <mark>up-target=".map"</mark>&gt;
+                    Lat: &lt;input name="lat"&gt;
+                    Lng: &lt;input name="lng"&gt;
+                    &lt;button&gt;Add pin&lt;/button&gt;
+                  &lt;/form&gt;
+
+            %pre
+              %code.javascript(data-noescape)
+                :preserve
+                  up.compiler('.map', function($element, pins) {
+                    var map = new google.maps.Map($element);
+                    pins.forEach(function(pin) {
+                      var position = new google.maps.LatLng(pin.lat, pin.lng);
+                      new google.maps.Marker({
+                        position: position,
+                        map: map
+                      });
+                  });
+
+          %section
+
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;
+
+
+
+
+                  &lt;%= form_for Pin.new, html: { 'up-target' =&gt; '.map' } do |form| %&gt;
+                    Lat: &lt;%= form.text_field :lat %&gt;
+                    Lng: &lt;%= form.text_field :lng %&gt;
+                    &lt;%= form.submit 'Add pin' %&gt;
+                  &lt;% end %&gt;
+
+            %pre
+              %code.javascript(data-noescape)
+                :preserve
+                  up.compiler('.map', function($element, pins) {
+                    var map = new google.maps.Map($element);
+                    pins.forEach(function(pin) {
+                      var position = new google.maps.LatLng(pin.lat, pin.lng);
+                      new google.maps.Marker({
+                        position: position,
+                        map: map
+                      });
+                  });
+
+          %section
+
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;
+
+
+
+
+                  &lt;%= form_for Pin.new, html: { 'up-target' =&gt; '.map' } do |form| %&gt;
+                    Lat: &lt;%= form.text_field :lat %&gt;
+                    Lng: &lt;%= form.text_field :lng %&gt;
+                    &lt;%= form.submit 'Add pin' %&gt;
+                  &lt;% end %&gt;
+
+            %pre
+              %code.javascript(data-noescape)
+                :preserve
+                  up.compiler('.map', function($element, initialPins) {
+                    var map = new google.maps.Map($element);
+                    function renderPins(pins) { ... }
+                    renderPins(initialPins);
+                  });
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+
+          %section
+
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;" <mark>up-keep</mark>&gt;&lt;/div&gt;
+
+
+
+
+                  &lt;%= form_for Pin.new, html: { 'up-target' =&gt; '.map' } do |form| %&gt;
+                    Lat: &lt;%= form.text_field :lat %&gt;
+                    Lng: &lt;%= form.text_field :lng %&gt;
+                    &lt;%= form.submit 'Add pin' %&gt;
+                  &lt;% end %&gt;
+
+            %pre
+              %code.javascript(data-noescape)
+                :preserve
+                  up.compiler('.map', function($element, initialPins) {
+                    var map = new google.maps.Map($element);
+                    function renderPins(pins) { ... }
+                    renderPins(initialPins);
+                    <mark>$element.on('up:fragment:keep', function(event) {</mark>
+                    <mark>  renderPins(event.newData);                     </mark>
+                    <mark>});                                              </mark>
+                  });
+                  &nbsp;
+
+
+
+        %section
+          %h3 Getting started
+
+          %ul
+            %li Read through <a href="http://unpoly.com">unpoly.com</a>
+            %li <code>gem 'unpoly-rails'</code>
+            %li Replace half your Javascript with <code>up-target</code> links
+            %li Convert remaining Javascripts into <code>up.compiler</code>
+
+
+
+        %section
+          %img.plain(src='pictures/logos/unpoly.png' width='50%')
+
+        %section
+          %p
+            <a href="https://www.flickr.com/photos/127580645@N07/15215520777">iOS 8 icons</a> by Microsiervos
+
+
+        %section
+          %h2 Additional slides
+
+
+        %section
+          %h3 Navigation
+
+          %ul
+            %li
+              All fragment updates change the browser URL by default.
+            %li
+              .line
+                Back/Forward buttons work as expected.
+              .subtle
+                Even scroll positions are restored.
+            %li
+              .line
+                Linking to a fragment will <b>scroll the viewport</b> to reveal the fragment.
+              .subtle
+                Unpoly is aware of fixed navigation bars and will scroll further/less.
+            %li
+              Links to the current URL get an <a href="http://unpoly.com/up-current"><code>up-current</code></a>
+              class automatically.
+            %li
+              .line
+                Modals and popups have their own URL.
+              .subtle
+                When a modal closes, the background URL is restored.<br />
+                Reloading a modal's URL shows the content as a full page.
+            %li
+              .line
+                Use <a href="http://unpoly.com/up-back"><code>[up-back]</code></a> to link to a previous state.
+              .subtle
+                That's a real link with a URL, not <code>location.back()</code>
+            %li
+              .line
+                Everything is opt-in
+              .subtle
+                Links without <code>up-target</code> will do a regular page load.<br>
+                This is different to Turbolinks, where you need to opt-out.
+
+
+
+        %section
+          %h3 Find-as-you-type search
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;form action="/users" up-target=".list" <mark>up-autosubmit</mark>&gt;
+                  &lt;input type="search" name="query" /&gt;
+                &lt;/form&gt;
+
+                &lt;div class="list"&gt;
+                  &lt;% @users.each do |user| %&gt;
+                    = link_to user.email, user
+                  &lt;% end %&gt;
                 &lt;/div&gt;
 
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('.template', function($element, data) {
-                  var view = rivets.bind($element, data);
-                  return view.unbind;
-                });
+
 
         %section
-          %h3 Animation
-
-          %p
-            When a new element enters the DOM, you can <b>animate</b> the appearance:
+          %h3 Symmmetry to BEM blocks
 
           %pre
-            %code.html(data-noescape)
+            %code.nohighlight(data-noescape)
               :preserve
-                &lt;a href="/settings" up-modal=".menu" up-animation="fade-in"&gt;
-                  Open settings
-                &lt;/a&gt;
+                <b>app/assets/stylesheets/blocks</b>
+                  head.css
+                  map.css
+                  photo_hero.css
+                  screenshot.css
+                  tail.css
+
+                <b>app/assets/javascripts/compilers</b>
+                  head.js
+                  map.js
+                  photo_hero.js
+                  screenshot.js
+
+        %section
+
+          %section
+            %h2
+              .line
+                Memory leaks
+
+            %ul
+              %li
+                Our Random.js is <b>full of memory leaks</b>.
+              %li
+                We just don't notice because the Javascript VM is reset between page loads!
+              %li
+                We can't have memory leaks in persistent Javascript VMs
+                .subtle
+                  like Angular.js, Unpoly, Turbolinks
+              %li
+                Background: <a href="https://makandracards.com/makandra/31325-how-to-create-memory-leaks-in-jquery">one</a>,
+                <a href="https://makandracards.com/makandra/31289-how-to-create-giant-memory-leaks-in-angularjs">two</a>.
+
+          %section
+            %h3 Random.js
+
+            %h4.subtle HTML
+
+            %pre.xs
+              %code.html(data-noescape)
+                :preserve
+                  &lt;clock&gt;&lt;/clock&gt;
+
+            %h4.subtle Javascript
+
+            %pre.xs
+              %code.javascript(data-noescape)
+                :preserve
+                  $.unobtrusive(function() {
+                    $(this).find('clock', function() {
+
+                      var $clock = $(this);
+
+                      function updateClock() {
+                        var now = new Date();
+                        $clock.html(now.toString());
+                      }
+
+                      setInterval(updateClock, 1000);
+
+                    });
+                  });
+
+          %section
+            %h3 Random.js: <span class="red">Leaky</span>
 
 
-          %p
-            When you swap an element, you can <b>transition</b> between the old and new states:
+            %h4.subtle HTML
 
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;a href="/users" up-target=".list" up-transition="cross-fade"&gt;
-                  Show users
-                &lt;/a&gt;
+            %pre.xs
+              %code.html(data-noescape)
+                :preserve
+                  &lt;clock&gt;&lt;/clock&gt;
 
-          %p
-            Animations are implemented via CSS transforms on a 3D-accelerated layer.
+            %h4.subtle Javascript
 
-          %hr
+            %pre.xs
+              %code.javascript(data-noescape)
+                :preserve
+                  $.unobtrusive(function() {
+                    $(this).find('clock', function() {
 
-          %p
-            %a(href='https://staging.makandra.de' target='_blank')
-              View examples on new makandra.de
+                      var $clock = $(this);
+
+                      function updateClock() {
+                        var now = new Date();
+                        $clock.html(now.toString());
+                      }
+
+                      <mark class="bad">setInterval(updateClock, 1000);</mark> // creates one interval per &lt;clock&gt;!
+
+                    });
+                  });
+
+          %section
+            %h3 Unpoly compiler: <span class="red">Still leaky</span>
+
+            %h4.subtle HTML
+
+            %pre.xs
+              %code.html(data-noescape)
+                :preserve
+                  &lt;clock&gt;&lt;/clock&gt;
+
+            %h4.subtle Javascript
+
+            %pre.xs
+              %code.javascript(data-noescape)
+                :preserve
+                  up.compiler('clock', function($clock) {
+
+                    function updateClock() {
+                      var now = new Date();
+                      $clock.html(now.toString());
+                    }
+
+                    <mark class="bad">setInterval(updateClock, 1000);</mark> // this still leaks memory!
+                  });
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+
+          %section
+            %h3 Unpoly compiler: <span class="green">Clean</span>
+
+            %h4.subtle HTML
+
+            %pre.xs
+              %code.html(data-noescape)
+                :preserve
+                  &lt;clock&gt;&lt;/clock&gt;
+
+            %h4.subtle Javascript
+
+            %pre.xs
+              %code.javascript(data-noescape)
+                :preserve
+                  up.compiler('clock', function($clock) {
+
+                    function updateClock() {
+                      var now = new Date();
+                      $clock.html(now.toString());
+                    }
+
+                    var interval = setInterval(updateClock, 1000);
+
+                    <mark>return function() { clearInterval(interval) };</mark> // clean up when destroyed
+                  });
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+
+          %section
+            %h3 Unpoly compiler: <span class="red">Leaky</span>
+
+            %pre
+              %code.javascript(data-noescape)
+                :preserve
+                  up.compiler('textarea.wysiwyg', function($textarea) {
+                    $textarea.redactor();
+                  });
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+
+          %section
+            %h3 Unpoly compiler: <span class="green">Clean</span>
+
+            %pre
+              %code.javascript(data-noescape)
+                :preserve
+                  up.compiler('textarea.wysiwyg', function($textarea) {
+                    $textarea.redactor();
+                    return function() {
+                      $textarea.redactor('destroy');
+                    }
+                  });
+
+
+        %section
+
+          %section
+            %h3 Animation
+
+            %p
+              When a new element enters the DOM, you can <b>animate</b> the appearance:
+
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;a href="/settings" up-modal=".menu" up-animation="fade-in"&gt;
+                    Open settings
+                  &lt;/a&gt;
+
+
+            %p
+              When you swap an element, you can <b>transition</b> between the old and new states:
+
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;a href="/users" up-target=".list" up-transition="cross-fade"&gt;
+                    Show users
+                  &lt;/a&gt;
+
+            %p
+              Animations are implemented via CSS transforms on a 3D-accelerated layer.
+
+            %hr
+
+            %p
+              %a(href='https://staging.makandra.de' target='_blank')
+                View examples on new makandra.de
+              %br
+              %span.subtle (page transitions, screenshot animation, responsive nav)
+
+          %section(data-background-color='#000')
+            %h3 Why transitions are hard
             %br
-            %span.subtle (page transitions, screenshot animation, responsive nav)
+            .transition-issue-illustration(style='width: 960px; height: 460px')
+              %img(src='pictures/transition_desired.svg' width='100%')
 
-        %section(data-background-color='#000')
-          %h3 Why transitions are hard
-          %br
-          .transition-issue-illustration(style='width: 960px; height: 460px')
-            %img(src='pictures/transition_desired.svg' width='100%')
+          %section(data-background-color='#000')
+            %h3 Why transitions are hard
+            %br
+            .transition-issue-illustration(style='width: 960px; height: 460px')
+              %img(src='pictures/transition_naive.svg' width='100%')
 
-        %section(data-background-color='#000')
-          %h3 Why transitions are hard
-          %br
-          .transition-issue-illustration(style='width: 960px; height: 460px')
-            %img(src='pictures/transition_naive.svg' width='100%')
+
+          %section
+            %h3 Ghosting
+
+            .ghosts
+              .ghosts--layer.is-old
+                Old
+                .ghosts--css
+                  position: static<br>
+                  display: hidden
+              .ghosts--layer.is-new
+                New
+                .ghosts--css
+                  position: static<br>
+                  opacity: 0
+              .ghosts--layer.is-old-ghost
+                Old (ghost)
+                .ghosts--css
+                  position: absolute
+              .ghosts--layer.is-new-ghost
+                New (ghost)
+                .ghosts--css
+                  position: absolute
+
+
+          %section(data-background-color='#000')
+            %h3 Without ghosting
+            %br
+            .transition-issue-illustration(style='width: 960px; height: 460px')
+              %img(src='pictures/transition_naive.svg' width='100%')
+
+
+          %section(data-background-color='#000')
+            %h3 With ghosting
+            %br
+            .transition-issue-illustration(style='width: 960px; height: 460px')
+              %img(src='pictures/transition_desired.svg' width='100%')
+
+          %section
+            .columns
+
+              .column
+                %h4 Predefined animations
+                %pre
+                  %code.nohighlight(data-noescape)
+                    :preserve
+                      fade-in
+                      fade-out
+                      move-to-top
+                      move-from-bottom
+                      move-to-bottom
+                      move-from-top
+                      move-to-left
+                      move-from-right
+                      move-to-right
+                      move-from-left
+
+              .column
+                %h4 Predefined transitions
+                %pre
+                  %code.nohighlight(data-noescape)
+                    :preserve
+                      cross-fade
+                      move-top
+                      move-bottom
+                      move-left
+                      move-right
+
+          %section
+            %h3 Custom animations
+
+            %pre
+              %code.javascript(data-noescape)
+                :preserve
+                  up.animation('zoom-in', function($element, options) {
+
+                    var firstFrame = {
+                      opacity: 0,
+                      transform: 'scale(0.5)'
+                    };
+
+                    var lastFrame = {
+                      opacity: 1,
+                      transform: 'scale(1)'
+                    };
+
+                    $element.css(firstFrame);
+                    return up.animate($element, lastFrame, options);
+
+                  });
+
+        %section
+
+          %section
+            %h3
+              <span class="subtle">Toggle all: </span> On load
+
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;span class="toggle-all"&gt;Toggle all&lt;/span&gt;
+
+            %pre
+              %code.javascript(data-noescape)
+                :preserve
+                  $(function() {
+                    $('.toggle-all').each(function() {
+                      var $link = $(this);
+                      $link.on('click', function() {
+                        var $form = $link.closest('form');
+                        var $checkboxes = $form.find(':checkbox');
+                        var someUnchecked = $checkboxes.is(':not(:checked)');
+                        $checkboxes.prop('checked', someUnchecked);
+                      });
+                    });
+                  });
+                  &nbsp;
+                  &nbsp;
+
+            %p
+              <a href="http://codepen.io/triskweline/pen/MyrVgG" target="_blank">Run example on codepen.io</a>.<br>
+              This is what you see in jQuery tutorials.<br>
+              HTML fragments loaded via AJAX don't get Javascriptified.
+
+
+          %section
+            %h3
+              <span class="subtle">Toggle all: </span> Angular directive
+
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;span class="toggle-all"&gt;Toggle all&lt;/span&gt;
+
+            %pre
+              %code.javascript(data-noescape)
+                :preserve
+                  app.directive('toggle-all', function() {
+                    return {
+                      restrict: 'C',
+                      link: function(scope, $link) {
+                        $link.on('click', function() {
+                          var $form = $link.closest('form');
+                          var $checkboxes = $form.find(':checkbox');
+                          var someUnchecked = $checkboxes.is(':not(:checked)');
+                          $checkboxes.prop('checked', someUnchecked);
+                        });
+                      }
+                    }
+                  });
+
+            %p
+              It's nice how Angular lets us register a compiling function for a CSS selector.
+              <br>
+              Also we don't need to manually Javascriptify new fragments
+              <br>
+              as long as we insert them through Angular templates
+
+          %section
+            %h3
+              <span class="subtle">Toggle all: </span> Unpoly compiler
+
+            %pre
+              %code.html(data-noescape)
+                :preserve
+                  &lt;span class="toggle-all"&gt;Toggle all&lt;/span&gt;
+
+            %pre
+              %code.javascript(data-noescape)
+                :preserve
+                  up.compiler('.toggle-all', function($link) {
+                    $link.on('click', function() {
+                      var $form = $link.closest('form');
+                      var $checkboxes = $form.find(':checkbox');
+                      var someUnchecked = $checkboxes.is(':not(:checked)');
+                      $checkboxes.prop('checked', someUnchecked);
+                    });
+                  });
+
+            %p
+              Unpoly automatically compiles all fragments that it inserts or updates.
 
 
         %section
-          %h3 Ghosting
+          %h3 Documentation
+          %p
+            View full documentation of JS functions,<br> events and UJS selectors on
+            <a href="http://unpoly.com/">unpoly.com</a>.
 
-          .ghosts
-            .ghosts--layer.is-old
-              Old
-              .ghosts--css
-                position: static<br>
-                display: hidden
-            .ghosts--layer.is-new
-              New
-              .ghosts--css
-                position: static<br>
-                opacity: 0
-            .ghosts--layer.is-old-ghost
-              Old (ghost)
-              .ghosts--css
-                position: absolute
-            .ghosts--layer.is-new-ghost
-              New (ghost)
-              .ghosts--css
-                position: absolute
-
-
-        %section(data-background-color='#000')
-          %h3 Without ghosting
-          %br
-          .transition-issue-illustration(style='width: 960px; height: 460px')
-            %img(src='pictures/transition_naive.svg' width='100%')
-
-
-        %section(data-background-color='#000')
-          %h3 With ghosting
-          %br
-          .transition-issue-illustration(style='width: 960px; height: 460px')
-            %img(src='pictures/transition_desired.svg' width='100%')
-
-        %section
-          .columns
-
-            .column
-              %h4 Predefined animations
-              %pre
-                %code.nohighlight(data-noescape)
-                  :preserve
-                    fade-in
-                    fade-out
-                    move-to-top
-                    move-from-bottom
-                    move-to-bottom
-                    move-from-top
-                    move-to-left
-                    move-from-right
-                    move-to-right
-                    move-from-left
-
-            .column
-              %h4 Predefined transitions
-              %pre
-                %code.nohighlight(data-noescape)
-                  :preserve
-                    cross-fade
-                    move-top
-                    move-bottom
-                    move-left
-                    move-right
-
-        %section
-          %h3 Custom animations
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                up.animation('zoom-in', function($element, options) {
-
-                  var firstFrame = {
-                    opacity: 0,
-                    transform: 'scale(0.5)'
-                  };
-
-                  var lastFrame = {
-                    opacity: 1,
-                    transform: 'scale(1)'
-                  };
-
-                  $element.css(firstFrame);
-                  return up.animate($element, lastFrame, options);
-
-                });
 
         %section
           %h3 Legacy browsers
@@ -1482,405 +2433,7 @@
               %th IE8
               %td Unpoly prevents itself from booting,<br>leaving you with a classic server-side application
 
-        %section
-          %h2
-            Composability
 
-          %ul
-            %li
-              Unpoly's default UJS behavior is a thin wrapper around a Javascript API
-            %li
-              If the default UJS behavior doesn't fit your use case,<br>you can use
-              that Javascript API from your own code, or invent new UJS syntax
-
-
-        %section
-          %h3
-            .line Dual interfaces
-
-          %h4.subtle <u>U</u>nobtrusive
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="story"&gt;
-
-                  &lt;p&gt;Story summary&lt;/p&gt;
-
-                  &lt;a href="full.html" up-target=".story"&gt;
-                    Read full story
-                  &lt;/a&gt;
-
-                &lt;/div&gt;
-
-          %h4.subtle <u>P</u>rogrammatic
-
-          %pre
-            %code.javascript
-              :preserve
-                up.replace('.story', 'full.html');
-
-        %section
-
-          %h3
-            .line Invent your own UJS syntax
-
-          %h4.subtle HTML
-
-          %pre.l
-            %code.html(data-noescape)
-              :preserve
-                &lt;a menu-link href="/details"&gt;Show more&lt;/span&gt;
-
-          %h4.subtle Javascript
-
-          %pre.l
-            %code.javascript
-              :preserve
-                up.compiler('[menu-link]', function($link) {
-                  $link.on('click', function(event) {
-                    event.preventDefault();
-                    up.popup.attach($link, {
-                      target: '.menu',
-                      position: 'bottom-left',
-                      animation: 'roll-down'
-                    });
-                  });
-                });
-
-        %section
-
-          %h3
-            .line Repurpose existing UJS syntax
-
-          %h4.subtle HTML
-
-          %pre.l
-            %code.html(data-noescape)
-              :preserve
-                &lt;a menu-link href="/details"&gt;Show more&lt;/span&gt;
-
-          %h4.subtle Javascript
-
-          %pre.l
-            %code.javascript
-              :preserve
-                up.macro('[menu-link]', function($link) {
-                  $link.attr(
-                    'up-target': '.menu',
-                    'up-position': 'bottom-left',
-                    'up-animation': 'roll-down'
-                  });
-                });
-                &nbsp;
-                &nbsp;
-                &nbsp;
-
-        %section
-          %h3
-            .line Events
-
-          %pre
-            %code.javascript
-              :preserve
-                $(document).on('up:modal:open', function(event) {
-                  if (dontLikeModals()) {
-                    event.preventDefault();
-                  }
-                });
-
-          -#.fragment
-          -#  %p
-          -#    You can also use <a href="http://unpoly.com/up.on"><code>up.on</code></a> to bind event handlers to <code>document</code>.<br />
-          -#    <code>up.on</code> supports <a href="http://unpoly.com/up-data"><code>up-data</code></a> and discards handlers on unsupported browsers.
-          -#
-          -#  %pre
-          -#    %code.javascript
-          -#      :preserve
-          -#        up.on('click', '.map', function(event, $element, data) {
-          -#          // ...
-          -#        });
-
-        %section
-          %h3
-            .line All Async actions return promises
-
-          %pre
-            %code.javascript
-              :preserve
-                up.replace('.story', 'full.html').then(function() {
-                  // Fragments were loaded and swapped
-                });
-
-          %pre
-            %code.javascript
-              :preserve
-                up.morph('.old', '.new', 'cross-fade').then(function() {
-                  // Transition has completed
-                });
-
-          %p
-            <a href="https://makandracards.com/curriculum/35275-javascript-writing-asynchronous-code" target="_blank">Curriculum lesson on promises</a>
-
-        %section
-          %h3 Documentation
-          %p
-            View full documentation of JS functions,<br> events and UJS selectors on
-            <a href="http://unpoly.com/">unpoly.com</a>.
-
-        %section
-          %h2 Forms
-
-          %p
-            Hard things with forms:
-
-          %ul
-            %li Submitting a form via AJAX
-            %li File uploads via AJAX
-            %li Detecting redirects
-            %li Dealing with validation errors
-            %li Server-side validations without a page load
-            %li Submitting a form within a modal and staying within the modal
-
-        %section
-          %h3 Ajax forms
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;form method="post" action="/users" <mark>up-target=".main"</mark>&gt;
-                  ...
-                &lt;/form&gt;
-
-          %ul
-            %li A successful submission (status 200) will update <code>.main</code>
-            %li
-              A failed submission will (non-200 status) update the form itself
-              .subtle
-                (Or use an <code>up-fail-target</code> attribute)
-
-        %section
-
-          %h3 Return non-200 status<br />when validations fail
-
-          %pre
-            %code.ruby(data-noescape)
-              :preserve
-                class UsersController < ApplicationController
-
-                  def create
-                    user_params = params[:user].permit(:email, :password)
-                    @user = User.new(user_params)
-                    if @user.save?
-                      sign_in @user
-                    else
-                      render 'form', <mark>status: :bad_request</mark>
-                    end
-                  end
-
-                end
-
-        %section
-          %h3 Forms within a modal
-
-          %p
-            To <b>stay</b> within the modal, target a selector <b>within</b> the modal:
-
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;form up-target=".selector-within-modal"&gt;
-                  ...
-                &lt;/form&gt;
-
-          %p
-            To <b>close</b> the modal, target a selector <b>behind</b> the modal:
-
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;form up-target=".selector-behind-modal"&gt;
-                  ...
-                &lt;/form&gt;
-
-        %section
-          %h3 Validations without a page load
-
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;form action="/users"&gt;
-
-                  &lt;fieldset&gt;
-                    &lt;label&gt;E-mail&lt;/label&gt;
-                    &lt;input type="text" name="email" <mark>up-validate</mark>&gt;
-                  &lt;/label&gt;
-
-                  &lt;fieldset&gt;
-                    &lt;label&gt;Password&lt;/label&gt;
-                    &lt;input type="password" name="password"&gt;
-                  &lt;/fieldset&gt;
-
-                  &lt;button type="submit"&gt;Register&lt;/button&gt;
-
-                &lt;/form&gt;
-
-        %section
-          %h3 Validations without a page load
-
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;form action="/users"&gt;
-
-                  <mark>&lt;fieldset&gt;                                    </mark>
-                  <mark>  &lt;label&gt;E-mail&lt;/label&gt;                       </mark>
-                  <mark>  &lt;input type="text" name="email" up-validate&gt;</mark>
-                  <mark>&lt;/label&gt;                                      </mark>
-
-                  &lt;fieldset&gt;
-                    &lt;label&gt;Password&lt;/label&gt;
-                    &lt;input type="password" name="password"&gt;
-                  &lt;/fieldset&gt;
-
-                  &lt;button type="submit"&gt;Register&lt;/button&gt;
-
-                &lt;/form&gt;
-
-        %section
-          %h3 Validations without a page load
-
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;form action="/users"&gt;
-
-                  <mark>&lt;fieldset class="has-error"&gt;                                      </mark>
-                  <mark>  &lt;label&gt;E-mail has already been taken!&lt;/label&gt;                   </mark>
-                  <mark>  &lt;input type="text" name="email" up-validate value="foo@bar.com"&gt;</mark>
-                  <mark>&lt;/label&gt;                                                          </mark>
-
-                  &lt;fieldset&gt;
-                    &lt;label&gt;Password&lt;/label&gt;
-                    &lt;input type="password" name="password"&gt;
-                  &lt;/fieldset&gt;
-
-                  &lt;button type="submit"&gt;Register&lt;/button&gt;
-
-                &lt;/form&gt;
-
-        %section
-          %h3 Validations without a page load
-
-          %pre
-            %code.ruby(data-noescape)
-              :preserve
-                class UsersController &lt; ApplicationController
-
-                  def create
-                    @user = User.new(user_params)
-                    if up.validate?
-                      @user.valid?  # run validations, but don't save to DB
-                      render 'form' # render form with error messages
-                    elsif @user.save?
-                      sign_in @user
-                    else
-                      render 'form', status: :bad_request
-                    end
-                  end
-
-                end
-
-        %section
-          %h3 Validations without a page load
-
-          %pre
-            %code.ruby(data-noescape)
-              :preserve
-                class UsersController &lt; ApplicationController
-
-                  def create
-                    @user = User.new(user_params)
-                    <mark>if up.validate?</mark>
-                    <mark>  @user.valid? </mark> # run validations, but don't save to DB
-                    <mark>  render 'form'</mark> # render form with error messages
-                    elsif @user.save?
-                      sign_in @user
-                    else
-                      render 'form', status: :bad_request
-                    end
-                  end
-
-                end
-
-        %section
-          %h3 Updating dependent fields
-
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;form action="/contracts"&gt;
-                  &lt;select name="department" <mark>up-validate="[name=employee]"</mark>&gt;...&lt;/select&gt;
-                  &lt;select name="employee"&gt;...&lt;/select&gt;
-                &lt;/form&gt;
-
-
-        %section
-          %h3 Persisting elements
-          %pre.l
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="story"&gt;
-
-                  &lt;video <mark>up-keep</mark> src="movie.mp4"&gt;&lt;/video&gt;
-
-                  &lt;p&gt;Story summary&lt;/p&gt;
-
-                  &lt;a href="full.html" up-target=".story"&gt;
-                    Read full story
-                  &lt;/a&gt;
-
-                &lt;/div&gt;
-
-        %section
-          %h3 Find-as-you-type search
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;form action="/users" up-target=".list" <mark>up-observe="up.submit(this)"</mark>&gt;
-                  &lt;input type="search" name="query" /&gt;
-                &lt;/form&gt;
-
-                &lt;div class="list"&gt;
-                  &lt;% @users.each do |user| %&gt;
-                    = link_to user.email, user
-                  &lt;% end %&gt;
-                &lt;/div&gt;
-
-          %p
-            <code>up-observe</code> reacts faster than our vintage <code>observeField</code> helper
-            and has no concurrency issues.
-
-        %section
-          %h3 Find-as-you-type search
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;form action="/users" up-target=".list" <mark>up-autosubmit</mark>&gt;
-                  &lt;input type="search" name="query" /&gt;
-                &lt;/form&gt;
-
-                &lt;div class="list"&gt;
-                  &lt;% @users.each do |user| %&gt;
-                    = link_to user.email, user
-                  &lt;% end %&gt;
-                &lt;/div&gt;
-
-          %p
-            <code>up-observe</code> reacts faster than our vintage <code>observeField</code> helper
-            and has no concurrency issues.
 
         %section
           %h3 Bootstrap integration
@@ -1896,55 +2449,6 @@
               Makes Unpoly aware of fixed Bootstrap layout components when scrolling the viewport.
             %li
               In general we try to not do things that would totally clash with Bootstrap.
-
-
-        %section
-
-          %table
-            %tr
-              %th
-              %th Random.js
-              %th
-                Unpoly app
-              %th Single-page app
-            %tr
-              %th
-                Code
-              %td
-                %span.green Simple
-              %td
-                %span.green Simple
-              %td
-                %span.red Complex
-            %tr
-              %th
-                UX
-              %td
-                %span.red Painful
-              %td
-                %span.yellow-green Friendly
-              %td
-                %span.green Refined
-            %tr
-              %th
-                Cost
-              %td
-                %span.green Affordable
-              %td
-                %span.green Affordable
-              %td
-                %span.red Expensive
-
-
-        %section
-          %h3 Getting started
-
-          %ul
-            %li Read through <a href="http://unpoly.com">unpoly.com</a>
-            %li <code>gem 'unpoly-rails'</code>
-            %li Replace half your Javascript with <code>up-target</code> links
-            %li Convert remaining Javascripts into <code>up.compiler</code>
-
 
         %section
           %h3 Rails integration
@@ -1989,64 +2493,95 @@
             E.g. <a href="http://unpoly.com">unpoly.com</a> is a static middleman site using Unpoly.
 
         %section
-          %h3 Unit testing
 
-          %p
-            Use <a href="http://jasmine.github.io/">Jasmine</a> to describe examples.<br />
-            Use <a href="https://github.com/velesin/jasmine-jquery">jasmine-jquery</a> to create sample elements.<br />
-            Use <a href="http://unpoly.com/up.hello"><code>up.hello</code></a> to compile sample elements.
+          %section
+            %h3 Unit testing
 
-          %pre.xs
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('.current-year', function($element) {
-                  var year = new Date().getFullYear();
-                  $element.text(year);
-                });
+            %p
+              Use <a href="http://jasmine.github.io/">Jasmine</a> to describe examples.<br />
+              Use <a href="https://github.com/velesin/jasmine-jquery">jasmine-jquery</a> to create sample elements.<br />
+              Use <a href="http://unpoly.com/up.hello"><code>up.hello</code></a> to compile sample elements.
 
-          %pre.xs
-            %code.javascript(data-noescape)
-              :preserve
-                describe('.current-year', function() {
-                  it("displays today's year", function() {
-                    $element = affix('.current-today');
-                    up.hello($element);
-                    year = new Date().getFullYear();
-                    expect($element).toHaveText(year.toString());
+            %pre.xs
+              %code.javascript(data-noescape)
+                :preserve
+                  up.compiler('.current-year', function($element) {
+                    var year = new Date().getFullYear();
+                    $element.text(year);
                   });
-                });
 
-        %section
-          %h3 Easier integration testing
+            %pre.xs
+              %code.javascript(data-noescape)
+                :preserve
+                  describe('.current-year', function() {
+                    it("displays today's year", function() {
+                      $element = affix('.current-today');
+                      up.hello($element);
+                      year = new Date().getFullYear();
+                      expect($element).toHaveText(year.toString());
+                    });
+                  });
 
-          %p
-            Disable animation:
+          %section
+            %h3 Easier integration testing
 
-          %pre
-            %code.ruby(data-noescape)
-              :preserve
-                up.motion.config.enabled = false;
+            %p
+              Disable animation:
 
-          %p
-            Disable concurrent requests:
+            %pre
+              %code.ruby(data-noescape)
+                :preserve
+                  up.motion.config.enabled = false;
 
-          %pre
-            %code.ruby(data-noescape)
-              :preserve
-                up.proxy.config.maxRequests = 1;
+            %p
+              Disable concurrent requests:
 
-          %p
-            Wait before you do things:
+            %pre
+              %code.ruby(data-noescape)
+                :preserve
+                  up.proxy.config.maxRequests = 1;
 
-          %pre.xs
-            %code.ruby(data-noescape)
-              :preserve
-                AfterStep do
-                  sleep 0.05 while page.evaluate_script('window.up && up.proxy.isBusy()')
-                end
-          %p
-            (Or use <a href="https://github.com/makandra/spreewald#waiting-for-page-load"><code>patiently</code></a>).
+            %p
+              Wait before you do things:
 
+            %pre.xs
+              %code.ruby(data-noescape)
+                :preserve
+                  AfterStep do
+                    sleep 0.05 while page.evaluate_script('window.up && up.proxy.isBusy()')
+                  end
+            %p
+              (Or use <a href="https://github.com/makandra/spreewald#waiting-for-page-load"><code>patiently</code></a>).
+
+          %section
+            %p
+              Use <a href="https://github.com/jasmine/jasmine-ajax">jasmine-ajax</a> to mock the network:
+
+            %pre.xxs
+              %code.javascript(data-noescape)
+                :preserve
+                  up.compiler('.server-time', function($element) {
+                    $element.text('Loading ...');
+                    up.ajax('/time').then(function(time) { $element.text(time) };
+                  });
+
+            %pre.xxs
+              %code.javascript(data-noescape)
+                :preserve
+                  describe('.current-year', function() {
+                    it('fetches and displays the current time from the server', function() {
+                      jasmine.Ajax.install();
+                      var $element = affix('.server-time');
+                      up.hello($element);
+                      expect($element).toHaveText('Loading...');
+                      jasmine.Ajax.requests.mostRecent().respondWith({
+                        status: 200,
+                        contentType: 'text/plain',
+                        responseText: '13:37:00'
+                      });
+                      expect($element).toHaveText('13:37:00');
+                    });
+                  });
 
 
         %section
@@ -2080,17 +2615,6 @@
           %p
             Is your alternative home-growing an informal Random.js framework?
 
-        %section
-          %img.plain(src='pictures/logos/unpoly.png' width='50%')
-
-        %section
-          %p
-            <a href="https://www.flickr.com/photos/127580645@N07/15215520777">iOS 8 icons</a> by Microsiervos
-
-
-        %section
-          %h2 Additional slides
-
 
         %section
           %h3 Appending instead of replacing
@@ -2107,182 +2631,6 @@
                 &lt;a class="next-page" href="/tasks?page=2"
                   up-target=".next-page, <mark>.tasks:after</mark>"&gt;Next page&lt;/a&gt;
 
-        %section
-          %h2 Updating persisted elements
-
-        %section
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="map" up-data="[
-                  { lat: 48.36, lng: 10.99 },
-                  { lat: 48.75, lng: 11.45 }
-                ]"&gt;&lt;/div&gt;
-
-                &lt;form method="post" action="/pins" <mark>up-target=".map"</mark>&gt;
-                  Lat: &lt;input name="lat"&gt;
-                  Lng: &lt;input name="lng"&gt;
-                  &lt;button&gt;Add pin&lt;/button&gt;
-                &lt;/form&gt;
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('.map', function($element, pins) {
-                  var map = new google.maps.Map($element);
-                  pins.forEach(function(pin) {
-                    var position = new google.maps.LatLng(pin.lat, pin.lng);
-                    new google.maps.Marker({
-                      position: position,
-                      map: map
-                    });
-                });
-
-        %section
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &lt;form method="post" action="/pins" <mark>up-target=".map"</mark>&gt;
-                  Lat: &lt;input name="lat"&gt;
-                  Lng: &lt;input name="lng"&gt;
-                  &lt;button&gt;Add pin&lt;/button&gt;
-                &lt;/form&gt;
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('.map', function($element, pins) {
-                  var map = new google.maps.Map($element);
-                  pins.forEach(function(pin) {
-                    var position = new google.maps.LatLng(pin.lat, pin.lng);
-                    new google.maps.Marker({
-                      position: position,
-                      map: map
-                    });
-                });
-
-        %section
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;
-
-
-
-
-                &lt;%= form_for Pin.new, html: { 'up-target' =&gt; '.map' } do |form| %&gt;
-                  Lat: &lt;%= form.text_field :lat %&gt;
-                  Lng: &lt;%= form.text_field :lng %&gt;
-                  &lt;%= form.submit 'Add pin' %&gt;
-                &lt;% end %&gt;
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('.map', function($element, pins) {
-                  var map = new google.maps.Map($element);
-                  pins.forEach(function(pin) {
-                    var position = new google.maps.LatLng(pin.lat, pin.lng);
-                    new google.maps.Marker({
-                      position: position,
-                      map: map
-                    });
-                });
-
-        %section
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;
-
-
-
-
-                &lt;%= form_for Pin.new, html: { 'up-target' =&gt; '.map' } do |form| %&gt;
-                  Lat: &lt;%= form.text_field :lat %&gt;
-                  Lng: &lt;%= form.text_field :lng %&gt;
-                  &lt;%= form.submit 'Add pin' %&gt;
-                &lt;% end %&gt;
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('.map', function($element, initialPins) {
-                  var map = new google.maps.Map($element);
-                  function renderPins(pins) { ... }
-                  renderPins(initialPins);
-                });
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-
-        %section
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;" <mark>up-keep</mark>&gt;&lt;/div&gt;
-
-
-
-
-                &lt;%= form_for Pin.new, html: { 'up-target' =&gt; '.map' } do |form| %&gt;
-                  Lat: &lt;%= form.text_field :lat %&gt;
-                  Lng: &lt;%= form.text_field :lng %&gt;
-                  &lt;%= form.submit 'Add pin' %&gt;
-                &lt;% end %&gt;
-
-          %pre
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('.map', function($element, initialPins) {
-                  var map = new google.maps.Map($element);
-                  function renderPins(pins) { ... }
-                  renderPins(initialPins);
-                  <mark>$element.on('up:fragment:keep', function(event) {</mark>
-                  <mark>  renderPins(event.newData);                     </mark>
-                  <mark>});                                              </mark>
-                });
-                &nbsp;
-
-        %section
-          %p
-            Use <a href="https://github.com/jasmine/jasmine-ajax">jasmine-ajax</a> to mock the network:
-
-          %pre.xxs
-            %code.javascript(data-noescape)
-              :preserve
-                up.compiler('.server-time', function($element) {
-                  $element.text('Loading ...');
-                  up.ajax('/time').then(function(time) { $element.text(time) };
-                });
-
-          %pre.xxs
-            %code.javascript(data-noescape)
-              :preserve
-                describe('.current-year', function() {
-                  it('fetches and displays the current time from the server', function() {
-                    jasmine.Ajax.install();
-                    var $element = affix('.server-time');
-                    up.hello($element);
-                    expect($element).toHaveText('Loading...');
-                    jasmine.Ajax.requests.mostRecent().respondWith({
-                      status: 200,
-                      contentType: 'text/plain',
-                      responseText: '13:37:00'
-                    });
-                    expect($element).toHaveText('13:37:00');
-                  });
-                });
 
     %script{:src => "lib/js/head.min.js"}
     %script{:src => "js/reveal.js"}
