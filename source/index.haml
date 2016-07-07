@@ -133,11 +133,11 @@
                   Authorization
                 .complexity--slice.is-color5.is-weight1
                   Routing
-                .complexity--slice.is-color4.is-weight4
+                .complexity--slice.is-color4.is-weight3
                   Models
                 .complexity--slice.is-color3.is-weight2
                   Controllers
-                .complexity--slice.is-color2.is-weight3
+                .complexity--slice.is-color2.is-weight2
                   Views
                 .complexity--slice.is-color1.is-weight2
                   Dependencies
@@ -415,14 +415,19 @@
 
 
         %section
-          %p
-            There's a trade-off between UI fidelity and code complexity.
+
           %p
             SPAs are a good fit for a certain class of UI.
+            %br
+            For us that class is the exception, not the default.
+
           %p
-            For us that's the exception, not the default.
+            There's a trade-off between ambitious UI and code complexity.
+
           %p
-            We think we can fix most of the problems with server-side apps.
+            We think we can fix most of the problems with server-side apps
+            %br
+            and find a new sweet spot in that trade-off.
 
 
         -#%section
@@ -640,6 +645,7 @@
           .line
             %a(href='http://demo.unpoly.com/')
               Demo of problematic app
+
             %a.subtle(href='http://localhost:3000/') (Local)
 
           %p
@@ -817,10 +823,21 @@
 
 
         %section
-          %img(src='pictures/fragment_flow_vanilla.svg' width='100%')
+          %h3 Classic page flow
+
+          %img(src='pictures/fragment_flow_vanilla.svg' width='100%' style='margin-bottom: 10px')
+
+          %p
+            Server renders full pages on every request.
 
         %section
-          %img(src='pictures/fragment_flow_unpoly.svg' width='100%')
+
+          %h3 Unpoly page flow
+
+          %img(src='pictures/fragment_flow_unpoly.svg' width='100%' style='margin-bottom: 10px')
+
+          %p
+            Server still renders full pages, but we only use fragments.
 
         %section
           %h3 Layers
@@ -1010,10 +1027,6 @@
 
           %section
             %h2 Response times
-            %p
-              %img.plain(src='pictures/ios_8_icons.jpg' width='50%')
-            %p
-              Users in 2016 expect more than a slide show.
 
           %section
             %h3 Response times
@@ -1052,10 +1065,9 @@
 
           %ul
             %li
-              .line
-                We write very few AngularJS interactions that don't rely on a connection.
-
-            %li Most of our AngularJS interactions are still bound by server speed.
+              Most of our AngularJS interactions are making API requests
+              %br
+              and are thus bound by server speed.
             %li
               .line
                 Rendering to JSON takes time, too.
@@ -1078,13 +1090,15 @@
               Unpoly's approach
 
           %ul
-            %li Provide instantaneous feedback to all user input
-            %li Make interactions appear faster than they really are
-            %li Free up enough time budget that we can afford to render<br />full pages on the server
+            %li
+              Provide instantaneous feedback to all user input
+              so interactions<br>appear faster than they really are
+            %li Pick <u>all</u> the low-hanging fruit that's wasting 100s of milliseconds
+            %li Free up enough time budget that we can afford to render<br>full pages on the server
             %li Use best practices for server performance
+            %li Provide options if all of that is not enough
 
         %section
-          %h3 What you get out of the box
           %ul
 
             %li
@@ -1118,7 +1132,7 @@
           %p
             Feel the response time of an Unpoly app by opening a card on
             %br
-            <a href="http://makandracards.com/makandra">makandracards.com</a>.
+            <a href="http://makandracards.com/makandra">makandracards.com/makandra</a>.
 
 
         %section
@@ -1254,6 +1268,7 @@
               %li Detecting redirects
               %li Dealing with validation errors
               %li Server-side validations without a page load
+              %li Dependencies between fields
               %li Submitting a form within a modal and staying within the modal
 
             %p
@@ -1763,6 +1778,12 @@
 
         %section
           %img.plain(src='pictures/logos/unpoly.png' width='50%')
+
+          %p
+            %a(href='mailto:henning.koch@makandra.de') henning.koch@makandra.de
+            %br
+            %a(href='https://twitter.com/triskweline') @triskweline
+
 
         %section
           %p

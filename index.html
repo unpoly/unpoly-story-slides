@@ -97,13 +97,13 @@
                 <div class='complexity--slice is-color5 is-weight1'>
                   Routing
                 </div>
-                <div class='complexity--slice is-color4 is-weight4'>
+                <div class='complexity--slice is-color4 is-weight3'>
                   Models
                 </div>
                 <div class='complexity--slice is-color3 is-weight2'>
                   Controllers
                 </div>
-                <div class='complexity--slice is-color2 is-weight3'>
+                <div class='complexity--slice is-color2 is-weight2'>
                   Views
                 </div>
                 <div class='complexity--slice is-color1 is-weight2'>
@@ -444,16 +444,17 @@
         </section>
         <section>
           <p>
-            There's a trade-off between UI fidelity and code complexity.
-          </p>
-          <p>
             SPAs are a good fit for a certain class of UI.
+            <br>
+            For us that class is the exception, not the default.
           </p>
           <p>
-            For us that's the exception, not the default.
+            There's a trade-off between ambitious UI and code complexity.
           </p>
           <p>
-            We think we can fix most of the problems with server-side apps.
+            We think we can fix most of the problems with server-side apps
+            <br>
+            and find a new sweet spot in that trade-off.
           </p>
         </section>
         <section>
@@ -568,10 +569,18 @@
           </ul>
         </section>
         <section>
-          <img src='pictures/fragment_flow_vanilla.svg' width='100%'>
+          <h3>Classic page flow</h3>
+          <img src='pictures/fragment_flow_vanilla.svg' style='margin-bottom: 10px' width='100%'>
+          <p>
+            Server renders full pages on every request.
+          </p>
         </section>
         <section>
-          <img src='pictures/fragment_flow_unpoly.svg' width='100%'>
+          <h3>Unpoly page flow</h3>
+          <img src='pictures/fragment_flow_unpoly.svg' style='margin-bottom: 10px' width='100%'>
+          <p>
+            Server still renders full pages, but we only use fragments.
+          </p>
         </section>
         <section>
           <h3>Layers</h3>
@@ -698,12 +707,6 @@
         <section>
           <section>
             <h2>Response times</h2>
-            <p>
-              <img class='plain' src='pictures/ios_8_icons.jpg' width='50%'>
-            </p>
-            <p>
-              Users in 2016 expect more than a slide show.
-            </p>
           </section>
           <section>
             <h3>Response times</h3>
@@ -750,11 +753,10 @@
           </h3>
           <ul>
             <li>
-              <div class='line'>
-                We write very few AngularJS interactions that don't rely on a connection.
-              </div>
+              Most of our AngularJS interactions are making API requests
+              <br>
+              and are thus bound by server speed.
             </li>
-            <li>Most of our AngularJS interactions are still bound by server speed.</li>
             <li>
               <div class='line'>
                 Rendering to JSON takes time, too.
@@ -788,14 +790,17 @@
             </div>
           </h3>
           <ul>
-            <li>Provide instantaneous feedback to all user input</li>
-            <li>Make interactions appear faster than they really are</li>
-            <li>Free up enough time budget that we can afford to render<br />full pages on the server</li>
+            <li>
+              Provide instantaneous feedback to all user input
+              so interactions<br>appear faster than they really are
+            </li>
+            <li>Pick <u>all</u> the low-hanging fruit that's wasting 100s of milliseconds</li>
+            <li>Free up enough time budget that we can afford to render<br>full pages on the server</li>
             <li>Use best practices for server performance</li>
+            <li>Provide options if all of that is not enough</li>
           </ul>
         </section>
         <section>
-          <h3>What you get out of the box</h3>
           <ul>
             <li>
               We no longer parse and execute CSS, Javascript and build the DOM on every request
@@ -833,7 +838,7 @@
           <p>
             Feel the response time of an Unpoly app by opening a card on
             <br>
-            <a href="http://makandracards.com/makandra">makandracards.com</a>.
+            <a href="http://makandracards.com/makandra">makandracards.com/makandra</a>.
           </p>
         </section>
         <section>
@@ -897,6 +902,7 @@
               <li>Detecting redirects</li>
               <li>Dealing with validation errors</li>
               <li>Server-side validations without a page load</li>
+              <li>Dependencies between fields</li>
               <li>Submitting a form within a modal and staying within the modal</li>
             </ul>
             <p>
@@ -1131,6 +1137,11 @@
         </section>
         <section>
           <img class='plain' src='pictures/logos/unpoly.png' width='50%'>
+          <p>
+            <a href='mailto:henning.koch@makandra.de'>henning.koch@makandra.de</a>
+            <br>
+            <a href='https://twitter.com/triskweline'>@triskweline</a>
+          </p>
         </section>
         <section>
           <p>
