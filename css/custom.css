@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Orbitron:400,500,700);
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,400italic,600italic,700italic);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700);
 
 
 body {
@@ -65,8 +66,9 @@ body {
 }
 
 .reveal code {
-  font-size: 90%;
-  line-height: 120%;
+  /*font-size: 90%;*/
+  /*line-height: 120%;*/
+  font-family: Ubuntu Mono
 }
 
 .reveal pre {
@@ -144,6 +146,7 @@ body {
 }
 
 .reveal p {
+  font-weight: normal; /* theme default is 300 */
   line-height: 1.2;
 }
 
@@ -268,6 +271,14 @@ body {
   color: #1c3;
 }
 
+.reveal .blue {
+  color: #28c;
+}
+
+.reveal .gray {
+  color: #999;
+}
+
 .reveal .yellow-green {
   color: #ce3;
 }
@@ -293,6 +304,8 @@ body {
   background-color: #2d3c6c;
   padding-left: 0;
   padding-right: 0;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
 .reveal code mark.bad {
@@ -330,18 +343,20 @@ body {
 }
 
 .reveal .layers--layer.is-document {
-  background-color: rgba(80, 120, 200, 0.7);
+  background-color: rgba(80, 120, 200, 0.6);
   transform: rotateY(60deg) translateZ(0px);
 }
 
 .reveal .layers--layer.is-modal {
+  margin-left: 40px;
   transform: rotateY(60deg) translateZ(50px);
-  background-color: rgba(200, 50, 40, 0.7);
+  background-color: rgba(200, 50, 40, 0.6);
 }
 
 .reveal .layers--layer.is-popup {
+  margin-left: 80px;
   transform: rotateY(60deg) translateZ(100px);
-  background-color: rgba(40, 200, 150, 0.7);
+  background-color: rgba(40, 200, 150, 0.6);
 }
 
 
@@ -351,12 +366,12 @@ body {
 }
 
 .reveal .layers:hover .layers--layer.is-modal {
-  margin-left: 100px;
+  margin-left: 120px;
   background-color: rgba(200, 50, 40, 0.3);
 }
 
 .reveal .layers:hover .layers--layer.is-popup {
-  margin-left: 200px;
+  margin-left: 240px;
   background-color: rgba(40, 200, 150, 0.3);
 }
 
