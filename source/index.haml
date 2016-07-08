@@ -679,13 +679,15 @@
             %img.plain(src='pictures/logos/unpoly.png' width='50%')
           %ul
             %li 25 new HTML attributes to write modern UI, but keep logic on the server
+            -#%li
+            -#  Takes some ideas from unobtrusive Javascript and progressive enhancement,
+            -#  but goes much further than that
             %li Works with existing code
             %li
               Backend-agnostic
               .subtle
                 (although we have some really nice Rails bindings)
-            %li In development for two years
-            %li In production with multiple apps
+            %li In development for two years and in production with multiple apps
 
         -#
         -#%section
@@ -1120,7 +1122,7 @@
 
 
         %section
-          %h2 Activating JS snippets
+          %h3 Activating JS snippets
 
           %p
             Every app needs a way to pair Javascript snippets<br />with certain HTML elements:
@@ -1503,7 +1505,7 @@
 
 
         %section
-          %h3
+          %h2
             Composability
 
           %ul
@@ -1594,12 +1596,6 @@
           %p
             <a href="https://makandracards.com/curriculum/35275-javascript-writing-asynchronous-code" target="_blank">Curriculum lesson on promises</a>
 
-        %section
-          %h3 The Javascript API is extensive
-          %p
-            View full documentation of JS functions,<br> events and UJS selectors on
-            <a href="http://unpoly.com/">unpoly.com</a>.
-
 
         %section
 
@@ -1628,6 +1624,13 @@
                     });
                   });
                 });
+
+
+        %section
+          %h3 The Javascript API is extensive
+          %p
+            View full documentation of JS functions,<br> events and UJS selectors on
+            <a href="http://unpoly.com/">unpoly.com</a>.
 
 
         %section

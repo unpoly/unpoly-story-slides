@@ -570,8 +570,7 @@
                 (although we have some really nice Rails bindings)
               </div>
             </li>
-            <li>In development for two years</li>
-            <li>In production with multiple apps</li>
+            <li>In development for two years and in production with multiple apps</li>
           </ul>
         </section>
         <section>
@@ -821,7 +820,7 @@
           </ul>
         </section>
         <section>
-          <h2>Activating JS snippets</h2>
+          <h3>Activating JS snippets</h3>
           <p>
             Every app needs a way to pair Javascript snippets<br />with certain HTML elements:
           </p>
@@ -1095,9 +1094,9 @@
           <pre><code class='javascript' data-noescape>up.compiler('.template', function($element, data) {&#x000A;  var view = rivets.bind($element, data);&#x000A;  return view.unbind;&#x000A;});&#x000A;&#x000A;&#x000A;</code></pre>
         </section>
         <section>
-          <h3>
+          <h2>
             Composability
-          </h3>
+          </h2>
           <ul>
             <li>
               Homegrown UJS syntax usually lacks composability.
@@ -1142,13 +1141,6 @@
           </p>
         </section>
         <section>
-          <h3>The Javascript API is extensive</h3>
-          <p>
-            View full documentation of JS functions,<br> events and UJS selectors on
-            <a href="http://unpoly.com/">unpoly.com</a>.
-          </p>
-        </section>
-        <section>
           <h3>
             <div class='line'>Invent your own UJS syntax</div>
           </h3>
@@ -1156,6 +1148,13 @@
           <pre><code class='html' data-noescape>&lt;a menu-link href="/details"&gt;Show more&lt;/span&gt;&#x000A;</code></pre>
           <h4 class='subtle'>Javascript</h4>
           <pre><code class='javascript'>up.compiler('[menu-link]', function($link) {&#x000A;  $link.on('click', function(event) {&#x000A;    event.preventDefault();&#x000A;    up.popup.attach($link, {&#x000A;      target: '.menu',&#x000A;      position: 'bottom-left',&#x000A;      animation: 'roll-down'&#x000A;    });&#x000A;  });&#x000A;});&#x000A;&#x000A;</code></pre>
+        </section>
+        <section>
+          <h3>The Javascript API is extensive</h3>
+          <p>
+            View full documentation of JS functions,<br> events and UJS selectors on
+            <a href="http://unpoly.com/">unpoly.com</a>.
+          </p>
         </section>
         <section>
           <h2>Animation</h2>
