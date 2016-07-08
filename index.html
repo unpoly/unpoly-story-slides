@@ -1315,7 +1315,7 @@
         </section>
         <section>
           <h3>Find-as-you-type search</h3>
-          <pre><code class='html' data-noescape>&lt;form action="/users" up-target=".list" <mark>up-autosubmit</mark>&gt;&#x000A;  &lt;input type="search" name="query" /&gt;&#x000A;&lt;/form&gt;&#x000A;&#x000A;&lt;div class="list"&gt;&#x000A;  &lt;% @users.each do |user| %&gt;&#x000A;    = link_to user.email, user&#x000A;  &lt;% end %&gt;&#x000A;&lt;/div&gt;&#x000A;&#x000A;&#x000A;</code></pre>
+          <pre><code class='html' data-noescape>&lt;form action="/users" up-target=".list" <mark>up-autosubmit</mark>&gt;&#x000A;  &lt;input type="search" name="query" /&gt;&#x000A;&lt;/form&gt;&#x000A;&#x000A;&lt;div class="list"&gt;&#x000A;  &lt;% @users.each do |user| %&gt;&#x000A;    &lt;%= link_to user.email, user &gt;&#x000A;  &lt;% end %&gt;&#x000A;&lt;/div&gt;&#x000A;&#x000A;&#x000A;</code></pre>
         </section>
         <section>
           <h3>
