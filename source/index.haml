@@ -457,7 +457,7 @@
               For us that class is the exception, not the default.
 
             %li
-              There's a trade-off between ambitious UI and code complexity.
+              There's a trade-off between UI fidelity and code complexity.
 
             %li
               We think we can fix most of the problems with server-side apps
@@ -744,6 +744,8 @@
             %img.plain(src='pictures/logos/unpoly.png' width='50%')
           %ul
             %li 25 new HTML attributes to write modern UI, but keep logic on the server
+            -#%li Extraction of common UI patterns from 50+ apps
+            -#%li Evolution of common UJS patterns from 50+ apps and various libraries
             -#%li
             -#  Takes some ideas from unobtrusive JavaScript and progressive enhancement,
             -#  but goes much further than that
@@ -931,58 +933,6 @@
             This solves most of our problems with transient state being destroyed.
 
 
-        %section
-
-          %h3
-            Update a page fragment
-            .subtle
-              without JavaScript
-
-          %p
-            %a(href='http://unpoly.com/examples/update-fragment/' target='_blank') Run example on unpoly.com
-
-          .columns
-            .column
-              %h4.subtle short.html
-              %pre.xxs
-                %code.html(data-noescape)
-                  :preserve
-                    &lt;div class="story"&gt;
-
-                      &lt;p&gt;Story summary&lt;/p&gt;
-
-                      &lt;a href="full.html" <mark>up-target=".story"</mark>&gt;
-                        Read full story
-                      &lt;/a&gt;
-
-                    &lt;/div&gt;
-
-                    <mark>&lt;p&gt;This text won't change&lt;/p&gt;</mark>
-
-            .column
-              %h4.subtle full.html
-              %pre.xxs
-                %code.html(data-noescape)
-                  :preserve
-                    &lt;div class="story"&gt;
-
-                      &lt;h1&gt;Full story&lt;/h1&gt;
-
-                      &lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;
-
-                      &lt;a href="short.html" <mark>up-target=".story"&gt;</mark>
-                        Read summary
-                      &lt;/a&gt;
-
-                    &lt;/div&gt;
-          %ul.s
-            %li Unpoly requests <code>full.html</code> via AJAX
-            %li Server renders a <u>full HTML page</u>
-            %li Unpoly extracts the fragment that matches <code class='blue'>.story</code>
-            %li Unpoly swaps the old and new fragment
-            %li Unpoly changes the browser URL to <code>http://host/full.html</code>
-
-
 
 
         %section
@@ -1012,81 +962,26 @@
         %section
           %img(src='pictures/gmail_layers.png')
 
-        -#%section
-        -#  %h3 Layers
-        -#
-        -#  %pre.s
-        -#    %code.html(data-noescape)
-        -#      :preserve
-        -#        &lt;a href="/list" up-target=".main"&gt;Replace fragment&lt;/a&gt;
-        -#
-        -#        &lt;a href="/new" up-modal=".main"&gt;Open fragment in dialog&lt;/a&gt;
-        -#
-        -#        &lt;a href="/menu" up-popup=".main"&gt;Open fragment in dropdown&lt;/a&gt;
-        -#
-        -#  %p Links in an layer prefer to update fragments within the layer
-        -#  %p Changing a fragment behind the layer will close the layer
-        -#
-
         %section
+          %h3 Layers
 
-          %h3
-            Open fragment in modal dialog
-            .subtle
-              without JavaScript
-
-          %p
-            %a(href='http://unpoly.com/examples/modal/') Run example on unpoly.com
-
-          %pre.xs
+          %pre.s
             %code.html(data-noescape)
               :preserve
-                &lt;div class="story"&gt;
+                &lt;a href="/list" up-target=".main"&gt;Replace fragment&lt;/a&gt;
 
-                  &lt;p&gt;Story summary&lt;/p&gt;
+                &lt;a href="/new" up-modal=".main"&gt;Open fragment in dialog&lt;/a&gt;
 
-                  &lt;a href="full.html" <mark>up-modal=".story"</mark>&gt;
-                    Read full story
-                  &lt;/a&gt;
+                &lt;a href="/menu" up-popup=".main"&gt;Open fragment in dropdown&lt;/a&gt;
 
-                &lt;/div&gt;
+          %p Links in an layer prefer to update fragments within the layer
+          %p Changing a fragment behind the layer will close the layer
+          -#%p
+          -#  Layers have their own URL
+          -#  %br
+          -#  %span.subtle
+          -#    When a layer closes, the background URL is restored
 
-          %ul
-            %li Unpoly requests <code>full.html</code> via AJAX
-            %li Server renders a <u>full HTML page</u>
-            %li Unpoly extracts the fragment that matches <code class='blue'>.story</code>
-            %li Unpoly displays the new fragment in a <code class='blue'>&lt;div class="up-modal"&gt;</code>
-            %li Unpoly changes the browser URL to <code>http://host/full.html</code>
-
-        %section
-
-          %h3
-            Open fragment in a popup menu
-            .subtle
-              without JavaScript
-
-          %p(style='visibility: hidden')
-            %a(href='http://unpoly.com/examples/modal/') Run example on unpoly.com
-
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="story"&gt;
-
-                  &lt;p&gt;Story summary&lt;/p&gt;
-
-                  &lt;a href="full.html" <mark>up-popup=".story"</mark>&gt;
-                    Read full story
-                  &lt;/a&gt;
-
-                &lt;/div&gt;
-
-          %ul
-            %li Unpoly requests <code>full.html</code> via AJAX
-            %li Server renders a <u>full HTML page</u>
-            %li Unpoly extracts the fragment that matches <code class='blue'>.story</code>
-            %li Unpoly displays the new fragment in a <code class='blue'>&lt;div class="up-popup"&gt;</code>
-            %li Unpoly changes the browser URL to <code>http://host/full.html</code>
 
 
         %section
@@ -1108,16 +1003,11 @@
             %li
               Links to the current URL get an <a href="http://unpoly.com/up-current"><code>up-current</code></a>
               class automatically.
-            %li
-              .line
-                Modals and popups have their own URL.
-              .subtle
-                When a layer closes, the background URL is restored.
-            %li
-              .line
-                Use <a href="http://unpoly.com/up-back" target="_blank"><code>[up-back]</code></a> to link to a previous state.
-              .subtle
-                That's a real link with a URL, not <code>location.back()</code>
+            -#%li
+            -#  .line
+            -#    Use <a href="http://unpoly.com/up-back" target="_blank"><code>[up-back]</code></a> to link to a previous state.
+            -#  .subtle
+            -#    That's a real link with a URL, not <code>location.back()</code>
             -#%li
             -#  .line
             -#    Everything is opt-in
@@ -1149,14 +1039,14 @@
             Every app needs a way to pair JavaScript snippets<br />with certain HTML elements:
 
           %ul
-            %li An <code class='blue'>a[title]</code> attribute should activate qTip on mouseover
+            -#%li An <code class='blue'>a[title]</code> attribute should activate qTip on mouseover
             %li A <code class='blue'>textarea.wysiwyg</code> should activate Redactor on load
             %li
               An <code class='blue'>input[type=search]</code> field should automatically request new results
               %br
               when the user types something
             %li
-              A <code class='blue'>.button.toggle-all</code> should toggle all checkboxes
+              A <code class='blue'>button.toggle-all</code> should toggle all checkboxes
               when clicked
             %li
               A <code class='blue'>.map</code> should render a map via the Google Maps JS API
@@ -1212,7 +1102,7 @@
             %code.javascript(data-noescape)
               :preserve
                 up.compiler('.map', function($map) {
-                  new google.maps.Map($map, { center: pin });
+                  new google.maps.Map($map);
                 });
 
 
@@ -1281,7 +1171,39 @@
 
 
 
+        %section
+          %h3 Symmetry to CSS components
 
+          %p
+            If you are using some CSS component architecture like <a href="https://css-tricks.com/bem-101/">BEM</a>
+            you will find a nice symmetry between your CSS components and Unpoly compilers:
+
+          .columns
+            .column
+              %pre
+                %code.nohighlight(data-noescape)
+                  :preserve
+                    <b>app/assets/stylesheets/blocks</b>
+                      carousel.css
+                      head.css
+                      map.css
+                      screenshot.css
+                      tail.css
+            .column
+              %pre
+                %code.nohighlight(data-noescape)
+                  :preserve
+                    <b>app/assets/javascripts/compilers</b>
+                      carousel.js
+                      head.js
+                      map.js
+                      screenshot.js
+
+
+          %p
+            By sticking to this pattern you will always know where to find the CSS / JS that affects
+            your
+            <code class='blue'>&lt;div class='map'&gt;...&lt;/div&gt;</code> element.
 
         %section
           %h2 Response times
@@ -1368,7 +1290,7 @@
 
             -#%li <a href="http://unpoly.com"><code>up-dash</code></a> is a <a href="http://unpoly.com/up.macro">macro</a> for <code>up-target</code>, <code>up-instant</code> and <code>up-preload</code>.
             %li
-              <code>GET</code> requests are cached for 5 minutes
+              Responses to <code>GET</code> requests are cached for 5 minutes
               .subtle
                 Any non-<code>GET</code> request clears the entire cache
 
@@ -1398,7 +1320,7 @@
           %h3 How you can optimize further
 
           %ul
-            %li Server-side fragment caching (duh!)
+            %li Server-side fragment caching
             %li Tailor responses for the requested selector
             %li Spinners for long-running requests
             %li We can still implement client-side interactions
@@ -1410,25 +1332,32 @@
         %section
           %h3 Tailor responses for the requested selector
 
-          %pre
-            %code.html(data-noescape)
+          %pre.xs
+            %code.erb(data-noescape)
               :preserve
                 &lt;html&gt;
                   &lt;body&gt;
 
                     &lt;% if up.target?('.side') %&gt;
-                      &lt;%= render 'side' %&gt;
+                      &lt;div class='side'&gt;
+                        ...
+                      &lt;/div&gt;
                     &lt;% end %&gt;
 
                     &lt;% if up.target?('.main') %&gt;
-                      &lt;%= yield %&gt;
+                      &lt;div class='main'&gt;
+                        ...
+                      &lt;/div&gt;
                     &lt;% end %&gt;
 
                   &lt;/body&gt;
                 &lt;/html&gt;
 
           %p
-            <code>up.target?(css)</code> looks at the <code>X-Up-Target</code> HTTP header.
+            <code>up.target?(css)</code> looks at the <code>X-Up-Target</code> HTTP header
+            %br
+            that Unpoly
+            sends with every request.
 
         %section
           %h3 Spinners
@@ -1450,10 +1379,6 @@
                   up.on('up:proxy:slow', show);
                   up.on('up:proxy:recover', hide);
                   hide();
-                  return function() {
-                    up.off('up:proxy:slow', show);
-                    up.off('up:proxy:recover', hide);
-                  };
                 });
 
           %p
@@ -1507,43 +1432,35 @@
                   return view.unbind;
                 });
 
-
-
         %section
           %h2
             Composability
 
-          %ul
-            %li
-              Homegrown UJS syntax usually lacks composability.
-              %br
-              Changing that was a major design goal for Unpoly.
 
-            %li
-              Unpoly's default UJS behavior is a thin wrapper around a JavaScript API.
-            %li
-              If the default UJS behavior doesn't fit your use case, you can use
-              that JavaScript API from your own code, or invent new UJS syntax.
+
+          %p
+            Homegrown UJS syntax usually lacks composability.
+            %br
+            Changing that was a major design goal for Unpoly.
 
 
         %section
           %h3
             .line Dual interfaces
 
+          %p
+            Unpoly's default UJS behavior is a small layer around a JS API.
+            %br
+            You can use this JS API to call Unpoly from your own code:
+
           %h4.subtle <u>U</u>nobtrusive
 
           %pre
             %code.html(data-noescape)
               :preserve
-                &lt;div class="story"&gt;
+                &lt;a href="full.html" up-target=".story"&gt;Continue&lt;/a&gt;
 
-                  &lt;p&gt;Story summary&lt;/p&gt;
 
-                  &lt;a href="full.html" up-target=".story"&gt;
-                    Read full story
-                  &lt;/a&gt;
-
-                &lt;/div&gt;
 
           %h4.subtle <u>P</u>rogrammatic
 
@@ -1552,55 +1469,46 @@
               :preserve
                 up.replace('.story', 'full.html');
 
+        -#
+        -#%section
+        -#  %h3
+        -#    .line Dual interfaces
+        -#
+        -#  %p
+        -#    Unpoly's default UJS behavior is a small layer around a JS API.
+        -#    %br
+        -#    You can use this JS API to call Unpoly from your own code:
+        -#
+        -#
+        -#  %h4.subtle <u>U</u>nobtrusive
+        -#
+        -#  %pre
+        -#    %code.html(data-noescape)
+        -#      :preserve
+        -#        &lt;form up-target=".main"&gt;
+        -#          ...
+        -#        &lt;/form&gt;
+        -#
+        -#  %h4.subtle <u>P</u>rogrammatic
+        -#
+        -#  %pre
+        -#    %code.javascript
+        -#      :preserve
+        -#        up.submit('form', target: '.main');
+
 
         %section
           %h3
-            .line Dual interfaces
-
-          %h4.subtle <u>U</u>nobtrusive
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;form up-target=".main"&gt;
-
-                  ...
-
-                &lt;/form&gt;
-
-
-
-
-
-          %h4.subtle <u>P</u>rogrammatic
+            .line Events
 
           %pre
             %code.javascript
               :preserve
-                up.submit('form', target: '.main');
-
-
-        %section
-          %h3
-            .line All Async actions return promises
-
-          %pre
-            %code.javascript
-              :preserve
-                up.replace('.story', 'full.html').then(function() {
-                  // Fragments were loaded and swapped
+                $(document).on('up:modal:open', function(event) {
+                  if (dontLikeModals()) {
+                    event.preventDefault();
+                  }
                 });
-
-          %pre
-            %code.javascript
-              :preserve
-                up.morph('.old', '.new', 'cross-fade').then(function() {
-                  // Transition has completed
-                });
-
-          %p
-            <a href="https://makandracards.com/curriculum/35275-javascript-writing-asynchronous-code" target="_blank">Curriculum lesson on promises</a>
-
 
         %section
 
@@ -1612,23 +1520,25 @@
           %pre
             %code.html(data-noescape)
               :preserve
-                &lt;a menu-link href="/details"&gt;Show more&lt;/span&gt;
+                &lt;a <mark>menu-link</mark> href="/details"&gt;Show more&lt;/span&gt;
 
-          %h4.subtle JavaScript
+          .fragment
 
-          %pre
-            %code.javascript
-              :preserve
-                up.compiler('[menu-link]', function($link) {
-                  $link.on('click', function(event) {
-                    event.preventDefault();
-                    up.popup.attach($link, {
-                      target: '.menu',
-                      position: 'bottom-left',
-                      animation: 'roll-down'
+            %h4.subtle JavaScript
+
+            %pre
+              %code.javascript
+                :preserve
+                  up.compiler('[menu-link]', function($link) {
+                    $link.on('click', function(event) {
+                      event.preventDefault();
+                      up.popup.attach($link, {
+                        target: '.menu',
+                        position: 'bottom-left',
+                        animation: 'roll-down'
+                      });
                     });
                   });
-                });
 
 
         %section
@@ -1759,7 +1669,9 @@
                 &lt;/form&gt;
 
         %section
-          %h3 Validations without a page load
+          %h3
+            .line Server-side validations
+            .subtle without a page load
 
           %pre.s
             %code.html(data-noescape)
@@ -1781,7 +1693,9 @@
                 &lt;/form&gt;
 
         %section
-          %h3 Validations without a page load
+          %h3
+            .line Server-side validations
+            .subtle without a page load
 
           %pre.s
             %code.html(data-noescape)
@@ -1803,7 +1717,9 @@
                 &lt;/form&gt;
 
         %section
-          %h3 Validations without a page load
+          %h3
+            .line Server-side validations
+            .subtle without a page load
 
           %pre.s
             %code.html(data-noescape)
@@ -1825,7 +1741,9 @@
                 &lt;/form&gt;
 
         %section
-          %h3 Validations without a page load
+          %h3
+            .line Server-side validations
+            .subtle without a page load
 
           %pre
             %code.ruby(data-noescape)
@@ -1847,7 +1765,9 @@
 
 
         %section
-          %h3 Validations without a page load
+          %h3
+            .line Server-side validations
+            .subtle without a page load
 
           %pre
             %code.ruby(data-noescape)
@@ -1870,7 +1790,7 @@
 
         %section
           %h3
-            .line Updating dependent fields
+            .line Dependent fields
             .subtle Simple cases
 
           %p
@@ -1894,7 +1814,7 @@
 
         %section
           %h3
-            .line Updating dependent fields
+            .line Dependent fields
             .subtle Harder cases
 
           %p
@@ -1939,6 +1859,141 @@
         %section
           %h2 Additional slides
 
+
+        %section
+
+          %h3
+            Update a page fragment
+            .subtle
+              without JavaScript
+
+          %p
+            %a(href='http://unpoly.com/examples/update-fragment/' target='_blank') Run example on unpoly.com
+
+          .columns
+            .column
+              %h4.subtle short.html
+              %pre.xxs
+                %code.html(data-noescape)
+                  :preserve
+                    &lt;div class="story"&gt;
+
+                      &lt;p&gt;Story summary&lt;/p&gt;
+
+                      &lt;a href="full.html" <mark>up-target=".story"</mark>&gt;
+                        Read full story
+                      &lt;/a&gt;
+
+                    &lt;/div&gt;
+
+                    <mark>&lt;p&gt;This text won't change&lt;/p&gt;</mark>
+
+            .column
+              %h4.subtle full.html
+              %pre.xxs
+                %code.html(data-noescape)
+                  :preserve
+                    &lt;div class="story"&gt;
+
+                      &lt;h1&gt;Full story&lt;/h1&gt;
+
+                      &lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;
+
+                      &lt;a href="short.html" <mark>up-target=".story"&gt;</mark>
+                        Read summary
+                      &lt;/a&gt;
+
+                    &lt;/div&gt;
+          %ul.s
+            %li Unpoly requests <code>full.html</code> via AJAX
+            %li Server renders a <u>full HTML page</u>
+            %li Unpoly extracts the fragment that matches <code class='blue'>.story</code>
+            %li Unpoly swaps the old and new fragment
+            %li Unpoly changes the browser URL to <code>http://host/full.html</code>
+
+
+
+        %section
+
+          %h3
+            Open fragment in modal dialog
+            .subtle
+              without JavaScript
+
+          %p
+            %a(href='http://unpoly.com/examples/modal/') Run example on unpoly.com
+
+          %pre.xs
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="story"&gt;
+
+                  &lt;p&gt;Story summary&lt;/p&gt;
+
+                  &lt;a href="full.html" <mark>up-modal=".story"</mark>&gt;
+                    Read full story
+                  &lt;/a&gt;
+
+                &lt;/div&gt;
+
+          %ul
+            %li Unpoly requests <code>full.html</code> via AJAX
+            %li Server renders a <u>full HTML page</u>
+            %li Unpoly extracts the fragment that matches <code class='blue'>.story</code>
+            %li Unpoly displays the new fragment in a <code class='blue'>&lt;div class="up-modal"&gt;</code>
+            %li Unpoly changes the browser URL to <code>http://host/full.html</code>
+
+        %section
+
+          %h3
+            Open fragment in a popup menu
+            .subtle
+              without JavaScript
+
+          %p(style='visibility: hidden')
+            %a(href='http://unpoly.com/examples/modal/') Run example on unpoly.com
+
+          %pre.xs
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="story"&gt;
+
+                  &lt;p&gt;Story summary&lt;/p&gt;
+
+                  &lt;a href="full.html" <mark>up-popup=".story"</mark>&gt;
+                    Read full story
+                  &lt;/a&gt;
+
+                &lt;/div&gt;
+
+          %ul
+            %li Unpoly requests <code>full.html</code> via AJAX
+            %li Server renders a <u>full HTML page</u>
+            %li Unpoly extracts the fragment that matches <code class='blue'>.story</code>
+            %li Unpoly displays the new fragment in a <code class='blue'>&lt;div class="up-popup"&gt;</code>
+            %li Unpoly changes the browser URL to <code>http://host/full.html</code>
+
+
+        %section
+          %h3
+            .line All Async actions return promises
+
+          %pre
+            %code.javascript
+              :preserve
+                up.replace('.story', 'full.html').then(function() {
+                  // Fragments were loaded and swapped
+                });
+
+          %pre
+            %code.javascript
+              :preserve
+                up.morph('.old', '.new', 'cross-fade').then(function() {
+                  // Transition has completed
+                });
+
+          %p
+            <a href="https://makandracards.com/curriculum/35275-javascript-writing-asynchronous-code" target="_blank">Curriculum lesson on promises</a>
 
         %section
           %h3 Appending instead of replacing
@@ -2150,18 +2205,6 @@
 
 
 
-        %section
-          %h3
-            .line Events
-
-          %pre
-            %code.javascript
-              :preserve
-                $(document).on('up:modal:open', function(event) {
-                  if (dontLikeModals()) {
-                    event.preventDefault();
-                  }
-                });
 
           -#.fragment
           -#  %p
@@ -2175,27 +2218,6 @@
           -#          // ...
           -#        });
 
-
-
-
-        %section
-          %h3 Symmmetry to BEM blocks
-
-          %pre
-            %code.nohighlight(data-noescape)
-              :preserve
-                <b>app/assets/stylesheets/blocks</b>
-                  head.css
-                  map.css
-                  photo_hero.css
-                  screenshot.css
-                  tail.css
-
-                <b>app/assets/javascripts/compilers</b>
-                  head.js
-                  map.js
-                  photo_hero.js
-                  screenshot.js
 
         %section
 
