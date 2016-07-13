@@ -562,6 +562,10 @@ body {
   background-color: #eb1;
 }
 
+.reveal .complexity--slice.is-color9 {
+  background-color: #291;
+}
+
 .reveal .complexity--slice.is-weight1 {
   height: 25px;
   line-height: 25px;

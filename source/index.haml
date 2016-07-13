@@ -3,9 +3,7 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:charset => "utf-8"}/
-    %title We're breaking up with Javascript frontends
-    %meta{:content => "A framework for easily creating beautiful presentations using HTML", :name => "description"}/
-    %meta{:content => "Hakim El Hattab", :name => "author"}/
+    %title We're breaking up with JavaScript frontends
     %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}/
     %meta{:content => "black-translucent", :name => "apple-mobile-web-app-status-bar-style"}/
     %meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui", :name => "viewport"}/
@@ -14,6 +12,8 @@
     %link{:href => "css/custom.css", :rel => "stylesheet"}/
     / Code syntax highlighting
     %link{:href => "lib/css/highlightjs/paraiso-dark.css", :rel => "stylesheet"}/
+
+    %link{ :href => 'pictures/favicon.png', :rel => 'icon' }
     / Printing and PDF exports
     :javascript
       var link = document.createElement( 'link' );
@@ -34,7 +34,7 @@
             .subtle
               It's not you, it's us
             .line
-              We're breaking up with Javascript frontends
+              We're breaking up with JavaScript frontends
           %p
             Henning Koch, makandra GmbH
             %br
@@ -306,7 +306,7 @@
           .complexity
 
             .complexity--title
-              Complexity in 2015
+              Complexity in 2014
 
             .complexity--side
 
@@ -334,6 +334,62 @@
             .complexity--side
 
               .complexity--stack
+                .complexity--slice.is-color6.is-weight1
+                  Authorization
+                .complexity--slice.is-color5.is-weight2
+                  Routing
+                .complexity--slice.is-color4.is-weight7
+                  Models / API client
+                .complexity--slice.is-color3.is-weight6
+                  Controllers
+                .complexity--slice.is-color2.is-weight3
+                  Views
+                .complexity--slice.is-color1.is-weight7
+                  Dependencies
+
+              .complexity--side-name
+                Client
+
+          %p.subtle.xs(style='margin-top: 5px; text-align: center')
+            Based on chart by <a href="https://twitter.com/ryanstout">@ryanstout</a>
+
+
+        %section
+          .complexity
+
+            .complexity--title
+              Complexity in 2015
+
+            .complexity--side
+
+              .complexity--stack
+                .complexity--slice.is-color9.is-weight2
+                  Prerendering
+                .complexity--slice.is-color8.is-weight1
+                  Asset packing
+                .complexity--slice.is-color7.is-weight4
+                  API
+                .complexity--slice.is-color6.is-weight1
+                  Authorization
+                .complexity--slice.is-color5.is-weight1
+                  Routing
+                .complexity--slice.is-color4.is-weight4
+                  Models
+                .complexity--slice.is-color3.is-weight2
+                  Controllers
+                .complexity--slice.is-color2.is-weight2
+                  Views
+                .complexity--slice.is-color1.is-weight3
+                  Dependencies
+
+              .complexity--side-name
+                Server
+
+            .complexity--side
+
+              .complexity--stack
+                .complexity--slice.is-color7.is-weight2
+                  Virtual DOM
                 .complexity--slice.is-color6.is-weight1
                   Authorization
                 .complexity--slice.is-color5.is-weight2
@@ -407,6 +463,10 @@
               We think we can fix most of the problems with server-side apps
               %br
               and find a new sweet spot in that trade-off.
+
+
+        %section
+          %img(src='pictures/trade_off.png' height=600)
 
 
         -#%section
@@ -516,7 +576,7 @@
         -#    Hybrid AngularJS
         -#
         -#  %ul
-        -#    %li.green Marrying HTML/Javascript through directives is great
+        -#    %li.green Marrying HTML/JavaScript through directives is great
         -#    %li.red Crawlable content must always be rendered on the server,<br />so we can't really use this for important state changes
         -#    %li.red No routing, so no real URLs for changed state
         -#    %li.red Compile time is an issue on large pages
@@ -533,7 +593,7 @@
         -#    %li We still start new Random.js projects despite having AngularJS.
         -#    %li.fragment.green Rendered on the server using Ruby
         -#    %li.fragment.red
-        -#      Javascript:
+        -#      JavaScript:
         -#      %ul
         -#        %li Copy &amp; paste of untested (and flawed!) code snippets from cards and old projects
         -#        %li Anything non-trivial is implemented with a wall of jQuery
@@ -586,7 +646,7 @@
 
         -#%section
         -#  %p
-        -#    We just spent three years learning how Javascript works.
+        -#    We just spent three years learning how JavaScript works.
         -#  %p
         -#    Can we take some of those learnings back into the server-side paradigm?
 
@@ -649,10 +709,15 @@
 
         %section
 
-          %img.right(src='pictures/html6.png' height=200 style='margin-right: 180px')
 
 
-          %h3 Thought experiment
+          %h3
+            .line
+              How to fix server-side apps?
+            .subtle
+              A thought experiment
+
+          %img.right(src='pictures/html6.png' height=200 style='margin-right: 120px')
 
           %p
             Imagine HTML6 was all about server-side apps
@@ -670,7 +735,7 @@
           %p.fragment
             We can polyfill all of that!
             %br
-            %span.subtle Because it's 2016 and Javascript is now fast.
+            %span.subtle Because it's 2016 and JavaScript is now fast.
 
 
 
@@ -680,13 +745,17 @@
           %ul
             %li 25 new HTML attributes to write modern UI, but keep logic on the server
             -#%li
-            -#  Takes some ideas from unobtrusive Javascript and progressive enhancement,
+            -#  Takes some ideas from unobtrusive JavaScript and progressive enhancement,
             -#  but goes much further than that
-            %li Works with existing code
             %li
-              Backend-agnostic
+              .line
+                Works with existing code
               .subtle
-                (although we have some really nice Rails bindings)
+                little to no changes required on the server side
+            %li
+              Works with any backend language or framework
+              .subtle
+                although we have some nice Rails bindings
             %li In development for two years and in production with multiple apps
 
         -#
@@ -736,9 +805,9 @@
         -#%section
         -#  %h2 Unpoly
         -#  %ul
-        -#    %li Unobtrusive Javascript framework
+        -#    %li Unobtrusive JavaScript framework
         -#    %li Snappy UI for server-side apps
-        -#    %li Structure for organizing Javascript snippets
+        -#    %li Structure for organizing JavaScript snippets
         -#    %li In development for 18 months
         -#    %li
         -#      Largest open-source project we have
@@ -759,7 +828,7 @@
         -#
         -#  %ul
         -#    %li Perceived speed
-        -#    %li Keep DOM and Javascript VM between requests
+        -#    %li Keep DOM and JavaScript VM between requests
         -#    %li Layered interactions
         -#
         -#%section
@@ -833,7 +902,7 @@
             -#  .green The form is validated on the server, a red outline is shown
 
             %li
-              .line Inspect links and see attributes with <code>up-*</code> prefix
+              .line Inspect links and see attributes with <code class='blue'>up-*</code> prefix
               .gray
                 See docs for <a href="http://unpoly.com/a-up-target"><code>[up-target]</code></a> and
                 <a href="http://unpoly.com/up-modal"><code>[up-modal]</code></a>
@@ -857,7 +926,7 @@
           %img(src='pictures/fragment_flow_unpoly.svg' width='100%' style='margin-bottom: 10px')
 
           %p
-            Server still renders full pages, but we only use fragments.
+            Server <b>still renders full pages</b>, but we only use fragments.
             %br
             This solves most of our problems with transient state being destroyed.
 
@@ -867,38 +936,10 @@
           %h3
             Update a page fragment
             .subtle
-              without Javascript
+              without JavaScript
 
           %p
             %a(href='http://unpoly.com/examples/update-fragment/' target='_blank') Run example on unpoly.com
-
-          %pre.xs
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="story"&gt;
-
-                  &lt;p&gt;Story summary&lt;/p&gt;
-
-                  &lt;a href="full.html" <mark>up-target=".story"</mark>&gt;
-                    Read full story
-                  &lt;/a&gt;
-
-                &lt;/div&gt;
-
-          %ul
-            %li Unpoly requests <code>full.html</code> via AJAX
-            %li Server returns a <u>full HTML page</u> as usual
-            %li Unpoly extracts the fragment that matches <code>.story</code>
-            %li Unpoly swaps the old and new fragment
-            %li Unpoly changes the browser URL to <code>http://host/full.html</code>
-
-
-        %section
-
-          %h3
-            Update a page fragment
-            .subtle
-              without Javascript
 
           .columns
             .column
@@ -934,33 +975,13 @@
                       &lt;/a&gt;
 
                     &lt;/div&gt;
-          %ul
+          %ul.s
             %li Unpoly requests <code>full.html</code> via AJAX
-            %li Server returns a <u>full HTML page</u> as usual
-            %li Unpoly extracts the fragment that matches <code>.story</code>
+            %li Server renders a <u>full HTML page</u>
+            %li Unpoly extracts the fragment that matches <code class='blue'>.story</code>
             %li Unpoly swaps the old and new fragment
             %li Unpoly changes the browser URL to <code>http://host/full.html</code>
 
-
-
-        %section
-          %h3 Appending instead of replacing
-
-          %pre
-            %code.html(data-noescape)
-              :preserve
-                &lt;div class="tasks"&gt;
-                  &lt;li&gt;Wash car&lt;/li&gt;
-                  &lt;li&gt;Purchase supplies&lt;/li&gt;
-                  &lt;li&gt;Fix tent&lt;/li&gt;
-                &lt;/ul&gt;
-
-                &lt;a class="next-page" href="/tasks?page=2"
-                  up-target="<mark>.tasks:after</mark>, .next-page"&gt;Next page&lt;/a&gt;
-
-          %p
-            This appends the second page to the task list
-            and replaces the "Next page" button with a link to page 3.
 
 
 
@@ -1012,7 +1033,7 @@
           %h3
             Open fragment in modal dialog
             .subtle
-              without Javascript
+              without JavaScript
 
           %p
             %a(href='http://unpoly.com/examples/modal/') Run example on unpoly.com
@@ -1032,9 +1053,9 @@
 
           %ul
             %li Unpoly requests <code>full.html</code> via AJAX
-            %li Server returns a <u>full HTML page</u> as usual
-            %li Unpoly extracts the fragment that matches <code>.story</code>
-            %li <mark>Unpoly displays the new fragment in a <code>&lt;div class="up-modal"&gt;</code></mark>
+            %li Server renders a <u>full HTML page</u>
+            %li Unpoly extracts the fragment that matches <code class='blue'>.story</code>
+            %li Unpoly displays the new fragment in a <code class='blue'>&lt;div class="up-modal"&gt;</code>
             %li Unpoly changes the browser URL to <code>http://host/full.html</code>
 
         %section
@@ -1042,7 +1063,7 @@
           %h3
             Open fragment in a popup menu
             .subtle
-              without Javascript
+              without JavaScript
 
           %p(style='visibility: hidden')
             %a(href='http://unpoly.com/examples/modal/') Run example on unpoly.com
@@ -1062,9 +1083,9 @@
 
           %ul
             %li Unpoly requests <code>full.html</code> via AJAX
-            %li Server returns a <u>full HTML page</u> as usual
-            %li Unpoly extracts the fragment that matches <code>.story</code>
-            %li <mark>Unpoly displays the new fragment in a <code>&lt;div class="up-popup"&gt;</code></mark>
+            %li Server renders a <u>full HTML page</u>
+            %li Unpoly extracts the fragment that matches <code class='blue'>.story</code>
+            %li Unpoly displays the new fragment in a <code class='blue'>&lt;div class="up-popup"&gt;</code>
             %li Unpoly changes the browser URL to <code>http://host/full.html</code>
 
 
@@ -1091,31 +1112,31 @@
               .line
                 Modals and popups have their own URL.
               .subtle
-                When a modal closes, the background URL is restored.
+                When a layer closes, the background URL is restored.
             %li
               .line
-                Use <a href="http://unpoly.com/up-back"><code>[up-back]</code></a> to link to a previous state.
+                Use <a href="http://unpoly.com/up-back" target="_blank"><code>[up-back]</code></a> to link to a previous state.
               .subtle
                 That's a real link with a URL, not <code>location.back()</code>
-            %li
-              .line
-                Everything is opt-in
-              .subtle
-                Links without <code>up-target</code> will do a regular page load.<br>
-                This is different to Turbolinks, where you need to opt-out.
-
+            -#%li
+            -#  .line
+            -#    Everything is opt-in
+            -#  .subtle
+            -#    Links without <code>up-target</code> will do a regular page load.<br>
+            -#    This is different to Turbolinks, where you need to opt-out.
+            -#
 
 
         %section
-          %h3 But I have this really custom <span class="subtle">Javascript / jQuery library / behavior</span> that I need to integrate
+          %h3 But I have this really custom <span class="subtle">JavaScript / jQuery library / behavior</span> that I need to integrate
 
           %p
             Don't worry, we actually allow for massive customization:
 
           %ul
-            %li Pairing Javascript snippets with HTML elements
+            %li Pairing JavaScript snippets with HTML elements
             %li Integrating libraries (WYSIWYG editor, jQuery plugins, ...)
-            %li Passing structured data to Javascript snippets
+            %li Passing structured data to JavaScript snippets
             %li Reuse existing Unpoly functionality from your own code
             %li Invent your own UJS syntax
             %li Configure defaults
@@ -1125,21 +1146,20 @@
           %h3 Activating JS snippets
 
           %p
-            Every app needs a way to pair Javascript snippets<br />with certain HTML elements:
+            Every app needs a way to pair JavaScript snippets<br />with certain HTML elements:
 
           %ul
-            %li An <code>a[title]</code> attribute should activate qTip on mouseover
-            %li A <code>textarea.wysiwyg</code> should activate Redactor on load
+            %li An <code class='blue'>a[title]</code> attribute should activate qTip on mouseover
+            %li A <code class='blue'>textarea.wysiwyg</code> should activate Redactor on load
             %li
-              An <code>input[type=search]</code> field should automatically request new results
+              An <code class='blue'>input[type=search]</code> field should automatically request new results
               %br
               when the user types something
             %li
-              A <code>.map</code> should render a map with pins via the Google Maps JS API
-            %li
-              A <code>.button.toggle-all</code> should toggle all checkboxes in a form
-              %br
+              A <code class='blue'>.button.toggle-all</code> should toggle all checkboxes
               when clicked
+            %li
+              A <code class='blue'>.map</code> should render a map via the Google Maps JS API
 
         %section
           %h3
@@ -1160,7 +1180,7 @@
           %pre
             %code.javascript(data-noescape)
               :preserve
-                $(function() {
+                $(document).ready(function() {
                   $('.map').each(function() {
                     new google.maps.Map(this);
                   });
@@ -1239,7 +1259,7 @@
           %pre
             %code.html(data-noescape)
               :preserve
-                &lt;div class="map" up-data="{ lat: 48.36, lng: 10.99 }"&lt;/div&gt;
+                &lt;div class="map" up-data="{ lat: 48.75, lng: 11.45 }"&lt;/div&gt;
                 &nbsp;
                 &nbsp;
                 &nbsp;
@@ -1255,9 +1275,9 @@
 
 
           %p
-            The <code>up-data</code> attribute value is parsed as JSON and passed
+            The <code class='blue'>up-data</code> attribute value is parsed as JSON and passed
             %br
-            to your compiler as a Javascript object.
+            to your compiler as a JavaScript object.
 
 
 
@@ -1267,45 +1287,17 @@
           %h2 Response times
 
         %section
-          %h3 Response times
-
-          %ul.s
-            %li
-              <b>0.1 second</b> is about the limit for having the user feel that the system is reacting
-              instantaneously,
-              <span class="subtle">meaning that no special feedback is necessary except to display the
-              result.</span>
-            %li
-              <b>1.0 second</b> is about the limit for the user's flow of thought to stay uninterrupted, even
-              though the user will notice the delay. <span class="subtle">Normally, no special feedback is necessary during
-              delays of more than 0.1 but less than 1.0 second, but the user does lose the feeling of
-              operating directly on the data.</span>
-            %li
-              <b>10 seconds</b> is about the limit for keeping the user's attention focused on the dialogue.
-              <span class="subtle">
-              For longer delays, users will want to perform other tasks while waiting for the computer
-              to finish, so they should be given feedback indicating when the computer expects to be
-              done. Feedback during the delay is especially important if the response time is likely to
-              be highly variable, since users will then not know what to expect.</span>
-          %p
-            %cite
-              Miller 1968; Card et al. 1991; Jacob Nielsen 1993
-
-          %p
-            Also see Google's <a href="https://developers.google.com/web/tools/chrome-devtools/profile/evaluate-performance/rail">RAIL Performance Model</a>.
-
-        %section
           %h3
             .subtle
               Reponse times
             .line
-              Baseline: AngularJS
+              How fast are SPAs?
 
 
           %p
             We want to approximate the snappiness of a AngularJS SPA
             %br
-            (since we're happy with those). So let's take a closer look:
+            (since we're happy with those). How fast is an SPA?
 
 
           %ul
@@ -1351,7 +1343,7 @@
           %ul
 
             %li
-              We no longer parse and execute CSS, Javascript and build the DOM on every request
+              We no longer parse and execute CSS, JavaScript and build the DOM on every request
               .subtle
                 makandra deck on Cards (140 ms), AMC frontend (360 ms)
 
@@ -1386,13 +1378,28 @@
             %br
             <a href="http://makandracards.com/makandra" target="_blank">makandracards.com/makandra</a>.
 
+          %br
+
+          .xxxs(style='opacity: 0.2')
+            %p Paste this into the console to visualize mousedown events:
+
+            %pre
+              %code(data-noescape)
+                :preserve
+                  function showEvent() {
+                    var $div = $('&lt;div&gt;mousedown!&lt;/div&gt;');
+                    $div.css({ backgroundColor: 'blue', color: 'white', fontSize: '20px', padding: '20px', position: 'fixed', left: '0', top: '0', zIndex: '99999999' });
+                    $div.appendTo(document.body);
+                    $div.fadeOut(500, function() { $div.remove() });
+                  };
+                  document.addEventListener('mousedown',  showEvent, { capture: true });
 
         %section
           %h3 How you can optimize further
 
           %ul
             %li Server-side fragment caching (duh!)
-            %li Tailor responses for the <code>X-Up-Target</code> header
+            %li Tailor responses for the requested selector
             %li Spinners for long-running requests
             %li We can still implement client-side interactions
             %li Go nuclear with two-way bindings
@@ -1401,17 +1408,12 @@
           -#  ⬇ Navigate down for more optimization slides
 
         %section
-          %h3 Tailored responses
+          %h3 Tailor responses for the requested selector
 
-          %pre.xxs
+          %pre
             %code.html(data-noescape)
               :preserve
                 &lt;html&gt;
-
-                  &lt;% if up.target?('head') %&gt;
-                    &lt;%= render 'head' %&gt;
-                  &lt;% end %&gt;
-
                   &lt;body&gt;
 
                     &lt;% if up.target?('.side') %&gt;
@@ -1424,6 +1426,9 @@
 
                   &lt;/body&gt;
                 &lt;/html&gt;
+
+          %p
+            <code>up.target?(css)</code> looks at the <code>X-Up-Target</code> HTTP header.
 
         %section
           %h3 Spinners
@@ -1452,7 +1457,7 @@
                 });
 
           %p
-            The <code>up:proxy:slow</code> event is triggered after 300 ms (configurable).
+            The <code class='blue'>up:proxy:slow</code> event is triggered after 300 ms (configurable).
 
         %section
           %h3 We can still implement interactions on the client
@@ -1515,10 +1520,10 @@
               Changing that was a major design goal for Unpoly.
 
             %li
-              Unpoly's default UJS behavior is a thin wrapper around a Javascript API.
+              Unpoly's default UJS behavior is a thin wrapper around a JavaScript API.
             %li
               If the default UJS behavior doesn't fit your use case, you can use
-              that Javascript API from your own code, or invent new UJS syntax.
+              that JavaScript API from your own code, or invent new UJS syntax.
 
 
         %section
@@ -1609,7 +1614,7 @@
               :preserve
                 &lt;a menu-link href="/details"&gt;Show more&lt;/span&gt;
 
-          %h4.subtle Javascript
+          %h4.subtle JavaScript
 
           %pre
             %code.javascript
@@ -1627,7 +1632,7 @@
 
 
         %section
-          %h3 The Javascript API is extensive
+          %h3 The JavaScript API is extensive
           %p
             View full documentation of JS functions,<br> events and UJS selectors on
             <a href="http://unpoly.com/">unpoly.com</a>.
@@ -1683,7 +1688,7 @@
             %li Dependencies between fields
             %li Submitting a form within a modal and staying within the modal
 
-          %p
+          %p.green
             These are all solved by Unpoly.
 
         %section
@@ -1692,7 +1697,7 @@
             %h3 Ajax forms
 
             %p
-              A form with <code>up-target</code> will be submitted via AJAX
+              A form with <code class='blue'>[up-target]</code> will be submitted via AJAX
               and leave surrounding elements intact:
 
             %pre
@@ -1702,7 +1707,7 @@
                     ...
                   &lt;/form&gt;
 
-            %p A successful submission (status 200) will update <code>.main</code>
+            %p A successful submission (status 200) will update <code class='blue'>.main</code>
             %p
               A failed submission will (non-200 status) update the form itself
               %br
@@ -1829,10 +1834,7 @@
 
                   def create
                     @user = User.new(user_params)
-                    if up.validate?
-                      @user.valid?  # run validations, but don't save to DB
-                      render 'form' # render form with error messages
-                    elsif @user.save?
+                    if @user.save
                       sign_in @user
                     else
                       render 'form', status: :bad_request
@@ -1840,6 +1842,9 @@
                   end
 
                 end
+
+
+
 
         %section
           %h3 Validations without a page load
@@ -1911,9 +1916,9 @@
 
           %ul
             %li Read through <a href="http://unpoly.com">unpoly.com</a>
-            %li <code>gem 'unpoly-rails'</code> (<a href="http://unpoly.com/download">other methods</a>)
-            %li Replace half your Javascript with <code>up-target</code> links
-            %li Convert remaining Javascripts into <code>up.compiler</code>
+            %li <code class='blue'>gem 'unpoly-rails'</code> (<a href="http://unpoly.com/download">other methods</a>)
+            %li Replace half your JavaScript with <code class='blue'>up-target</code> attributes
+            %li Convert remaining JavaScripts into <code class='blue'>up.compiler</code>
 
 
 
@@ -1933,6 +1938,27 @@
 
         %section
           %h2 Additional slides
+
+
+        %section
+          %h3 Appending instead of replacing
+
+          %pre
+            %code.html(data-noescape)
+              :preserve
+                &lt;div class="tasks"&gt;
+                  &lt;li&gt;Wash car&lt;/li&gt;
+                  &lt;li&gt;Purchase supplies&lt;/li&gt;
+                  &lt;li&gt;Fix tent&lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;a class="next-page" href="/tasks?page=2"
+                  up-target="<mark>.tasks:after</mark>, .next-page"&gt;Next page&lt;/a&gt;
+
+          %p
+            This appends the second page to the task list
+            and replaces the "Next page" button with a link to page 3.
+
 
 
         %section
@@ -2140,7 +2166,7 @@
           -#.fragment
           -#  %p
           -#    You can also use <a href="http://unpoly.com/up.on"><code>up.on</code></a> to bind event handlers to <code>document</code>.<br />
-          -#    <code>up.on</code> supports <a href="http://unpoly.com/up-data"><code>up-data</code></a> and discards handlers on unsupported browsers.
+          -#    <code class='blue'>up.on</code> supports <a href="http://unpoly.com/up-data"><code>up-data</code></a> and discards handlers on unsupported browsers.
           -#
           -#  %pre
           -#    %code.javascript
@@ -2182,9 +2208,9 @@
               %li
                 A regular Random.js app is <b>full of memory leaks</b>.
               %li
-                We just don't notice because the Javascript VM is reset between page loads!
+                We just don't notice because the JavaScript VM is reset between page loads!
               %li
-                We can't have memory leaks in persistent Javascript VMs
+                We can't have memory leaks in persistent JavaScript VMs
                 .subtle
                   like Angular.js, Unpoly, Turbolinks
               %li
@@ -2201,7 +2227,7 @@
                 :preserve
                   &lt;clock&gt;&lt;/clock&gt;
 
-            %h4.subtle Javascript
+            %h4.subtle JavaScript
 
             %pre.xs
               %code.javascript(data-noescape)
@@ -2232,7 +2258,7 @@
                 :preserve
                   &lt;clock&gt;&lt;/clock&gt;
 
-            %h4.subtle Javascript
+            %h4.subtle JavaScript
 
             %pre.xs
               %code.javascript(data-noescape)
@@ -2262,7 +2288,7 @@
                 :preserve
                   &lt;clock&gt;&lt;/clock&gt;
 
-            %h4.subtle Javascript
+            %h4.subtle JavaScript
 
             %pre.xs
               %code.javascript(data-noescape)
@@ -2292,7 +2318,7 @@
                 :preserve
                   &lt;clock&gt;&lt;/clock&gt;
 
-            %h4.subtle Javascript
+            %h4.subtle JavaScript
 
             %pre.xs
               %code.javascript(data-noescape)
@@ -2738,6 +2764,34 @@
 
 
 
+        %section
+          %h3 Response times
+
+          %ul.s
+            %li
+              <b>0.1 second</b> is about the limit for having the user feel that the system is reacting
+              instantaneously,
+              <span class="subtle">meaning that no special feedback is necessary except to display the
+              result.</span>
+            %li
+              <b>1.0 second</b> is about the limit for the user's flow of thought to stay uninterrupted, even
+              though the user will notice the delay. <span class="subtle">Normally, no special feedback is necessary during
+              delays of more than 0.1 but less than 1.0 second, but the user does lose the feeling of
+              operating directly on the data.</span>
+            %li
+              <b>10 seconds</b> is about the limit for keeping the user's attention focused on the dialogue.
+              <span class="subtle">
+              For longer delays, users will want to perform other tasks while waiting for the computer
+              to finish, so they should be given feedback indicating when the computer expects to be
+              done. Feedback during the delay is especially important if the response time is likely to
+              be highly variable, since users will then not know what to expect.</span>
+          %p
+            %cite
+              Miller 1968; Card et al. 1991; Jacob Nielsen 1993
+
+          %p
+            Also see Google's <a href="https://developers.google.com/web/tools/chrome-devtools/profile/evaluate-performance/rail">RAIL Performance Model</a>.
+
 
         %section
 
@@ -2751,7 +2805,7 @@
               :preserve
                 &lt;a menu-link href="/details"&gt;Show more&lt;/span&gt;
 
-          %h4.subtle Javascript
+          %h4.subtle JavaScript
 
           %pre
             %code.javascript
@@ -2778,7 +2832,7 @@
             %br
             ☑ You have some control over the UI requirements
             %br
-            ☑ You're ready to launch 100% of your Javascript from <code>up.compiler</code>
+            ☑ You're ready to launch 100% of your JavaScript from <code>up.compiler</code>
             %br
             ☑ You're OK with dealing with the occasional breaking change
 

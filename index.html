@@ -3,9 +3,7 @@
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
     <meta charset='utf-8'>
-    <title>We're breaking up with Javascript frontends</title>
-    <meta content='A framework for easily creating beautiful presentations using HTML' name='description'>
-    <meta content='Hakim El Hattab' name='author'>
+    <title>We're breaking up with JavaScript frontends</title>
     <meta content='yes' name='apple-mobile-web-app-capable'>
     <meta content='black-translucent' name='apple-mobile-web-app-status-bar-style'>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui' name='viewport'>
@@ -14,6 +12,7 @@
     <link href='css/custom.css' rel='stylesheet'>
     <!-- Code syntax highlighting -->
     <link href='lib/css/highlightjs/paraiso-dark.css' rel='stylesheet'>
+    <link href='pictures/favicon.png' rel='icon'>
     <!-- Printing and PDF exports -->
     <script>
       var link = document.createElement( 'link' );
@@ -36,7 +35,7 @@
               It's not you, it's us
             </div>
             <div class='line'>
-              We're breaking up with Javascript frontends
+              We're breaking up with JavaScript frontends
             </div>
           </h3>
           <p>
@@ -348,7 +347,7 @@
         <section>
           <div class='complexity'>
             <div class='complexity--title'>
-              Complexity in 2015
+              Complexity in 2014
             </div>
             <div class='complexity--side'>
               <div class='complexity--stack'>
@@ -383,6 +382,78 @@
             </div>
             <div class='complexity--side'>
               <div class='complexity--stack'>
+                <div class='complexity--slice is-color6 is-weight1'>
+                  Authorization
+                </div>
+                <div class='complexity--slice is-color5 is-weight2'>
+                  Routing
+                </div>
+                <div class='complexity--slice is-color4 is-weight7'>
+                  Models / API client
+                </div>
+                <div class='complexity--slice is-color3 is-weight6'>
+                  Controllers
+                </div>
+                <div class='complexity--slice is-color2 is-weight3'>
+                  Views
+                </div>
+                <div class='complexity--slice is-color1 is-weight7'>
+                  Dependencies
+                </div>
+              </div>
+              <div class='complexity--side-name'>
+                Client
+              </div>
+            </div>
+          </div>
+          <p class='subtle xs' style='margin-top: 5px; text-align: center'>
+            Based on chart by <a href="https://twitter.com/ryanstout">@ryanstout</a>
+          </p>
+        </section>
+        <section>
+          <div class='complexity'>
+            <div class='complexity--title'>
+              Complexity in 2015
+            </div>
+            <div class='complexity--side'>
+              <div class='complexity--stack'>
+                <div class='complexity--slice is-color9 is-weight2'>
+                  Prerendering
+                </div>
+                <div class='complexity--slice is-color8 is-weight1'>
+                  Asset packing
+                </div>
+                <div class='complexity--slice is-color7 is-weight4'>
+                  API
+                </div>
+                <div class='complexity--slice is-color6 is-weight1'>
+                  Authorization
+                </div>
+                <div class='complexity--slice is-color5 is-weight1'>
+                  Routing
+                </div>
+                <div class='complexity--slice is-color4 is-weight4'>
+                  Models
+                </div>
+                <div class='complexity--slice is-color3 is-weight2'>
+                  Controllers
+                </div>
+                <div class='complexity--slice is-color2 is-weight2'>
+                  Views
+                </div>
+                <div class='complexity--slice is-color1 is-weight3'>
+                  Dependencies
+                </div>
+              </div>
+              <div class='complexity--side-name'>
+                Server
+              </div>
+            </div>
+            <div class='complexity--side'>
+              <div class='complexity--stack'>
+                <div class='complexity--slice is-color7 is-weight2'>
+                  Virtual DOM
+                </div>
                 <div class='complexity--slice is-color6 is-weight1'>
                   Authorization
                 </div>
@@ -468,6 +539,9 @@
           </ol>
         </section>
         <section>
+          <img height='600' src='pictures/trade_off.png'>
+        </section>
+        <section>
           <h3>
             What server-side apps
             <div class='green'>
@@ -531,8 +605,15 @@
           </ul>
         </section>
         <section>
-          <img class='right' height='200' src='pictures/html6.png' style='margin-right: 180px'>
-          <h3>Thought experiment</h3>
+          <h3>
+            <div class='line'>
+              How to fix server-side apps?
+            </div>
+            <div class='subtle'>
+              A thought experiment
+            </div>
+          </h3>
+          <img class='right' height='200' src='pictures/html6.png' style='margin-right: 120px'>
           <p>
             Imagine HTML6 was all about server-side apps
           </p>
@@ -554,7 +635,7 @@
           <p class='fragment'>
             We can polyfill all of that!
             <br>
-            <span class='subtle'>Because it's 2016 and Javascript is now fast.</span>
+            <span class='subtle'>Because it's 2016 and JavaScript is now fast.</span>
           </p>
         </section>
         <section>
@@ -563,11 +644,18 @@
           </h2>
           <ul>
             <li>25 new HTML attributes to write modern UI, but keep logic on the server</li>
-            <li>Works with existing code</li>
             <li>
-              Backend-agnostic
+              <div class='line'>
+                Works with existing code
+              </div>
               <div class='subtle'>
-                (although we have some really nice Rails bindings)
+                little to no changes required on the server side
+              </div>
+            </li>
+            <li>
+              Works with any backend language or framework
+              <div class='subtle'>
+                although we have some nice Rails bindings
               </div>
             </li>
             <li>In development for two years and in production with multiple apps</li>
@@ -604,7 +692,7 @@
               <div class='green'>Pattern selection happens in a modal dialog, <br>preserving unsaved form values</div>
             </li>
             <li>
-              <div class='line'>Inspect links and see attributes with <code>up-*</code> prefix</div>
+              <div class='line'>Inspect links and see attributes with <code class='blue'>up-*</code> prefix</div>
               <div class='gray'>
                 See docs for <a href="http://unpoly.com/a-up-target"><code>[up-target]</code></a> and
                 <a href="http://unpoly.com/up-modal"><code>[up-modal]</code></a>
@@ -625,7 +713,7 @@
           <h3>Unpoly page flow</h3>
           <img src='pictures/fragment_flow_unpoly.svg' style='margin-bottom: 10px' width='100%'>
           <p>
-            Server still renders full pages, but we only use fragments.
+            Server <b>still renders full pages</b>, but we only use fragments.
             <br>
             This solves most of our problems with transient state being destroyed.
           </p>
@@ -634,28 +722,12 @@
           <h3>
             Update a page fragment
             <div class='subtle'>
-              without Javascript
+              without JavaScript
             </div>
           </h3>
           <p>
             <a href='http://unpoly.com/examples/update-fragment/' target='_blank'>Run example on unpoly.com</a>
           </p>
-          <pre class='xs'><code class='html' data-noescape>&lt;div class="story"&gt;&#x000A;&#x000A;  &lt;p&gt;Story summary&lt;/p&gt;&#x000A;&#x000A;  &lt;a href="full.html" <mark>up-target=".story"</mark>&gt;&#x000A;    Read full story&#x000A;  &lt;/a&gt;&#x000A;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
-          <ul>
-            <li>Unpoly requests <code>full.html</code> via AJAX</li>
-            <li>Server returns a <u>full HTML page</u> as usual</li>
-            <li>Unpoly extracts the fragment that matches <code>.story</code></li>
-            <li>Unpoly swaps the old and new fragment</li>
-            <li>Unpoly changes the browser URL to <code>http://host/full.html</code></li>
-          </ul>
-        </section>
-        <section>
-          <h3>
-            Update a page fragment
-            <div class='subtle'>
-              without Javascript
-            </div>
-          </h3>
           <div class='columns'>
             <div class='column'>
               <h4 class='subtle'>short.html</h4>
@@ -666,21 +738,13 @@
               <pre class='xxs'><code class='html' data-noescape>&lt;div class="story"&gt;&#x000A;&#x000A;  &lt;h1&gt;Full story&lt;/h1&gt;&#x000A;&#x000A;  &lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;&#x000A;&#x000A;  &lt;a href="short.html" <mark>up-target=".story"&gt;</mark>&#x000A;    Read summary&#x000A;  &lt;/a&gt;&#x000A;&#x000A;&lt;/div&gt;</code></pre>
             </div>
           </div>
-          <ul>
+          <ul class='s'>
             <li>Unpoly requests <code>full.html</code> via AJAX</li>
-            <li>Server returns a <u>full HTML page</u> as usual</li>
-            <li>Unpoly extracts the fragment that matches <code>.story</code></li>
+            <li>Server renders a <u>full HTML page</u></li>
+            <li>Unpoly extracts the fragment that matches <code class='blue'>.story</code></li>
             <li>Unpoly swaps the old and new fragment</li>
             <li>Unpoly changes the browser URL to <code>http://host/full.html</code></li>
           </ul>
-        </section>
-        <section>
-          <h3>Appending instead of replacing</h3>
-          <pre><code class='html' data-noescape>&lt;div class="tasks"&gt;&#x000A;  &lt;li&gt;Wash car&lt;/li&gt;&#x000A;  &lt;li&gt;Purchase supplies&lt;/li&gt;&#x000A;  &lt;li&gt;Fix tent&lt;/li&gt;&#x000A;&lt;/ul&gt;&#x000A;&#x000A;&lt;a class="next-page" href="/tasks?page=2"&#x000A;  up-target="<mark>.tasks:after</mark>, .next-page"&gt;Next page&lt;/a&gt;&#x000A;</code></pre>
-          <p>
-            This appends the second page to the task list
-            and replaces the "Next page" button with a link to page 3.
-          </p>
         </section>
         <section>
           <h3>Layers</h3>
@@ -718,7 +782,7 @@
           <h3>
             Open fragment in modal dialog
             <div class='subtle'>
-              without Javascript
+              without JavaScript
             </div>
           </h3>
           <p>
@@ -727,9 +791,9 @@
           <pre class='xs'><code class='html' data-noescape>&lt;div class="story"&gt;&#x000A;&#x000A;  &lt;p&gt;Story summary&lt;/p&gt;&#x000A;&#x000A;  &lt;a href="full.html" <mark>up-modal=".story"</mark>&gt;&#x000A;    Read full story&#x000A;  &lt;/a&gt;&#x000A;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
           <ul>
             <li>Unpoly requests <code>full.html</code> via AJAX</li>
-            <li>Server returns a <u>full HTML page</u> as usual</li>
-            <li>Unpoly extracts the fragment that matches <code>.story</code></li>
-            <li><mark>Unpoly displays the new fragment in a <code>&lt;div class="up-modal"&gt;</code></mark></li>
+            <li>Server renders a <u>full HTML page</u></li>
+            <li>Unpoly extracts the fragment that matches <code class='blue'>.story</code></li>
+            <li>Unpoly displays the new fragment in a <code class='blue'>&lt;div class="up-modal"&gt;</code></li>
             <li>Unpoly changes the browser URL to <code>http://host/full.html</code></li>
           </ul>
         </section>
@@ -737,7 +801,7 @@
           <h3>
             Open fragment in a popup menu
             <div class='subtle'>
-              without Javascript
+              without JavaScript
             </div>
           </h3>
           <p style='visibility: hidden'>
@@ -746,9 +810,9 @@
           <pre class='xs'><code class='html' data-noescape>&lt;div class="story"&gt;&#x000A;&#x000A;  &lt;p&gt;Story summary&lt;/p&gt;&#x000A;&#x000A;  &lt;a href="full.html" <mark>up-popup=".story"</mark>&gt;&#x000A;    Read full story&#x000A;  &lt;/a&gt;&#x000A;&#x000A;&lt;/div&gt;&#x000A;</code></pre>
           <ul>
             <li>Unpoly requests <code>full.html</code> via AJAX</li>
-            <li>Server returns a <u>full HTML page</u> as usual</li>
-            <li>Unpoly extracts the fragment that matches <code>.story</code></li>
-            <li><mark>Unpoly displays the new fragment in a <code>&lt;div class="up-popup"&gt;</code></mark></li>
+            <li>Server renders a <u>full HTML page</u></li>
+            <li>Unpoly extracts the fragment that matches <code class='blue'>.story</code></li>
+            <li>Unpoly displays the new fragment in a <code class='blue'>&lt;div class="up-popup"&gt;</code></li>
             <li>Unpoly changes the browser URL to <code>http://host/full.html</code></li>
           </ul>
         </section>
@@ -783,37 +847,28 @@
                 Modals and popups have their own URL.
               </div>
               <div class='subtle'>
-                When a modal closes, the background URL is restored.
+                When a layer closes, the background URL is restored.
               </div>
             </li>
             <li>
               <div class='line'>
-                Use <a href="http://unpoly.com/up-back"><code>[up-back]</code></a> to link to a previous state.
+                Use <a href="http://unpoly.com/up-back" target="_blank"><code>[up-back]</code></a> to link to a previous state.
               </div>
               <div class='subtle'>
                 That's a real link with a URL, not <code>location.back()</code>
               </div>
             </li>
-            <li>
-              <div class='line'>
-                Everything is opt-in
-              </div>
-              <div class='subtle'>
-                Links without <code>up-target</code> will do a regular page load.<br>
-                This is different to Turbolinks, where you need to opt-out.
-              </div>
-            </li>
           </ul>
         </section>
         <section>
-          <h3>But I have this really custom <span class="subtle">Javascript / jQuery library / behavior</span> that I need to integrate</h3>
+          <h3>But I have this really custom <span class="subtle">JavaScript / jQuery library / behavior</span> that I need to integrate</h3>
           <p>
             Don't worry, we actually allow for massive customization:
           </p>
           <ul>
-            <li>Pairing Javascript snippets with HTML elements</li>
+            <li>Pairing JavaScript snippets with HTML elements</li>
             <li>Integrating libraries (WYSIWYG editor, jQuery plugins, ...)</li>
-            <li>Passing structured data to Javascript snippets</li>
+            <li>Passing structured data to JavaScript snippets</li>
             <li>Reuse existing Unpoly functionality from your own code</li>
             <li>Invent your own UJS syntax</li>
             <li>Configure defaults</li>
@@ -822,23 +877,22 @@
         <section>
           <h3>Activating JS snippets</h3>
           <p>
-            Every app needs a way to pair Javascript snippets<br />with certain HTML elements:
+            Every app needs a way to pair JavaScript snippets<br />with certain HTML elements:
           </p>
           <ul>
-            <li>An <code>a[title]</code> attribute should activate qTip on mouseover</li>
-            <li>A <code>textarea.wysiwyg</code> should activate Redactor on load</li>
+            <li>An <code class='blue'>a[title]</code> attribute should activate qTip on mouseover</li>
+            <li>A <code class='blue'>textarea.wysiwyg</code> should activate Redactor on load</li>
             <li>
-              An <code>input[type=search]</code> field should automatically request new results
+              An <code class='blue'>input[type=search]</code> field should automatically request new results
               <br>
               when the user types something
             </li>
             <li>
-              A <code>.map</code> should render a map with pins via the Google Maps JS API
+              A <code class='blue'>.button.toggle-all</code> should toggle all checkboxes
+              when clicked
             </li>
             <li>
-              A <code>.button.toggle-all</code> should toggle all checkboxes in a form
-              <br>
-              when clicked
+              A <code class='blue'>.map</code> should render a map via the Google Maps JS API
             </li>
           </ul>
         </section>
@@ -852,7 +906,7 @@
             </div>
           </h3>
           <pre><code class='html' data-noescape>&lt;div class="map"&gt;&lt;/span&gt;&#x000A;&#x000A;&#x000A;&#x000A;&#x000A;</code></pre>
-          <pre><code class='javascript' data-noescape>$(function() {&#x000A;  $('.map').each(function() {&#x000A;    new google.maps.Map(this);&#x000A;  });&#x000A;});&#x000A;</code></pre>
+          <pre><code class='javascript' data-noescape>$(document).ready(function() {&#x000A;  $('.map').each(function() {&#x000A;    new google.maps.Map(this);&#x000A;  });&#x000A;});&#x000A;</code></pre>
           <p>
             This is what you see in jQuery tutorials.
             <br>
@@ -894,49 +948,16 @@
             <div class='line'>Getting data into your JS</div>
             <div class='subtle'>Unpoly</div>
           </h3>
-          <pre><code class='html' data-noescape>&lt;div class="map" up-data="{ lat: 48.36, lng: 10.99 }"&lt;/div&gt;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
+          <pre><code class='html' data-noescape>&lt;div class="map" up-data="{ lat: 48.75, lng: 11.45 }"&lt;/div&gt;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
           <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, <mark>pin</mark>) {&#x000A;  new google.maps.Map($element, center: pin);&#x000A;});&#x000A;&#x000A;&#x000A;</code></pre>
           <p>
-            The <code>up-data</code> attribute value is parsed as JSON and passed
+            The <code class='blue'>up-data</code> attribute value is parsed as JSON and passed
             <br>
-            to your compiler as a Javascript object.
+            to your compiler as a JavaScript object.
           </p>
         </section>
         <section>
           <h2>Response times</h2>
-        </section>
-        <section>
-          <h3>Response times</h3>
-          <ul class='s'>
-            <li>
-              <b>0.1 second</b> is about the limit for having the user feel that the system is reacting
-              instantaneously,
-              <span class="subtle">meaning that no special feedback is necessary except to display the
-              result.</span>
-            </li>
-            <li>
-              <b>1.0 second</b> is about the limit for the user's flow of thought to stay uninterrupted, even
-              though the user will notice the delay. <span class="subtle">Normally, no special feedback is necessary during
-              delays of more than 0.1 but less than 1.0 second, but the user does lose the feeling of
-              operating directly on the data.</span>
-            </li>
-            <li>
-              <b>10 seconds</b> is about the limit for keeping the user's attention focused on the dialogue.
-              <span class="subtle">
-              For longer delays, users will want to perform other tasks while waiting for the computer
-              to finish, so they should be given feedback indicating when the computer expects to be
-              done. Feedback during the delay is especially important if the response time is likely to
-              be highly variable, since users will then not know what to expect.</span>
-            </li>
-          </ul>
-          <p>
-            <cite>
-              Miller 1968; Card et al. 1991; Jacob Nielsen 1993
-            </cite>
-          </p>
-          <p>
-            Also see Google's <a href="https://developers.google.com/web/tools/chrome-devtools/profile/evaluate-performance/rail">RAIL Performance Model</a>.
-          </p>
         </section>
         <section>
           <h3>
@@ -944,13 +965,13 @@
               Reponse times
             </div>
             <div class='line'>
-              Baseline: AngularJS
+              How fast are SPAs?
             </div>
           </h3>
           <p>
             We want to approximate the snappiness of a AngularJS SPA
             <br>
-            (since we're happy with those). So let's take a closer look:
+            (since we're happy with those). How fast is an SPA?
           </p>
           <ul>
             <li>
@@ -1005,7 +1026,7 @@
           <h3>What you get out of the box</h3>
           <ul>
             <li>
-              We no longer parse and execute CSS, Javascript and build the DOM on every request
+              We no longer parse and execute CSS, JavaScript and build the DOM on every request
               <div class='subtle'>
                 makandra deck on Cards (140 ms), AMC frontend (360 ms)
               </div>
@@ -1047,20 +1068,28 @@
             <br>
             <a href="http://makandracards.com/makandra" target="_blank">makandracards.com/makandra</a>.
           </p>
+          <br>
+          <div class='xxxs' style='opacity: 0.2'>
+            <p>Paste this into the console to visualize mousedown events:</p>
+            <pre><code data-noescape>function showEvent() {&#x000A;  var $div = $('&lt;div&gt;mousedown!&lt;/div&gt;');&#x000A;  $div.css({ backgroundColor: 'blue', color: 'white', fontSize: '20px', padding: '20px', position: 'fixed', left: '0', top: '0', zIndex: '99999999' });&#x000A;  $div.appendTo(document.body);&#x000A;  $div.fadeOut(500, function() { $div.remove() });&#x000A;};&#x000A;document.addEventListener('mousedown',  showEvent, { capture: true });&#x000A;</code></pre>
+          </div>
         </section>
         <section>
           <h3>How you can optimize further</h3>
           <ul>
             <li>Server-side fragment caching (duh!)</li>
-            <li>Tailor responses for the <code>X-Up-Target</code> header</li>
+            <li>Tailor responses for the requested selector</li>
             <li>Spinners for long-running requests</li>
             <li>We can still implement client-side interactions</li>
             <li>Go nuclear with two-way bindings</li>
           </ul>
         </section>
         <section>
-          <h3>Tailored responses</h3>
-          <pre class='xxs'><code class='html' data-noescape>&lt;html&gt;&#x000A;&#x000A;  &lt;% if up.target?('head') %&gt;&#x000A;    &lt;%= render 'head' %&gt;&#x000A;  &lt;% end %&gt;&#x000A;&#x000A;  &lt;body&gt;&#x000A;&#x000A;    &lt;% if up.target?('.side') %&gt;&#x000A;      &lt;%= render 'side' %&gt;&#x000A;    &lt;% end %&gt;&#x000A;&#x000A;    &lt;% if up.target?('.main') %&gt;&#x000A;      &lt;%= yield %&gt;&#x000A;    &lt;% end %&gt;&#x000A;&#x000A;  &lt;/body&gt;&#x000A;&lt;/html&gt;&#x000A;</code></pre>
+          <h3>Tailor responses for the requested selector</h3>
+          <pre><code class='html' data-noescape>&lt;html&gt;&#x000A;  &lt;body&gt;&#x000A;&#x000A;    &lt;% if up.target?('.side') %&gt;&#x000A;      &lt;%= render 'side' %&gt;&#x000A;    &lt;% end %&gt;&#x000A;&#x000A;    &lt;% if up.target?('.main') %&gt;&#x000A;      &lt;%= yield %&gt;&#x000A;    &lt;% end %&gt;&#x000A;&#x000A;  &lt;/body&gt;&#x000A;&lt;/html&gt;&#x000A;</code></pre>
+          <p>
+            <code>up.target?(css)</code> looks at the <code>X-Up-Target</code> HTTP header.
+          </p>
         </section>
         <section>
           <h3>Spinners</h3>
@@ -1070,7 +1099,7 @@
           <pre class='xs'><code class='html' data-noescape>&lt;div class="spinner"&gt;Please wait!&lt;/div&gt;&#x000A;</code></pre>
           <pre class='xs'><code class='javascript' data-noescape>up.compiler('.spinner', function($element) {&#x000A;  function show() { $element.show() };&#x000A;  function hide() { $element.hide() };&#x000A;  up.on('up:proxy:slow', show);&#x000A;  up.on('up:proxy:recover', hide);&#x000A;  hide();&#x000A;  return function() {&#x000A;    up.off('up:proxy:slow', show);&#x000A;    up.off('up:proxy:recover', hide);&#x000A;  };&#x000A;});&#x000A;</code></pre>
           <p>
-            The <code>up:proxy:slow</code> event is triggered after 300 ms (configurable).
+            The <code class='blue'>up:proxy:slow</code> event is triggered after 300 ms (configurable).
           </p>
         </section>
         <section>
@@ -1104,11 +1133,11 @@
               Changing that was a major design goal for Unpoly.
             </li>
             <li>
-              Unpoly's default UJS behavior is a thin wrapper around a Javascript API.
+              Unpoly's default UJS behavior is a thin wrapper around a JavaScript API.
             </li>
             <li>
               If the default UJS behavior doesn't fit your use case, you can use
-              that Javascript API from your own code, or invent new UJS syntax.
+              that JavaScript API from your own code, or invent new UJS syntax.
             </li>
           </ul>
         </section>
@@ -1146,11 +1175,11 @@
           </h3>
           <h4 class='subtle'>HTML</h4>
           <pre><code class='html' data-noescape>&lt;a menu-link href="/details"&gt;Show more&lt;/span&gt;&#x000A;</code></pre>
-          <h4 class='subtle'>Javascript</h4>
+          <h4 class='subtle'>JavaScript</h4>
           <pre><code class='javascript'>up.compiler('[menu-link]', function($link) {&#x000A;  $link.on('click', function(event) {&#x000A;    event.preventDefault();&#x000A;    up.popup.attach($link, {&#x000A;      target: '.menu',&#x000A;      position: 'bottom-left',&#x000A;      animation: 'roll-down'&#x000A;    });&#x000A;  });&#x000A;});&#x000A;&#x000A;</code></pre>
         </section>
         <section>
-          <h3>The Javascript API is extensive</h3>
+          <h3>The JavaScript API is extensive</h3>
           <p>
             View full documentation of JS functions,<br> events and UJS selectors on
             <a href="http://unpoly.com/">unpoly.com</a>.
@@ -1184,7 +1213,7 @@
             <li>Dependencies between fields</li>
             <li>Submitting a form within a modal and staying within the modal</li>
           </ul>
-          <p>
+          <p class='green'>
             These are all solved by Unpoly.
           </p>
         </section>
@@ -1192,11 +1221,11 @@
           <section>
             <h3>Ajax forms</h3>
             <p>
-              A form with <code>up-target</code> will be submitted via AJAX
+              A form with <code class='blue'>[up-target]</code> will be submitted via AJAX
               and leave surrounding elements intact:
             </p>
             <pre><code class='html' data-noescape>&lt;form method="post" action="/users" <mark>up-target=".main"</mark>&gt;&#x000A;  ...&#x000A;&lt;/form&gt;&#x000A;</code></pre>
-            <p>A successful submission (status 200) will update <code>.main</code></p>
+            <p>A successful submission (status 200) will update <code class='blue'>.main</code></p>
             <p>
               A failed submission will (non-200 status) update the form itself
               <br>
@@ -1235,7 +1264,7 @@
         </section>
         <section>
           <h3>Validations without a page load</h3>
-          <pre><code class='ruby' data-noescape>class UsersController &lt; ApplicationController&#x000A;&#x000A;  def create&#x000A;    @user = User.new(user_params)&#x000A;    if up.validate?&#x000A;      @user.valid?  # run validations, but don't save to DB&#x000A;      render 'form' # render form with error messages&#x000A;    elsif @user.save?&#x000A;      sign_in @user&#x000A;    else&#x000A;      render 'form', status: :bad_request&#x000A;    end&#x000A;  end&#x000A;&#x000A;end&#x000A;</code></pre>
+          <pre><code class='ruby' data-noescape>class UsersController &lt; ApplicationController&#x000A;&#x000A;  def create&#x000A;    @user = User.new(user_params)&#x000A;    if @user.save&#x000A;      sign_in @user&#x000A;    else&#x000A;      render 'form', status: :bad_request&#x000A;    end&#x000A;  end&#x000A;&#x000A;end&#x000A;&#x000A;&#x000A;&#x000A;</code></pre>
         </section>
         <section>
           <h3>Validations without a page load</h3>
@@ -1268,9 +1297,9 @@
           <h3>Getting started</h3>
           <ul>
             <li>Read through <a href="http://unpoly.com">unpoly.com</a></li>
-            <li><code>gem 'unpoly-rails'</code> (<a href="http://unpoly.com/download">other methods</a>)</li>
-            <li>Replace half your Javascript with <code>up-target</code> links</li>
-            <li>Convert remaining Javascripts into <code>up.compiler</code></li>
+            <li><code class='blue'>gem 'unpoly-rails'</code> (<a href="http://unpoly.com/download">other methods</a>)</li>
+            <li>Replace half your JavaScript with <code class='blue'>up-target</code> attributes</li>
+            <li>Convert remaining JavaScripts into <code class='blue'>up.compiler</code></li>
           </ul>
         </section>
         <section>
@@ -1283,6 +1312,14 @@
         </section>
         <section>
           <h2>Additional slides</h2>
+        </section>
+        <section>
+          <h3>Appending instead of replacing</h3>
+          <pre><code class='html' data-noescape>&lt;div class="tasks"&gt;&#x000A;  &lt;li&gt;Wash car&lt;/li&gt;&#x000A;  &lt;li&gt;Purchase supplies&lt;/li&gt;&#x000A;  &lt;li&gt;Fix tent&lt;/li&gt;&#x000A;&lt;/ul&gt;&#x000A;&#x000A;&lt;a class="next-page" href="/tasks?page=2"&#x000A;  up-target="<mark>.tasks:after</mark>, .next-page"&gt;Next page&lt;/a&gt;&#x000A;</code></pre>
+          <p>
+            This appends the second page to the task list
+            and replaces the "Next page" button with a link to page 3.
+          </p>
         </section>
         <section>
           <section>
@@ -1339,10 +1376,10 @@
                 A regular Random.js app is <b>full of memory leaks</b>.
               </li>
               <li>
-                We just don't notice because the Javascript VM is reset between page loads!
+                We just don't notice because the JavaScript VM is reset between page loads!
               </li>
               <li>
-                We can't have memory leaks in persistent Javascript VMs
+                We can't have memory leaks in persistent JavaScript VMs
                 <div class='subtle'>
                   like Angular.js, Unpoly, Turbolinks
                 </div>
@@ -1357,28 +1394,28 @@
             <h3>Random.js</h3>
             <h4 class='subtle'>HTML</h4>
             <pre class='xs'><code class='html' data-noescape>&lt;clock&gt;&lt;/clock&gt;&#x000A;</code></pre>
-            <h4 class='subtle'>Javascript</h4>
+            <h4 class='subtle'>JavaScript</h4>
             <pre class='xs'><code class='javascript' data-noescape>$.unobtrusive(function() {&#x000A;  $(this).find('clock', function() {&#x000A;&#x000A;    var $clock = $(this);&#x000A;&#x000A;    function updateClock() {&#x000A;      var now = new Date();&#x000A;      $clock.html(now.toString());&#x000A;    }&#x000A;&#x000A;    setInterval(updateClock, 1000);&#x000A;&#x000A;  });&#x000A;});&#x000A;</code></pre>
           </section>
           <section>
             <h3>Random.js: <span class="red">Leaky</span></h3>
             <h4 class='subtle'>HTML</h4>
             <pre class='xs'><code class='html' data-noescape>&lt;clock&gt;&lt;/clock&gt;&#x000A;</code></pre>
-            <h4 class='subtle'>Javascript</h4>
+            <h4 class='subtle'>JavaScript</h4>
             <pre class='xs'><code class='javascript' data-noescape>$.unobtrusive(function() {&#x000A;  $(this).find('clock', function() {&#x000A;&#x000A;    var $clock = $(this);&#x000A;&#x000A;    function updateClock() {&#x000A;      var now = new Date();&#x000A;      $clock.html(now.toString());&#x000A;    }&#x000A;&#x000A;    <mark class="bad">setInterval(updateClock, 1000);</mark> // creates one interval per &lt;clock&gt;!&#x000A;&#x000A;  });&#x000A;});&#x000A;</code></pre>
           </section>
           <section>
             <h3>Unpoly compiler: <span class="red">Still leaky</span></h3>
             <h4 class='subtle'>HTML</h4>
             <pre class='xs'><code class='html' data-noescape>&lt;clock&gt;&lt;/clock&gt;&#x000A;</code></pre>
-            <h4 class='subtle'>Javascript</h4>
+            <h4 class='subtle'>JavaScript</h4>
             <pre class='xs'><code class='javascript' data-noescape>up.compiler('clock', function($clock) {&#x000A;&#x000A;  function updateClock() {&#x000A;    var now = new Date();&#x000A;    $clock.html(now.toString());&#x000A;  }&#x000A;&#x000A;  <mark class="bad">setInterval(updateClock, 1000);</mark> // this still leaks memory!&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
           </section>
           <section>
             <h3>Unpoly compiler: <span class="green">Clean</span></h3>
             <h4 class='subtle'>HTML</h4>
             <pre class='xs'><code class='html' data-noescape>&lt;clock&gt;&lt;/clock&gt;&#x000A;</code></pre>
-            <h4 class='subtle'>Javascript</h4>
+            <h4 class='subtle'>JavaScript</h4>
             <pre class='xs'><code class='javascript' data-noescape>up.compiler('clock', function($clock) {&#x000A;&#x000A;  function updateClock() {&#x000A;    var now = new Date();&#x000A;    $clock.html(now.toString());&#x000A;  }&#x000A;&#x000A;  var interval = setInterval(updateClock, 1000);&#x000A;&#x000A;  <mark>return function() { clearInterval(interval) };</mark> // clean up when destroyed&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
           </section>
           <section>
@@ -1657,12 +1694,45 @@
           </ul>
         </section>
         <section>
+          <h3>Response times</h3>
+          <ul class='s'>
+            <li>
+              <b>0.1 second</b> is about the limit for having the user feel that the system is reacting
+              instantaneously,
+              <span class="subtle">meaning that no special feedback is necessary except to display the
+              result.</span>
+            </li>
+            <li>
+              <b>1.0 second</b> is about the limit for the user's flow of thought to stay uninterrupted, even
+              though the user will notice the delay. <span class="subtle">Normally, no special feedback is necessary during
+              delays of more than 0.1 but less than 1.0 second, but the user does lose the feeling of
+              operating directly on the data.</span>
+            </li>
+            <li>
+              <b>10 seconds</b> is about the limit for keeping the user's attention focused on the dialogue.
+              <span class="subtle">
+              For longer delays, users will want to perform other tasks while waiting for the computer
+              to finish, so they should be given feedback indicating when the computer expects to be
+              done. Feedback during the delay is especially important if the response time is likely to
+              be highly variable, since users will then not know what to expect.</span>
+            </li>
+          </ul>
+          <p>
+            <cite>
+              Miller 1968; Card et al. 1991; Jacob Nielsen 1993
+            </cite>
+          </p>
+          <p>
+            Also see Google's <a href="https://developers.google.com/web/tools/chrome-devtools/profile/evaluate-performance/rail">RAIL Performance Model</a>.
+          </p>
+        </section>
+        <section>
           <h3>
             <div class='line'>Repurpose existing UJS syntax</div>
           </h3>
           <h4 class='subtle'>HTML</h4>
           <pre><code class='html' data-noescape>&lt;a menu-link href="/details"&gt;Show more&lt;/span&gt;&#x000A;</code></pre>
-          <h4 class='subtle'>Javascript</h4>
+          <h4 class='subtle'>JavaScript</h4>
           <pre><code class='javascript'>up.macro('[menu-link]', function($link) {&#x000A;  $link.attr(&#x000A;    'up-target': '.menu',&#x000A;    'up-position': 'bottom-left',&#x000A;    'up-animation': 'roll-down'&#x000A;  });&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&#x000A;&#x000A;&#x000A;</code></pre>
         </section>
         <section>
@@ -1672,7 +1742,7 @@
             <br>
             ☑ You have some control over the UI requirements
             <br>
-            ☑ You're ready to launch 100% of your Javascript from <code>up.compiler</code>
+            ☑ You're ready to launch 100% of your JavaScript from <code>up.compiler</code>
             <br>
             ☑ You're OK with dealing with the occasional breaking change
           </p>
