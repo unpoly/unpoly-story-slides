@@ -574,6 +574,7 @@
               <div class='subtle'>(modals, drop-downs, drawers)</div>
             </li>
             <li>Animation is complicated</li>
+            <li>Complex forms</li>
           </ol>
         </section>
         <section>
@@ -1080,7 +1081,8 @@
         </section>
         <section>
           <h3>
-            <div class='line'>Dual interfaces</div>
+            <div class='subtle'>Composability</div>
+            <div class='line'>JavaScript API</div>
           </h3>
           <p>
             Unpoly's default UJS behavior is a small layer around a JS API.
@@ -1088,25 +1090,27 @@
             You can use this JS API to call Unpoly from your own code:
           </p>
           <h4 class='subtle'><u>U</u>nobtrusive</h4>
-          <pre><code class='html' data-noescape>&lt;a href="full.html" up-target=".story"&gt;Continue&lt;/a&gt;&#x000A;&#x000A;&#x000A;</code></pre>
+          <pre><code class='html' data-noescape>&lt;a href="full.html" up-target=".story"&gt;Continue&lt;/a&gt;&#x000A;</code></pre>
           <h4 class='subtle'><u>P</u>rogrammatic</h4>
           <pre><code class='javascript'>up.replace('.story', 'full.html');&#x000A;</code></pre>
         </section>
         <section>
           <h3>
+            <div class='subtle'>Composability</div>
             <div class='line'>Events</div>
           </h3>
           <pre><code class='javascript'>$(document).on('up:modal:open', function(event) {&#x000A;  if (dontLikeModals()) {&#x000A;    event.preventDefault();&#x000A;  }&#x000A;});&#x000A;</code></pre>
         </section>
         <section>
           <h3>
+            <div class='subtle'>Composability</div>
             <div class='line'>Invent your own UJS syntax</div>
           </h3>
           <h4 class='subtle'>HTML</h4>
           <pre><code class='html' data-noescape>&lt;a <mark>menu-link</mark> href="/details"&gt;Show more&lt;/span&gt;&#x000A;</code></pre>
           <div class='fragment'>
             <h4 class='subtle'>JavaScript</h4>
-            <pre><code class='javascript'>up.compiler('[menu-link]', function($link) {&#x000A;  $link.on('click', function(event) {&#x000A;    event.preventDefault();&#x000A;    up.popup.attach($link, {&#x000A;      target: '.menu',&#x000A;      position: 'bottom-left',&#x000A;      animation: 'roll-down'&#x000A;    });&#x000A;  });&#x000A;});&#x000A;&#x000A;</code></pre>
+            <pre><code class='javascript'>up.compiler('[menu-link]', function($link) {&#x000A;  $link.on('click', function(event) {&#x000A;    event.preventDefault();&#x000A;    up.popup.attach($link, {&#x000A;      target: '.menu',&#x000A;      position: 'bottom-left',&#x000A;      animation: 'roll-down'&#x000A;    });&#x000A;  });&#x000A;});&#x000A;</code></pre>
           </div>
         </section>
         <section>
@@ -1138,11 +1142,11 @@
           <ul>
             <li>Submitting a form via AJAX</li>
             <li>File uploads via AJAX</li>
-            <li>Detecting redirects</li>
-            <li>Dealing with validation errors</li>
+            <li>Detecting redirects of an AJAX form submission</li>
+            <li>Dealing with validation errors of an AJAX form submission</li>
             <li>Server-side validations without a page load</li>
             <li>Dependencies between fields</li>
-            <li>Submitting a form within a modal and staying within the modal</li>
+            <li>Submitting a form within a modal while keeping the modal open</li>
           </ul>
           <p class='green'>
             These are all solved by Unpoly.
@@ -1237,12 +1241,60 @@
           <p>
             In the example below we load a list of employees when the user selects a department:
           </p>
-          <pre class='s'><code class='html' data-noescape>&lt;form action="/contracts"&gt;&#x000A;  &lt;select name="department" <mark>up-validate="[name=employee]"</mark>&gt;...&lt;/select&gt;&#x000A;  &lt;select name="employee"&gt;...&lt;/select&gt;&#x000A;&lt;/form&gt;&#x000A;</code></pre>
+          <pre class='s'><code class='html' data-noescape>&lt;form action="/contracts"&gt;&#x000A;  &lt;select name="department" <mark>up-validate="[name=employee]"</mark>&gt;...&lt;/select&gt;&#x000A;  &lt;select name="employee"&gt;...&lt;/select&gt;&#x000A;&lt;/form&gt;&#x000A;&#x000A;</code></pre>
         </section>
         <section>
-          <h3>Getting started</h3>
+          <h3>
+            What server-side apps
+            <div class='red'>
+              don't do well
+            </div>
+          </h3>
+          <ol>
+            <li>Slow interaction feedback</li>
+            <li>
+              Page loads destroy transient state
+              <div class='subtle'>(scroll positions, unsaved form values, focus)</div>
+            </li>
+            <li>
+              Layered interactions are hard
+              <div class='subtle'>(modals, drop-downs, drawers)</div>
+            </li>
+            <li>Animation is complicated</li>
+            <li>Complex forms</li>
+          </ol>
+        </section>
+        <section>
+          <h3>
+            What server-side apps
+            <div class='blue'>
+              can actually be okay at
+            </div>
+          </h3>
+          <ol>
+            <li>Slow interaction feedback</li>
+            <li>
+              Page loads destroy transient state
+              <div class='subtle'>(scroll positions, unsaved form values, focus)</div>
+            </li>
+            <li>
+              Layered interactions are hard
+              <div class='subtle'>(modals, drop-downs, drawers)</div>
+            </li>
+            <li>Animation is complicated</li>
+            <li>Complex forms</li>
+          </ol>
+        </section>
+        <section>
+          <img height='600' src='pictures/trade_off.png'>
+        </section>
+        <section>
+          <h2>Getting started</h2>
           <ul>
-            <li>Read through <a href="http://unpoly.com">unpoly.com</a></li>
+            <li>
+              Check out <a href="http://unpoly.com">unpoly.com</a>
+              to get an overview of what's included
+            </li>
             <li><code class='blue'>gem 'unpoly-rails'</code> (<a href="http://unpoly.com/download">other methods</a>)</li>
             <li>Replace half your JavaScript with <code class='blue'>up-target</code> attributes</li>
             <li>Convert remaining JavaScripts into <code class='blue'>up.compiler</code></li>

@@ -678,6 +678,7 @@
               Layered interactions are hard
               .subtle (modals, drop-downs, drawers)
             %li Animation is complicated
+            %li Complex forms
 
 
         %section
@@ -1436,8 +1437,6 @@
           %h2
             Composability
 
-
-
           %p
             Homegrown UJS syntax usually lacks composability.
             %br
@@ -1446,7 +1445,8 @@
 
         %section
           %h3
-            .line Dual interfaces
+            .subtle Composability
+            .line JavaScript API
 
           %p
             Unpoly's default UJS behavior is a small layer around a JS API.
@@ -1459,8 +1459,6 @@
             %code.html(data-noescape)
               :preserve
                 &lt;a href="full.html" up-target=".story"&gt;Continue&lt;/a&gt;
-
-
 
           %h4.subtle <u>P</u>rogrammatic
 
@@ -1499,6 +1497,7 @@
 
         %section
           %h3
+            .subtle Composability
             .line Events
 
           %pre
@@ -1513,6 +1512,7 @@
         %section
 
           %h3
+            .subtle Composability
             .line Invent your own UJS syntax
 
           %h4.subtle HTML
@@ -1539,7 +1539,6 @@
                       });
                     });
                   });
-
 
         %section
           %h3 The JavaScript API is extensive
@@ -1592,11 +1591,11 @@
           %ul
             %li Submitting a form via AJAX
             %li File uploads via AJAX
-            %li Detecting redirects
-            %li Dealing with validation errors
+            %li Detecting redirects of an AJAX form submission
+            %li Dealing with validation errors of an AJAX form submission
             %li Server-side validations without a page load
             %li Dependencies between fields
-            %li Submitting a form within a modal and staying within the modal
+            %li Submitting a form within a modal while keeping the modal open
 
           %p.green
             These are all solved by Unpoly.
@@ -1831,11 +1830,53 @@
                   &lt;select name="employee"&gt;...&lt;/select&gt;
                 &lt;/form&gt;
 
+
         %section
-          %h3 Getting started
+          %h3
+            What server-side apps
+            .red
+              don't do well
+
+          %ol
+            %li Slow interaction feedback
+            %li
+              Page loads destroy transient state
+              .subtle (scroll positions, unsaved form values, focus)
+            %li
+              Layered interactions are hard
+              .subtle (modals, drop-downs, drawers)
+            %li Animation is complicated
+            %li Complex forms
+
+
+        %section
+          %h3
+            What server-side apps
+            .blue
+              can actually be okay at
+
+          %ol
+            %li Slow interaction feedback
+            %li
+              Page loads destroy transient state
+              .subtle (scroll positions, unsaved form values, focus)
+            %li
+              Layered interactions are hard
+              .subtle (modals, drop-downs, drawers)
+            %li Animation is complicated
+            %li Complex forms
+
+        %section
+          %img(src='pictures/trade_off.png' height=600)
+
+
+        %section
+          %h2 Getting started
 
           %ul
-            %li Read through <a href="http://unpoly.com">unpoly.com</a>
+            %li
+              Check out <a href="http://unpoly.com">unpoly.com</a>
+              to get an overview of what's included
             %li <code class='blue'>gem 'unpoly-rails'</code> (<a href="http://unpoly.com/download">other methods</a>)
             %li Replace half your JavaScript with <code class='blue'>up-target</code> attributes
             %li Convert remaining JavaScripts into <code class='blue'>up.compiler</code>
