@@ -3,7 +3,7 @@
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
     <meta charset='utf-8'>
-    <title>We're breaking up with JavaScript frontends</title>
+    <title>Modern frontends for server-side applications</title>
     <meta content='yes' name='apple-mobile-web-app-capable'>
     <meta content='black-translucent' name='apple-mobile-web-app-status-bar-style'>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui' name='viewport'>
@@ -31,22 +31,17 @@
       <div class='slides'>
         <section>
           <h3>
-            <div class='subtle'>
-              It's not you, it's us
+            <div class='line'>
+              Modern frontends
             </div>
             <div class='line'>
-              We're breaking up with JavaScript frontends
+              for server-side applications
             </div>
           </h3>
           <p>
             Henning Koch, makandra GmbH
             <br>
             <a href='https://twitter.com/triskweline'>@triskweline</a>
-          </p>
-        </section>
-        <section>
-          <p>
-            Give it 10 minutes.
           </p>
         </section>
         <section>
@@ -61,7 +56,7 @@
                 <li>Oldest app is from 2007</li>
               </ul>
             </li>
-            <li>Will we be able to do this for another 9 years?</li>
+            <li>Will we be able to do this for another 10 years?</li>
           </ul>
         </section>
         <section>
@@ -484,7 +479,9 @@
         </section>
         <section>
           <p>
-            A look back at the 7 AngularJS projects that we wrote from 2013-2016:
+            A look back at the 7 AngularJS projects
+            <br>
+            that we wrote from 2013-2016:
           </p>
           <div class='project-dots'>
             <div class='project-dots--row'>
@@ -503,7 +500,9 @@
         </section>
         <section>
           <p>
-            In hindsight, these are the projects that should have been a SPA:
+            In hindsight, these are the projects that should have been
+            <br>
+            a Single Page Application (SPA):
           </p>
           <div class='project-dots'>
             <div class='project-dots--row'>
@@ -636,7 +635,7 @@
           <p class='fragment'>
             We can polyfill all of that!
             <br>
-            <span class='subtle'>Because it's 2016 and JavaScript is now fast.</span>
+            <span class='subtle'>Because it's 2017 and JavaScript is now fast.</span>
           </p>
         </section>
         <section>
@@ -758,147 +757,121 @@
           <p>Changing a fragment behind the layer will close the layer</p>
         </section>
         <section>
-          <h3>Navigation</h3>
-          <ul>
-            <li>
-              All fragment updates change the browser URL by default.
-            </li>
-            <li>
+          <section>
+            <h3>But I have this really custom <span class="subtle">JavaScript / jQuery library / behavior</span> that I need to integrate</h3>
+            <p>
+              Don't worry, we actually allow for massive customization:
+            </p>
+            <ul>
+              <li>Pairing JavaScript snippets with HTML elements</li>
+              <li>Integrating libraries (WYSIWYG editor, jQuery plugins, ...)</li>
+              <li>Passing structured data to JavaScript snippets</li>
+              <li>Reuse existing Unpoly functionality from your own code</li>
+              <li>Invent your own UJS syntax</li>
+              <li>Configure defaults</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Activating JS snippets</h3>
+            <p>
+              Every app needs a way to pair JavaScript snippets<br />with certain HTML elements:
+            </p>
+            <ul>
+              <li>A <code class='blue'>textarea.wysiwyg</code> should activate Redactor on load</li>
+              <li>
+                An <code class='blue'>input[type=search]</code> field should automatically request new results
+                <br>
+                when the user types something
+              </li>
+              <li>
+                A <code class='blue'>button.toggle-all</code> should toggle all checkboxes
+                when clicked
+              </li>
+              <li>
+                A <code class='blue'>.map</code> should render a map via the Google Maps JS API
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h3>
               <div class='line'>
-                Back/Forward buttons work as expected.
+                Activating JS snippets
               </div>
               <div class='subtle'>
-                Even scroll positions are restored.
+                Random.js
               </div>
-            </li>
-            <li>
-              <div class='line'>
-                Linking to a fragment will <b>scroll the viewport</b> to reveal the fragment.
-              </div>
-              <div class='subtle'>
-                Unpoly is aware of fixed navigation bars and will scroll further/less.
-              </div>
-            </li>
-            <li>
-              Links to the current URL get an <a href="http://unpoly.com/up-current"><code>up-current</code></a>
-              class automatically.
-            </li>
-          </ul>
-        </section>
-        <section>
-          <h3>But I have this really custom <span class="subtle">JavaScript / jQuery library / behavior</span> that I need to integrate</h3>
-          <p>
-            Don't worry, we actually allow for massive customization:
-          </p>
-          <ul>
-            <li>Pairing JavaScript snippets with HTML elements</li>
-            <li>Integrating libraries (WYSIWYG editor, jQuery plugins, ...)</li>
-            <li>Passing structured data to JavaScript snippets</li>
-            <li>Reuse existing Unpoly functionality from your own code</li>
-            <li>Invent your own UJS syntax</li>
-            <li>Configure defaults</li>
-          </ul>
-        </section>
-        <section>
-          <h3>Activating JS snippets</h3>
-          <p>
-            Every app needs a way to pair JavaScript snippets<br />with certain HTML elements:
-          </p>
-          <ul>
-            <li>A <code class='blue'>textarea.wysiwyg</code> should activate Redactor on load</li>
-            <li>
-              An <code class='blue'>input[type=search]</code> field should automatically request new results
+            </h3>
+            <pre><code class='html' data-noescape>&lt;div class="map"&gt;&lt;/span&gt;&#x000A;&#x000A;&#x000A;&#x000A;&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>$(document).ready(function() {&#x000A;  $('.map').each(function() {&#x000A;    new google.maps.Map(this);&#x000A;  });&#x000A;});&#x000A;</code></pre>
+            <p>
+              This is what you see in jQuery tutorials.
               <br>
-              when the user types something
-            </li>
-            <li>
-              A <code class='blue'>button.toggle-all</code> should toggle all checkboxes
-              when clicked
-            </li>
-            <li>
-              A <code class='blue'>.map</code> should render a map via the Google Maps JS API
-            </li>
-          </ul>
-        </section>
-        <section>
-          <h3>
-            <div class='line'>
-              Activating JS snippets
+              <span class='red'>HTML fragments loaded via AJAX don't get Javascriptified.</span>
+            </p>
+          </section>
+          <section>
+            <h3>
+              <div class='line'>
+                Activating JS snippets
+              </div>
+              <div class='subtle'>
+                Unpoly
+              </div>
+            </h3>
+            <pre><code class='html' data-noescape>&lt;div class="map"&gt;&lt;/span&gt;&#x000A;&#x000A;&#x000A;&#x000A;&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>up.compiler('.map', function($map) {&#x000A;  new google.maps.Map($map);&#x000A;});&#x000A;&#x000A;&#x000A;</code></pre>
+            <p>
+              Unpoly automatically compiles all fragments that it inserts or updates.
+              <br>
+              On the first page load, the entire document is compiled.
+            </p>
+          </section>
+          <section>
+            <h3>
+              <div class='line'>Getting data into your JS</div>
+              <div class='subtle'>Random.js</div>
+            </h3>
+            <pre><code class='html' data-noescape>&lt;div class="map"&gt;&lt;/div&gt;&#x000A;&#x000A;&lt;script type="text/javascript"&gt;&#x000A;  initMap($('.map'), { lat: 48.75, lng: 11.45 });&#x000A;&lt;/script&gt;&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>function initMap($element, pin) {&#x000A;  new google.maps.Map($element, { center: pin });&#x000A;});&#x000A;&#x000A;&#x000A;</code></pre>
+            <p>
+              &nbsp;
+              <br>
+              &nbsp;
+            </p>
+          </section>
+          <section>
+            <h3>
+              <div class='line'>Getting data into your JS</div>
+              <div class='subtle'>Unpoly</div>
+            </h3>
+            <pre><code class='html' data-noescape>&lt;div class="map" up-data="{ lat: 48.75, lng: 11.45 }"&lt;/div&gt;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, <mark>pin</mark>) {&#x000A;  new google.maps.Map($element, center: pin);&#x000A;});&#x000A;&#x000A;&#x000A;</code></pre>
+            <p>
+              The <code class='blue'>up-data</code> attribute value is parsed as JSON and passed
+              <br>
+              to your compiler as a JavaScript object.
+            </p>
+          </section>
+          <section>
+            <h3>Symmetry to CSS components</h3>
+            <p>
+              If you are using some CSS component architecture like <a href="https://css-tricks.com/bem-101/">BEM</a>
+              you will find a nice symmetry between your CSS components and Unpoly compilers:
+            </p>
+            <div class='columns'>
+              <div class='column'>
+                <pre><code class='nohighlight' data-noescape><b>app/assets/stylesheets/blocks</b>&#x000A;  carousel.css&#x000A;  head.css&#x000A;  map.css&#x000A;  screenshot.css&#x000A;  tail.css</code></pre>
+              </div>
+              <div class='column'>
+                <pre><code class='nohighlight' data-noescape><b>app/assets/javascripts/compilers</b>&#x000A;  carousel.js&#x000A;  head.js&#x000A;  map.js&#x000A;  screenshot.js&#x000A;&#x000A;</code></pre>
+              </div>
             </div>
-            <div class='subtle'>
-              Random.js
-            </div>
-          </h3>
-          <pre><code class='html' data-noescape>&lt;div class="map"&gt;&lt;/span&gt;&#x000A;&#x000A;&#x000A;&#x000A;&#x000A;</code></pre>
-          <pre><code class='javascript' data-noescape>$(document).ready(function() {&#x000A;  $('.map').each(function() {&#x000A;    new google.maps.Map(this);&#x000A;  });&#x000A;});&#x000A;</code></pre>
-          <p>
-            This is what you see in jQuery tutorials.
-            <br>
-            <span class='red'>HTML fragments loaded via AJAX don't get Javascriptified.</span>
-          </p>
-        </section>
-        <section>
-          <h3>
-            <div class='line'>
-              Activating JS snippets
-            </div>
-            <div class='subtle'>
-              Unpoly
-            </div>
-          </h3>
-          <pre><code class='html' data-noescape>&lt;div class="map"&gt;&lt;/span&gt;&#x000A;&#x000A;&#x000A;&#x000A;&#x000A;</code></pre>
-          <pre><code class='javascript' data-noescape>up.compiler('.map', function($map) {&#x000A;  new google.maps.Map($map);&#x000A;});&#x000A;&#x000A;&#x000A;</code></pre>
-          <p>
-            Unpoly automatically compiles all fragments that it inserts or updates.
-            <br>
-            On the first page load, the entire document is compiled.
-          </p>
-        </section>
-        <section>
-          <h3>
-            <div class='line'>Getting data into your JS</div>
-            <div class='subtle'>Random.js</div>
-          </h3>
-          <pre><code class='html' data-noescape>&lt;div class="map"&gt;&lt;/div&gt;&#x000A;&#x000A;&lt;script type="text/javascript"&gt;&#x000A;  initMap($('.map'), { lat: 48.75, lng: 11.45 });&#x000A;&lt;/script&gt;&#x000A;</code></pre>
-          <pre><code class='javascript' data-noescape>function initMap($element, pin) {&#x000A;  new google.maps.Map($element, { center: pin });&#x000A;});&#x000A;&#x000A;&#x000A;</code></pre>
-          <p>
-            &nbsp;
-            <br>
-            &nbsp;
-          </p>
-        </section>
-        <section>
-          <h3>
-            <div class='line'>Getting data into your JS</div>
-            <div class='subtle'>Unpoly</div>
-          </h3>
-          <pre><code class='html' data-noescape>&lt;div class="map" up-data="{ lat: 48.75, lng: 11.45 }"&lt;/div&gt;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
-          <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, <mark>pin</mark>) {&#x000A;  new google.maps.Map($element, center: pin);&#x000A;});&#x000A;&#x000A;&#x000A;</code></pre>
-          <p>
-            The <code class='blue'>up-data</code> attribute value is parsed as JSON and passed
-            <br>
-            to your compiler as a JavaScript object.
-          </p>
-        </section>
-        <section>
-          <h3>Symmetry to CSS components</h3>
-          <p>
-            If you are using some CSS component architecture like <a href="https://css-tricks.com/bem-101/">BEM</a>
-            you will find a nice symmetry between your CSS components and Unpoly compilers:
-          </p>
-          <div class='columns'>
-            <div class='column'>
-              <pre><code class='nohighlight' data-noescape><b>app/assets/stylesheets/blocks</b>&#x000A;  carousel.css&#x000A;  head.css&#x000A;  map.css&#x000A;  screenshot.css&#x000A;  tail.css</code></pre>
-            </div>
-            <div class='column'>
-              <pre><code class='nohighlight' data-noescape><b>app/assets/javascripts/compilers</b>&#x000A;  carousel.js&#x000A;  head.js&#x000A;  map.js&#x000A;  screenshot.js&#x000A;&#x000A;</code></pre>
-            </div>
-          </div>
-          <p>
-            By sticking to this pattern you will always know where to find the CSS / JS that affects
-            your
-            <code class='blue'>&lt;div class='map'&gt;...&lt;/div&gt;</code> element.
-          </p>
+            <p>
+              By sticking to this pattern you will always know where to find the CSS / JS that affects
+              your
+              <code class='blue'>&lt;div class='map'&gt;...&lt;/div&gt;</code> element.
+            </p>
+          </section>
         </section>
         <section>
           <h2>Response times</h2>
@@ -1019,140 +992,144 @@
           </div>
         </section>
         <section>
-          <h3>How you can optimize further</h3>
-          <ul>
-            <li>Server-side fragment caching</li>
-            <li>Tailor responses for the requested selector</li>
-            <li>Spinners for long-running requests</li>
-            <li>We can still implement client-side interactions</li>
-            <li>Go nuclear with two-way bindings</li>
-          </ul>
+          <section>
+            <h3>How you can optimize further</h3>
+            <ul>
+              <li>Server-side fragment caching</li>
+              <li>Tailor responses for the requested selector</li>
+              <li>Spinners for long-running requests</li>
+              <li>We can still implement client-side interactions</li>
+              <li>Go nuclear with two-way bindings</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Tailor responses for the requested selector</h3>
+            <pre class='xs'><code class='erb' data-noescape>&lt;html&gt;&#x000A;  &lt;body&gt;&#x000A;&#x000A;    &lt;% if up.target?('.side') %&gt;&#x000A;      &lt;div class='side'&gt;&#x000A;        ...&#x000A;      &lt;/div&gt;&#x000A;    &lt;% end %&gt;&#x000A;&#x000A;    &lt;% if up.target?('.main') %&gt;&#x000A;      &lt;div class='main'&gt;&#x000A;        ...&#x000A;      &lt;/div&gt;&#x000A;    &lt;% end %&gt;&#x000A;&#x000A;  &lt;/body&gt;&#x000A;&lt;/html&gt;&#x000A;</code></pre>
+            <p>
+              <code>up.target?(css)</code> looks at the <code>X-Up-Target</code> HTTP header
+              <br>
+              that Unpoly
+              sends with every request.
+            </p>
+          </section>
+          <section>
+            <h3>Spinners</h3>
+            <p>
+              For the occasional long-running request, you can configure this globally:
+            </p>
+            <pre class='xs'><code class='html' data-noescape>&lt;div class="spinner"&gt;Please wait!&lt;/div&gt;&#x000A;</code></pre>
+            <pre class='xs'><code class='javascript' data-noescape>up.compiler('.spinner', function($element) {&#x000A;  function show() { $element.show() };&#x000A;  function hide() { $element.hide() };&#x000A;  up.on('up:proxy:slow', show);&#x000A;  up.on('up:proxy:recover', hide);&#x000A;  hide();&#x000A;});&#x000A;</code></pre>
+            <p>
+              The <code class='blue'>up:proxy:slow</code> event is triggered after 300 ms (configurable).
+            </p>
+          </section>
+          <section>
+            <h3>We can still implement interactions on the client</h3>
+            <pre><code class='html' data-noescape>&lt;div class='greeter'&gt;&#x000A;  &lt;input class='greeter--input'>&#x000A;  Hello &lt;span class='greeter--name'&gt;&lt;span&gt;!&#x000A;&lt;/div&gt;&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>up.compiler('.greeter', function($element) {&#x000A;  var $input = $element.find('.greeter--input');&#x000A;  var $name = $element.find('.greeter--name');&#x000A;  $input.on('input', function() {&#x000A;    $name.text($input.val());&#x000A;  });&#x000A;});&#x000A;</code></pre>
+          </section>
+          <section>
+            <h3>
+              <div class='subtle'>
+                Going nuclear
+              </div>
+              <div class='line'>
+                Two-way bindings
+              </div>
+            </h3>
+            <p>
+              With <a href="http://rivetsjs.com/">Rivets.js</a> (6 KB):
+            </p>
+            <pre><code class='html' data-noescape>&lt;div class='template' up-data='{ "name": "Arne" }'&gt;&#x000A;  &lt;input rv-value='name'>&#x000A;  Hello { name }!&#x000A;&lt;/div&gt;&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>up.compiler('.template', function($element, data) {&#x000A;  var view = rivets.bind($element, data);&#x000A;  return view.unbind;&#x000A;});&#x000A;</code></pre>
+          </section>
         </section>
         <section>
-          <h3>Tailor responses for the requested selector</h3>
-          <pre class='xs'><code class='erb' data-noescape>&lt;html&gt;&#x000A;  &lt;body&gt;&#x000A;&#x000A;    &lt;% if up.target?('.side') %&gt;&#x000A;      &lt;div class='side'&gt;&#x000A;        ...&#x000A;      &lt;/div&gt;&#x000A;    &lt;% end %&gt;&#x000A;&#x000A;    &lt;% if up.target?('.main') %&gt;&#x000A;      &lt;div class='main'&gt;&#x000A;        ...&#x000A;      &lt;/div&gt;&#x000A;    &lt;% end %&gt;&#x000A;&#x000A;  &lt;/body&gt;&#x000A;&lt;/html&gt;&#x000A;</code></pre>
-          <p>
-            <code>up.target?(css)</code> looks at the <code>X-Up-Target</code> HTTP header
-            <br>
-            that Unpoly
-            sends with every request.
-          </p>
-        </section>
-        <section>
-          <h3>Spinners</h3>
-          <p>
-            For the occasional long-running request, you can configure this globally:
-          </p>
-          <pre class='xs'><code class='html' data-noescape>&lt;div class="spinner"&gt;Please wait!&lt;/div&gt;&#x000A;</code></pre>
-          <pre class='xs'><code class='javascript' data-noescape>up.compiler('.spinner', function($element) {&#x000A;  function show() { $element.show() };&#x000A;  function hide() { $element.hide() };&#x000A;  up.on('up:proxy:slow', show);&#x000A;  up.on('up:proxy:recover', hide);&#x000A;  hide();&#x000A;});&#x000A;</code></pre>
-          <p>
-            The <code class='blue'>up:proxy:slow</code> event is triggered after 300 ms (configurable).
-          </p>
-        </section>
-        <section>
-          <h3>We can still implement interactions on the client</h3>
-          <pre><code class='html' data-noescape>&lt;div class='greeter'&gt;&#x000A;  &lt;input class='greeter--input'>&#x000A;  Hello &lt;span class='greeter--name'&gt;&lt;span&gt;!&#x000A;&lt;/div&gt;&#x000A;</code></pre>
-          <pre><code class='javascript' data-noescape>up.compiler('.greeter', function($element) {&#x000A;  var $input = $element.find('.greeter--input');&#x000A;  var $name = $element.find('.greeter--name');&#x000A;  $input.on('input', function() {&#x000A;    $name.text($input.val());&#x000A;  });&#x000A;});&#x000A;</code></pre>
-        </section>
-        <section>
-          <h3>
-            <div class='subtle'>
-              Going nuclear
+          <section>
+            <h2>
+              Composability
+            </h2>
+            <p>
+              Homegrown UJS syntax usually lacks composability.
+              <br>
+              Changing that was a major design goal for Unpoly.
+            </p>
+          </section>
+          <section>
+            <h3>
+              <div class='subtle'>Composability</div>
+              <div class='line'>JavaScript API</div>
+            </h3>
+            <p>
+              Unpoly's default UJS behavior is a small layer around a JS API.
+              <br>
+              You can use this JS API to call Unpoly from your own code:
+            </p>
+            <h4 class='subtle'><u>U</u>nobtrusive</h4>
+            <pre><code class='html' data-noescape>&lt;a href="full.html" up-target=".story"&gt;Continue&lt;/a&gt;&#x000A;</code></pre>
+            <h4 class='subtle'><u>P</u>rogrammatic</h4>
+            <pre><code class='javascript'>up.replace('.story', 'full.html');&#x000A;</code></pre>
+          </section>
+          <section>
+            <h3>
+              <div class='subtle'>Composability</div>
+              <div class='line'>Events</div>
+            </h3>
+            <pre><code class='javascript'>$(document).on('up:modal:open', function(event) {&#x000A;  if (dontLikeModals()) {&#x000A;    event.preventDefault();&#x000A;  }&#x000A;});&#x000A;</code></pre>
+          </section>
+          <section>
+            <h3>
+              <div class='subtle'>Composability</div>
+              <div class='line'>Invent your own UJS syntax</div>
+            </h3>
+            <h4 class='subtle'>HTML</h4>
+            <pre><code class='html' data-noescape>&lt;a <mark>menu-link</mark> href="/details"&gt;Show more&lt;/span&gt;&#x000A;</code></pre>
+            <div class='fragment'>
+              <h4 class='subtle'>JavaScript</h4>
+              <pre><code class='javascript'>up.compiler('[menu-link]', function($link) {&#x000A;  $link.on('click', function(event) {&#x000A;    event.preventDefault();&#x000A;    up.popup.attach($link, {&#x000A;      target: '.menu',&#x000A;      position: 'bottom-left',&#x000A;      animation: 'roll-down'&#x000A;    });&#x000A;  });&#x000A;});&#x000A;</code></pre>
             </div>
-            <div class='line'>
-              Two-way bindings
-            </div>
-          </h3>
-          <p>
-            With <a href="http://rivetsjs.com/">Rivets.js</a> (6 KB):
-          </p>
-          <pre><code class='html' data-noescape>&lt;div class='template' up-data='{ "name": "Arne" }'&gt;&#x000A;  &lt;input rv-value='name'>&#x000A;  Hello { name }!&#x000A;&lt;/div&gt;&#x000A;</code></pre>
-          <pre><code class='javascript' data-noescape>up.compiler('.template', function($element, data) {&#x000A;  var view = rivets.bind($element, data);&#x000A;  return view.unbind;&#x000A;});&#x000A;</code></pre>
+          </section>
+          <section>
+            <h3>The JavaScript API is extensive</h3>
+            <p>
+              View full documentation of JS functions,<br> events and UJS selectors on
+              <a href="http://unpoly.com/">unpoly.com</a>.
+            </p>
+          </section>
+          <section>
+            <h2>Animation</h2>
+            <p>
+              When a new element enters the DOM, you can <b>animate</b> the appearance:
+            </p>
+            <pre><code class='html' data-noescape>&lt;a href="/settings" up-modal=".menu" up-animation="fade-in"&gt;&#x000A;  Open settings&#x000A;&lt;/a&gt;&#x000A;&#x000A;</code></pre>
+            <p>
+              When you swap an element, you can <b>transition</b> between the old and new states:
+            </p>
+            <pre><code class='html' data-noescape>&lt;a href="/users" up-target=".list" up-transition="cross-fade"&gt;&#x000A;  Show users&#x000A;&lt;/a&gt;&#x000A;</code></pre>
+            <p>
+              Animations are implemented via CSS transforms on a 3D-accelerated layer.
+            </p>
+          </section>
         </section>
         <section>
-          <h2>
-            Composability
-          </h2>
-          <p>
-            Homegrown UJS syntax usually lacks composability.
-            <br>
-            Changing that was a major design goal for Unpoly.
-          </p>
-        </section>
-        <section>
-          <h3>
-            <div class='subtle'>Composability</div>
-            <div class='line'>JavaScript API</div>
-          </h3>
-          <p>
-            Unpoly's default UJS behavior is a small layer around a JS API.
-            <br>
-            You can use this JS API to call Unpoly from your own code:
-          </p>
-          <h4 class='subtle'><u>U</u>nobtrusive</h4>
-          <pre><code class='html' data-noescape>&lt;a href="full.html" up-target=".story"&gt;Continue&lt;/a&gt;&#x000A;</code></pre>
-          <h4 class='subtle'><u>P</u>rogrammatic</h4>
-          <pre><code class='javascript'>up.replace('.story', 'full.html');&#x000A;</code></pre>
-        </section>
-        <section>
-          <h3>
-            <div class='subtle'>Composability</div>
-            <div class='line'>Events</div>
-          </h3>
-          <pre><code class='javascript'>$(document).on('up:modal:open', function(event) {&#x000A;  if (dontLikeModals()) {&#x000A;    event.preventDefault();&#x000A;  }&#x000A;});&#x000A;</code></pre>
-        </section>
-        <section>
-          <h3>
-            <div class='subtle'>Composability</div>
-            <div class='line'>Invent your own UJS syntax</div>
-          </h3>
-          <h4 class='subtle'>HTML</h4>
-          <pre><code class='html' data-noescape>&lt;a <mark>menu-link</mark> href="/details"&gt;Show more&lt;/span&gt;&#x000A;</code></pre>
-          <div class='fragment'>
-            <h4 class='subtle'>JavaScript</h4>
-            <pre><code class='javascript'>up.compiler('[menu-link]', function($link) {&#x000A;  $link.on('click', function(event) {&#x000A;    event.preventDefault();&#x000A;    up.popup.attach($link, {&#x000A;      target: '.menu',&#x000A;      position: 'bottom-left',&#x000A;      animation: 'roll-down'&#x000A;    });&#x000A;  });&#x000A;});&#x000A;</code></pre>
-          </div>
-        </section>
-        <section>
-          <h3>The JavaScript API is extensive</h3>
-          <p>
-            View full documentation of JS functions,<br> events and UJS selectors on
-            <a href="http://unpoly.com/">unpoly.com</a>.
-          </p>
-        </section>
-        <section>
-          <h2>Animation</h2>
-          <p>
-            When a new element enters the DOM, you can <b>animate</b> the appearance:
-          </p>
-          <pre><code class='html' data-noescape>&lt;a href="/settings" up-modal=".menu" up-animation="fade-in"&gt;&#x000A;  Open settings&#x000A;&lt;/a&gt;&#x000A;&#x000A;</code></pre>
-          <p>
-            When you swap an element, you can <b>transition</b> between the old and new states:
-          </p>
-          <pre><code class='html' data-noescape>&lt;a href="/users" up-target=".list" up-transition="cross-fade"&gt;&#x000A;  Show users&#x000A;&lt;/a&gt;&#x000A;</code></pre>
-          <p>
-            Animations are implemented via CSS transforms on a 3D-accelerated layer.
-          </p>
-        </section>
-        <section>
-          <h2>Forms</h2>
-          <p>
-            Painful things with forms:
-          </p>
-          <ul>
-            <li>Submitting a form via AJAX</li>
-            <li>File uploads via AJAX</li>
-            <li>Detecting redirects of an AJAX form submission</li>
-            <li>Dealing with validation errors of an AJAX form submission</li>
-            <li>Server-side validations without a page load</li>
-            <li>Dependencies between fields</li>
-            <li>Submitting a form within a modal while keeping the modal open</li>
-          </ul>
-          <p class='green'>
-            These are all solved by Unpoly.
-          </p>
-        </section>
-        <section>
+          <section>
+            <h2>Forms</h2>
+            <p>
+              Painful things with forms:
+            </p>
+            <ul>
+              <li>Submitting a form via AJAX</li>
+              <li>File uploads via AJAX</li>
+              <li>Detecting redirects of an AJAX form submission</li>
+              <li>Dealing with validation errors of an AJAX form submission</li>
+              <li>Server-side validations without a page load</li>
+              <li>Dependencies between fields</li>
+              <li>Submitting a form within a modal while keeping the modal open</li>
+            </ul>
+            <p class='green'>
+              These are all solved by Unpoly.
+            </p>
+          </section>
           <section>
             <h3>Ajax forms</h3>
             <p>
@@ -1173,75 +1150,75 @@
             <h3>Return non-200 status<br />when validations fail</h3>
             <pre><code class='ruby' data-noescape>class UsersController < ApplicationController&#x000A;&#x000A;  def create&#x000A;    user_params = params[:user].permit(:email, :password)&#x000A;    @user = User.new(user_params)&#x000A;    if @user.save?&#x000A;      sign_in @user&#x000A;    else&#x000A;      render 'form', <mark>status: :bad_request</mark>&#x000A;    end&#x000A;  end&#x000A;&#x000A;end&#x000A;</code></pre>
           </section>
-        </section>
-        <section>
-          <h3>Forms within a modal</h3>
-          <p>
-            To <b>stay</b> within the modal, target a selector <b>within</b> the modal:
-          </p>
-          <pre><code class='html' data-noescape>&lt;form up-target=".selector-within-modal"&gt;&#x000A;  ...&#x000A;&lt;/form&gt;&#x000A;</code></pre>
-          <p>
-            To <b>close</b> the modal, target a selector <b>behind</b> the modal:
-          </p>
-          <pre><code class='html' data-noescape>&lt;form up-target=".selector-behind-modal"&gt;&#x000A;  ...&#x000A;&lt;/form&gt;&#x000A;</code></pre>
-        </section>
-        <section>
-          <h3>
-            <div class='line'>Server-side validations</div>
-            <div class='subtle'>without a page load</div>
-          </h3>
-          <pre class='s'><code class='html' data-noescape>&lt;form action="/users"&gt;&#x000A;&#x000A;  &lt;fieldset&gt;&#x000A;    &lt;label&gt;E-mail&lt;/label&gt;&#x000A;    &lt;input type="text" name="email" <mark>up-validate</mark>&gt;&#x000A;  &lt;/label&gt;&#x000A;&#x000A;  &lt;fieldset&gt;&#x000A;    &lt;label&gt;Password&lt;/label&gt;&#x000A;    &lt;input type="password" name="password"&gt;&#x000A;  &lt;/fieldset&gt;&#x000A;&#x000A;  &lt;button type="submit"&gt;Register&lt;/button&gt;&#x000A;&#x000A;&lt;/form&gt;&#x000A;</code></pre>
-        </section>
-        <section>
-          <h3>
-            <div class='line'>Server-side validations</div>
-            <div class='subtle'>without a page load</div>
-          </h3>
-          <pre class='s'><code class='html' data-noescape>&lt;form action="/users"&gt;&#x000A;&#x000A;  <mark>&lt;fieldset&gt;                                    </mark>&#x000A;  <mark>  &lt;label&gt;E-mail&lt;/label&gt;                       </mark>&#x000A;  <mark>  &lt;input type="text" name="email" up-validate&gt;</mark>&#x000A;  <mark>&lt;/label&gt;                                      </mark>&#x000A;&#x000A;  &lt;fieldset&gt;&#x000A;    &lt;label&gt;Password&lt;/label&gt;&#x000A;    &lt;input type="password" name="password"&gt;&#x000A;  &lt;/fieldset&gt;&#x000A;&#x000A;  &lt;button type="submit"&gt;Register&lt;/button&gt;&#x000A;&#x000A;&lt;/form&gt;&#x000A;</code></pre>
-        </section>
-        <section>
-          <h3>
-            <div class='line'>Server-side validations</div>
-            <div class='subtle'>without a page load</div>
-          </h3>
-          <pre class='s'><code class='html' data-noescape>&lt;form action="/users"&gt;&#x000A;&#x000A;  <mark>&lt;fieldset class="has-error"&gt;                                      </mark>&#x000A;  <mark>  &lt;label&gt;E-mail has already been taken!&lt;/label&gt;                   </mark>&#x000A;  <mark>  &lt;input type="text" name="email" up-validate value="foo@bar.com"&gt;</mark>&#x000A;  <mark>&lt;/label&gt;                                                          </mark>&#x000A;&#x000A;  &lt;fieldset&gt;&#x000A;    &lt;label&gt;Password&lt;/label&gt;&#x000A;    &lt;input type="password" name="password"&gt;&#x000A;  &lt;/fieldset&gt;&#x000A;&#x000A;  &lt;button type="submit"&gt;Register&lt;/button&gt;&#x000A;&#x000A;&lt;/form&gt;&#x000A;</code></pre>
-        </section>
-        <section>
-          <h3>
-            <div class='line'>Server-side validations</div>
-            <div class='subtle'>without a page load</div>
-          </h3>
-          <pre><code class='ruby' data-noescape>class UsersController &lt; ApplicationController&#x000A;&#x000A;  def create&#x000A;    @user = User.new(user_params)&#x000A;    if @user.save&#x000A;      sign_in @user&#x000A;    else&#x000A;      render 'form', status: :bad_request&#x000A;    end&#x000A;  end&#x000A;&#x000A;end&#x000A;&#x000A;&#x000A;&#x000A;</code></pre>
-        </section>
-        <section>
-          <h3>
-            <div class='line'>Server-side validations</div>
-            <div class='subtle'>without a page load</div>
-          </h3>
-          <pre><code class='ruby' data-noescape>class UsersController &lt; ApplicationController&#x000A;&#x000A;  def create&#x000A;    @user = User.new(user_params)&#x000A;    <mark>if up.validate?</mark>&#x000A;    <mark>  @user.valid? </mark> # run validations, but don't save to DB&#x000A;    <mark>  render 'form'</mark> # render form with error messages&#x000A;    elsif @user.save?&#x000A;      sign_in @user&#x000A;    else&#x000A;      render 'form', status: :bad_request&#x000A;    end&#x000A;  end&#x000A;&#x000A;end&#x000A;</code></pre>
-        </section>
-        <section>
-          <h3>
-            <div class='line'>Dependent fields</div>
-            <div class='subtle'>Simple cases</div>
-          </h3>
-          <p>
-            Use <a href="http://unpoly.com/up-switch" target="_blank"><code>[up-switch]</code></a> to show or hide existing elements based on a control value:
-          </p>
-          <pre><code class='html' data-noescape>&lt;select name="advancedness" up-switch=".target"&gt;&#x000A;  &lt;option value="basic"&gt;Basic parts&lt;/option&gt;&#x000A;  &lt;option value="advanced"&gt;Advanced parts&lt;/option&gt;&#x000A;&lt;/select&gt;&#x000A;&#x000A;&lt;div class="target" up-show-for="basic"&gt;&#x000A;  only shown for advancedness = basic&#x000A;&lt;/div&gt;&#x000A;&#x000A;&lt;div class="target" up-hide-for="basic"&gt;&#x000A;  hidden for advancedness = basic&#x000A;&lt;/div&gt;&#x000A;</code></pre>
-        </section>
-        <section>
-          <h3>
-            <div class='line'>Dependent fields</div>
-            <div class='subtle'>Harder cases</div>
-          </h3>
-          <p>
-            Use <a href="http://unpoly.com/up-validate" target="_blank"><code>[up-validate]</code></a> to update a field from the server when a control value changes.
-          </p>
-          <p>
-            In the example below we load a list of employees when the user selects a department:
-          </p>
-          <pre class='s'><code class='html' data-noescape>&lt;form action="/contracts"&gt;&#x000A;  &lt;select name="department" <mark>up-validate="[name=employee]"</mark>&gt;...&lt;/select&gt;&#x000A;  &lt;select name="employee"&gt;...&lt;/select&gt;&#x000A;&lt;/form&gt;&#x000A;&#x000A;</code></pre>
+          <section>
+            <h3>Forms within a modal</h3>
+            <p>
+              To <b>stay</b> within the modal, target a selector <b>within</b> the modal:
+            </p>
+            <pre><code class='html' data-noescape>&lt;form up-target=".selector-within-modal"&gt;&#x000A;  ...&#x000A;&lt;/form&gt;&#x000A;</code></pre>
+            <p>
+              To <b>close</b> the modal, target a selector <b>behind</b> the modal:
+            </p>
+            <pre><code class='html' data-noescape>&lt;form up-target=".selector-behind-modal"&gt;&#x000A;  ...&#x000A;&lt;/form&gt;&#x000A;</code></pre>
+          </section>
+          <section>
+            <h3>
+              <div class='line'>Server-side validations</div>
+              <div class='subtle'>without a page load</div>
+            </h3>
+            <pre class='s'><code class='html' data-noescape>&lt;form action="/users"&gt;&#x000A;&#x000A;  &lt;fieldset&gt;&#x000A;    &lt;label&gt;E-mail&lt;/label&gt;&#x000A;    &lt;input type="text" name="email" <mark>up-validate</mark>&gt;&#x000A;  &lt;/label&gt;&#x000A;&#x000A;  &lt;fieldset&gt;&#x000A;    &lt;label&gt;Password&lt;/label&gt;&#x000A;    &lt;input type="password" name="password"&gt;&#x000A;  &lt;/fieldset&gt;&#x000A;&#x000A;  &lt;button type="submit"&gt;Register&lt;/button&gt;&#x000A;&#x000A;&lt;/form&gt;&#x000A;</code></pre>
+          </section>
+          <section>
+            <h3>
+              <div class='line'>Server-side validations</div>
+              <div class='subtle'>without a page load</div>
+            </h3>
+            <pre class='s'><code class='html' data-noescape>&lt;form action="/users"&gt;&#x000A;&#x000A;  <mark>&lt;fieldset&gt;                                    </mark>&#x000A;  <mark>  &lt;label&gt;E-mail&lt;/label&gt;                       </mark>&#x000A;  <mark>  &lt;input type="text" name="email" up-validate&gt;</mark>&#x000A;  <mark>&lt;/label&gt;                                      </mark>&#x000A;&#x000A;  &lt;fieldset&gt;&#x000A;    &lt;label&gt;Password&lt;/label&gt;&#x000A;    &lt;input type="password" name="password"&gt;&#x000A;  &lt;/fieldset&gt;&#x000A;&#x000A;  &lt;button type="submit"&gt;Register&lt;/button&gt;&#x000A;&#x000A;&lt;/form&gt;&#x000A;</code></pre>
+          </section>
+          <section>
+            <h3>
+              <div class='line'>Server-side validations</div>
+              <div class='subtle'>without a page load</div>
+            </h3>
+            <pre class='s'><code class='html' data-noescape>&lt;form action="/users"&gt;&#x000A;&#x000A;  <mark>&lt;fieldset class="has-error"&gt;                                      </mark>&#x000A;  <mark>  &lt;label&gt;E-mail has already been taken!&lt;/label&gt;                   </mark>&#x000A;  <mark>  &lt;input type="text" name="email" up-validate value="foo@bar.com"&gt;</mark>&#x000A;  <mark>&lt;/label&gt;                                                          </mark>&#x000A;&#x000A;  &lt;fieldset&gt;&#x000A;    &lt;label&gt;Password&lt;/label&gt;&#x000A;    &lt;input type="password" name="password"&gt;&#x000A;  &lt;/fieldset&gt;&#x000A;&#x000A;  &lt;button type="submit"&gt;Register&lt;/button&gt;&#x000A;&#x000A;&lt;/form&gt;&#x000A;</code></pre>
+          </section>
+          <section>
+            <h3>
+              <div class='line'>Server-side validations</div>
+              <div class='subtle'>without a page load</div>
+            </h3>
+            <pre><code class='ruby' data-noescape>class UsersController &lt; ApplicationController&#x000A;&#x000A;  def create&#x000A;    @user = User.new(user_params)&#x000A;    if @user.save&#x000A;      sign_in @user&#x000A;    else&#x000A;      render 'form', status: :bad_request&#x000A;    end&#x000A;  end&#x000A;&#x000A;end&#x000A;&#x000A;&#x000A;&#x000A;</code></pre>
+          </section>
+          <section>
+            <h3>
+              <div class='line'>Server-side validations</div>
+              <div class='subtle'>without a page load</div>
+            </h3>
+            <pre><code class='ruby' data-noescape>class UsersController &lt; ApplicationController&#x000A;&#x000A;  def create&#x000A;    @user = User.new(user_params)&#x000A;    <mark>if up.validate?</mark>&#x000A;    <mark>  @user.valid? </mark> # run validations, but don't save to DB&#x000A;    <mark>  render 'form'</mark> # render form with error messages&#x000A;    elsif @user.save?&#x000A;      sign_in @user&#x000A;    else&#x000A;      render 'form', status: :bad_request&#x000A;    end&#x000A;  end&#x000A;&#x000A;end&#x000A;</code></pre>
+          </section>
+          <section>
+            <h3>
+              <div class='line'>Dependent fields</div>
+              <div class='subtle'>Simple cases</div>
+            </h3>
+            <p>
+              Use <a href="http://unpoly.com/up-switch" target="_blank"><code>[up-switch]</code></a> to show or hide existing elements based on a control value:
+            </p>
+            <pre><code class='html' data-noescape>&lt;select name="advancedness" up-switch=".target"&gt;&#x000A;  &lt;option value="basic"&gt;Basic parts&lt;/option&gt;&#x000A;  &lt;option value="advanced"&gt;Advanced parts&lt;/option&gt;&#x000A;&lt;/select&gt;&#x000A;&#x000A;&lt;div class="target" up-show-for="basic"&gt;&#x000A;  only shown for advancedness = basic&#x000A;&lt;/div&gt;&#x000A;&#x000A;&lt;div class="target" up-hide-for="basic"&gt;&#x000A;  hidden for advancedness = basic&#x000A;&lt;/div&gt;&#x000A;</code></pre>
+          </section>
+          <section>
+            <h3>
+              <div class='line'>Dependent fields</div>
+              <div class='subtle'>Harder cases</div>
+            </h3>
+            <p>
+              Use <a href="http://unpoly.com/up-validate" target="_blank"><code>[up-validate]</code></a> to update a field from the server when a control value changes.
+            </p>
+            <p>
+              In the example below we load a list of employees when the user selects a department:
+            </p>
+            <pre class='s'><code class='html' data-noescape>&lt;form action="/contracts"&gt;&#x000A;  &lt;select name="department" <mark>up-validate="[name=employee]"</mark>&gt;...&lt;/select&gt;&#x000A;  &lt;select name="employee"&gt;...&lt;/select&gt;&#x000A;&lt;/form&gt;&#x000A;&#x000A;</code></pre>
+          </section>
         </section>
         <section>
           <h3>
@@ -1293,9 +1270,9 @@
           <ul>
             <li>
               Check out <a href="http://unpoly.com">unpoly.com</a>
-              to get an overview of what's included
+              for a tutorial and an overview of what's included
             </li>
-            <li><code class='blue'>gem 'unpoly-rails'</code> (<a href="http://unpoly.com/download">other methods</a>)</li>
+            <li><code class='blue'>npm install unpoly</code> or <code class='blue'>gem install unpoly-rails</code> or <a href='http://unpoly.com/install/cdn' target='_blank'>link to CDN</a></li>
             <li>Replace half your JavaScript with <code class='blue'>up-target</code> attributes</li>
             <li>Convert remaining JavaScripts into <code class='blue'>up.compiler</code></li>
           </ul>
@@ -1310,6 +1287,34 @@
         </section>
         <section>
           <h2>Additional slides</h2>
+        </section>
+        <section>
+          <h3>Navigation</h3>
+          <ul>
+            <li>
+              All fragment updates change the browser URL by default.
+            </li>
+            <li>
+              <div class='line'>
+                Back/Forward buttons work as expected.
+              </div>
+              <div class='subtle'>
+                Even scroll positions are restored.
+              </div>
+            </li>
+            <li>
+              <div class='line'>
+                Linking to a fragment will <b>scroll the viewport</b> to reveal the fragment.
+              </div>
+              <div class='subtle'>
+                Unpoly is aware of fixed navigation bars and will scroll further/less.
+              </div>
+            </li>
+            <li>
+              Links to the current URL get an <a href="http://unpoly.com/up-current"><code>up-current</code></a>
+              class automatically.
+            </li>
+          </ul>
         </section>
         <section>
           <h3>
