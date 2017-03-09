@@ -113,7 +113,7 @@ body {
 /*}*/
 
 .reveal .subtle {
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .reveal .subtler {
@@ -482,7 +482,7 @@ body {
 
 .reveal .complexity {
   width: 100%;
-  height: 600px;
+  height: 640px;
   /*background-color: #333;*/
 }
 
@@ -622,4 +622,8 @@ body {
   font-size: 50px;
   text-transform: uppercase;
   font-weight: bold;
+}
+
+.reveal .complexity--title .subtle {
+  font-size: 40px;
 }

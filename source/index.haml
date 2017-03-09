@@ -65,6 +65,10 @@
         -#  %img(src='pictures/rails_lts.png')
 
         %section
+          %h3
+            Maintainability = 1 / (Dependencies * Complexity)
+
+        %section
           %h2 Tweet from 2025
           %img(src='pictures/future_tweet.png')
 
@@ -74,6 +78,8 @@
 
             .complexity--title
               Complexity
+              .subtle
+                &nbsp;
 
             .complexity--side
 
@@ -97,6 +103,8 @@
 
             .complexity--title
               Complexity in 2005
+              .subtle
+                Server-side apps
 
             .complexity--side
 
@@ -132,6 +140,8 @@
 
             .complexity--title
               Complexity in 2008
+              .subtle
+                JavaScript snippets
 
             .complexity--side
 
@@ -172,6 +182,8 @@
 
             .complexity--title
               Complexity in 2009
+              .subtle
+                Unobtrusive JavaScript
 
             .complexity--side
 
@@ -213,6 +225,8 @@
 
             .complexity--title
               Complexity in 2011
+              .subtle
+                JS Maintainability pains
 
             .complexity--side
 
@@ -256,6 +270,8 @@
 
             .complexity--title
               Complexity in 2013
+              .subtle
+                Single Page Apps (SPA)
 
             .complexity--side
 
@@ -303,13 +319,15 @@
 
             .complexity--title
               Complexity in 2014
+              .subtle
+                Copy everything into SPA
 
             .complexity--side
 
               .complexity--stack
                 .complexity--slice.is-color8.is-weight1
                   Asset packing
-                .complexity--slice.is-color7.is-weight4
+                .complexity--slice.is-color7.is-weight5
                   API
                 .complexity--slice.is-color6.is-weight1
                   Authorization
@@ -338,7 +356,7 @@
                   Models / API client
                 .complexity--slice.is-color3.is-weight6
                   Controllers
-                .complexity--slice.is-color2.is-weight3
+                .complexity--slice.is-color2.is-weight4
                   Views
                 .complexity--slice.is-color1.is-weight7
                   Dependencies
@@ -355,6 +373,8 @@
 
             .complexity--title
               Complexity in 2015
+              .subtle
+                Add abstractions to fix SPA issues
 
             .complexity--side
 
@@ -363,7 +383,7 @@
                   Prerendering
                 .complexity--slice.is-color8.is-weight1
                   Asset packing
-                .complexity--slice.is-color7.is-weight4
+                .complexity--slice.is-color7.is-weight5
                   API
                 .complexity--slice.is-color6.is-weight1
                   Authorization
@@ -396,7 +416,7 @@
                   Controllers
                 .complexity--slice.is-color2.is-weight3
                   Views
-                .complexity--slice.is-color1.is-weight7
+                .complexity--slice.is-color1.is-weight8
                   Dependencies
 
               .complexity--side-name
@@ -759,7 +779,7 @@
               Works with any backend language or framework
               .subtle
                 although we have some nice Rails bindings
-            %li In development for two years and in production with multiple apps
+            %li In development for 2½ years and in production with multiple apps
 
         -#
         -#%section
@@ -990,7 +1010,7 @@
             %h3 But I have this really custom <span class="subtle">JavaScript / jQuery library / behavior</span> that I need to integrate
 
             %p
-              Don't worry, we actually allow for massive customization:
+              Don't worry, there's a massive JavasScript API for:
 
             %ul
               %li Pairing JavaScript snippets with HTML elements
@@ -1850,7 +1870,7 @@
             %li
               Check out <a href="http://unpoly.com">unpoly.com</a>
               for a tutorial and an overview of what's included
-            %li <code class='blue'>npm install unpoly</code> or <code class='blue'>gem install unpoly-rails</code> or <a href='http://unpoly.com/install/cdn' target='_blank'>link to CDN</a>
+            %li Install with CDN, npm, Rubygems, Bower, etc. (we support everything)
             %li Replace half your JavaScript with <code class='blue'>up-target</code> attributes
             %li Convert remaining JavaScripts into <code class='blue'>up.compiler</code>
 
