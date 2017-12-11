@@ -29,28 +29,281 @@
       .slides
 
         %section
-          -#%img.plain(src='pictures/logos/unpoly.png' width='50%')
+
+          %h2
+            %img.plain(src='pictures/logos/unpoly.png' width='50%')
+
           %h3
-            .subtle
-              It's not you, it's us
-            .line
-              We're breaking up with JavaScript frontends
-          %p
-            Henning Koch, makandra GmbH
+            Review 2017
             %br
-            %a(href='https://twitter.com/triskweline') @triskweline
-
-
-
-        -#%section
-        -#  %img.plain(src='pictures/logos/unpoly2.png' width='50%')
-        -#
-        -#%section
-        -#  %img.plain(src='pictures/logos/unpoly3.png' width='50%')
+            Roadmap 2018
 
         %section
+          %h2 2017
+
+          %ul
+            %li Infinite bug fixes
+            %li Drop support for IE9, IE10
+            %li jQuery 3
+            %li Webpack + npm
+            %li Native AJAX
+            %li Native promises
+
+        %section
+          %img(src='pictures/diffs_without_unpoly.png' height=600)
+
+        %section
+          %img(src='pictures/diffs_with_unpoly.png' height=600)
+
+        %section
+          %h2
+            .subtle
+              2017
+            .line
+              Unpoly 0.50
+
+        %section
+          %h2
+            .subtle
+              2018
+            .line
+              Unpoly 1.0.0
+
+        %section
+          %h2
+            .subtle
+              2018
+            .line
+              Unpoly 2.0.0
+
+        %section
+          %h2
+            .subtle
+              2018
+            .line
+              Unpoly 3.0.0
+
+        %section
+          %h2
+            .subtle
+              Semantic versioning
+            .green
+              No rules for 0.x versions
+
           %p
-            Give it 10 minutes.
+            Major version zero (0.y.z) is for initial development. Anything may change at any time. The public API should not be considered stable.
+
+        %section(data-background-color='#3f1020')
+
+          %h2
+            .subtle
+              Semantic versioning
+            .red With 1.0 the commitments begin
+
+
+
+          %p
+            %b Version 1.0.0 defines the public API.
+            The way in which the version number is incremented after this release is dependent on this public API and how it changes.
+
+          %p
+            Given a version number <code>MAJOR.MINOR.PATCH</code>, increment the:
+
+          %ol
+            %li <code>MAJOR</code> version when you make incompatible API changes,
+            %li <code>MINOR</code> version when you add functionality in a backwards-compatible manner,
+            %li <code>PATCH</code> version when you make backwards-compatible bug fixes.
+
+
+        %section
+
+          %ul
+            %li So Unpoly stayed on 0.x in hope that the API would stabilize 100%
+            %li.fragment That never happened
+            %li.fragment (and that's OK)
+
+
+        %section
+          %h2
+            .subtle In 2018 Unpoly will
+            .line switch to frequent major releases
+
+          %ul
+
+            %li.fragment
+              It's stupid to stay on 0.x forever in fear of breaking changes
+              .subtle
+                There is <b>zero signal</b> in an Unpoly version number right now
+
+            %li.fragment
+              After 1.0 there will be a major version bump every few months
+              .subtle
+                Use this to know if you can upgrade without reading CHANGELOG
+            %li.fragment
+              Major bumps will not mean "huge breaking change" like in Rails
+              .subtle
+                It means: <i>Any</i> breaking change
+                %br
+                It means: You should read CHANGELOG or run tests
+            %li.fragment
+              There's still a commitment to not break your app for petty reasons
+              .subtle
+                There will always be deprecations and clearly documented upgrade paths
+                %br
+                Like we had for three years now
+
+
+        %section
+
+          %h2
+            .subtle
+              Roadmap
+            .line
+              Quality of live improvements
+
+          %ul
+            %li <code>input[up-redraw]</code>
+            %li <code>[up-live]</code>
+            %li Better handling of URL <code>#hashes</code>
+            %li Rich events
+            %li Mailing list
+
+
+
+        %section
+
+          %h2
+            .subtle
+              Roadmap
+            .line
+              Zeroconf offline
+
+          %p.fragment
+            (This might not work)
+
+
+
+        -#%section
+        -#
+        -#  %h3
+        -#    The idea behind Unpoly
+        -#
+        -#  %img.right(src='pictures/html6.png' height=200 style='margin-right: 120px')
+        -#
+        -#  %ul
+        -#    %li
+        -#      Emulate a browser that is friendly to apps, not documents
+        -#    %li
+        -#      Write less JavaScript
+
+
+        %section
+          %img(src='pictures/trade_off.png' height=600)
+
+        %section
+          %img(src='pictures/cards_online.png' height=600)
+
+        %section
+          %img(src='pictures/cards_native_offline.png' height=600)
+
+        %section
+          %img(src='pictures/cards_online.png' height=600)
+
+        %section
+          %img(src='pictures/cards_unpoly_offline.png' height=600)
+
+
+        %section
+          %h2
+            Offline is hard
+
+          %ul
+            %li
+              Devices don't actually know if they're online or not
+            %li
+              Being online/offline is not actually a binary state
+              .subtle
+                Celltower switches, moving devices, captive portals, ...
+            %li
+              Service worker is on a different thread
+            %li
+              Assets
+
+        %section
+
+          %p
+            What could maybe be a good default:
+
+          %ul
+            %li When a link or form submission fails, we don't burn down the page
+            %li Users can continue to visit recently visited pages while they're offline
+            %li Users get a visual distinction whether a link is available or not
+
+          %p
+            How well would this work if we did it like this:
+
+          %ul
+            %li If a request fails, Unpoly goes into offline mode
+            %li We have different (much longer) expiration settings for up.proxy when offline
+            %li We mark links, forms as .up-offline (or [up-disabled]) if we are offline and the resource is not cached
+            %li We don't follow offline links and forms, or maybe throw an up:offline event whose preventable default is to not follow
+            %li We need some way to detect connection recovery. This is probably the hardest thing of all. We probably need to periodically fetch the Favicon or something.
+
+        %section
+          Screenshot of form
+
+        %section
+          Screenshot of offline dinosaur
+
+        %section
+          Screenshot of form
+
+        %section
+          Screenshot of rescue bubble
+
+        %section
+          %h2 Forms
+
+          %pre.xl
+            %code.html(data-noescape)
+              :preserve
+                &lt;form method='post' action='/documents' <mark>up-rescue</mark>&gt;
+                  &lt;input type="text" name="title"&gt;
+                  &lt;input type="file" name="document"&gt;
+                  &lt;button type="submit"&gt;Submit&lt;/button&gt;
+                &lt;/form&gt;
+
+          %pre.xl.fragment
+            %code.javascript(data-noescape)
+              :preserve
+                up.on('up:request:rescued', function(event) {
+                  $('&lt;div class="toast"&gt;&lt;/div&gt;')
+                    .text("Retry: " + event.request.title)
+                    .on('click', event.request.retry)
+                    .appendTo(document.body)
+                })
+
+        %section
+          %h2 Default service worker
+
+        %section
+          Screenshot of blank chrome
+
+        %section
+          Screenshot of offline dinosaur
+
+        %section
+          Screenshot of blank chrome
+
+        %section
+          Screenshot of cards with some links striked
+
+
+
+        %section
+          Fin
+
+
 
         %section
           %h3 Context
@@ -465,8 +718,6 @@
               and find a new sweet spot in that trade-off.
 
 
-        %section
-          %img(src='pictures/trade_off.png' height=600)
 
 
         -#%section

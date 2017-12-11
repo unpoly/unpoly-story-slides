@@ -30,24 +30,269 @@
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class='slides'>
         <section>
+          <h2>
+            <img class='plain' src='pictures/logos/unpoly.png' width='50%'>
+          </h2>
           <h3>
+            Review 2017
+            <br>
+            Roadmap 2018
+          </h3>
+        </section>
+        <section>
+          <h2>2017</h2>
+          <ul>
+            <li>Infinite bug fixes</li>
+            <li>Drop support for IE9, IE10</li>
+            <li>jQuery 3</li>
+            <li>Webpack + npm</li>
+            <li>Native AJAX</li>
+            <li>Native promises</li>
+          </ul>
+        </section>
+        <section>
+          <img height='600' src='pictures/diffs_without_unpoly.png'>
+        </section>
+        <section>
+          <img height='600' src='pictures/diffs_with_unpoly.png'>
+        </section>
+        <section>
+          <h2>
             <div class='subtle'>
-              It's not you, it's us
+              2017
             </div>
             <div class='line'>
-              We're breaking up with JavaScript frontends
+              Unpoly 0.50
             </div>
-          </h3>
+          </h2>
+        </section>
+        <section>
+          <h2>
+            <div class='subtle'>
+              2018
+            </div>
+            <div class='line'>
+              Unpoly 1.0.0
+            </div>
+          </h2>
+        </section>
+        <section>
+          <h2>
+            <div class='subtle'>
+              2018
+            </div>
+            <div class='line'>
+              Unpoly 2.0.0
+            </div>
+          </h2>
+        </section>
+        <section>
+          <h2>
+            <div class='subtle'>
+              2018
+            </div>
+            <div class='line'>
+              Unpoly 3.0.0
+            </div>
+          </h2>
+        </section>
+        <section>
+          <h2>
+            <div class='subtle'>
+              Semantic versioning
+            </div>
+            <div class='green'>
+              No rules for 0.x versions
+            </div>
+          </h2>
           <p>
-            Henning Koch, makandra GmbH
-            <br>
-            <a href='https://twitter.com/triskweline'>@triskweline</a>
+            Major version zero (0.y.z) is for initial development. Anything may change at any time. The public API should not be considered stable.
+          </p>
+        </section>
+        <section data-background-color='#3f1020'>
+          <h2>
+            <div class='subtle'>
+              Semantic versioning
+            </div>
+            <div class='red'>With 1.0 the commitments begin</div>
+          </h2>
+          <p>
+            <b>Version 1.0.0 defines the public API.</b>
+            The way in which the version number is incremented after this release is dependent on this public API and how it changes.
+          </p>
+          <p>
+            Given a version number <code>MAJOR.MINOR.PATCH</code>, increment the:
+          </p>
+          <ol>
+            <li><code>MAJOR</code> version when you make incompatible API changes,</li>
+            <li><code>MINOR</code> version when you add functionality in a backwards-compatible manner,</li>
+            <li><code>PATCH</code> version when you make backwards-compatible bug fixes.</li>
+          </ol>
+        </section>
+        <section>
+          <ul>
+            <li>So Unpoly stayed on 0.x in hope that the API would stabilize 100%</li>
+            <li class='fragment'>That never happened</li>
+            <li class='fragment'>(and that's OK)</li>
+          </ul>
+        </section>
+        <section>
+          <h2>
+            <div class='subtle'>In 2018 Unpoly will</div>
+            <div class='line'>switch to frequent major releases</div>
+          </h2>
+          <ul>
+            <li class='fragment'>
+              It's stupid to stay on 0.x forever in fear of breaking changes
+              <div class='subtle'>
+                There is <b>zero signal</b> in an Unpoly version number right now
+              </div>
+            </li>
+            <li class='fragment'>
+              After 1.0 there will be a major version bump every few months
+              <div class='subtle'>
+                Use this to know if you can upgrade without reading CHANGELOG
+              </div>
+            </li>
+            <li class='fragment'>
+              Major bumps will not mean "huge breaking change" like in Rails
+              <div class='subtle'>
+                It means: <i>Any</i> breaking change
+                <br>
+                It means: You should read CHANGELOG or run tests
+              </div>
+            </li>
+            <li class='fragment'>
+              There's still a commitment to not break your app for petty reasons
+              <div class='subtle'>
+                There will always be deprecations and clearly documented upgrade paths
+                <br>
+                Like we had for three years now
+              </div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>
+            <div class='subtle'>
+              Roadmap
+            </div>
+            <div class='line'>
+              Quality of live improvements
+            </div>
+          </h2>
+          <ul>
+            <li><code>input[up-redraw]</code></li>
+            <li><code>[up-live]</code></li>
+            <li>Better handling of URL <code>#hashes</code></li>
+            <li>Rich events</li>
+            <li>Mailing list</li>
+          </ul>
+        </section>
+        <section>
+          <h2>
+            <div class='subtle'>
+              Roadmap
+            </div>
+            <div class='line'>
+              Zeroconf offline
+            </div>
+          </h2>
+          <p class='fragment'>
+            (This might not work)
           </p>
         </section>
         <section>
+          <img height='600' src='pictures/trade_off.png'>
+        </section>
+        <section>
+          <img height='600' src='pictures/cards_online.png'>
+        </section>
+        <section>
+          <img height='600' src='pictures/cards_native_offline.png'>
+        </section>
+        <section>
+          <img height='600' src='pictures/cards_online.png'>
+        </section>
+        <section>
+          <img height='600' src='pictures/cards_unpoly_offline.png'>
+        </section>
+        <section>
+          <h2>
+            Offline is hard
+          </h2>
+          <ul>
+            <li>
+              Devices don't actually know if they're online or not
+            </li>
+            <li>
+              Being online/offline is not actually a binary state
+              <div class='subtle'>
+                Celltower switches, moving devices, captive portals, ...
+              </div>
+            </li>
+            <li>
+              Service worker is on a different thread
+            </li>
+            <li>
+              Assets
+            </li>
+          </ul>
+        </section>
+        <section>
           <p>
-            Give it 10 minutes.
+            What could maybe be a good default:
           </p>
+          <ul>
+            <li>When a link or form submission fails, we don't burn down the page</li>
+            <li>Users can continue to visit recently visited pages while they're offline</li>
+            <li>Users get a visual distinction whether a link is available or not</li>
+          </ul>
+          <p>
+            How well would this work if we did it like this:
+          </p>
+          <ul>
+            <li>If a request fails, Unpoly goes into offline mode</li>
+            <li>We have different (much longer) expiration settings for up.proxy when offline</li>
+            <li>We mark links, forms as .up-offline (or [up-disabled]) if we are offline and the resource is not cached</li>
+            <li>We don't follow offline links and forms, or maybe throw an up:offline event whose preventable default is to not follow</li>
+            <li>We need some way to detect connection recovery. This is probably the hardest thing of all. We probably need to periodically fetch the Favicon or something.</li>
+          </ul>
+        </section>
+        <section>
+          Screenshot of form
+        </section>
+        <section>
+          Screenshot of offline dinosaur
+        </section>
+        <section>
+          Screenshot of form
+        </section>
+        <section>
+          Screenshot of rescue bubble
+        </section>
+        <section>
+          <h2>Forms</h2>
+          <pre class='xl'><code class='html' data-noescape>&lt;form method='post' action='/documents' <mark>up-rescue</mark>&gt;&#x000A;  &lt;input type="text" name="title"&gt;&#x000A;  &lt;input type="file" name="document"&gt;&#x000A;  &lt;button type="submit"&gt;Submit&lt;/button&gt;&#x000A;&lt;/form&gt;&#x000A;</code></pre>
+          <pre class='xl fragment'><code class='javascript' data-noescape>up.on('up:request:rescued', function(event) {&#x000A;  $('&lt;div class="toast"&gt;&lt;/div&gt;')&#x000A;    .text("Retry: " + event.request.title)&#x000A;    .on('click', event.request.retry)&#x000A;    .appendTo(document.body)&#x000A;})&#x000A;</code></pre>
+        </section>
+        <section>
+          <h2>Default service worker</h2>
+        </section>
+        <section>
+          Screenshot of blank chrome
+        </section>
+        <section>
+          Screenshot of offline dinosaur
+        </section>
+        <section>
+          Screenshot of blank chrome
+        </section>
+        <section>
+          Screenshot of cards with some links striked
+        </section>
+        <section>
+          Fin
         </section>
         <section>
           <h3>Context</h3>
@@ -537,9 +782,6 @@
               and find a new sweet spot in that trade-off.
             </li>
           </ol>
-        </section>
-        <section>
-          <img height='600' src='pictures/trade_off.png'>
         </section>
         <section>
           <h3>
