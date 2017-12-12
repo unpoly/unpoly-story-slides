@@ -43,12 +43,12 @@
 
           %ul
             %li Drop support for IE9, IE10
-            %li jQuery 3
             %li Webpack + npm
             %li Native AJAX
             %li Native promises
-            %li.fragment.orange
-              Infinite bug fixes
+            %li jQuery 3
+            %li Many, many bug fixes
+
 
         %section
           %img(src='pictures/diffs_without_unpoly.png' height=600)
@@ -68,12 +68,11 @@
 
           %ul
             %li Drop support for IE9, IE10
-            %li jQuery 3
             %li Webpack + npm
             %li Native AJAX
             %li Native promises
-            %li.fragment.orange
-              Infinite bug fixes
+            %li jQuery 3
+            %li Many, many bug fixes
 
 
         %section
@@ -111,10 +110,7 @@
 
         %section
           %h2
-            .subtle
-              Sidebar
-            .line
-              Semantic versioning
+            Semantic versioning
 
           %p
             Major version zero (0.y.z) is for initial development.
@@ -208,6 +204,9 @@
           %p.fragment.red
             Browsers don't work well when internet goes away
 
+        %section
+          %h2 Offline links
+
         -#%section
         -#
         -#  %h3
@@ -260,20 +259,22 @@
             %code a.up-offline
 
           %p
-            This link cannot currently be acccessed due to a loss
-            of network connectivity.
+            This class will be toggled automatically on all links as
+            network connection is lost or regained.
+
+          %p
+            Links with this class cannot currently be acccessed due
+            to a loss of network connectivity.
 
           %p
             Previously cached pages will remain accessible while
             the user is offline.
-            Cache entries don't expire while offline.
-
-          %p
-            This class will be set and removed automatically as
-            network connection is lost or regained.
-
             Links to cached pages will not
             be assigned the <code>.up-offline</code> class.
+
+          %p
+            Cache entries don't expire while offline.
+
 
             %br
             &nbsp;
@@ -325,6 +326,11 @@
         -#    %li We don't follow offline links and forms, or maybe throw an up:offline event whose preventable default is to not follow
         -#    %li We need some way to detect connection recovery. This is probably the hardest thing of all. We probably need to periodically fetch the Favicon or something.
 
+
+        %section
+          %h2 Offline forms
+
+
         %section
           %img(src='pictures/cards_form.png' height=600)
 
@@ -349,7 +355,10 @@
           %img(src='pictures/cards_form_unpoly_offline_navigate.png' height=600)
 
         %section
-          %img(src='pictures/cards_form_unpoly_restored.png' height=600)
+          %img(src='pictures/cards_form_unpoly_restored1.png' height=600)
+
+        %section
+          %img(src='pictures/cards_form_unpoly_restored2.png' height=600)
 
         %section
           %h2 Rescuing form data
@@ -398,7 +407,7 @@
           %h3
             .red
               Why this might not work
-            .line
+            .line.fragment
               Offline is hard
 
           %ul
@@ -412,6 +421,8 @@
               Service worker is on a different thread
             %li.fragment
               Need to cache JavaScript, CSS, images, fonts, ...
+            %li.fragment
+              Tracking of new app versions
 
           %p.green.fragment
             But let's try!

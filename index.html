@@ -43,13 +43,11 @@
           <h2>2017</h2>
           <ul>
             <li>Drop support for IE9, IE10</li>
-            <li>jQuery 3</li>
             <li>Webpack + npm</li>
             <li>Native AJAX</li>
             <li>Native promises</li>
-            <li class='fragment orange'>
-              Infinite bug fixes
-            </li>
+            <li>jQuery 3</li>
+            <li>Many, many bug fixes</li>
           </ul>
         </section>
         <section>
@@ -68,13 +66,11 @@
           <h2>2017</h2>
           <ul>
             <li>Drop support for IE9, IE10</li>
-            <li>jQuery 3</li>
             <li>Webpack + npm</li>
             <li>Native AJAX</li>
             <li>Native promises</li>
-            <li class='fragment orange'>
-              Infinite bug fixes
-            </li>
+            <li>jQuery 3</li>
+            <li>Many, many bug fixes</li>
           </ul>
         </section>
         <section>
@@ -124,12 +120,7 @@
         </section>
         <section>
           <h2>
-            <div class='subtle'>
-              Sidebar
-            </div>
-            <div class='line'>
-              Semantic versioning
-            </div>
+            Semantic versioning
           </h2>
           <p>
             Major version zero (0.y.z) is for initial development.
@@ -236,6 +227,9 @@
           </p>
         </section>
         <section>
+          <h2>Offline links</h2>
+        </section>
+        <section>
           <img height='600' src='pictures/cards_online.png'>
         </section>
         <section>
@@ -270,19 +264,21 @@
             <code>a.up-offline</code>
           </h2>
           <p>
-            This link cannot currently be acccessed due to a loss
-            of network connectivity.
+            This class will be toggled automatically on all links as
+            network connection is lost or regained.
+          </p>
+          <p>
+            Links with this class cannot currently be acccessed due
+            to a loss of network connectivity.
           </p>
           <p>
             Previously cached pages will remain accessible while
             the user is offline.
-            Cache entries don't expire while offline.
-          </p>
-          <p>
-            This class will be set and removed automatically as
-            network connection is lost or regained.
             Links to cached pages will not
             be assigned the <code>.up-offline</code> class.
+          </p>
+          <p>
+            Cache entries don't expire while offline.
             <br>
             &nbsp;
           </p>
@@ -292,6 +288,9 @@
         <section>
           <h3>Connection state notifications</h3>
           <pre class='xl'><code class='javascript' data-noescape>up.on('up:connection:lost', function(event) {&#x000A;  $('&lt;div class="toast"&gt;&lt;/div&gt;')&#x000A;    .text("Connection lost")&#x000A;    .appendTo(document.body)&#x000A;})&#x000A;&#x000A;up.on('up:connection:restored', function(event) {&#x000A;  $('&lt;div class="toast"&gt;&lt;/div&gt;')&#x000A;    .text("Connection restored")&#x000A;    .appendTo(document.body)&#x000A;})&#x000A;</code></pre>
+        </section>
+        <section>
+          <h2>Offline forms</h2>
         </section>
         <section>
           <img height='600' src='pictures/cards_form.png'>
@@ -317,7 +316,10 @@
           <img height='600' src='pictures/cards_form_unpoly_offline_navigate.png'>
         </section>
         <section>
-          <img height='600' src='pictures/cards_form_unpoly_restored.png'>
+          <img height='600' src='pictures/cards_form_unpoly_restored1.png'>
+        </section>
+        <section>
+          <img height='600' src='pictures/cards_form_unpoly_restored2.png'>
         </section>
         <section>
           <h2>Rescuing form data</h2>
@@ -349,7 +351,7 @@
             <div class='red'>
               Why this might not work
             </div>
-            <div class='line'>
+            <div class='line fragment'>
               Offline is hard
             </div>
           </h3>
@@ -368,6 +370,9 @@
             </li>
             <li class='fragment'>
               Need to cache JavaScript, CSS, images, fonts, ...
+            </li>
+            <li class='fragment'>
+              Tracking of new app versions
             </li>
           </ul>
           <p class='green fragment'>
