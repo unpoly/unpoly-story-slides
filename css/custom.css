@@ -138,7 +138,7 @@ body {
 .reveal h5 code,
 .reveal h6 code {
   text-transform: none;
-  color: #e82;
+  /* color: #e82; */
 }
 
 .reveal h2.with-case {
@@ -273,6 +273,10 @@ body {
 
 .reveal .blue {
   color: #28c;
+}
+
+.reveal .orange {
+  color: #f92;
 }
 
 .reveal .gray {
@@ -622,4 +626,8 @@ body {
   font-size: 50px;
   text-transform: uppercase;
   font-weight: bold;
+}
+
+.center {
+  text-align: center;
 }
