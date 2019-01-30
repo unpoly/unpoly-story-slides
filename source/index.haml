@@ -63,7 +63,7 @@
               %ul
                 %li 50+ apps in maintenance
                 %li Oldest app is from 2007
-            %li Will we be able to do this for another 9 years?
+            %li Will we be able to do this for another 10 years?
 
         -#%section
         -#  %img(src='pictures/rails_lts.png')
@@ -1002,7 +1002,7 @@
               .subtle
                 Unpoly is aware of fixed navigation bars and will scroll further/less.
             %li
-              Links to the current URL get an <a href="http://unpoly.com/up-current"><code>up-current</code></a>
+              Links to the current URL get an <a href="http://unpoly.com/up-current"><code>.up-current</code></a>
               class automatically.
             -#%li
             -#  .line
@@ -1071,14 +1071,14 @@
           %pre
             %code.javascript(data-noescape)
               :preserve
-                $(document).ready(function() {
-                  $('.map').each(function() {
-                    new google.maps.Map(this);
-                  });
-                });
+                document.addEventListener('DOMContentLoaded', function(event) {
+                  document.querySelectorAll('.map').forEach(function(element) {
+                    new google.maps.Map(element)
+                  })
+                })
 
           %p
-            This is what you see in jQuery tutorials.
+            This is what you see in JavaScript tutorials.
             %br
             %span.red HTML fragments loaded via AJAX don't get Javascriptified.
 
@@ -1102,9 +1102,9 @@
           %pre
             %code.javascript(data-noescape)
               :preserve
-                up.compiler('.map', function($map) {
-                  new google.maps.Map($map);
-                });
+                up.compiler('.map', function(element) {
+                  new google.maps.Map(element)
+                })
 
 
 
@@ -1124,15 +1124,15 @@
                 &lt;div class="map"&gt;&lt;/div&gt;
 
                 &lt;script type="text/javascript"&gt;
-                  initMap($('.map'), { lat: 48.75, lng: 11.45 });
+                  initMap(document.querySelector('.map'), { lat: 48.75, lng: 11.45 })
                 &lt;/script&gt;
 
           %pre
             %code.javascript(data-noescape)
               :preserve
-                function initMap($element, pin) {
-                  new google.maps.Map($element, { center: pin });
-                });
+                function initMap(element, center) {
+                  new google.maps.Map(element, { center: center })
+                })
 
 
 
@@ -1159,14 +1159,14 @@
           %pre
             %code.javascript(data-noescape)
               :preserve
-                up.compiler('.map', function($element, <mark>pin</mark>) {
-                  new google.maps.Map($element, center: pin);
-                });
+                up.compiler('.map', function(element, center) {
+                  new google.maps.Map(element, center: center)
+                })
 
 
 
           %p
-            The <code class='blue'>up-data</code> attribute value is parsed as JSON and passed
+            The <code class='blue'>[up-data] </code> attribute value is parsed as JSON and passed
             %br
             to your compiler as a JavaScript object.
 
@@ -1271,13 +1271,13 @@
                 makandra deck on Cards (140 ms), AMC frontend (360 ms)
 
             %li
-              Clicked links/forms get an <a href="http://unpoly.com/up-active"><code>up-active</code></a> class while loading
+              Clicked links/forms get an <a href="http://unpoly.com/up-active"><code>.up-active</code></a> class while loading
               .subtle
                 Get into a habit of styling <code>.up-active</code> for instantaneous feedback<br>
                 Use throttling and Chrome's network tab
 
             %li
-              Links with an <a href="http://unpoly.com/up-instant"><code>up-instant</code></a> attribute load on <code>mousedown</code> instead of <code>click</code>
+              Links with an <a href="http://unpoly.com/up-instant"><code>[up-instant]</code></a> attribute load on <code>mousedown</code> instead of <code>click</code>
               .subtle
                 Saves ~70 ms with a mouse (<a href="http://instantclick.io/click-test" target="_blank">test yourself</a>)
                 %br
@@ -1285,7 +1285,7 @@
                 %br
                 Your Linux/Windows apps do that, too!
             %li
-              Links with <a href="http://unpoly.com/up-preload"><code>up-preload</code></a> attribute preload destination while hovering
+              Links with <a href="http://unpoly.com/up-preload"><code>[up-preload]</code></a> attribute preload destination while hovering
               .subtle
                 Saves ~200-400 ms minus configured delay (<a href="http://instantclick.io/click-test" target="_blank">test yourself</a>)
 
@@ -1374,12 +1374,12 @@
           %pre.xs
             %code.javascript(data-noescape)
               :preserve
-                up.compiler('.spinner', function($element) {
-                  function show() { $element.show() };
-                  function hide() { $element.hide() };
-                  up.on('up:proxy:slow', show);
-                  up.on('up:proxy:recover', hide);
-                  hide();
+                up.compiler('.spinner', function(element) {
+                  function show() { element.style.display = 'block' }
+                  function hide() { element.style.display = 'none' }
+                  up.on('up:proxy:slow', show)
+                  up.on('up:proxy:recover', hide)
+                  hide()
                 });
 
           %p
@@ -1399,13 +1399,13 @@
           %pre
             %code.javascript(data-noescape)
               :preserve
-                up.compiler('.greeter', function($element) {
-                  var $input = $element.find('.greeter--input');
-                  var $name = $element.find('.greeter--name');
-                  $input.on('input', function() {
-                    $name.text($input.val());
-                  });
-                });
+                up.compiler('.greeter', function(element) {
+                  let input = element.querySelector('.greeter--input')
+                  let name = element.querySelector('.greeter--name')
+                  input.addEventListener('input', function() {
+                    name.textContent = input.value
+                  })
+                })
 
         %section
           %h3
@@ -1428,10 +1428,10 @@
           %pre
             %code.javascript(data-noescape)
               :preserve
-                up.compiler('.template', function($element, data) {
-                  var view = rivets.bind($element, data);
-                  return view.unbind;
-                });
+                up.compiler('.template', function(element, data) {
+                  let view = rivets.bind(element, data)
+                  return function() { view.unbind } // clean up
+                })
 
         %section
           %h2
@@ -1465,7 +1465,7 @@
           %pre
             %code.javascript
               :preserve
-                up.replace('.story', 'full.html');
+                up.replace('.story', 'full.html')
 
         -#
         -#%section
@@ -1505,9 +1505,9 @@
               :preserve
                 $(document).on('up:modal:open', function(event) {
                   if (dontLikeModals()) {
-                    event.preventDefault();
+                    event.preventDefault()
                   }
-                });
+                })
 
         %section
 
@@ -1529,10 +1529,10 @@
             %pre
               %code.javascript
                 :preserve
-                  up.compiler('[menu-link]', function($link) {
-                    $link.on('click', function(event) {
+                  up.compiler('[menu-link]', function(element) {
+                    element.addEventListener('click', function(event) {
                       event.preventDefault();
-                      up.popup.attach($link, {
+                      up.popup.attach(element, {
                         target: '.menu',
                         position: 'bottom-left',
                         animation: 'roll-down'
@@ -1621,7 +1621,7 @@
               A failed submission will (non-200 status) update the form itself
               %br
               %span.subtle
-                (Or use an <code>up-fail-target</code> attribute)
+                (Or use an <code>[up-fail-target]</code> attribute)
 
           %section
 
@@ -1877,10 +1877,9 @@
             %li
               Check out <a href="http://unpoly.com">unpoly.com</a>
               to get an overview of what's included
-            %li <code class='blue'>gem 'unpoly-rails'</code> (<a href="http://unpoly.com/download">other methods</a>)
-            %li Replace half your JavaScript with <code class='blue'>up-target</code> attributes
-            %li Convert remaining JavaScripts into <code class='blue'>up.compiler</code>
-
+            %li <code class='blue'>npm install unpoly --save</code> or <code class='blue'>gem 'unpoly-rails'</code> (<a href="http://unpoly.com/download">other methods</a>)
+            %li Replace half your JavaScript with <code class='blue'>[up-target]</code> attributes
+            %li Convert remaining JavaScripts into <code class='blue'>up.compiler()</code>
 
 
         %section
@@ -2100,15 +2099,15 @@
             %pre
               %code.javascript(data-noescape)
                 :preserve
-                  up.compiler('.map', function($element, pins) {
-                    var map = new google.maps.Map($element);
+                  up.compiler('.map', function(element, pins) {
+                    var map = new google.maps.Map(element)
                     pins.forEach(function(pin) {
                       var position = new google.maps.LatLng(pin.lat, pin.lng);
                       new google.maps.Marker({
                         position: position,
                         map: map
-                      });
-                  });
+                      })
+                  })
 
           %section
 
@@ -2129,15 +2128,15 @@
             %pre
               %code.javascript(data-noescape)
                 :preserve
-                  up.compiler('.map', function($element, pins) {
-                    var map = new google.maps.Map($element);
+                  up.compiler('.map', function(element, pins) {
+                    var map = new google.maps.Map(element);
                     pins.forEach(function(pin) {
-                      var position = new google.maps.LatLng(pin.lat, pin.lng);
+                      var position = new google.maps.LatLng(pin.lat, pin.lng)
                       new google.maps.Marker({
                         position: position,
                         map: map
-                      });
-                  });
+                      })
+                  })
 
           %section
 
@@ -2158,15 +2157,15 @@
             %pre
               %code.javascript(data-noescape)
                 :preserve
-                  up.compiler('.map', function($element, pins) {
-                    var map = new google.maps.Map($element);
+                  up.compiler('.map', function(element, pins) {
+                    var map = new google.maps.Map(element)
                     pins.forEach(function(pin) {
-                      var position = new google.maps.LatLng(pin.lat, pin.lng);
+                      var position = new google.maps.LatLng(pin.lat, pin.lng)
                       new google.maps.Marker({
                         position: position,
                         map: map
-                      });
-                  });
+                      })
+                  })
 
           %section
 
@@ -2187,10 +2186,10 @@
             %pre
               %code.javascript(data-noescape)
                 :preserve
-                  up.compiler('.map', function($element, initialPins) {
-                    var map = new google.maps.Map($element);
+                  up.compiler('.map', function(element, initialPins) {
+                    var map = new google.maps.Map(element)
                     function renderPins(pins) { ... }
-                    renderPins(initialPins);
+                    renderPins(initialPins)
                   });
                   &nbsp;
                   &nbsp;
@@ -2219,11 +2218,11 @@
                   up.compiler('.map', function($element, initialPins) {
                     var map = new google.maps.Map($element);
                     function renderPins(pins) { ... }
-                    renderPins(initialPins);
-                    <mark>$element.on('up:fragment:keep', function(event) {</mark>
-                    <mark>  renderPins(event.newData);                     </mark>
-                    <mark>});                                              </mark>
-                  });
+                    renderPins(initialPins)
+                    <mark>element.addEventListener('up:fragment:keep', function(event) {</mark>
+                    <mark>  renderPins(event.newData)                                   </mark>
+                    <mark>})                                                            </mark>
+                  })
                   &nbsp;
 
 
@@ -2356,14 +2355,14 @@
             %pre.xs
               %code.javascript(data-noescape)
                 :preserve
-                  up.compiler('clock', function($clock) {
+                  up.compiler('clock', function(clock) {
 
                     function updateClock() {
-                      var now = new Date();
-                      $clock.html(now.toString());
+                      var now = new Date()
+                      clock.textContent = now.toString()
                     }
 
-                    <mark class="bad">setInterval(updateClock, 1000);</mark> // this still leaks memory!
+                    <mark class="bad">setInterval(updateClock, 1000)</mark> // this still leaks memory!
                   });
                   &nbsp;
                   &nbsp;
@@ -2386,17 +2385,17 @@
             %pre.xs
               %code.javascript(data-noescape)
                 :preserve
-                  up.compiler('clock', function($clock) {
+                  up.compiler('clock', function(clock) {
 
                     function updateClock() {
-                      var now = new Date();
-                      $clock.html(now.toString());
+                      var now = new Date()
+                      clock.textContent = now.toString()
                     }
 
-                    var interval = setInterval(updateClock, 1000);
+                    var interval = setInterval(updateClock, 1000)
 
-                    <mark>return function() { clearInterval(interval) };</mark> // clean up when destroyed
-                  });
+                    <mark>return function() { clearInterval(interval) }</mark> // clean up when destroyed
+                  })
                   &nbsp;
                   &nbsp;
                   &nbsp;
@@ -2407,9 +2406,9 @@
             %pre
               %code.javascript(data-noescape)
                 :preserve
-                  up.compiler('textarea.wysiwyg', function($textarea) {
-                    $textarea.redactor();
-                  });
+                  up.compiler('textarea.wysiwyg', function(textarea) {
+                    $R(textarea)
+                  })
                   &nbsp;
                   &nbsp;
                   &nbsp;
@@ -2420,12 +2419,12 @@
             %pre
               %code.javascript(data-noescape)
                 :preserve
-                  up.compiler('textarea.wysiwyg', function($textarea) {
-                    $textarea.redactor();
+                  up.compiler('textarea.wysiwyg', function(textarea) {
+                    $R(textarea)
                     return function() {
-                      $textarea.redactor('destroy');
+                      $R(textarea, 'destroy')
                     }
-                  });
+                  })
 
 
         %section
@@ -2513,25 +2512,25 @@
           %section
             %h3 Custom animations
 
-            %pre
+            %pre.xs
               %code.javascript(data-noescape)
                 :preserve
-                  up.animation('zoom-in', function($element, options) {
+                  up.animation('zoom-in', function(element, options) {
 
                     var firstFrame = {
                       opacity: 0,
                       transform: 'scale(0.5)'
-                    };
+                    }
 
                     var lastFrame = {
                       opacity: 1,
                       transform: 'scale(1)'
-                    };
+                    }
 
-                    $element.css(firstFrame);
-                    return up.animate($element, lastFrame, options);
+                    up.element.setStyle(element, firstFrame)
+                    return up.animate(element, lastFrame, options)
 
-                  });
+                  })
 
         %section
 
@@ -2547,17 +2546,18 @@
             %pre
               %code.javascript(data-noescape)
                 :preserve
-                  $(function() {
-                    $('.toggle-all').each(function() {
-                      var $link = $(this);
-                      $link.on('click', function() {
-                        var $form = $link.closest('form');
-                        var $checkboxes = $form.find(':checkbox');
-                        var someUnchecked = $checkboxes.is(':not(:checked)');
-                        $checkboxes.prop('checked', someUnchecked);
-                      });
-                    });
-                  });
+                  document.addEventListener('DOMContentLoaded', function() {
+                    document.querySelectorAll('.toggle-all').forEach(function(element) {
+                      element.addEventListener('click', function() {
+                        let form = element.closest('form');
+                        let checkboxes = form.querySelectorAll('input[type=checkox]');
+                        let someUnchecked = !!checkboxes.find(function(cb) { !cb.checked }
+                        checkboxes.forEach(function(cb) {
+                          cb.checked = someUnchecked
+                        })
+                      })
+                    })
+                  })
                   &nbsp;
                   &nbsp;
 
@@ -2584,14 +2584,14 @@
                       restrict: 'C',
                       link: function(scope, $link) {
                         $link.on('click', function() {
-                          var $form = $link.closest('form');
-                          var $checkboxes = $form.find(':checkbox');
-                          var someUnchecked = $checkboxes.is(':not(:checked)');
-                          $checkboxes.prop('checked', someUnchecked);
-                        });
+                          var $form = $link.closest('form')
+                          var $checkboxes = $form.find(':checkbox')
+                          var someUnchecked = $checkboxes.is(':not(:checked)')
+                          $checkboxes.prop('checked', someUnchecked)
+                        })
                       }
                     }
-                  });
+                  })
 
             %p
               It's nice how Angular lets us register a compiling function for a CSS selector.
@@ -2612,14 +2612,16 @@
             %pre
               %code.javascript(data-noescape)
                 :preserve
-                  up.compiler('.toggle-all', function($link) {
-                    $link.on('click', function() {
-                      var $form = $link.closest('form');
-                      var $checkboxes = $form.find(':checkbox');
-                      var someUnchecked = $checkboxes.is(':not(:checked)');
-                      $checkboxes.prop('checked', someUnchecked);
-                    });
-                  });
+                  up.compiler('.toggle-all', function(element) {
+                    element.addEventListener('click', function() {
+                      let form = element.closest('form');
+                      let checkboxes = form.querySelectorAll('input[type=checkox]');
+                      let someUnchecked = !!checkboxes.find(function(cb) { !cb.checked }
+                      checkboxes.forEach(function(cb) {
+                        cb.checked = someUnchecked
+                      })
+                    })
+                  })
 
             %p
               Unpoly automatically compiles all fragments that it inserts or updates.

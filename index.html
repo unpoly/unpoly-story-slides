@@ -61,7 +61,7 @@
                 <li>Oldest app is from 2007</li>
               </ul>
             </li>
-            <li>Will we be able to do this for another 9 years?</li>
+            <li>Will we be able to do this for another 10 years?</li>
           </ul>
         </section>
         <section>
@@ -780,7 +780,7 @@
               </div>
             </li>
             <li>
-              Links to the current URL get an <a href="http://unpoly.com/up-current"><code>up-current</code></a>
+              Links to the current URL get an <a href="http://unpoly.com/up-current"><code>.up-current</code></a>
               class automatically.
             </li>
           </ul>
@@ -830,9 +830,9 @@
             </div>
           </h3>
           <pre><code class='html' data-noescape>&lt;div class="map"&gt;&lt;/span&gt;&#x000A;&#x000A;&#x000A;&#x000A;&#x000A;</code></pre>
-          <pre><code class='javascript' data-noescape>$(document).ready(function() {&#x000A;  $('.map').each(function() {&#x000A;    new google.maps.Map(this);&#x000A;  });&#x000A;});&#x000A;</code></pre>
+          <pre><code class='javascript' data-noescape>document.addEventListener('DOMContentLoaded', function(event) {&#x000A;  document.querySelectorAll('.map').forEach(function(element) {&#x000A;    new google.maps.Map(element)&#x000A;  })&#x000A;})&#x000A;</code></pre>
           <p>
-            This is what you see in jQuery tutorials.
+            This is what you see in JavaScript tutorials.
             <br>
             <span class='red'>HTML fragments loaded via AJAX don't get Javascriptified.</span>
           </p>
@@ -847,7 +847,7 @@
             </div>
           </h3>
           <pre><code class='html' data-noescape>&lt;div class="map"&gt;&lt;/span&gt;&#x000A;&#x000A;&#x000A;&#x000A;&#x000A;</code></pre>
-          <pre><code class='javascript' data-noescape>up.compiler('.map', function($map) {&#x000A;  new google.maps.Map($map);&#x000A;});&#x000A;&#x000A;&#x000A;</code></pre>
+          <pre><code class='javascript' data-noescape>up.compiler('.map', function(element) {&#x000A;  new google.maps.Map(element)&#x000A;})&#x000A;&#x000A;&#x000A;</code></pre>
           <p>
             Unpoly automatically compiles all fragments that it inserts or updates.
             <br>
@@ -859,8 +859,8 @@
             <div class='line'>Getting data into your JS</div>
             <div class='subtle'>Random.js</div>
           </h3>
-          <pre><code class='html' data-noescape>&lt;div class="map"&gt;&lt;/div&gt;&#x000A;&#x000A;&lt;script type="text/javascript"&gt;&#x000A;  initMap($('.map'), { lat: 48.75, lng: 11.45 });&#x000A;&lt;/script&gt;&#x000A;</code></pre>
-          <pre><code class='javascript' data-noescape>function initMap($element, pin) {&#x000A;  new google.maps.Map($element, { center: pin });&#x000A;});&#x000A;&#x000A;&#x000A;</code></pre>
+          <pre><code class='html' data-noescape>&lt;div class="map"&gt;&lt;/div&gt;&#x000A;&#x000A;&lt;script type="text/javascript"&gt;&#x000A;  initMap(document.querySelector('.map'), { lat: 48.75, lng: 11.45 })&#x000A;&lt;/script&gt;&#x000A;</code></pre>
+          <pre><code class='javascript' data-noescape>function initMap(element, center) {&#x000A;  new google.maps.Map(element, { center: center })&#x000A;})&#x000A;&#x000A;&#x000A;</code></pre>
           <p>
             &nbsp;
             <br>
@@ -873,9 +873,9 @@
             <div class='subtle'>Unpoly</div>
           </h3>
           <pre><code class='html' data-noescape>&lt;div class="map" up-data="{ lat: 48.75, lng: 11.45 }"&lt;/div&gt;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
-          <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, <mark>pin</mark>) {&#x000A;  new google.maps.Map($element, center: pin);&#x000A;});&#x000A;&#x000A;&#x000A;</code></pre>
+          <pre><code class='javascript' data-noescape>up.compiler('.map', function(element, center) {&#x000A;  new google.maps.Map(element, center: center)&#x000A;})&#x000A;&#x000A;&#x000A;</code></pre>
           <p>
-            The <code class='blue'>up-data</code> attribute value is parsed as JSON and passed
+            The <code class='blue'>[up-data] </code> attribute value is parsed as JSON and passed
             <br>
             to your compiler as a JavaScript object.
           </p>
@@ -976,14 +976,14 @@
               </div>
             </li>
             <li>
-              Clicked links/forms get an <a href="http://unpoly.com/up-active"><code>up-active</code></a> class while loading
+              Clicked links/forms get an <a href="http://unpoly.com/up-active"><code>.up-active</code></a> class while loading
               <div class='subtle'>
                 Get into a habit of styling <code>.up-active</code> for instantaneous feedback<br>
                 Use throttling and Chrome's network tab
               </div>
             </li>
             <li>
-              Links with an <a href="http://unpoly.com/up-instant"><code>up-instant</code></a> attribute load on <code>mousedown</code> instead of <code>click</code>
+              Links with an <a href="http://unpoly.com/up-instant"><code>[up-instant]</code></a> attribute load on <code>mousedown</code> instead of <code>click</code>
               <div class='subtle'>
                 Saves ~70 ms with a mouse (<a href="http://instantclick.io/click-test" target="_blank">test yourself</a>)
                 <br>
@@ -993,7 +993,7 @@
               </div>
             </li>
             <li>
-              Links with <a href="http://unpoly.com/up-preload"><code>up-preload</code></a> attribute preload destination while hovering
+              Links with <a href="http://unpoly.com/up-preload"><code>[up-preload]</code></a> attribute preload destination while hovering
               <div class='subtle'>
                 Saves ~200-400 ms minus configured delay (<a href="http://instantclick.io/click-test" target="_blank">test yourself</a>)
               </div>
@@ -1044,7 +1044,7 @@
             For the occasional long-running request, you can configure this globally:
           </p>
           <pre class='xs'><code class='html' data-noescape>&lt;div class="spinner"&gt;Please wait!&lt;/div&gt;&#x000A;</code></pre>
-          <pre class='xs'><code class='javascript' data-noescape>up.compiler('.spinner', function($element) {&#x000A;  function show() { $element.show() };&#x000A;  function hide() { $element.hide() };&#x000A;  up.on('up:proxy:slow', show);&#x000A;  up.on('up:proxy:recover', hide);&#x000A;  hide();&#x000A;});&#x000A;</code></pre>
+          <pre class='xs'><code class='javascript' data-noescape>up.compiler('.spinner', function(element) {&#x000A;  function show() { element.style.display = 'block' }&#x000A;  function hide() { element.style.display = 'none' }&#x000A;  up.on('up:proxy:slow', show)&#x000A;  up.on('up:proxy:recover', hide)&#x000A;  hide()&#x000A;});&#x000A;</code></pre>
           <p>
             The <code class='blue'>up:proxy:slow</code> event is triggered after 300 ms (configurable).
           </p>
@@ -1052,7 +1052,7 @@
         <section>
           <h3>We can still implement interactions on the client</h3>
           <pre><code class='html' data-noescape>&lt;div class='greeter'&gt;&#x000A;  &lt;input class='greeter--input'>&#x000A;  Hello &lt;span class='greeter--name'&gt;&lt;span&gt;!&#x000A;&lt;/div&gt;&#x000A;</code></pre>
-          <pre><code class='javascript' data-noescape>up.compiler('.greeter', function($element) {&#x000A;  var $input = $element.find('.greeter--input');&#x000A;  var $name = $element.find('.greeter--name');&#x000A;  $input.on('input', function() {&#x000A;    $name.text($input.val());&#x000A;  });&#x000A;});&#x000A;</code></pre>
+          <pre><code class='javascript' data-noescape>up.compiler('.greeter', function(element) {&#x000A;  let input = element.querySelector('.greeter--input')&#x000A;  let name = element.querySelector('.greeter--name')&#x000A;  input.addEventListener('input', function() {&#x000A;    name.textContent = input.value&#x000A;  })&#x000A;})&#x000A;</code></pre>
         </section>
         <section>
           <h3>
@@ -1067,7 +1067,7 @@
             With <a href="http://rivetsjs.com/">Rivets.js</a> (6 KB):
           </p>
           <pre><code class='html' data-noescape>&lt;div class='template' up-data='{ "name": "Arne" }'&gt;&#x000A;  &lt;input rv-value='name'>&#x000A;  Hello { name }!&#x000A;&lt;/div&gt;&#x000A;</code></pre>
-          <pre><code class='javascript' data-noescape>up.compiler('.template', function($element, data) {&#x000A;  var view = rivets.bind($element, data);&#x000A;  return view.unbind;&#x000A;});&#x000A;</code></pre>
+          <pre><code class='javascript' data-noescape>up.compiler('.template', function(element, data) {&#x000A;  let view = rivets.bind(element, data)&#x000A;  return function() { view.unbind } // clean up&#x000A;})&#x000A;</code></pre>
         </section>
         <section>
           <h2>
@@ -1092,14 +1092,14 @@
           <h4 class='subtle'><u>U</u>nobtrusive</h4>
           <pre><code class='html' data-noescape>&lt;a href="full.html" up-target=".story"&gt;Continue&lt;/a&gt;&#x000A;</code></pre>
           <h4 class='subtle'><u>P</u>rogrammatic</h4>
-          <pre><code class='javascript'>up.replace('.story', 'full.html');&#x000A;</code></pre>
+          <pre><code class='javascript'>up.replace('.story', 'full.html')&#x000A;</code></pre>
         </section>
         <section>
           <h3>
             <div class='subtle'>Composability</div>
             <div class='line'>Events</div>
           </h3>
-          <pre><code class='javascript'>$(document).on('up:modal:open', function(event) {&#x000A;  if (dontLikeModals()) {&#x000A;    event.preventDefault();&#x000A;  }&#x000A;});&#x000A;</code></pre>
+          <pre><code class='javascript'>$(document).on('up:modal:open', function(event) {&#x000A;  if (dontLikeModals()) {&#x000A;    event.preventDefault()&#x000A;  }&#x000A;})&#x000A;</code></pre>
         </section>
         <section>
           <h3>
@@ -1110,7 +1110,7 @@
           <pre><code class='html' data-noescape>&lt;a <mark>menu-link</mark> href="/details"&gt;Show more&lt;/span&gt;&#x000A;</code></pre>
           <div class='fragment'>
             <h4 class='subtle'>JavaScript</h4>
-            <pre><code class='javascript'>up.compiler('[menu-link]', function($link) {&#x000A;  $link.on('click', function(event) {&#x000A;    event.preventDefault();&#x000A;    up.popup.attach($link, {&#x000A;      target: '.menu',&#x000A;      position: 'bottom-left',&#x000A;      animation: 'roll-down'&#x000A;    });&#x000A;  });&#x000A;});&#x000A;</code></pre>
+            <pre><code class='javascript'>up.compiler('[menu-link]', function(element) {&#x000A;  element.addEventListener('click', function(event) {&#x000A;    event.preventDefault();&#x000A;    up.popup.attach(element, {&#x000A;      target: '.menu',&#x000A;      position: 'bottom-left',&#x000A;      animation: 'roll-down'&#x000A;    });&#x000A;  });&#x000A;});&#x000A;</code></pre>
           </div>
         </section>
         <section>
@@ -1165,7 +1165,7 @@
               A failed submission will (non-200 status) update the form itself
               <br>
               <span class='subtle'>
-                (Or use an <code>up-fail-target</code> attribute)
+                (Or use an <code>[up-fail-target]</code> attribute)
               </span>
             </p>
           </section>
@@ -1295,9 +1295,9 @@
               Check out <a href="http://unpoly.com">unpoly.com</a>
               to get an overview of what's included
             </li>
-            <li><code class='blue'>gem 'unpoly-rails'</code> (<a href="http://unpoly.com/download">other methods</a>)</li>
-            <li>Replace half your JavaScript with <code class='blue'>up-target</code> attributes</li>
-            <li>Convert remaining JavaScripts into <code class='blue'>up.compiler</code></li>
+            <li><code class='blue'>npm install unpoly --save</code> or <code class='blue'>gem 'unpoly-rails'</code> (<a href="http://unpoly.com/download">other methods</a>)</li>
+            <li>Replace half your JavaScript with <code class='blue'>[up-target]</code> attributes</li>
+            <li>Convert remaining JavaScripts into <code class='blue'>up.compiler()</code></li>
           </ul>
         </section>
         <section>
@@ -1405,23 +1405,23 @@
           </section>
           <section>
             <pre><code class='html' data-noescape>&lt;div class="map" up-data="[&#x000A;  { lat: 48.36, lng: 10.99 },&#x000A;  { lat: 48.75, lng: 11.45 }&#x000A;]"&gt;&lt;/div&gt;&#x000A;&#x000A;&lt;form method="post" action="/pins" <mark>up-target=".map"</mark>&gt;&#x000A;  Lat: &lt;input name="lat"&gt;&#x000A;  Lng: &lt;input name="lng"&gt;&#x000A;  &lt;button&gt;Add pin&lt;/button&gt;&#x000A;&lt;/form&gt;&#x000A;</code></pre>
-            <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, pins) {&#x000A;  var map = new google.maps.Map($element);&#x000A;  pins.forEach(function(pin) {&#x000A;    var position = new google.maps.LatLng(pin.lat, pin.lng);&#x000A;    new google.maps.Marker({&#x000A;      position: position,&#x000A;      map: map&#x000A;    });&#x000A;});&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>up.compiler('.map', function(element, pins) {&#x000A;  var map = new google.maps.Map(element)&#x000A;  pins.forEach(function(pin) {&#x000A;    var position = new google.maps.LatLng(pin.lat, pin.lng);&#x000A;    new google.maps.Marker({&#x000A;      position: position,&#x000A;      map: map&#x000A;    })&#x000A;})&#x000A;</code></pre>
           </section>
           <section>
             <pre><code class='html' data-noescape>&lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&lt;form method="post" action="/pins" <mark>up-target=".map"</mark>&gt;&#x000A;  Lat: &lt;input name="lat"&gt;&#x000A;  Lng: &lt;input name="lng"&gt;&#x000A;  &lt;button&gt;Add pin&lt;/button&gt;&#x000A;&lt;/form&gt;&#x000A;</code></pre>
-            <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, pins) {&#x000A;  var map = new google.maps.Map($element);&#x000A;  pins.forEach(function(pin) {&#x000A;    var position = new google.maps.LatLng(pin.lat, pin.lng);&#x000A;    new google.maps.Marker({&#x000A;      position: position,&#x000A;      map: map&#x000A;    });&#x000A;});&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>up.compiler('.map', function(element, pins) {&#x000A;  var map = new google.maps.Map(element);&#x000A;  pins.forEach(function(pin) {&#x000A;    var position = new google.maps.LatLng(pin.lat, pin.lng)&#x000A;    new google.maps.Marker({&#x000A;      position: position,&#x000A;      map: map&#x000A;    })&#x000A;})&#x000A;</code></pre>
           </section>
           <section>
             <pre><code class='html' data-noescape>&lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;&#x000A;&#x000A;&#x000A;&#x000A;&#x000A;&lt;%= form_for Pin.new, html: { 'up-target' =&gt; '.map' } do |form| %&gt;&#x000A;  Lat: &lt;%= form.text_field :lat %&gt;&#x000A;  Lng: &lt;%= form.text_field :lng %&gt;&#x000A;  &lt;%= form.submit 'Add pin' %&gt;&#x000A;&lt;% end %&gt;&#x000A;</code></pre>
-            <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, pins) {&#x000A;  var map = new google.maps.Map($element);&#x000A;  pins.forEach(function(pin) {&#x000A;    var position = new google.maps.LatLng(pin.lat, pin.lng);&#x000A;    new google.maps.Marker({&#x000A;      position: position,&#x000A;      map: map&#x000A;    });&#x000A;});&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>up.compiler('.map', function(element, pins) {&#x000A;  var map = new google.maps.Map(element)&#x000A;  pins.forEach(function(pin) {&#x000A;    var position = new google.maps.LatLng(pin.lat, pin.lng)&#x000A;    new google.maps.Marker({&#x000A;      position: position,&#x000A;      map: map&#x000A;    })&#x000A;})&#x000A;</code></pre>
           </section>
           <section>
             <pre><code class='html' data-noescape>&lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;"&gt;&lt;/div&gt;&#x000A;&#x000A;&#x000A;&#x000A;&#x000A;&lt;%= form_for Pin.new, html: { 'up-target' =&gt; '.map' } do |form| %&gt;&#x000A;  Lat: &lt;%= form.text_field :lat %&gt;&#x000A;  Lng: &lt;%= form.text_field :lng %&gt;&#x000A;  &lt;%= form.submit 'Add pin' %&gt;&#x000A;&lt;% end %&gt;&#x000A;</code></pre>
-            <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, initialPins) {&#x000A;  var map = new google.maps.Map($element);&#x000A;  function renderPins(pins) { ... }&#x000A;  renderPins(initialPins);&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>up.compiler('.map', function(element, initialPins) {&#x000A;  var map = new google.maps.Map(element)&#x000A;  function renderPins(pins) { ... }&#x000A;  renderPins(initialPins)&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
           </section>
           <section>
             <pre><code class='html' data-noescape>&lt;div class="map" up-data="&lt;%= @pins.to_json %&gt;" <mark>up-keep</mark>&gt;&lt;/div&gt;&#x000A;&#x000A;&#x000A;&#x000A;&#x000A;&lt;%= form_for Pin.new, html: { 'up-target' =&gt; '.map' } do |form| %&gt;&#x000A;  Lat: &lt;%= form.text_field :lat %&gt;&#x000A;  Lng: &lt;%= form.text_field :lng %&gt;&#x000A;  &lt;%= form.submit 'Add pin' %&gt;&#x000A;&lt;% end %&gt;&#x000A;</code></pre>
-            <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, initialPins) {&#x000A;  var map = new google.maps.Map($element);&#x000A;  function renderPins(pins) { ... }&#x000A;  renderPins(initialPins);&#x000A;  <mark>$element.on('up:fragment:keep', function(event) {</mark>&#x000A;  <mark>  renderPins(event.newData);                     </mark>&#x000A;  <mark>});                                              </mark>&#x000A;});&#x000A;&nbsp;&#x000A;&#x000A;&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>up.compiler('.map', function($element, initialPins) {&#x000A;  var map = new google.maps.Map($element);&#x000A;  function renderPins(pins) { ... }&#x000A;  renderPins(initialPins)&#x000A;  <mark>element.addEventListener('up:fragment:keep', function(event) {</mark>&#x000A;  <mark>  renderPins(event.newData)                                   </mark>&#x000A;  <mark>})                                                            </mark>&#x000A;})&#x000A;&nbsp;&#x000A;&#x000A;&#x000A;</code></pre>
           </section>
         </section>
         <section>
@@ -1473,22 +1473,22 @@
             <h4 class='subtle'>HTML</h4>
             <pre class='xs'><code class='html' data-noescape>&lt;clock&gt;&lt;/clock&gt;&#x000A;</code></pre>
             <h4 class='subtle'>JavaScript</h4>
-            <pre class='xs'><code class='javascript' data-noescape>up.compiler('clock', function($clock) {&#x000A;&#x000A;  function updateClock() {&#x000A;    var now = new Date();&#x000A;    $clock.html(now.toString());&#x000A;  }&#x000A;&#x000A;  <mark class="bad">setInterval(updateClock, 1000);</mark> // this still leaks memory!&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
+            <pre class='xs'><code class='javascript' data-noescape>up.compiler('clock', function(clock) {&#x000A;&#x000A;  function updateClock() {&#x000A;    var now = new Date()&#x000A;    clock.textContent = now.toString()&#x000A;  }&#x000A;&#x000A;  <mark class="bad">setInterval(updateClock, 1000)</mark> // this still leaks memory!&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
           </section>
           <section>
             <h3>Unpoly compiler: <span class="green">Clean</span></h3>
             <h4 class='subtle'>HTML</h4>
             <pre class='xs'><code class='html' data-noescape>&lt;clock&gt;&lt;/clock&gt;&#x000A;</code></pre>
             <h4 class='subtle'>JavaScript</h4>
-            <pre class='xs'><code class='javascript' data-noescape>up.compiler('clock', function($clock) {&#x000A;&#x000A;  function updateClock() {&#x000A;    var now = new Date();&#x000A;    $clock.html(now.toString());&#x000A;  }&#x000A;&#x000A;  var interval = setInterval(updateClock, 1000);&#x000A;&#x000A;  <mark>return function() { clearInterval(interval) };</mark> // clean up when destroyed&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
+            <pre class='xs'><code class='javascript' data-noescape>up.compiler('clock', function(clock) {&#x000A;&#x000A;  function updateClock() {&#x000A;    var now = new Date()&#x000A;    clock.textContent = now.toString()&#x000A;  }&#x000A;&#x000A;  var interval = setInterval(updateClock, 1000)&#x000A;&#x000A;  <mark>return function() { clearInterval(interval) }</mark> // clean up when destroyed&#x000A;})&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
           </section>
           <section>
             <h3>Unpoly compiler: <span class="red">Leaky</span></h3>
-            <pre><code class='javascript' data-noescape>up.compiler('textarea.wysiwyg', function($textarea) {&#x000A;  $textarea.redactor();&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>up.compiler('textarea.wysiwyg', function(textarea) {&#x000A;  $R(textarea)&#x000A;})&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
           </section>
           <section>
             <h3>Unpoly compiler: <span class="green">Clean</span></h3>
-            <pre><code class='javascript' data-noescape>up.compiler('textarea.wysiwyg', function($textarea) {&#x000A;  $textarea.redactor();&#x000A;  return function() {&#x000A;    $textarea.redactor('destroy');&#x000A;  }&#x000A;});&#x000A;&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>up.compiler('textarea.wysiwyg', function(textarea) {&#x000A;  $R(textarea)&#x000A;  return function() {&#x000A;    $R(textarea, 'destroy')&#x000A;  }&#x000A;})&#x000A;&#x000A;</code></pre>
           </section>
         </section>
         <section>
@@ -1565,7 +1565,7 @@
           </section>
           <section>
             <h3>Custom animations</h3>
-            <pre><code class='javascript' data-noescape>up.animation('zoom-in', function($element, options) {&#x000A;&#x000A;  var firstFrame = {&#x000A;    opacity: 0,&#x000A;    transform: 'scale(0.5)'&#x000A;  };&#x000A;&#x000A;  var lastFrame = {&#x000A;    opacity: 1,&#x000A;    transform: 'scale(1)'&#x000A;  };&#x000A;&#x000A;  $element.css(firstFrame);&#x000A;  return up.animate($element, lastFrame, options);&#x000A;&#x000A;});&#x000A;</code></pre>
+            <pre class='xs'><code class='javascript' data-noescape>up.animation('zoom-in', function(element, options) {&#x000A;&#x000A;  var firstFrame = {&#x000A;    opacity: 0,&#x000A;    transform: 'scale(0.5)'&#x000A;  }&#x000A;&#x000A;  var lastFrame = {&#x000A;    opacity: 1,&#x000A;    transform: 'scale(1)'&#x000A;  }&#x000A;&#x000A;  up.element.setStyle(element, firstFrame)&#x000A;  return up.animate(element, lastFrame, options)&#x000A;&#x000A;})&#x000A;</code></pre>
           </section>
         </section>
         <section>
@@ -1574,7 +1574,7 @@
               <span class="subtle">Toggle all: </span> On load
             </h3>
             <pre><code class='html' data-noescape>&lt;span class="toggle-all"&gt;Toggle all&lt;/span&gt;&#x000A;</code></pre>
-            <pre><code class='javascript' data-noescape>$(function() {&#x000A;  $('.toggle-all').each(function() {&#x000A;    var $link = $(this);&#x000A;    $link.on('click', function() {&#x000A;      var $form = $link.closest('form');&#x000A;      var $checkboxes = $form.find(':checkbox');&#x000A;      var someUnchecked = $checkboxes.is(':not(:checked)');&#x000A;      $checkboxes.prop('checked', someUnchecked);&#x000A;    });&#x000A;  });&#x000A;});&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>document.addEventListener('DOMContentLoaded', function() {&#x000A;  document.querySelectorAll('.toggle-all').forEach(function(element) {&#x000A;    element.addEventListener('click', function() {&#x000A;      let form = element.closest('form');&#x000A;      let checkboxes = form.querySelectorAll('input[type=checkox]');&#x000A;      let someUnchecked = !!checkboxes.find(function(cb) { !cb.checked }&#x000A;      checkboxes.forEach(function(cb) {&#x000A;        cb.checked = someUnchecked&#x000A;      })&#x000A;    })&#x000A;  })&#x000A;})&#x000A;&nbsp;&#x000A;&nbsp;&#x000A;</code></pre>
             <p>
               <a href="http://codepen.io/triskweline/pen/MyrVgG" target="_blank">Run example on codepen.io</a>.<br>
               This is what you see in jQuery tutorials.<br>
@@ -1586,7 +1586,7 @@
               <span class="subtle">Toggle all: </span> Angular directive
             </h3>
             <pre><code class='html' data-noescape>&lt;span class="toggle-all"&gt;Toggle all&lt;/span&gt;&#x000A;</code></pre>
-            <pre><code class='javascript' data-noescape>app.directive('toggle-all', function() {&#x000A;  return {&#x000A;    restrict: 'C',&#x000A;    link: function(scope, $link) {&#x000A;      $link.on('click', function() {&#x000A;        var $form = $link.closest('form');&#x000A;        var $checkboxes = $form.find(':checkbox');&#x000A;        var someUnchecked = $checkboxes.is(':not(:checked)');&#x000A;        $checkboxes.prop('checked', someUnchecked);&#x000A;      });&#x000A;    }&#x000A;  }&#x000A;});&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>app.directive('toggle-all', function() {&#x000A;  return {&#x000A;    restrict: 'C',&#x000A;    link: function(scope, $link) {&#x000A;      $link.on('click', function() {&#x000A;        var $form = $link.closest('form')&#x000A;        var $checkboxes = $form.find(':checkbox')&#x000A;        var someUnchecked = $checkboxes.is(':not(:checked)')&#x000A;        $checkboxes.prop('checked', someUnchecked)&#x000A;      })&#x000A;    }&#x000A;  }&#x000A;})&#x000A;</code></pre>
             <p>
               It's nice how Angular lets us register a compiling function for a CSS selector.
               <br>
@@ -1600,7 +1600,7 @@
               <span class="subtle">Toggle all: </span> Unpoly compiler
             </h3>
             <pre><code class='html' data-noescape>&lt;span class="toggle-all"&gt;Toggle all&lt;/span&gt;&#x000A;</code></pre>
-            <pre><code class='javascript' data-noescape>up.compiler('.toggle-all', function($link) {&#x000A;  $link.on('click', function() {&#x000A;    var $form = $link.closest('form');&#x000A;    var $checkboxes = $form.find(':checkbox');&#x000A;    var someUnchecked = $checkboxes.is(':not(:checked)');&#x000A;    $checkboxes.prop('checked', someUnchecked);&#x000A;  });&#x000A;});&#x000A;</code></pre>
+            <pre><code class='javascript' data-noescape>up.compiler('.toggle-all', function(element) {&#x000A;  element.addEventListener('click', function() {&#x000A;    let form = element.closest('form');&#x000A;    let checkboxes = form.querySelectorAll('input[type=checkox]');&#x000A;    let someUnchecked = !!checkboxes.find(function(cb) { !cb.checked }&#x000A;    checkboxes.forEach(function(cb) {&#x000A;      cb.checked = someUnchecked&#x000A;    })&#x000A;  })&#x000A;})&#x000A;</code></pre>
             <p>
               Unpoly automatically compiles all fragments that it inserts or updates.
             </p>
