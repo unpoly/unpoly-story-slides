@@ -754,7 +754,7 @@
         <section>
           <h3>Layers</h3>
           <pre class='s'><code class='html' data-noescape>&lt;a href="/list" up-target=".main"&gt;Replace fragment&lt;/a&gt;&#x000A;&#x000A;&lt;a href="/new" up-modal=".main"&gt;Open fragment in dialog&lt;/a&gt;&#x000A;&#x000A;&lt;a href="/menu" up-popup=".main"&gt;Open fragment in dropdown&lt;/a&gt;&#x000A;</code></pre>
-          <p>Links in an layer prefer to update fragments within the layer</p>
+          <p>Links in a layer prefer to update fragments within the layer</p>
           <p>Changing a fragment behind the layer will close the layer</p>
         </section>
         <section>
@@ -1162,7 +1162,7 @@
             <pre><code class='html' data-noescape>&lt;form method="post" action="/users" <mark>up-target=".main"</mark>&gt;&#x000A;  ...&#x000A;&lt;/form&gt;&#x000A;</code></pre>
             <p>A successful submission (status 200) will update <code class='blue'>.main</code></p>
             <p>
-              A failed submission will (non-200 status) update the form itself
+              A failed submission (non-200 status) will update the form itself
               <br>
               <span class='subtle'>
                 (Or use an <code>[up-fail-target]</code> attribute)
@@ -1295,7 +1295,7 @@
               Check out <a href="http://unpoly.com">unpoly.com</a>
               to get an overview of what's included
             </li>
-            <li><code class='blue'>npm install unpoly --save</code> or <code class='blue'>gem 'unpoly-rails'</code> (<a href="http://unpoly.com/download">other methods</a>)</li>
+            <li><code class='blue'>npm install unpoly --save</code> or <code class='blue'>gem 'unpoly-rails'</code> (<a href="http://unpoly.com/install">other methods</a>)</li>
             <li>Replace half your JavaScript with <code class='blue'>[up-target]</code> attributes</li>
             <li>Convert remaining JavaScripts into <code class='blue'>up.compiler()</code></li>
           </ul>
