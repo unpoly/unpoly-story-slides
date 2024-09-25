@@ -681,31 +681,31 @@
             %li Complex forms
 
 
-        %section
-
-          %h3 Demo of server-side app issues
-
-          %p
-            %a(href='http://demo.unpoly.com/' target="_blank")
-              Link to demo app
-            %br
-            %span.subtle (press <i>Start Classic</i> on first page)
-
-          %br
-          %h4
-            Things to try and observe:
-
-          %ul
-            %li
-              .line Navigate between cards in the left pane
-              .red Scroll positions get lost in both panes
-            %li
-              .line Open the second page ("More cards" link at the bottom of the left pane)
-              .red Card in the right pane gets lost
-
-            %li
-              .line Edit a card, change the title, then change the pattern
-              .red Unsaved form content is gone when returning from the pattern selection
+        -# %section
+        -#
+        -#   %h3 Demo of server-side app issues
+        -#
+        -#   %p
+        -#     %a(href='http://demo.unpoly.com/' target="_blank")
+        -#       Link to demo app
+        -#     %br
+        -#     %span.subtle (press <i>Start Classic</i> on first page)
+        -#
+        -#   %br
+        -#   %h4
+        -#     Things to try and observe:
+        -#
+        -#   %ul
+        -#     %li
+        -#       .line Navigate between cards in the left pane
+        -#       .red Scroll positions get lost in both panes
+        -#     %li
+        -#       .line Open the second page ("More cards" link at the bottom of the left pane)
+        -#       .red Card in the right pane gets lost
+        -#
+        -#     %li
+        -#       .line Edit a card, change the title, then change the pattern
+        -#       .red Unsaved form content is gone when returning from the pattern selection
 
 
         %section
@@ -871,45 +871,45 @@
 
 
 
-        %section
-          %h3 Demo of Unpoly-enhanced app
-
-          %p
-            %a(href='http://demo.unpoly.com/' target="_blank")
-              Link to demo app
-            %br
-            %span.subtle (press <i>Start Enhanced</i> on first page)
-
-          %h4
-            Things to try and observe:
-
-          %ol
-            %li
-              .line Navigate between cards, open and cancel the form
-              .green Page transitions are animated
-
-            %li
-              .line Navigate between cards in the left pane
-              .green Scroll positions are kept in both panes
-            %li
-              .line Open the second page ("More cards" link at the bottom of the left pane)
-              .green New page slides in smoothly
-              .green Card in the right pane is kept
-
-            %li
-              .line Edit a card, change the title, then change the pattern
-              .green Pattern selection happens in a modal dialog, <br>preserving unsaved form values
-
-            -#%li
-            -#  .line Edit a card, set an empty title, blur the field
-            -#  .green The form is validated on the server, a red outline is shown
-
-            %li
-              .line Inspect links and see attributes with <code class='blue'>up-*</code> prefix
-              .gray
-                See docs for <a href="http://unpoly.com/a-up-target"><code>[up-target]</code></a> and
-                <a href="http://unpoly.com/up-modal"><code>[up-modal]</code></a>
-
+        -# %section
+        -#   %h3 Demo of Unpoly-enhanced app
+        -#
+        -#   %p
+        -#     %a(href='http://demo.unpoly.com/' target="_blank")
+        -#       Link to demo app
+        -#     %br
+        -#     %span.subtle (press <i>Start Enhanced</i> on first page)
+        -#
+        -#   %h4
+        -#     Things to try and observe:
+        -#
+        -#   %ol
+        -#     %li
+        -#       .line Navigate between cards, open and cancel the form
+        -#       .green Page transitions are animated
+        -#
+        -#     %li
+        -#       .line Navigate between cards in the left pane
+        -#       .green Scroll positions are kept in both panes
+        -#     %li
+        -#       .line Open the second page ("More cards" link at the bottom of the left pane)
+        -#       .green New page slides in smoothly
+        -#       .green Card in the right pane is kept
+        -#
+        -#     %li
+        -#       .line Edit a card, change the title, then change the pattern
+        -#       .green Pattern selection happens in a modal dialog, <br>preserving unsaved form values
+        -#
+        -#     -#%li
+        -#     -#  .line Edit a card, set an empty title, blur the field
+        -#     -#  .green The form is validated on the server, a red outline is shown
+        -#
+        -#     %li
+        -#       .line Inspect links and see attributes with <code class='blue'>up-*</code> prefix
+        -#       .gray
+        -#         See docs for <a href="https://unpoly.com/a-up-target"><code>[up-target]</code></a> and
+        -#         <a href="https://unpoly.com/up-modal"><code>[up-modal]</code></a>
+        -#
 
 
         %section
@@ -1002,11 +1002,11 @@
               .subtle
                 Unpoly is aware of fixed navigation bars and will scroll further/less.
             %li
-              Links to the current URL get an <a href="http://unpoly.com/up-current"><code>.up-current</code></a>
+              Links to the current URL get an <a href="https://unpoly.com/up-current"><code>.up-current</code></a>
               class automatically.
             -#%li
             -#  .line
-            -#    Use <a href="http://unpoly.com/up-back" target="_blank"><code>[up-back]</code></a> to link to a previous state.
+            -#    Use <a href="https://unpoly.com/up-back" target="_blank"><code>[up-back]</code></a> to link to a previous state.
             -#  .subtle
             -#    That's a real link with a URL, not <code>location.back()</code>
             -#%li
@@ -1271,13 +1271,13 @@
                 makandra deck on Cards (140 ms), AMC frontend (360 ms)
 
             %li
-              Clicked links/forms get an <a href="http://unpoly.com/up-active"><code>.up-active</code></a> class while loading
+              Clicked links/forms get an <a href="https://unpoly.com/up-active"><code>.up-active</code></a> class while loading
               .subtle
                 Get into a habit of styling <code>.up-active</code> for instantaneous feedback<br>
                 Use throttling and Chrome's network tab
 
             %li
-              Links with an <a href="http://unpoly.com/up-instant"><code>[up-instant]</code></a> attribute load on <code>mousedown</code> instead of <code>click</code>
+              Links with an <a href="https://unpoly.com/up-instant"><code>[up-instant]</code></a> attribute load on <code>mousedown</code> instead of <code>click</code>
               .subtle
                 Saves ~70 ms with a mouse (<a href="http://instantclick.io/click-test" target="_blank">test yourself</a>)
                 %br
@@ -1285,11 +1285,11 @@
                 %br
                 Your Linux/Windows apps do that, too!
             %li
-              Links with <a href="http://unpoly.com/up-preload"><code>[up-preload]</code></a> attribute preload destination while hovering
+              Links with <a href="https://unpoly.com/up-preload"><code>[up-preload]</code></a> attribute preload destination while hovering
               .subtle
                 Saves ~200-400 ms minus configured delay (<a href="http://instantclick.io/click-test" target="_blank">test yourself</a>)
 
-            -#%li <a href="http://unpoly.com"><code>up-dash</code></a> is a <a href="http://unpoly.com/up.macro">macro</a> for <code>up-target</code>, <code>up-instant</code> and <code>up-preload</code>.
+            -#%li <a href="https://unpoly.com"><code>up-dash</code></a> is a <a href="https://unpoly.com/up.macro">macro</a> for <code>up-target</code>, <code>up-instant</code> and <code>up-preload</code>.
             %li
               Responses to <code>GET</code> requests are cached for 5 minutes
               .subtle
@@ -1544,7 +1544,7 @@
           %h3 The JavaScript API is extensive
           %p
             View full documentation of JS functions,<br> events and UJS selectors on
-            <a href="http://unpoly.com/">unpoly.com</a>.
+            <a href="https://unpoly.com/">unpoly.com</a>.
 
 
         %section
@@ -1793,7 +1793,7 @@
             .subtle Simple cases
 
           %p
-            Use <a href="http://unpoly.com/up-switch" target="_blank"><code>[up-switch]</code></a> to show or hide existing elements based on a control value:
+            Use <a href="https://unpoly.com/up-switch" target="_blank"><code>[up-switch]</code></a> to show or hide existing elements based on a control value:
 
           %pre
             %code.html(data-noescape)
@@ -1802,11 +1802,11 @@
                   &lt;option value="basic"&gt;Basic parts&lt;/option&gt;
                   &lt;option value="advanced"&gt;Advanced parts&lt;/option&gt;
                 &lt;/select&gt;
-                
+
                 &lt;div class="target" up-show-for="basic"&gt;
                   only shown for advancedness = basic
                 &lt;/div&gt;
-                
+
                 &lt;div class="target" up-hide-for="basic"&gt;
                   hidden for advancedness = basic
                 &lt;/div&gt;
@@ -1817,7 +1817,7 @@
             .subtle Harder cases
 
           %p
-            Use <a href="http://unpoly.com/up-validate" target="_blank"><code>[up-validate]</code></a> to update a field from the server when a control value changes.
+            Use <a href="https://unpoly.com/up-validate" target="_blank"><code>[up-validate]</code></a> to update a field from the server when a control value changes.
 
           %p
             In the example below we load a list of employees when the user selects a department:
@@ -1875,9 +1875,9 @@
 
           %ul
             %li
-              Check out <a href="http://unpoly.com">unpoly.com</a>
+              Check out <a href="https://unpoly.com">unpoly.com</a>
               to get an overview of what's included
-            %li <code class='blue'>npm install unpoly --save</code> or <code class='blue'>gem 'unpoly-rails'</code> (<a href="http://unpoly.com/install">other methods</a>)
+            %li <code class='blue'>npm install unpoly --save</code> or <code class='blue'>gem 'unpoly-rails'</code> (<a href="https://unpoly.com/install">other methods</a>)
             %li Replace half your JavaScript with <code class='blue'>[up-target]</code> attributes
             %li Convert remaining JavaScripts into <code class='blue'>up.compiler()</code>
 
@@ -1908,7 +1908,7 @@
               without JavaScript
 
           %p
-            %a(href='http://unpoly.com/examples/update-fragment/' target='_blank') Run example on unpoly.com
+            %a(href='https://unpoly.com/examples/update-fragment/' target='_blank') Run example on unpoly.com
 
           .columns
             .column
@@ -1961,7 +1961,7 @@
               without JavaScript
 
           %p
-            %a(href='http://unpoly.com/examples/modal/') Run example on unpoly.com
+            %a(href='https://unpoly.com/examples/modal/') Run example on unpoly.com
 
           %pre.xs
             %code.html(data-noescape)
@@ -1991,7 +1991,7 @@
               without JavaScript
 
           %p(style='visibility: hidden')
-            %a(href='http://unpoly.com/examples/modal/') Run example on unpoly.com
+            %a(href='https://unpoly.com/examples/modal/') Run example on unpoly.com
 
           %pre.xs
             %code.html(data-noescape)
@@ -2248,8 +2248,8 @@
 
           -#.fragment
           -#  %p
-          -#    You can also use <a href="http://unpoly.com/up.on"><code>up.on</code></a> to bind event handlers to <code>document</code>.<br />
-          -#    <code class='blue'>up.on</code> supports <a href="http://unpoly.com/up-data"><code>up-data</code></a> and discards handlers on unsupported browsers.
+          -#    You can also use <a href="https://unpoly.com/up.on"><code>up.on</code></a> to bind event handlers to <code>document</code>.<br />
+          -#    <code class='blue'>up.on</code> supports <a href="https://unpoly.com/up-data"><code>up-data</code></a> and discards handlers on unsupported browsers.
           -#
           -#  %pre
           -#    %code.javascript
@@ -2697,17 +2697,17 @@
 
           %ul
             %li
-              %a(href='http://unpoly.com/download#bower') Install with Bower
+              %a(href='https://unpoly.com/download#bower') Install with Bower
             %li
-              %a(href='http://unpoly.com/download#cdn') Link to a CDN
+              %a(href='https://unpoly.com/download#cdn') Link to a CDN
             %li
-              %a(href='http://unpoly.com/download#zip') Download as ZIP
+              %a(href='https://unpoly.com/download#zip') Download as ZIP
             %li
-              %a(hrf='http://unpoly.com/download#git') Clone with Git
+              %a(hrf='https://unpoly.com/download#git') Clone with Git
 
           %p
             Although the Rails bindings are nice, Unpoly works with any kind of backend.<br>
-            E.g. <a href="http://unpoly.com">unpoly.com</a> is a static middleman site using Unpoly.
+            E.g. <a href="https://unpoly.com">unpoly.com</a> is a static middleman site using Unpoly.
 
         %section
 
@@ -2717,7 +2717,7 @@
             %p
               Use <a href="http://jasmine.github.io/">Jasmine</a> to describe examples.<br />
               Use <a href="https://github.com/velesin/jasmine-jquery">jasmine-jquery</a> to create sample elements.<br />
-              Use <a href="http://unpoly.com/up.hello"><code>up.hello</code></a> to compile sample elements.
+              Use <a href="https://unpoly.com/up.hello"><code>up.hello</code></a> to compile sample elements.
 
             %pre.xs
               %code.javascript(data-noescape)
@@ -2823,8 +2823,8 @@
               .subtle
                 (how many specs has our Random.js?)
             %li Has seen some real world pain, but we're still learning new things
-            %li <a href="http://unpoly.com/changelog">Changelog</a> lists breaking changes and compatible changes separately
-            %li <a href="http://unpoly.com/search/">API</a> marks features as either <i>stable</i> or <i>experimental</i>.
+            %li <a href="https://unpoly.com/changelog">Changelog</a> lists breaking changes and compatible changes separately
+            %li <a href="https://unpoly.com/search/">API</a> marks features as either <i>stable</i> or <i>experimental</i>.
             %li There will be breaking changes, but always an upgrade path
 
 
