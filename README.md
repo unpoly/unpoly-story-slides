@@ -1,17 +1,9 @@
-Web development 101
-===================
+Unpoly introduction slides
+==========================
 
 To start the slides, open `index.html`
 
-Slides are also deployed at <http://webdev101.makandra.de>
-
-Code examples are in `examples`.
-
-One-line web server to serve the presentation and all examples:
-
-```
-ruby -run -ehttpd . -p8000
-```
+Slides are also deployed at <https://triskweline.de/unpoly-rugb>
 
 
 Making changes to the repo
